@@ -13,11 +13,11 @@
   <body>
 
 
-        <form action="TaskServlet" method=post>
+        <form action="LibraryServlet" method=post>
 
-          name:<input type="text" name="username"/><br>
-          password:<input type="password" name="password"/><br>
-          submit:<input type="submit" name="method" value="getTaskInfo"/><br>
+          category:<input type="text" name="category"/><br>
+          begin:<input type="text" name="begin"/><br>
+          submit:<input type="submit" name="method" value="getTitles"/><br>
 
 
         </form>

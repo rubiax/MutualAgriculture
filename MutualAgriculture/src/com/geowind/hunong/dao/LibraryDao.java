@@ -8,6 +8,8 @@ import java.util.Map;
  */
 public interface LibraryDao {
 
-    public List<Map<String, Object>> selectTitle(int category);
+	public List<Map<String, Object>> selectTitle(int category, int begin);
+
+	public List<Map<String, Object>> selectTitle(int begin);
 
 }
