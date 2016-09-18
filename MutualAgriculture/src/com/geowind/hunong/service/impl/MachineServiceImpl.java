@@ -1,8 +1,8 @@
 package com.geowind.hunong.service.impl;
 
+import com.geowind.entities.Machine;
 import com.geowind.hunong.dao.MachineDao;
 import com.geowind.hunong.dao.impl.MachineDaoImpl;
-import com.geowind.hunong.entity.Machine;
 import com.geowind.hunong.service.MachineService;
 
 /**

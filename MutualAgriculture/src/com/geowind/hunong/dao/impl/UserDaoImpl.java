@@ -11,7 +11,7 @@ import java.util.Map;
 public class UserDaoImpl implements UserDao {
     @Override
     public Map<String, Object> selectAccounts(String userId, String password) {
-        String sql = "select * from user where uname=? and upassword=?";
+        String sql = "select * from user where username=? and password=?";
         return DBHelper.doQueryOne(sql, userId, password);
     }
 }

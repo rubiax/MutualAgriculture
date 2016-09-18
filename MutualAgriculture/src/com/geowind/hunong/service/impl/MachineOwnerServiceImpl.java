@@ -1,8 +1,8 @@
 package com.geowind.hunong.service.impl;
 
+import com.geowind.entities.Machineowner;
 import com.geowind.hunong.dao.MachineOwnerDao;
 import com.geowind.hunong.dao.impl.MachineOwnerDaoImpl;
-import com.geowind.hunong.entity.MachineOwner;
 import com.geowind.hunong.service.MachineOwnerService;
 
 /**
@@ -17,7 +17,7 @@ public class MachineOwnerServiceImpl implements MachineOwnerService {
     }
 
     @Override
-    public int addMachineOwnerInfo(MachineOwner machineOwner) {
+    public int addMachineOwnerInfo(Machineowner machineOwner) {
         return  machineOwnerDao.insertMachineOwner(machineOwner);
     }
 }

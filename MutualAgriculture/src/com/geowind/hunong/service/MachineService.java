@@ -1,6 +1,7 @@
 package com.geowind.hunong.service;
 
-import com.geowind.hunong.entity.Machine;
+import com.geowind.entities.Machine;
+
 
 /**
  * Created by Kui on 2016/9/4.
