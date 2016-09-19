@@ -16,7 +16,7 @@ public class Test {
 		EntityManagerHelper.beginTransaction();
 		
 		User user = new User();
-		user.setUsername("aaa");
+		user.setUsername("ccc");
 		user.setType(1);
 		user.setPhone("111111111111");
 		

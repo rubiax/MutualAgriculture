@@ -19,6 +19,7 @@ public class TaskDAO implements ITaskDAO {
 	// property constants
 	public static final String WORKLOAD = "workload";
 	public static final String TYPE = "type";
+	public static final String FINISHED = "finished";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -165,6 +166,10 @@ public class TaskDAO implements ITaskDAO {
 
 	public List<Task> findByType(Object type) {
 		return findByProperty(TYPE, type);
+	}
+
+	public List<Task> findByFinished(Object finished) {
+		return findByProperty(FINISHED, finished);
 	}
 
 	/**

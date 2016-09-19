@@ -94,6 +94,8 @@ public interface ITaskDAO {
 
 	public List<Task> findByType(Object type);
 
+	public List<Task> findByFinished(Object finished);
+
 	/**
 	 * Find all Task entities.
 	 * 

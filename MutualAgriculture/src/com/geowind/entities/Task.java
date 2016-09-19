@@ -29,6 +29,7 @@ public class Task implements java.io.Serializable {
 	private Integer workload;
 	private Date date;
 	private String type;
+	private Boolean finished;
 
 	// Constructors
 
@@ -38,13 +39,14 @@ public class Task implements java.io.Serializable {
 
 	/** full constructor */
 	public Task(User user, Machine machine, Farmland farmland,
-			Integer workload, Date date, String type) {
+			Integer workload, Date date, String type, Boolean finished) {
 		this.user = user;
 		this.machine = machine;
 		this.farmland = farmland;
 		this.workload = workload;
 		this.date = date;
 		this.type = type;
+		this.finished = finished;
 	}
 
 	// Property accessors
@@ -115,6 +117,15 @@ public class Task implements java.io.Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Column(name = "finished")
+	public Boolean getFinished() {
+		return this.finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
 	}
 
 }

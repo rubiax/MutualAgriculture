@@ -17,9 +17,9 @@ public class EntityManagerHelper {
 	private static final Logger logger;
 	
 	static {
-		emf = Persistence.createEntityManagerFactory("abc"); 		
+		emf = Persistence.createEntityManagerFactory("Test"); 		
 		threadLocal = new ThreadLocal<EntityManager>();
-		logger = Logger.getLogger("abc");
+		logger = Logger.getLogger("Test");
 		logger.setLevel(Level.ALL);
 	}
 		

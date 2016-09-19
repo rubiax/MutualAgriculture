@@ -59,7 +59,7 @@ public class Zone implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "centreId")
+	@JoinColumn(name = "centerId")
 	public Center getCenter() {
 		return this.center;
 	}
