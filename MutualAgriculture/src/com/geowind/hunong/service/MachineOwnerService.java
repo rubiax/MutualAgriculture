@@ -1,6 +1,6 @@
 package com.geowind.hunong.service;
 
-import com.geowind.entities.Machineowner;
+import com.geowind.hunong.entities.Machineowner;
 
 
 /**

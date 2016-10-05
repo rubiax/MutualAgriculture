@@ -1,6 +1,6 @@
 package com.geowind.hunong.dao;
 
-import com.geowind.entities.Machineowner;
+import com.geowind.hunong.entities.Machineowner;
 
 
 /**

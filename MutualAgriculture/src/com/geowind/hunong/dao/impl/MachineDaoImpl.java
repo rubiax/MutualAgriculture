@@ -1,6 +1,6 @@
 package com.geowind.hunong.dao.impl;
 
-import com.geowind.entities.Machine;
+import com.geowind.hunong.entities.Machine;
 import com.geowind.hunong.dao.MachineDao;
 import com.geowind.hunong.util.DBHelper;
 

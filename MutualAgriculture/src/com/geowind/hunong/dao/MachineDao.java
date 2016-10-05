@@ -1,6 +1,6 @@
 package com.geowind.hunong.dao;
 
-import com.geowind.entities.Machine;
+import com.geowind.hunong.entities.Machine;
 
 
 

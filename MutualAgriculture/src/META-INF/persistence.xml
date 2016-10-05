@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="Test" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="model" transaction-type="RESOURCE_LOCAL">
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-		<class>com.geowind.entities.Farmland</class>
-		<class>com.geowind.entities.Orderitem</class>
-		<class>com.geowind.entities.Trader</class>
-		<class>com.geowind.entities.Machine</class>
-		<class>com.geowind.entities.Resource</class>
-		<class>com.geowind.entities.Task</class>
-		<class>com.geowind.entities.Order</class>
-		<class>com.geowind.entities.Center</class>
-		<class>com.geowind.entities.Machineowner</class>
-		<class>com.geowind.entities.Article</class>
-		<class>com.geowind.entities.Zone</class>
-		<class>com.geowind.entities.User</class>
+		<class>com.geowind.hunong.entities.Task</class>
+		<class>com.geowind.hunong.entities.Zone</class>
+		<class>com.geowind.hunong.entities.Order</class>
+		<class>com.geowind.hunong.entities.User</class>
+		<class>com.geowind.hunong.entities.Resource</class>
+		<class>com.geowind.hunong.entities.Machine</class>
+		<class>com.geowind.hunong.entities.Trader</class>
+		<class>com.geowind.hunong.entities.Center</class>
+		<class>com.geowind.hunong.entities.Farmland</class>
+		<class>com.geowind.hunong.entities.Article</class>
+		<class>com.geowind.hunong.entities.Orderitem</class>
+		<class>com.geowind.hunong.entities.Machineowner</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
