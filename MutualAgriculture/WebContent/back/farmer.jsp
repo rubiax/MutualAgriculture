@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -24,72 +27,60 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
 
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h3 class="box-title">搜索</h3>
+<div class="container">
+
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">搜索</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="box-body">
+            <form role="form" class="form-inline">
+                 <div class="form-group col-md-4">
+                     <label for="username">用户名</label>
+                     <input type="text" class="form-control" id="username" placeholder="">
+                 </div>
+
+                 <div class="form-group col-md-4">
+                     <label for="realname">姓名</label>
+                     <input type="text" class="form-control" id="realname" placeholder="">
+                 </div>
+
+                 <div class="form-group col-md-4">
+                     <label for="sex">性别</label>
+                     <select class="form-control" id="sex">
+                         <option>男</option>
+                         <option>女</option>
+                     </select>
+                 </div>
+                <div class="form-group col-md-4">
+                    <label for="phone">手机号</label>
+                    <input type="text" class="form-control" id="phone" placeholder="">
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="address">地址</label>
+                     <input type="text" class="form-control" id="address" placeholder="">
+                 </div>
+
+
+                 <div class="form-group col-md-3">
+                     <label></label>
+                     <br>
+                     <button type="submit" class="btn btn-primary">搜索</button>
+                 </div>
+
+            </form>
+
+        </div>
+
     </div>
-    <!-- /.box-header -->
-    <!-- form start -->
-    <div class="box-body">
-        <form role="form" class="form-inline">
-            <div class="form-group col-md-4">
-                <label for="username">用户名</label>
-                <input type="text" class="form-control" id="username" placeholder="输入用户名">
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="realname">姓名</label>
-                <input type="text" class="form-control" id="realname" placeholder="输入姓名">
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>性别</label>
-                <select class="form-control">
-                    <option>男</option>
-                    <option>女</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="phone">手机号</label>
-                <input type="text" class="form-control" id="phone" placeholder="输入地址">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="address">地址</label>
-                <input type="text" class="form-control" id="address" placeholder="输入地址">
-            </div>
 
 
-            <div class="form-group col-md-3">
-                <label></label>
-                <br>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </div>
-
-        </form>
-
-    </div>
     <!-- /.box-body -->
 </div>
-<div class="container">
-    <a class="btn btn-default">
-        <i class="fa fa-edit"></i>&nbsp;新增
-    </a>
-    <a class="btn btn-default">
-        <i class="fa fa-times"></i>&nbsp;删除
-    </a>
-    <a class="btn btn-default">
-        <i class="fa fa-area-chart"></i>&nbsp;统计
-    </a>
-    <a class="btn btn-default">
-        <i class="fa fa-check-square-o"></i>&nbsp;全选
-    </a>
-    <a class="btn btn-default">
-        <i class="fa fa-square-o"></i>&nbsp;取消
-    </a>
-    <a class="btn btn-default">
-        <i class="fa fa-save"></i>&nbsp;导出
-    </a>
-</div>
+
 <br/>
 <div class="box">
     <div class="box-header">
@@ -97,6 +88,26 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
+        <div class="container">
+            <a class="btn btn-default">
+                <i class="fa fa-edit"></i>&nbsp;新增
+            </a>
+            <a class="btn btn-default">
+                <i class="fa fa-times"></i>&nbsp;删除
+            </a>
+            <a class="btn btn-default">
+                <i class="fa fa-area-chart"></i>&nbsp;统计
+            </a>
+            <a class="btn btn-default">
+                <i class="fa fa-check-square-o"></i>&nbsp;全选
+            </a>
+            <a class="btn btn-default">
+                <i class="fa fa-square-o"></i>&nbsp;取消
+            </a>
+            <a class="btn btn-default">
+                <i class="fa fa-save"></i>&nbsp;导出
+            </a>
+        </div>
         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
                 <div class="col-sm-6"></div>
@@ -121,28 +132,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
+                        <c:forEach items="${allFarmer }" var="item">
+                        	<tr role="row" class="odd">
                             <td align="center"><input type="checkbox"></td>
-                            <td class="">Gecko</td>
-                            <td class="sorting_1">Seamonkey 1.1</td>
-                            <td>Win 98+ / OSX.2+</td>
-                            <td>1.8</td>
-                            <td>1.8</td>
-                            <td>1.8</td>
-                            <td>A</td>
+                            <td class="">${item.username }</td>
+                            <td class="sorting_1">${item.realname }</td>
+                            <td>${item.sex }</td>
+                            <td>${item.age }</td>
+                            <td>${item.phone }</td>
+                            <td>${item.address }</td>
+                            <td>${item.credit }</td>
                             <td align="center"><a href="editorfarmer.html">详情</a>&nbsp;&nbsp;<a href="#">删除</a></td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td align="center"><input type="checkbox"></td>
-                            <td class="">Webkit</td>
-                            <td class="sorting_1">Safari 3.0</td>
-                            <td>OSX.4+</td>
-                            <td>522.1</td>
-                            <td>522.1</td>
-                            <td>522.1</td>
-                            <td>A</td>
-                            <td align="center"><a href="editormachiner.html">详情</a>&nbsp;&nbsp;<a href="#">删除</a></td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                         <tfoot>
                         </tfoot>
@@ -152,6 +154,7 @@
         </div>
     </div>
     <!-- /.box-body -->
+</div>
 </div>
 
 <!-- jQuery 2.2.3 -->

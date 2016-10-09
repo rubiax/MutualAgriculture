@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -35,16 +38,16 @@
         <!-- form start -->
         <div class="box-body">
             <form role="form" class="form-inline">
-                 <div class="form-group col-md-4">
-                     <label for="username">用户名</label>
-                     <input type="text" class="form-control" id="username" placeholder="输入用户名">
-                 </div>
+
 
                  <div class="form-group col-md-4">
                      <label for="realname">姓名</label>
                      <input type="text" class="form-control" id="realname" placeholder="输入姓名">
                  </div>
-
+                 <div class="form-group col-md-4">
+                     <label for="phone">手机号</label>
+                     <input type="text" class="form-control" id="phone" placeholder="输入地址">
+                 </div>
                  <div class="form-group col-md-4">
                      <label>性别</label>
                      <select class="form-control">
@@ -52,10 +55,7 @@
                          <option>女</option>
                      </select>
                  </div>
-                <div class="form-group col-md-4">
-                    <label for="phone">手机号</label>
-                    <input type="text" class="form-control" id="phone" placeholder="输入地址">
-                </div>
+
                  <div class="form-group col-md-6">
                      <label for="address">地址</label>
                      <input type="text" class="form-control" id="address" placeholder="输入地址">
@@ -76,7 +76,6 @@
 
 
     <!-- /.box-body -->
-</div>
 
 <br/>
 <div class="box">
@@ -86,7 +85,7 @@
     <!-- /.box-header -->
     <div class="box-body">
         <div class="container">
-            <a class="btn btn-default">
+            <a class="btn btn-default" href="addmachineowner.html">
                 <i class="fa fa-edit"></i>&nbsp;新增
             </a>
             <a class="btn btn-default">
@@ -118,39 +117,28 @@
                         <tr role="row">
                             <!--<th class="sorting" tabindex="0" rowspan="1" colspan="1"></th>-->
                             <th rowspan="1" colspan="1"></th>
-                            <th rowspan="1" colspan="1">用户名</th>
                             <th rowspan="1" colspan="1">姓名</th>
                             <th rowspan="1" colspan="1">性别</th>
                             <th rowspan="1" colspan="1">年龄</th>
                             <th rowspan="1" colspan="1">手机号</th>
                             <th rowspan="1" colspan="1">地址</th>
-                            <th rowspan="1" colspan="1">信誉</th>
                             <th rowspan="1" colspan="1"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
+                         <c:forEach items="${allMachiner }" var="item">
+                        	<tr role="row" class="odd">
                             <td align="center"><input type="checkbox"></td>
-                            <td class="">Gecko</td>
-                            <td class="sorting_1">Seamonkey 1.1</td>
-                            <td>Win 98+ / OSX.2+</td>
-                            <td>1.8</td>
-                            <td>1.8</td>
-                            <td>1.8</td>
-                            <td>A</td>
+                            <td class="">${item.username }</td>
+                            <td class="sorting_1">${item.realname }</td>
+                            <td>${item.sex }</td>
+                            <td>${item.age }</td>
+                            <td>${item.phone }</td>
+                            <td>${item.address }</td>
+                            <td>${item.credit }</td>
                             <td align="center"><a href="editorfarmer.html">详情</a>&nbsp;&nbsp;<a href="#">删除</a></td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td align="center"><input type="checkbox"></td>
-                            <td class="">Webkit</td>
-                            <td class="sorting_1">Safari 3.0</td>
-                            <td>OSX.4+</td>
-                            <td>522.1</td>
-                            <td>522.1</td>
-                            <td>522.1</td>
-                            <td>A</td>
-                            <td align="center"><a href="editorfarmer.html">详情</a>&nbsp;&nbsp;<a href="#">删除</a></td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                         <tfoot>
                         </tfoot>
@@ -190,8 +178,6 @@
             "autoWidth": true,
             "columns": [
                 {"bSortable": false},
-                {"bSortable": true},
-                {"bSortable": true},
                 {"bSortable": true},
                 {"bSortable": true},
                 {"bSortable": true},

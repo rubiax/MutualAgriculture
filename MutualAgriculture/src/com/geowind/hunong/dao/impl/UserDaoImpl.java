@@ -27,23 +27,24 @@ public class UserDaoImpl implements UserDao {
     public List<User> search(User searchUser, String type) {
     	List<User> list = new ArrayList<User>();
     	StringBuffer sql = new StringBuffer();
-    	sql.append("select * from " + type + " where 1=1 and valid=1");
-    	if(null != searchUser.getUsername() && !"".equals(searchUser.getUsername())) {
-    		sql.append(" and username like '%").append(searchUser.getUsername()).append("%'");
+    	sql.append("select *, year(now())-year(birthday) as age from " + type + " where 1=1 and valid=1");
+    	if(searchUser != null) {
+    		if(null != searchUser.getUsername() && !"".equals(searchUser.getUsername())) {
+        		sql.append(" and username like '%").append(searchUser.getUsername()).append("%'");
+        	}
+        	if(null != searchUser.getRealname() && !"".equals(searchUser.getRealname())) {
+        		sql.append(" and realname like '%").append(searchUser.getRealname()).append("%'");
+        	}
+        	if(null != searchUser.getSex() && !"".equals(searchUser.getSex())) {
+        		sql.append(" and sex like '%").append(searchUser.getSex()).append("%'");
+        	}
+        	if(null != searchUser.getPhone() && !"".equals(searchUser.getPhone())) {
+        		sql.append(" and phone like '%").append(searchUser.getPhone()).append("%'");
+        	}
+        	if(null != searchUser.getAddress() && !"".equals(searchUser.getAddress())) {
+        		sql.append(" and address like '%").append(searchUser.getAddress()).append("%'");
+        	}
     	}
-    	if(null != searchUser.getRealname() && !"".equals(searchUser.getRealname())) {
-    		sql.append(" and realname like '%").append(searchUser.getRealname()).append("%'");
-    	}
-    	if(null != searchUser.getSex() && !"".equals(searchUser.getSex())) {
-    		sql.append(" and sex like '%").append(searchUser.getSex()).append("%'");
-    	}
-    	if(null != searchUser.getPhone() && !"".equals(searchUser.getPhone())) {
-    		sql.append(" and phone like '%").append(searchUser.getPhone()).append("%'");
-    	}
-    	if(null != searchUser.getAddress() && !"".equals(searchUser.getAddress())) {
-    		sql.append(" and address like '%").append(searchUser.getAddress()).append("%'");
-    	}
-    	
     	
     	Connection con = DBHelper.getConn();
     	ResultSet rs = null;
@@ -65,6 +66,7 @@ public class UserDaoImpl implements UserDao {
 				center.setCenterId(rs.getInt(11));
 				user.setCenter(center);
 				user.setValid(rs.getInt(12));
+				user.setAge(rs.getString(13));
 				list.add(user);
 			}
 		} catch (SQLException e) {

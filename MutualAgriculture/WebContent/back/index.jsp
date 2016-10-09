@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -268,8 +270,8 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'farmer.html')">种粮大户</a></li>
-            <li><a href="javascript:showpage(this,'machiner.html')">农机手</a></li>
+            <li><a href="javascript:showpage(this,'../bUserServlet?op=search&type=v_farmer')">种粮大户</a></li>
+            <li><a href="javascript:showpage(this,'../bUserServlet?op=search&type=v_machiner')">农机手</a></li>
             <li><a href="javascript:showpage(this,'machineowner.html')">农机拥有者</a></li>
           </ul>
         </li>
@@ -289,7 +291,16 @@ desired effect
         </li>
         <li><a href="#"><i class="fa fa-link"></i> <span>咨询中心</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>文库中心</span></a></li>
-
+        <li><a href="#"><i class="fa fa-link"></i> <span>病虫防治</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+          <ul class="treeview-menu">
+            <li><a href="javascript:showpage(this,'pestcontrol.html')">待解决</a></li>
+            <li><a href="javascript:showpage(this,'pestcontroled.html')">已解决</a></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

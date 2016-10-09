@@ -152,4 +152,14 @@ public class Machineowner implements java.io.Serializable {
 		this.machines = machines;
 	}
 
+	@Override
+	public String toString() {
+		return "Machineowner [ownerId=" + ownerId + ", center=" + center
+				+ ", name=" + name + ", sex=" + sex + ", birthday=" + birthday
+				+ ", phone=" + phone + ", address=" + address + ", valid="
+				+ valid + ", machines=" + machines + "]";
+	}
+	
+	
+
 }
