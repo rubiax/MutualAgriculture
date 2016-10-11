@@ -30,7 +30,6 @@ public class User implements java.io.Serializable {
 	private String realname;
 	private String sex;
 	private Date birthday;
-	private String age;
 	private String phone;
 	private Integer type;
 	private String picture;
@@ -71,7 +70,6 @@ public class User implements java.io.Serializable {
 		this.password = password;
 		this.realname = realname;
 		this.sex = sex;
-		this.age = age;
 		this.birthday = birthday;
 		this.phone = phone;
 		this.type = type;
@@ -213,19 +211,12 @@ public class User implements java.io.Serializable {
 		this.tasks = tasks;
 	}
 
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
 
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", center=" + center
 				+ ", password=" + password + ", realname=" + realname
-				+ ", sex=" + sex + ",age=" + age + ", birthday=" + birthday + ", phone="
+				+ ", sex=" + sex + ", birthday=" + birthday + ", phone="
 				+ phone + ", type=" + type + ", picture=" + picture
 				+ ", address=" + address + ", credit=" + credit + ", valid="
 				+ valid + ", farmlands=" + farmlands + ", tasks=" + tasks + "]";

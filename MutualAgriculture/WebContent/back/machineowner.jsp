@@ -37,7 +37,7 @@
         <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
             <div class="container">
-                <a class="btn btn-default">
+                <a class="btn btn-default" href="javascript:add()">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
                 <a class="btn btn-default">
@@ -65,63 +65,37 @@
                         <table id="example" class="table table-bordered table-striped dataTable" role="grid"
                                aria-describedby="example1_info">
                             <thead>
-                            <!--<tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 164.667px;" aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending">Rendering engine
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 203.667px;" aria-label="Browser: activate to sort column ascending">
-                                    Browser
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 179.667px;"
-                                    aria-label="Platform(s): activate to sort column ascending">Platform(s)
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 139.667px;"
-                                    aria-label="Engine version: activate to sort column ascending">Engine version
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 99.3333px;" aria-label="CSS grade: activate to sort column ascending">
-                                    CSS grade
-                                </th>
-                            </tr>-->
-                            <tr>
-                                <th rowspan="1" colspan="1">用户名</th>
-                                <th rowspan="1" colspan="1">姓名</th>
-                                <th rowspan="1" colspan="1">性别</th>
-                                <th rowspan="1" colspan="1">年龄</th>
-                                <th rowspan="1" colspan="1">手机号</th>
-                                <th rowspan="1" colspan="1">地址</th>
-                                <th rowspan="1" colspan="1">信誉</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${allMachiner }" var="item">
-                        	<tr role="row" class="odd">
-                            <td class="">${item.username }</td>
-                            <td class="sorting_1">${item.realname }</td>
-                            <td>${item.sex }</td>
+                        <tr role="row">
+                            <!--<th class="sorting" tabindex="0" rowspan="1" colspan="1"></th>-->
+                            <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">性别</th>
+                            <th rowspan="1" colspan="1">年龄</th>
+                            <th rowspan="1" colspan="1">手机号</th>
+                            <th rowspan="1" colspan="1">地址</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${allMachinerOwner }" var="item">
+                            <tr role="row" class="odd">
+                            <td class="">${item.name }</td>
+                            <td class="sorting_1">${item.sex }</td>
                             <td>${pageScope.now.year - item.birthday.year}</td>
                             <td>${item.phone }</td>
                             <td>${item.address }</td>
-                            <td>${item.credit }</td>
                         </tr>
+                        
                         </c:forEach>
-
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">用户名</th>
-                                <th rowspan="1" colspan="1">姓名</th>
-                                <th rowspan="1" colspan="1">性别</th>
-                                <th rowspan="1" colspan="1">年龄</th>
-                                <th rowspan="1" colspan="1">手机号</th>
-                                <th rowspan="1" colspan="1">地址</th>
-                                <th rowspan="1" colspan="1">信誉</th>
+                        </tbody>
+                        
+                        <tfoot>
+                        <tr>
+                        <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">性别</th>
+                            <th rowspan="1" colspan="1">年龄</th>
+                            <th rowspan="1" colspan="1">手机号</th>
+                            <th rowspan="1" colspan="1">地址</th>
                             </tr>
-                            </tfoot>
+                        </tfoot>
                         </table>
                     </div>
                 </div>
@@ -152,36 +126,31 @@
 <script src="js/dist/demo.js"></script>
 <!-- page script -->
 <script>
-	var username;
     $(function () {
         var table = $('#example').DataTable();
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                username = '';
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-                username = '';
                 $(this).addClass('selected');
-                username = $('.selected td:first').text();
             }
         } );
 
         $('#button').click( function () {
             table.row('.selected').remove().draw( false );
         } );
-        
 
     });
     
     function detail() {
-    	if(username == '' || username == undefined) {
-    		return;
-    	}
-    	var uri= "../bUserServlet?op=detail&type=v_machiner&username="+username;
-    	location.href = uri;
+    	
+    }
+    
+    function add() {
+    	
     }
 </script>
 </body>

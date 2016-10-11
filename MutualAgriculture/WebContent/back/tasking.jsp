@@ -43,7 +43,7 @@
                 <a class="btn btn-default">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
-                <a class="btn btn-default" href="javascript:detail()">
+                <a class="btn btn-default" href="javascript:editor()">
                     <i class="fa fa-area-chart"></i>&nbsp;详情
                 </a>
                 <a class="btn btn-default">
@@ -65,40 +65,19 @@
                         <table id="example" class="table table-bordered table-striped dataTable" role="grid"
                                aria-describedby="example1_info">
                             <thead>
-                            <!--<tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 164.667px;" aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending">Rendering engine
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 203.667px;" aria-label="Browser: activate to sort column ascending">
-                                    Browser
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 179.667px;"
-                                    aria-label="Platform(s): activate to sort column ascending">Platform(s)
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 139.667px;"
-                                    aria-label="Engine version: activate to sort column ascending">Engine version
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    style="width: 99.3333px;" aria-label="CSS grade: activate to sort column ascending">
-                                    CSS grade
-                                </th>
-                            </tr>-->
                             <tr>
-                                <th rowspan="1" colspan="1">用户名</th>
-                                <th rowspan="1" colspan="1">姓名</th>
-                                <th rowspan="1" colspan="1">性别</th>
-                                <th rowspan="1" colspan="1">年龄</th>
-                                <th rowspan="1" colspan="1">手机号</th>
-                                <th rowspan="1" colspan="1">地址</th>
-                                <th rowspan="1" colspan="1">信誉</th>
+                                 <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">任务区号</th>
+                            <th rowspan="1" colspan="1">农田地址</th>
+                            <th rowspan="1" colspan="1">经纬度</th>
+                            <th rowspan="1" colspan="1">农机牌号</th>
+                            <th rowspan="1" colspan="1">作业类型</th>
+                            <th rowspan="1" colspan="1">作物类型</th>
+                            <th rowspan="1" colspan="1">日期</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${allMachiner }" var="item">
+                            <%-- <c:forEach items="${currentTasking }" var="item">
                         	<tr role="row" class="odd">
                             <td class="">${item.username }</td>
                             <td class="sorting_1">${item.realname }</td>
@@ -108,18 +87,19 @@
                             <td>${item.address }</td>
                             <td>${item.credit }</td>
                         </tr>
-                        </c:forEach>
+                        </c:forEach> --%>
 
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">用户名</th>
-                                <th rowspan="1" colspan="1">姓名</th>
-                                <th rowspan="1" colspan="1">性别</th>
-                                <th rowspan="1" colspan="1">年龄</th>
-                                <th rowspan="1" colspan="1">手机号</th>
-                                <th rowspan="1" colspan="1">地址</th>
-                                <th rowspan="1" colspan="1">信誉</th>
+                                 <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">任务区号</th>
+                            <th rowspan="1" colspan="1">农田地址</th>
+                            <th rowspan="1" colspan="1">经纬度</th>
+                            <th rowspan="1" colspan="1">农机牌号</th>
+                            <th rowspan="1" colspan="1">作业类型</th>
+                            <th rowspan="1" colspan="1">作物类型</th>
+                            <th rowspan="1" colspan="1">日期</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -152,19 +132,20 @@
 <script src="js/dist/demo.js"></script>
 <!-- page script -->
 <script>
+
 	var username;
+	
     $(function () {
         var table = $('#example').DataTable();
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                username = '';
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-                username = '';
                 $(this).addClass('selected');
+                //alert(table.$('tr.selected td:first').html());
                 username = $('.selected td:first').text();
             }
         } );
@@ -173,14 +154,10 @@
             table.row('.selected').remove().draw( false );
         } );
         
-
     });
     
-    function detail() {
-    	if(username == '' || username == undefined) {
-    		return;
-    	}
-    	var uri= "../bUserServlet?op=detail&type=v_machiner&username="+username;
+    function editor() {
+    	var uri= "../bUserServlet?op=editor&type=v_farmer&username="+username;
     	location.href = uri;
     }
 </script>

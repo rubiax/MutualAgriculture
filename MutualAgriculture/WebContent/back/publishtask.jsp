@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +40,6 @@
         <!-- form start -->
         <form class="form-horizontal">
             <div class="box-body">
-                <fieldset disabled="disabled" class="col-md-10 allInfo">
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">分区名</label>
 
@@ -67,20 +68,10 @@
                             <textarea class="form-control" rows="3" placeholder="Enter ..." id="address"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="center" class="col-sm-2 control-label">服务中心</label>
-
-                        <div class="col-sm-10">
-                            <input class="form-control" id="center" placeholder="Password" type="password">
-                        </div>
-                    </div>
-                </fieldset>
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
-                <button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
-                <button type="reset" class="btn btn-default">重置</button>
+                <button type="button" class="btn btn-default">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->

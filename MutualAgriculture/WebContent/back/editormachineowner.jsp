@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +31,6 @@
 
 <div class="container">
 
-
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">Horizontal Form</h3>
@@ -38,39 +39,66 @@
         <!-- form start -->
         <form class="form-horizontal">
             <div class="box-body">
+                <fieldset disabled="disabled" class="col-md-10 allInfo">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">分区名</label>
+                        <label for="inputEmail3" class="col-md-2 control-label">姓名</label>
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="inputEmail3" placeholder="Email" type="email">
+                        <div class="col-md-10">
+                            <input class="form-control" id="inputEmail3" type="text" value="${currentMachineOwner.name }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">面积</label>
-
-                        <div class="col-sm-10">
-                            <input class="form-control" id="inputPassword3" placeholder="Password" type="password">
+                        <label for="sex" class="col-md-2 control-label">性别</label>
+                        <div class="radio col-md-10">
+                            <label>
+								<input name="sex" id="sex"
+									value="男" type="radio" ${currentMachineOwner.sex=='男'?'checked':''}> 男
+								</label> <label> <input name="sex" id="sex"
+									value="女" type="radio" ${currentMachineOwner.sex=='女'?'checked':''}> 女
+								</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">作物类型</label>
+                        <label for="datemask" class="col-md-2 control-label">出生日期</label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" id="datemask" value="${currentMachineOwner.birthday }">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">手机</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="type" placeholder="Password" type="password">
+                            <input class="form-control" id="type" type="text" id="phone" value="${currentMachineOwner.phone }">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address" class="col-md-2 control-label">地址</label>
 
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." id="address"></textarea>
+                            <textarea class="form-control" rows="3" id="address">${currentMachineOwner.address }</textarea>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="center" class="col-sm-2 control-label">服务中心</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="center" type="password">
+                        </div>
+                    </div>
+                </fieldset>
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default">确定</button>
-                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
+                <button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
+                <button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
+                <button type="reset" class="btn btn-default">重置</button>
+                <button type="button" class="btn btn-default" onclick="returnMachinerOwner()">返回</button>
             </div>
             <!-- /.box-footer -->
         </form>
@@ -104,8 +132,8 @@
     function saveInfo() {
         $(".allInfo").attr("disabled", "disabled");
     }
-    function returnZone() {
-        window.location = "zone.html";
+    function returnMachinerOwner() {
+        window.location = "machineowner.jsp";
     }
 
 

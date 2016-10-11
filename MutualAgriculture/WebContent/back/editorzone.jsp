@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +31,7 @@
 
 <div class="container">
 
+
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">Horizontal Form</h3>
@@ -39,57 +42,38 @@
             <div class="box-body">
                 <fieldset disabled="disabled" class="col-md-10 allInfo">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">姓名</label>
-
-                        <div class="col-md-10">
-                            <input class="form-control" id="inputEmail3" placeholder="Email" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sex" class="col-md-2 control-label">性别</label>
-                        <div class="radio col-md-10">
-                            <label>
-                                <input name="optionsRadios" id="optionsRadios1" value="option1" checked=""
-                                       type="radio" id="sex">
-                                男
-                            </label>
-                            <label>
-                                <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
-                                女
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="datemask" class="col-md-2 control-label">出生日期</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" id="datemask">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">手机</label>
+                        <label for="zonename" class="col-sm-2 control-label">分区名</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="type" placeholder="手机" type="text" id="phone">
+                            <input class="form-control" id="zonename" type="text" value="${currentZone.zonename }">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="area" class="col-sm-2 control-label">面积</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="area" type="text" value="${currentZone.area }">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">作物类型</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="type" type="text" value="${currentZone.type }">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address" class="col-md-2 control-label">地址</label>
 
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." id="address"></textarea>
+                            <textarea class="form-control" rows="3" id="address">${currentZone.address }</textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="center" class="col-sm-2 control-label">服务中心</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="center" placeholder="Password" type="password">
+                            <input disabled="disabled" class="form-control" id="center" type="text" value="${currentZone.center.name }">
                         </div>
                     </div>
                 </fieldset>
@@ -132,9 +116,20 @@
     }
     function saveInfo() {
         $(".allInfo").attr("disabled", "disabled");
+        var zonename = $.trim($("#zonename").val());
+        var area = $.trim($("#area").val());
+        var type = $.trim($("#type").val());
+        var address = $.trim($("#address").text());
+        $.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
+        	if(data == 1) {
+        		alert("修改成功");
+        	} else {
+        		alert("修改失败");
+        	}
+        });
     }
-    function returnFarmer() {
-        window.location = "farmer.html";
+    function returnZone() {
+        window.location = "zone.jsp";
     }
 
 

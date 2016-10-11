@@ -270,12 +270,12 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'../bUserServlet?op=search&type=v_farmer')">种粮大户</a></li>
-            <li><a href="javascript:showpage(this,'../bUserServlet?op=search&type=v_machiner')">农机手</a></li>
-            <li><a href="javascript:showpage(this,'machineowner.html')">农机拥有者</a></li>
+            <li><a href="javascript:showpage(this,'../bUserServlet?op=searchAll&type=v_farmer')">种粮大户</a></li>
+            <li><a href="javascript:showpage(this,'../bUserServlet?op=searchAll&type=v_machiner')">农机手</a></li>
+            <li><a href="javascript:showpage(this,'../bMachineOwnerServlet?op=searchAll')">农机拥有者</a></li>
           </ul>
         </li>
-        <li><a href="javascript:showpage(this,'zone.html')"><i class="fa fa-link"></i> <span>分区管理</span></a></li>
+        <li><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-link"></i> <span>分区管理</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>农田管理</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>农机管理</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>任务管理</span>

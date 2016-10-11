@@ -30,19 +30,20 @@ public class MachineOwnerDaoImpl implements MachineOwnerDao {
     	List<Machineowner> list = new ArrayList<Machineowner>();
     	StringBuffer sql = new StringBuffer();
     	sql.append("select * from machineowner where 1=1 and valid=1");
-    	if(null != searchMachineowner.getName() && !"".equals(searchMachineowner.getName())) {
-    		sql.append(" and name like '%").append(searchMachineowner.getName()).append("%'");
+    	if(null != searchMachineowner) {
+    		if(null != searchMachineowner.getName() && !"".equals(searchMachineowner.getName())) {
+        		sql.append(" and name like '%").append(searchMachineowner.getName()).append("%'");
+        	}
+        	if(null != searchMachineowner.getPhone() && !"".equals(searchMachineowner.getPhone())) {
+        		sql.append(" and phone like '%").append(searchMachineowner.getPhone()).append("%'");
+        	}
+        	if(null != searchMachineowner.getSex() && !"".equals(searchMachineowner.getSex())) {
+        		sql.append(" and sex like '%").append(searchMachineowner.getSex()).append("%'");
+        	}
+        	if(null != searchMachineowner.getAddress() && !"".equals(searchMachineowner.getAddress())) {
+        		sql.append(" and address like '%").append(searchMachineowner.getAddress()).append("%'");
+        	}
     	}
-    	if(null != searchMachineowner.getPhone() && !"".equals(searchMachineowner.getPhone())) {
-    		sql.append(" and phone like '%").append(searchMachineowner.getPhone()).append("%'");
-    	}
-    	if(null != searchMachineowner.getSex() && !"".equals(searchMachineowner.getSex())) {
-    		sql.append(" and sex like '%").append(searchMachineowner.getSex()).append("%'");
-    	}
-    	if(null != searchMachineowner.getAddress() && !"".equals(searchMachineowner.getAddress())) {
-    		sql.append(" and address like '%").append(searchMachineowner.getAddress()).append("%'");
-    	}
-    	
     	
     	Connection con = DBHelper.getConn();
     	ResultSet rs = null;
