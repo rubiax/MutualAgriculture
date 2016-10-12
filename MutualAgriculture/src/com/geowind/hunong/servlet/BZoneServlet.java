@@ -37,18 +37,53 @@ public class BZoneServlet extends BasicServlet {
 		case "add":
 			add(request, response);
 			break;
+		//删除
+		case "delete":
+			delete(request,response);
+			break;
 		default:
 			break;
 		}
 	}
 
 	/**
-	 * 添加
+	 * 删除
 	 * @param request
 	 * @param response
 	 */
-	private void add(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void delete(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+	}
+
+	/**
+	 * 添加
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ZoneDAO zoneDAO = new ZoneDAO();
+		String zonename = request.getParameter("zonename");
+		String type = request.getParameter("type");
+		Double area = Double.parseDouble(request.getParameter("area"));
+		String address = request.getParameter("address");
+		Zone zone = new Zone();
+		zone.setZonename(zonename);
+		zone.setAddress(address);
+		zone.setArea(area);
+		zone.setType(type);
+		zone.setValid(1);
+		EntityManagerHelper.beginTransaction();
+		try{
+			zoneDAO.save(zone);
+			EntityManagerHelper.commit();
+			this.out(response,"1");
+		}catch(Exception e){
+			this.out(response,"0");
+		}
+		
+		
 		
 	}
 

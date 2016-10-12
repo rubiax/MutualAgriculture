@@ -284,9 +284,9 @@ desired effect
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'publishtasks.html')">发布任务</a></li>
-            <li><a href="javascript:showpage(this,'tasking.html')">正在进行</a></li>
-            <li><a href="javascript:showpage(this,'tasked.html')">历史任务</a></li>
+            <li><a href="javascript:showpage(this,'publishtask.jsp')">发布任务</a></li>
+            <li><a href="javascript:showpage(this,'tasking.jsp')">正在进行</a></li>
+            <li><a href="javascript:showpage(this,'tasked.jsp')">历史任务</a></li>
           </ul>
         </li>
         <li><a href="#"><i class="fa fa-link"></i> <span>咨询中心</span></a></li>

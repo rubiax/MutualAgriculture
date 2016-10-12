@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,12 +51,12 @@
                     <label for="sex" class="col-md-2 control-label">性别</label>
                     <div class="radio col-md-10">
                         <label>
-                            <input name="optionsRadios" id="sex" value="option1" checked=""
+                            <input name="optionsRadios" id="sex" value="男" checked=""
                                    type="radio">
                             男
                         </label>
                         <label>
-                            <input name="optionsRadios" id="sex" value="option2" type="radio">
+                            <input name="optionsRadios" id="sex" value="女" type="radio">
                             女
                         </label>
                     </div>
@@ -75,7 +77,7 @@
                         <label for="phone" class="col-sm-2 control-label">手机</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="phone" placeholder="Password" type="password">
+                            <input class="form-control" id="phone" placeholder="Phone" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +90,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default">确定</button>
+                <button type="button" class="btn btn-default" onclick="add()">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->
@@ -120,11 +122,24 @@
     function editInfo() {
         $(".allInfo").removeAttr("disabled");
     }
-    function saveInfo() {
+    function add() {
         $(".allInfo").attr("disabled", "disabled");
+        var name = $.trim($("#name").val());
+        var sex = $('input:radio:checked').val();
+        var phone = $.trim($("#phone").val());
+        var address = $.trim($("#address").val());
+        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone}, function(data) {
+        	if(data == 1) {
+        		alert("添加成功");
+        	} else {
+        		alert("添加失败");
+        	}
+        });
+        
+        
     }
     function returnZone() {
-        window.location = "machineowner.html";
+        window.location = "machineowner.jsp";
     }
 
 

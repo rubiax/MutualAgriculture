@@ -41,10 +41,10 @@
             <div class="box-body">
                 <fieldset disabled="disabled" class="col-md-10 allInfo">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">姓名</label>
+                        <label for="username" class="col-md-2 control-label">姓名</label>
 
                         <div class="col-md-10">
-                            <input class="form-control" id="inputEmail3" type="text" value="${currentMachineOwner.name }">
+                            <input class="form-control" id="username" type="text" value="${currentMachineOwner.name }">
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,7 +74,7 @@
                         <label for="phone" class="col-sm-2 control-label">手机</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="type" type="text" id="phone" value="${currentMachineOwner.phone }">
+                            <input class="form-control" id="phone" type="text" id="phone" value="${currentMachineOwner.phone }">
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,10 +85,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="center" class="col-sm-2 control-label">服务中心</label>
+                        <label for="center" class="col-sm-2 control-label" >服务中心</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="center" type="password">
+                            <input disabled="disabled"  class="form-control" id="center" type="text" value="${currentMachineOwner.center.name }">
                         </div>
                     </div>
                 </fieldset>
@@ -131,6 +131,19 @@
     }
     function saveInfo() {
         $(".allInfo").attr("disabled", "disabled");
+        var username = $.trim($("#username").val());
+        var sex = $('input:radio:checked').val();
+        var address = $.trim($("#address").text());
+        var phone = $.trim($("#phone").val());
+        alert(username + " " +sex +" "+address+" "+phone);
+        $.post("../bMachineOwnerServlet", {op:"editor", username:username, sex:sex, address:address, phone:phone}, function(data) {
+        	if(data == 1) {
+        		alert("修改成功");
+        	} else {
+        		alert("修改失败");
+        	}
+        });
+        
     }
     function returnMachinerOwner() {
         window.location = "machineowner.jsp";

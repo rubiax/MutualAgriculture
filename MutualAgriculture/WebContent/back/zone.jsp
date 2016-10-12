@@ -37,7 +37,7 @@
         <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
             <div class="container">
-                <a class="btn btn-default">
+                <a class="btn btn-default" href="addzone.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
                 <a class="btn btn-default">

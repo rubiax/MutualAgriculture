@@ -37,10 +37,10 @@
         <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
             <div class="container">
-                <a class="btn btn-default" href="javascript:add()">
+                <a class="btn btn-default" href="addmachineowner.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
-                <a class="btn btn-default">
+                <a class="btn btn-default" href="javascript:deletemachiowner()">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
                 <a class="btn btn-default" href="javascript:detail()">
@@ -77,7 +77,7 @@
                         <tbody>
                         <c:forEach items="${allMachinerOwner }" var="item">
                             <tr role="row" class="odd">
-                            <td class="">${item.name }</td>
+                            <td class=""><label hidden="hidden">${item.ownerId }</label>${item.name }</td>
                             <td class="sorting_1">${item.sex }</td>
                             <td>${pageScope.now.year - item.birthday.year}</td>
                             <td>${item.phone }</td>
@@ -126,16 +126,19 @@
 <script src="js/dist/demo.js"></script>
 <!-- page script -->
 <script>
+	var ownerId;
     $(function () {
         var table = $('#example').DataTable();
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
+                ownerId='';
             }
             else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
+                ownerId = $('.selected td:first label').text();
             }
         } );
 
@@ -145,13 +148,41 @@
 
     });
     
-    function detail() {
+    
+    function deletemachiowner() {
+    	alert(ownerId);
+    	if(ownerId==" "||ownerId==undefined){
+    		return;
+    	}else{
+    		var result= confirm("确认删除？","确认","取消");
+    		if(result==true){
+    			$.post("../bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
+    	        	if(data == 1) {
+    	        		alert("删除成功");
+    	        	} else {
+    	        		alert("删除失败");
+    	        	}
+    	        });
+    		}else{
+    			return;
+    		}
+    	}
     	
     }
     
-    function add() {
+    function detail() {
+    	if(ownerId== " "||ownerId==undefined){
+    		return;
+    	}else{
+    		var uri= "../bMachineOwnerServlet?op=detail&ownerId="+ownerId;
+        	location.href = uri;
+    	}
     	
     }
+    
+    
+    
+    
 </script>
 </body>
 </html>

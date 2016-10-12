@@ -57,18 +57,18 @@
 
 					<div class="box-body">
 						<div class="form-group">
-							<label for="inputEmail3" class="col-md-3 control-label">用户名</label>
+							<label for="username" class="col-md-3 control-label">用户名</label>
 
 							<div class="col-md-8">
-								<input class="form-control" id="inputEmail3" disabled="disabled"
+								<input class="form-control" id="username" disabled="disabled"
 									type="text" value="${currentMachienr.username}">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword3" class="col-md-3 control-label">姓名</label>
+							<label for="name" class="col-md-3 control-label">姓名</label>
 
 							<div class="col-md-8">
-								<input class="form-control" id="inputPassword3" type="text"
+								<input class="form-control" id="name" type="text"
 									value="${currentMachienr.realname }">
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 						
 						
 						 <div class="form-group">
-							<label for="inputPassword3" class="col-md-3 control-label">性别</label>
+							<label for="sex" class="col-md-3 control-label">性别</label>
 							<div class="radio col-md-6">
 								<label>
 								<input name="sex" id="sex"

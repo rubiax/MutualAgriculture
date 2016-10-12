@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -39,24 +41,24 @@
         <form class="form-horizontal">
             <div class="box-body">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">分区名</label>
+                        <label for="zonename" class="col-sm-2 control-label">分区名</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputEmail3" placeholder="Email" type="email">
+                            <input class="form-control" id="zonename" placeholder="name" type="email">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">面积</label>
+                        <label for="area" class="col-sm-2 control-label">面积</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputPassword3" placeholder="Password" type="password">
+                            <input class="form-control" id="area" placeholder="area" type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">作物类型</label>
+                        <label for="type" class="col-sm-2 control-label">作物类型</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="type" placeholder="Password" type="password">
+                            <input class="form-control" id="type" placeholder="type" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,7 +71,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default">确定</button>
+                <button type="button" class="btn btn-default" onclick="saveInfo()">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->
@@ -103,11 +105,23 @@
     }
     function saveInfo() {
         $(".allInfo").attr("disabled", "disabled");
+        var zonename = $.trim($("#zonename").val());
+        var area = $.trim($("#area").val());
+        var type = $.trim($("#type").val());
+        var address = $.trim($("#address").val());
+        $.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
+        	if(data == 1) {
+        		alert("添加成功");
+        	} else {
+        		alert("添加失败");
+        	}
+        });
     }
     function returnZone() {
-        window.location = "zone.html";
+        window.location = "zone.jsp";
     }
 
+ 
 
 </script>
 
