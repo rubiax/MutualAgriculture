@@ -211,7 +211,6 @@ public class User implements java.io.Serializable {
 		this.tasks = tasks;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", center=" + center
@@ -221,6 +220,7 @@ public class User implements java.io.Serializable {
 				+ ", address=" + address + ", credit=" + credit + ", valid="
 				+ valid + ", farmlands=" + farmlands + ", tasks=" + tasks + "]";
 	}
-
 	
+	
+
 }

@@ -7,23 +7,24 @@
 		<class>com.geowind.hunong.entities.Task</class>
 		<class>com.geowind.hunong.entities.Zone</class>
 		<class>com.geowind.hunong.entities.Order</class>
-		<class>com.geowind.hunong.entities.User</class>
-		<class>com.geowind.hunong.entities.Resource</class>
 		<class>com.geowind.hunong.entities.Machine</class>
 		<class>com.geowind.hunong.entities.Trader</class>
-		<class>com.geowind.hunong.entities.Center</class>
-		<class>com.geowind.hunong.entities.Farmland</class>
-		<class>com.geowind.hunong.entities.Article</class>
-		<class>com.geowind.hunong.entities.Orderitem</class>
 		<class>com.geowind.hunong.entities.Machineowner</class>
+		<class>com.geowind.hunong.entities.Orderitem</class>
+		<class>com.geowind.hunong.entities.User</class>
+		<class>com.geowind.hunong.entities.Resource</class>
+		<class>com.geowind.hunong.entities.Admin</class>
+		<class>com.geowind.hunong.entities.Center</class>
+		<class>com.geowind.hunong.entities.Article</class>
+		<class>com.geowind.hunong.entities.Farmland</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/mutualagriculture" />
-			<property name="javax.persistence.jdbc.user" value="jin" />
+			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password"
-				value="818325" />
+				value="123456" />
 		</properties>
 	</persistence-unit>
 </persistence>

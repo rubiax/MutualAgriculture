@@ -70,4 +70,12 @@
     <servlet-name>BZoneServlet</servlet-name>
     <url-pattern>/bZoneServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.geowind.hunong.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/adminServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

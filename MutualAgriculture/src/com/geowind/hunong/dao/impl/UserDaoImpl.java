@@ -1,15 +1,8 @@
 package com.geowind.hunong.dao.impl;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.User;
 import com.geowind.hunong.dao.UserDao;
 import com.geowind.hunong.util.DBHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,32 +17,19 @@ public class UserDaoImpl implements UserDao {
     }
     
     @Override
-    public List<User> search(User searchUser, String type) {
-    	List<User> list = new ArrayList<User>();
-    	StringBuffer sql = new StringBuffer();
-    	sql.append("select * from " + type + " where 1=1 and valid=1");
-    	if(searchUser != null) {
-    		if(null != searchUser.getUsername() && !"".equals(searchUser.getUsername())) {
-        		sql.append(" and username like '%").append(searchUser.getUsername()).append("%'");
-        	}
-        	if(null != searchUser.getRealname() && !"".equals(searchUser.getRealname())) {
-        		sql.append(" and realname like '%").append(searchUser.getRealname()).append("%'");
-        	}
-        	if(null != searchUser.getSex() && !"".equals(searchUser.getSex())) {
-        		sql.append(" and sex like '%").append(searchUser.getSex()).append("%'");
-        	}
-        	if(null != searchUser.getPhone() && !"".equals(searchUser.getPhone())) {
-        		sql.append(" and phone like '%").append(searchUser.getPhone()).append("%'");
-        	}
-        	if(null != searchUser.getAddress() && !"".equals(searchUser.getAddress())) {
-        		sql.append(" and address like '%").append(searchUser.getAddress()).append("%'");
-        	}
-    	}
+    public List<Map<String, Object>> search(int centerId, String type) {
+    	//List<User> list = new ArrayList<User>();
+    	String sql = "select * from " + type + " where centerId=? and valid=1";
+    	return DBHelper.doQuery(sql ,centerId);
     	
-    	Connection con = DBHelper.getConn();
+    	/*Connection con = DBHelper.getConn();
+    	PreparedStatement ps = null;
     	ResultSet rs = null;
-    	try {
-    		rs = con.createStatement().executeQuery(sql.toString());
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, centerId);
+			rs = ps.executeQuery();
+			
 			while(rs.next()) {
 				User user = new User();
 				user.setUsername(rs.getString(1));
@@ -69,10 +49,11 @@ public class UserDaoImpl implements UserDao {
 				list.add(user);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		DBHelper.close(con, null, rs);
 		return list;
-    	
+    	*/
     }
 }

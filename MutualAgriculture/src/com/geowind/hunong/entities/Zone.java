@@ -13,12 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Zone entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "zone", catalog = "mutualagriculture")
+@Table(name = "zone", catalog = "mutualagriculture", uniqueConstraints = @UniqueConstraint(columnNames = "zonename"))
 public class Zone implements java.io.Serializable {
 
 	// Fields
@@ -78,7 +79,7 @@ public class Zone implements java.io.Serializable {
 		this.center = center;
 	}
 
-	@Column(name = "zonename", nullable = false, length = 45)
+	@Column(name = "zonename", unique = true, nullable = false, length = 45)
 	public String getZonename() {
 		return this.zonename;
 	}
@@ -131,15 +132,5 @@ public class Zone implements java.io.Serializable {
 	public void setFarmlands(Set<Farmland> farmlands) {
 		this.farmlands = farmlands;
 	}
-
-	@Override
-	public String toString() {
-		return "Zone [zoneId=" + zoneId + ", center=" + center + ", zonename="
-				+ zonename + ", area=" + area + ", type=" + type + ", address="
-				+ address + ", valid=" + valid + ", farmlands=" + farmlands
-				+ "]";
-	}
-	
-	
 
 }

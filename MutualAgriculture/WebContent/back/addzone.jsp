@@ -109,7 +109,8 @@
         var area = $.trim($("#area").val());
         var type = $.trim($("#type").val());
         var address = $.trim($("#address").val());
-        $.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
+        alert(zonename+" "+area+" "+type+" "+address);
+        $.post("../bZoneServlet", {op:"add", zonename:zonename, area:area, type:type, address:address}, function(data) {
         	if(data == 1) {
         		alert("添加成功");
         	} else {

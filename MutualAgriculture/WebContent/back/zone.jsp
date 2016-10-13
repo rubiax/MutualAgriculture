@@ -40,7 +40,7 @@
                 <a class="btn btn-default" href="addzone.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
-                <a class="btn btn-default">
+                <a class="btn btn-default" href="javascript:del()">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
                 <a class="btn btn-default" href="javascript:detail()">
@@ -153,6 +153,28 @@
     	}
     	var uri= "../bZoneServlet?op=detail&zoneId="+zoneId;
     	location.href = uri;
+    }
+    
+    
+    function del() {
+    	if(zoneId==" "||zoneId==undefined){
+    		return;
+    	}else{
+    		var result= confirm("确认删除？","确认","取消");
+    		if(result==true){
+    			$.post("../bZoneServlet", {op:"delete", zoneId:zoneId}, function(data) {
+    	        	if(data == 1) {
+    	        		alert("删除成功");
+    	        		location.href = "zone.jsp";
+    	        	} else {
+    	        		alert("删除失败");
+    	        	}
+    	        });
+    		}else{
+    			return;
+    		}
+    	}
+    	
     }
 </script>
 </body>

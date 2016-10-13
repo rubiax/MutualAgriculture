@@ -1,6 +1,7 @@
 package com.geowind.hunong.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.geowind.hunong.entities.Machineowner;
 
@@ -12,5 +13,5 @@ public interface MachineOwnerDao {
 
     public int insertMachineOwner(Machineowner machineOwner);
     
-    public List<Machineowner> search(Machineowner searchMachineowner);
+    public List<Map<String, Object>> search(int centerId);
 }

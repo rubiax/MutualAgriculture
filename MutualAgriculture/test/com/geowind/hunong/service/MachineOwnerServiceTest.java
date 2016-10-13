@@ -16,7 +16,7 @@ public class MachineOwnerServiceTest {
 		MachineOwnerService machineOwnerService = new MachineOwnerServiceImpl();
 		Machineowner machineowner = new Machineowner();
 		machineowner.setName("李四");
-		List<Machineowner> list = machineOwnerService.search(machineowner);
+		List<Machineowner> list = machineOwnerService.search(1);
 		for(Machineowner m : list) {
 			System.out.println(m);
 		}

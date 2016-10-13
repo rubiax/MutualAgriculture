@@ -51,12 +51,12 @@
                     <label for="sex" class="col-md-2 control-label">性别</label>
                     <div class="radio col-md-10">
                         <label>
-                            <input name="optionsRadios" id="sex" value="男" checked=""
+                            <input name="sex" id="sex" value="男" checked=""
                                    type="radio">
                             男
                         </label>
                         <label>
-                            <input name="optionsRadios" id="sex" value="女" type="radio">
+                            <input name="sex" id="sex" value="女" type="radio">
                             女
                         </label>
                     </div>
@@ -123,12 +123,14 @@
         $(".allInfo").removeAttr("disabled");
     }
     function add() {
-        $(".allInfo").attr("disabled", "disabled");
+        //$(".allInfo").attr("disabled", "disabled");
         var name = $.trim($("#name").val());
-        var sex = $('input:radio:checked').val();
+        var sex = $("#sex:checked").val();
+        var birthday = $.trim($("#datemask").val());
         var phone = $.trim($("#phone").val());
         var address = $.trim($("#address").val());
-        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone}, function(data) {
+        alert(name+" "+sex+" "+birthday+" "+phone+" "+address);
+        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
         	if(data == 1) {
         		alert("添加成功");
         	} else {

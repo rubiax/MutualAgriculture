@@ -40,7 +40,7 @@
                 <a class="btn btn-default" href="addmachineowner.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
-                <a class="btn btn-default" href="javascript:deletemachiowner()">
+                <a class="btn btn-default" href="javascript:del()">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
                 <a class="btn btn-default" href="javascript:detail()">
@@ -149,8 +149,7 @@
     });
     
     
-    function deletemachiowner() {
-    	alert(ownerId);
+    function del() {
     	if(ownerId==" "||ownerId==undefined){
     		return;
     	}else{
@@ -159,6 +158,7 @@
     			$.post("../bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
     	        	if(data == 1) {
     	        		alert("删除成功");
+    	        		location.href = "machineowner.jsp";
     	        	} else {
     	        		alert("删除失败");
     	        	}

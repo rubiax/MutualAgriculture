@@ -12,5 +12,5 @@ public interface UserService {
 
     public String login(String userId, String password);
     
-    public List<User> search(User user, String type);
+    public List<User> search(int centerId, String type);
 }

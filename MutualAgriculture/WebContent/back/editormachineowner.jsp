@@ -133,17 +133,22 @@
         $(".allInfo").attr("disabled", "disabled");
         var username = $.trim($("#username").val());
         var sex = $('input:radio:checked').val();
-        var address = $.trim($("#address").text());
+        var address = $.trim($("#address").val());
         var phone = $.trim($("#phone").val());
-        alert(username + " " +sex +" "+address+" "+phone);
-        $.post("../bMachineOwnerServlet", {op:"editor", username:username, sex:sex, address:address, phone:phone}, function(data) {
-        	if(data == 1) {
-        		alert("修改成功");
-        	} else {
-        		alert("修改失败");
-        	}
-        });
-        
+        var birthday = $.trim($("#datemask").val());
+        alert(username+" "+sex+" "+address+" "+phone+" "+birthday);
+        var result= confirm("确认修改？","确认","取消");
+        if(result == true) {
+        	$.post("../bMachineOwnerServlet", {op:"editor", username:username, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
+            	if(data == 1) {
+            		alert("修改成功");
+            	} else {
+            		alert("修改失败");
+            	}
+            });
+        } else {
+        	return;
+        }
     }
     function returnMachinerOwner() {
         window.location = "machineowner.jsp";

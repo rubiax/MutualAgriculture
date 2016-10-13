@@ -2,12 +2,15 @@ package com.geowind.hunong.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,6 +30,7 @@ public class Center implements java.io.Serializable {
 	private String name;
 	private String principal;
 	private Integer valid;
+	private Set<Admin> admins = new HashSet<Admin>(0);
 	private Set<Zone> zones = new HashSet<Zone>(0);
 	private Set<Machineowner> machineowners = new HashSet<Machineowner>(0);
 	private Set<User> users = new HashSet<User>(0);
@@ -39,13 +43,14 @@ public class Center implements java.io.Serializable {
 
 	/** full constructor */
 	public Center(String address, String level, String name, String principal,
-			Integer valid, Set<Zone> zones, Set<Machineowner> machineowners,
-			Set<User> users) {
+			Integer valid, Set<Admin> admins, Set<Zone> zones,
+			Set<Machineowner> machineowners, Set<User> users) {
 		this.address = address;
 		this.level = level;
 		this.name = name;
 		this.principal = principal;
 		this.valid = valid;
+		this.admins = admins;
 		this.zones = zones;
 		this.machineowners = machineowners;
 		this.users = users;
@@ -109,6 +114,15 @@ public class Center implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")
+	public Set<Admin> getAdmins() {
+		return this.admins;
+	}
+
+	public void setAdmins(Set<Admin> admins) {
+		this.admins = admins;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")
 	public Set<Zone> getZones() {
 		return this.zones;
 	}
@@ -134,5 +148,16 @@ public class Center implements java.io.Serializable {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Center [centerId=" + centerId + ", address=" + address
+				+ ", level=" + level + ", name=" + name + ", principal="
+				+ principal + ", valid=" + valid + ", admins=" + admins
+				+ ", zones=" + zones + ", machineowners=" + machineowners
+				+ ", users=" + users + "]";
+	}
+
+	
 
 }

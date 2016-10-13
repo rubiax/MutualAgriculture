@@ -119,14 +119,21 @@
         var zonename = $.trim($("#zonename").val());
         var area = $.trim($("#area").val());
         var type = $.trim($("#type").val());
-        var address = $.trim($("#address").text());
-        $.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
-        	if(data == 1) {
-        		alert("修改成功");
-        	} else {
-        		alert("修改失败");
-        	}
-        });
+        var address = $.trim($("#address").val());
+        alert(zonename+" "+area+" "+type+" "+address);
+        var result= confirm("确认修改？","确认","取消");
+        if(result == true) {
+        	$.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
+            	if(data == 1) {
+            		alert("修改成功");
+            	} else {
+            		alert("修改失败");
+            	}
+            });
+        } else {
+        	return;
+        }
+        
     }
     function returnZone() {
         window.location = "zone.jsp";

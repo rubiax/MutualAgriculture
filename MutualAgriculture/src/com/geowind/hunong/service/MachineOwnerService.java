@@ -12,5 +12,5 @@ public interface MachineOwnerService {
 
     public int addMachineOwnerInfo(Machineowner machineOwner);
     
-    public List<Machineowner> search(Machineowner searchMachineowner);
+    public List<Machineowner> search(int centerId);
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import javax.xml.soap.Detail;
+
 import com.geowind.hunong.dao.UserDao;
 import com.geowind.hunong.entities.EntityManagerHelper;
 import com.geowind.hunong.entities.User;
@@ -29,51 +31,63 @@ public class BUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
 		response.setCharacterEncoding("utf-8");
 
 		String op = request.getParameter("op");
-
-		UserService userService = new UserServiceImpl();
-		String type = null;
+		
 		switch (op) {
 		//查找所有
 		case "searchAll":
-			type = request.getParameter("type");
-			if (type.equals("v_farmer")) {
-				List<User> farmerList = userService.search(null, type);
-				request.getSession().setAttribute("allFarmer", farmerList);
-				response.sendRedirect("back/farmer.jsp");
-			} else if (type.equals("v_machiner")) {
-				List<User> farmerList = userService.search(null, type);
-				request.getSession().setAttribute("allMachiner", farmerList);
-				response.sendRedirect("back/machiner.jsp");
-			}
-
+			searchAll(request, response);
 			break;
 		//编辑信息
 		case "detail":
-			type = request.getParameter("type");
-			if (type.equals("v_farmer")) {
-				UserDAO userDAO = new UserDAO();
-				User currentFarmer = userDAO.findById(request
-						.getParameter("username"));
-				request.getSession().setAttribute("currentFarmer",
-						currentFarmer);
-				response.sendRedirect("back/editorfarmer.jsp");
-			} else if (type.equals("v_machiner")) {
-				UserDAO userDAO = new UserDAO();
-				User currentMachiner = userDAO.findById(request
-						.getParameter("username"));
-				request.getSession().setAttribute("currentMachienr",
-						currentMachiner);
-				response.sendRedirect("back/editormachiner.jsp");
-			}
+			detail(request, response);
 			break;
-
 		default:
 			break;
 		}
+	}
+
+	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String type = request.getParameter("type");
+		if (type.equals("v_farmer")) {
+			UserDAO userDAO = new UserDAO();
+			User currentFarmer = userDAO.findById(request
+					.getParameter("username"));
+			request.getSession().setAttribute("currentFarmer",
+					currentFarmer);
+			response.sendRedirect("back/editorfarmer.jsp");
+		} else if (type.equals("v_machiner")) {
+			UserDAO userDAO = new UserDAO();
+			User currentMachiner = userDAO.findById(request
+					.getParameter("username"));
+			request.getSession().setAttribute("currentMachienr",
+					currentMachiner);
+			response.sendRedirect("back/editormachiner.jsp");
+		}
+		
+	}
+
+	private void searchAll(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		UserService userService = new UserServiceImpl();
+		String type = request.getParameter("type");
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		if (type.equals("v_farmer")) {
+			if(request.getSession().getAttribute("allFarmer") == null) {
+				List<User> farmerList = userService.search(centerId, type);
+				request.getSession().setAttribute("allFarmer", farmerList);
+			}
+			response.sendRedirect("back/farmer.jsp");
+		} else if (type.equals("v_machiner")) {
+			if(request.getSession().getAttribute("allMachiner") == null) {
+				List<User> farmerList = userService.search(centerId, type);
+				request.getSession().setAttribute("allMachiner", farmerList);
+			}
+			response.sendRedirect("back/machiner.jsp");
+		}
+		
 	}
 
 }

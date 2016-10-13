@@ -1,8 +1,6 @@
 package com.geowind.test;
 
-import java.util.List;
 
-import com.geowind.hunong.entities.EntityManagerHelper;
 import com.geowind.hunong.entities.User;
 import com.geowind.hunong.entities.UserDAO;
 

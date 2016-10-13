@@ -2,6 +2,7 @@ package com.geowind.hunong.servlet;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 	
 
 		String op = request.getParameter("op");
-
+		
 		switch (op) {
 		case "searchAll":
 			searchAll(request,response);
@@ -75,18 +76,28 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException 
 	 */
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		MachineownerDAO machineOwnerDAO = new MachineownerDAO();
-		int ownerId = Integer.parseInt(request.getParameter("ownerId"));
-		Machineowner machineOwner = machineOwnerDAO.findById(ownerId);
+		MachineownerDAO machineownerDAO = new MachineownerDAO();
+		String ownerId = request.getParameter("ownerId");
+		List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+		Machineowner machineowner = null;
 		EntityManagerHelper.beginTransaction();
+		
 		try{
-			machineOwnerDAO.delete(machineOwner);
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getOwnerId() == Integer.parseInt(ownerId)) {
+					machineowner = list.get(i);
+					list.remove(i);
+					break;
+				}
+			}
+			machineowner.setValid(0);
+			machineownerDAO.update(machineowner);
 			EntityManagerHelper.commit();
+			request.getSession().setAttribute("allMachinerOwner", list);
 			this.out(response,"1");
-		}catch(Exception e){
+		}catch(RuntimeException re){
 			this.out(response, "0");
 		}
-
 		
 	}
 
@@ -113,7 +124,9 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
-		List<Machineowner> machinerOwnerList = machineService.search(null);
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		System.out.println(centerId);
+		List<Machineowner> machinerOwnerList = machineService.search(centerId);
 		request.getSession().setAttribute("allMachinerOwner",
 				machinerOwnerList);
 		response.sendRedirect("back/machineowner.jsp");
@@ -127,26 +140,38 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException 
 	 */
 	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+		int centerId = (int)request.getSession().getAttribute("currentCenterId");
 		MachineownerDAO machineOwnerDAOAdd = new MachineownerDAO();
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
+		String birthday = request.getParameter("birthday");
 		Machineowner machineOwner = new Machineowner();
 		machineOwner.setName(name);
 		machineOwner.setAddress(address);
 		machineOwner.setSex(sex);
 		machineOwner.setPhone(phone);
-		Date date = new Date();
-		machineOwner.setBirthday(date);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			machineOwner.setBirthday(sdf.parse(birthday));
+		} catch (ParseException e1) {
+			machineOwner.setBirthday(null);
+		}
 		Center center = new Center();
-		center.setCenterId(1);
-		machineOwner.setValid(1);
+		center.setCenterId(centerId);
 		machineOwner.setCenter(center);
+		machineOwner.setValid(1);
 		EntityManagerHelper.beginTransaction();
+		
+		
+		
 		try{
 			machineOwnerDAOAdd.save(machineOwner);
 			EntityManagerHelper.commit();
+			list.add(machineOwner);
+			request.getSession().setAttribute("allMachinerOwner", list);
 			this.out(response,"1");
 		}catch(Exception e){
 			this.out(response,"0");
@@ -161,20 +186,41 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void editor(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		MachineownerDAO machineOwnerDAOEditor = new MachineownerDAO();
+		MachineownerDAO machineOwnerDAO = new MachineownerDAO();
 		String username = request.getParameter("username");
 		String sex = request.getParameter("sex");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
+		String birthday = request.getParameter("birthday");
 		Machineowner machineOwner = (Machineowner) request.getSession().getAttribute("currentMachineOwner");
 		machineOwner.setName(username);
 		machineOwner.setAddress(address);
 		machineOwner.setSex(sex);
 		machineOwner.setPhone(phone);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			machineOwner.setBirthday(sdf.parse(birthday));
+		} catch (ParseException e) {
+			machineOwner.setBirthday(null);
+		}
 		EntityManagerHelper.beginTransaction();
 		try{
-			machineOwnerDAOEditor.update(machineOwner);
+			machineOwnerDAO.update(machineOwner);
 			EntityManagerHelper.commit();
+			List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+			int temp = -1;
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getOwnerId() == machineOwner.getOwnerId()) {
+					temp = i;
+					break;
+				}
+			}
+			if(temp != -1) {
+				list.remove(temp);
+				list.add(machineOwner);
+			}
+			request.getSession().setAttribute("allMachinerOwner", list);
+			request.getSession().setAttribute("currentMachineOwner", temp);
 			this.out(response,"1");
 		}catch(RuntimeException re){
 			this.out(response, "0");

@@ -12,9 +12,8 @@ public class UserSearchTest {
 	public static void main(String[] args) {
 		UserService service = new UserServiceImpl();
 		User user = new User();
-		user.setUsername("geowin");
-		user.setSex("男");
-		List<User> list = service.search(user, "v_farmer");
+		
+		List<User> list = service.search(1, "v_farmer");
 		for(User u : list) {
 			System.out.println(u);
 			System.out.println(u.getCenter().getCenterId());
