@@ -158,7 +158,7 @@
     			$.post("../bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
     	        	if(data == 1) {
     	        		alert("删除成功");
-    	        		location.href = "machineowner.jsp";
+    	        		location.href = "../bMachineOwnerServlet?op=searchAll";
     	        	} else {
     	        		alert("删除失败");
     	        	}

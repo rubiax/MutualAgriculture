@@ -151,7 +151,7 @@
         }
     }
     function returnMachinerOwner() {
-        window.location = "machineowner.jsp";
+        window.location = "../bMachineOwnerServlet?op=searchAll";
     }
 
 

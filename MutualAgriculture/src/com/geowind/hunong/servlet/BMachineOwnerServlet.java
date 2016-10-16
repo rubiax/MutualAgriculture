@@ -1,35 +1,22 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.entities.Center;
 import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.MachineDAO;
 import com.geowind.hunong.entities.Machineowner;
 import com.geowind.hunong.entities.MachineownerDAO;
-import com.geowind.hunong.entities.User;
-import com.geowind.hunong.entities.UserDAO;
-import com.geowind.hunong.entities.Zone;
-import com.geowind.hunong.entities.ZoneDAO;
 import com.geowind.hunong.service.MachineOwnerService;
-import com.geowind.hunong.service.MachineService;
-import com.geowind.hunong.service.UserService;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
-import com.geowind.hunong.service.impl.MachineServiceImpl;
-import com.geowind.hunong.service.impl.UserServiceImpl;
 
-import javafx.scene.input.DataFormat;
 
 public class BMachineOwnerServlet extends BasicServlet {
 
@@ -38,8 +25,6 @@ public class BMachineOwnerServlet extends BasicServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
-	
 
 		String op = request.getParameter("op");
 		
@@ -78,22 +63,23 @@ public class BMachineOwnerServlet extends BasicServlet {
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
 		String ownerId = request.getParameter("ownerId");
-		List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+		//List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
 		Machineowner machineowner = null;
 		EntityManagerHelper.beginTransaction();
 		
 		try{
-			for(int i=0; i<list.size(); i++) {
+			machineowner = machineownerDAO.findById(Integer.parseInt(ownerId));
+			/*for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getOwnerId() == Integer.parseInt(ownerId)) {
 					machineowner = list.get(i);
 					list.remove(i);
 					break;
 				}
-			}
+			}*/
 			machineowner.setValid(0);
 			machineownerDAO.update(machineowner);
 			EntityManagerHelper.commit();
-			request.getSession().setAttribute("allMachinerOwner", list);
+			//request.getSession().setAttribute("allMachinerOwner", list);
 			this.out(response,"1");
 		}catch(RuntimeException re){
 			this.out(response, "0");
@@ -109,10 +95,15 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
-		Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(request.getParameter("ownerId")));
-		request.getSession().setAttribute("currentMachineOwner",
-				machineowner);
-		response.sendRedirect("back/editormachineowner.jsp");
+		try {
+			Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(request.getParameter("ownerId")));
+			request.getSession().setAttribute("currentMachineOwner",
+					machineowner);
+			response.sendRedirect("back/editormachineowner.jsp");
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find failed", Level.SEVERE, re);
+		}
+		
 		
 	}
 
@@ -127,9 +118,14 @@ public class BMachineOwnerServlet extends BasicServlet {
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		System.out.println(centerId);
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);
-		request.getSession().setAttribute("allMachinerOwner",
-				machinerOwnerList);
-		response.sendRedirect("back/machineowner.jsp");
+		if(machinerOwnerList != null && machinerOwnerList.size()>0) {
+			request.getSession().setAttribute("allMachinerOwner",
+					machinerOwnerList);
+			response.sendRedirect("back/machineowner.jsp");
+		} else {
+			//跳转出错页面
+		}
+		
 		
 	}
 
@@ -140,7 +136,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException 
 	 */
 	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+		//List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
 		int centerId = (int)request.getSession().getAttribute("currentCenterId");
 		MachineownerDAO machineOwnerDAOAdd = new MachineownerDAO();
 		String name = request.getParameter("name");
@@ -164,14 +160,11 @@ public class BMachineOwnerServlet extends BasicServlet {
 		machineOwner.setCenter(center);
 		machineOwner.setValid(1);
 		EntityManagerHelper.beginTransaction();
-		
-		
-		
 		try{
 			machineOwnerDAOAdd.save(machineOwner);
 			EntityManagerHelper.commit();
-			list.add(machineOwner);
-			request.getSession().setAttribute("allMachinerOwner", list);
+			//list.add(machineOwner);
+			//request.getSession().setAttribute("allMachinerOwner", list);
 			this.out(response,"1");
 		}catch(Exception e){
 			this.out(response,"0");
@@ -207,7 +200,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		try{
 			machineOwnerDAO.update(machineOwner);
 			EntityManagerHelper.commit();
-			List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
+			/*List<Machineowner> list = (List<Machineowner>) request.getSession().getAttribute("allMachinerOwner");
 			int temp = -1;
 			for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getOwnerId() == machineOwner.getOwnerId()) {
@@ -219,8 +212,8 @@ public class BMachineOwnerServlet extends BasicServlet {
 				list.remove(temp);
 				list.add(machineOwner);
 			}
-			request.getSession().setAttribute("allMachinerOwner", list);
-			request.getSession().setAttribute("currentMachineOwner", temp);
+			request.getSession().setAttribute("allMachinerOwner", list);*/
+			request.getSession().setAttribute("currentMachineOwner", machineOwner);
 			this.out(response,"1");
 		}catch(RuntimeException re){
 			this.out(response, "0");

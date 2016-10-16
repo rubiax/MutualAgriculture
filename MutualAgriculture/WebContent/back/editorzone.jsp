@@ -136,7 +136,7 @@
         
     }
     function returnZone() {
-        window.location = "zone.jsp";
+        window.location = "../bZoneServlet?op=searchAll";
     }
 
 

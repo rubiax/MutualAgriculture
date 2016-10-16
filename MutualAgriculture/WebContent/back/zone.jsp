@@ -165,7 +165,7 @@
     			$.post("../bZoneServlet", {op:"delete", zoneId:zoneId}, function(data) {
     	        	if(data == 1) {
     	        		alert("删除成功");
-    	        		location.href = "zone.jsp";
+    	        		location.href = "../bZoneServlet?op=searchAll";
     	        	} else {
     	        		alert("删除失败");
     	        	}

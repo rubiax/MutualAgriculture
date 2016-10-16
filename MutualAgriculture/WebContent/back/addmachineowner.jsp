@@ -91,7 +91,7 @@
             <!-- /.box-body -->
             <div class="box-footer" align="center">
                 <button type="button" class="btn btn-default" onclick="add()">确定</button>
-                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
+                <button type="button" class="btn btn-default" onclick="returnMachineOwner()">返回</button>
             </div>
             <!-- /.box-footer -->
         </form>
@@ -140,8 +140,8 @@
         
         
     }
-    function returnZone() {
-        window.location = "machineowner.jsp";
+    function returnMachineOwner() {
+        window.location = "../bMachineOwnerServlet?op=searchAll";
     }
 
 
