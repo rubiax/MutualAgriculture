@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AdminLTE 2 | General Form Elements</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="css/plugins/datatables/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/dist/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+
+<title>Document</title>
+
+</head>
+<body style="background-color: #ECF0F5">
+
+	<div class="container">
+
+		<form class="form-horizontal">
+
+			<fieldset disabled="disabled" class="col-md-4 allInfo">
+
+
+				<!-- Horizontal Form -->
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">农机图片</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body">
+						<div align="center">
+							<img src="img/photo1.png" class="img-rounded" width="220px" height="auto">
+							<img src="img/photo2.png" class="img-rounded" width="220px" height="auto">
+							<img src="img/photo4.jpg" class="img-rounded" width="220px" height="auto">
+						</div>
+					</div>
+
+					<!-- /.box-body -->
+
+				</div>
+
+			</fieldset>
+
+			<fieldset disabled="disabled" class="col-md-8 allInfo">
+
+
+				<!-- Horizontal Form -->
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">详细信息</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body">
+						
+						
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">拥有者姓名</label>
+							<div class="col-md-8">
+								<input class="form-control" id="" disabled="disabled" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">机牌号</label>
+							<div class="col-md-8">
+								<input class="form-control" id="" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">农机类型</label>
+							<div class="col-md-8">
+								<input class="form-control" id="" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">农机品牌</label>
+							<div class="col-md-8">
+								<input class="form-control" id="" type="text" value="${}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">马力</label>
+							<div class="col-md-8">
+								<input class="form-control" id="" type="text" value="${}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">农机状态</label>
+							<div class="col-md-8">
+								<textarea class="form-control" rows="3">${}</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-md-2 control-label">报废时间</label>
+
+							<div class="col-md-8">
+								<textarea class="form-control" rows="3">${}</textarea>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+				</div>
+
+			</fieldset>
+			<div align="center">
+				<button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
+				<button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
+				<button type="reset" class="btn btn-default">重置</button>
+				<button type="button" class="btn btn-default"
+					onclick="returnFarmer()">返回</button>
+			</div>
+		</form>
+
+
+	</div>
+	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- date-range-picker -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<!-- InputMask -->
+	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+	<script>
+
+		function editInfo() {
+			$(".allInfo").removeAttr("disabled");
+		}
+		function saveInfo() {
+			$(".allInfo").attr("disabled", "disabled");
+		}
+		function returnFarmer() {
+			window.location = "farmer.jsp";
+		}
+		
+	</script>
+
+</body>
+</html>
