@@ -3,9 +3,13 @@ package com.geowind.hunong.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Article entity. @author MyEclipse Persistence Tools
@@ -15,12 +19,17 @@ import javax.persistence.Table;
 public class Article implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer articleId;
+	@Expose
 	private Integer category;
+	@Expose
 	private String title;
+	@Expose
 	private String url;
+	@Expose
 	private String description;
+	@Expose
 	private String author;
 
 	// Constructors

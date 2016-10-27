@@ -3,12 +3,15 @@ package com.geowind.hunong.entities;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Machine entity. @author MyEclipse Persistence Tools
@@ -25,18 +30,29 @@ import javax.persistence.TemporalType;
 public class Machine implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer machineId;
+	@Expose
 	private Machineowner machineowner;
+	@Expose
 	private String plate;
+	@Expose
 	private String type;
+	@Expose
 	private String brand;
+	@Expose
 	private String horsepower;
+	@Expose
 	private Date overdate;
+	@Expose
 	private String picture;
+	@Expose
 	private Integer state;
+	@Expose
 	private Integer workstate;
+	@Expose
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 
 	// Constructors

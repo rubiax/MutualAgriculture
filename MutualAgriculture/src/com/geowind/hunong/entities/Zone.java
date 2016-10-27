@@ -2,18 +2,23 @@ package com.geowind.hunong.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Zone entity. @author MyEclipse Persistence Tools
@@ -23,14 +28,21 @@ import javax.persistence.UniqueConstraint;
 public class Zone implements java.io.Serializable {
 
 	// Fields
-
+	@Expose  
 	private Integer zoneId;
+	@Expose  
 	private Center center;
+	@Expose  
 	private String zonename;
+	@Expose  
 	private Double area;
+	@Expose  
 	private String type;
+	@Expose  
 	private String address;
+	@Expose  
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false) 
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 
 	// Constructors

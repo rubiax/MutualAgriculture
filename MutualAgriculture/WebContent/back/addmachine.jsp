@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -23,6 +25,7 @@
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     
     <link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
+    
 
     <title>Document</title>
 
@@ -38,85 +41,67 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal">
+        <div class="form-horizontal">
             <div class="box-body">
-                    <div class="form-group">
-                        <label for="zonename" class="col-sm-2 control-label">拥有者姓名</label>
+                    <div class="form-group" id="ownernamediv">
+                        <label for="ownername" class="col-sm-2 control-label">拥有者姓名</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="username" placeholder="name" type="text">
+                            <input class="form-control" id="ownername" type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="area" class="col-sm-2 control-label">所属区号</label>
+                        <label for="plate" class="col-sm-2 control-label">机牌号</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="zoneid" placeholder="area" type="text">
+                            <input class="form-control" id="plate" type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="area" class="col-sm-2 control-label">经纬度</label>
+                        <label for="type" class="col-sm-2 control-label">农机类型</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="" placeholder="" type="text">
+                            <input class="form-control" id="type"  type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="area" class="col-sm-2 control-label">农田面积</label>
+                        <label for="brand" class="col-sm-2 control-label">农机品牌</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="" placeholder="" type="text">
+                            <input class="form-control" id="brand"  type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="type" class="col-sm-2 control-label">作物类型</label>
+                        <label for="horsepower" class="col-sm-2 control-label">马力</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="type" placeholder="type" type="text">
+                            <input class="form-control" id="horsepower"  type="text">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">农田状态</label>
+                    <!-- <div class="form-group">
+                        <label for="address" class="col-md-2 control-label">农机状态</label>
 						<div class="col-sm-5">
                             <input class="form-control" id="type" placeholder="type" type="text">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">pH</label>
+                        <label for="overdate" class="col-md-2 control-label">报废时间</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="type" placeholder="type" type="text">
+                            <input class="form-control" id="overdate" type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">NPK</label>
-						<div class="col-sm-5">
-                            <input class="form-control" id="type" placeholder="type" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">详细地址</label>
-                        <div class="col-md-5">
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." id="address"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">流转信息</label>
-                        <div class="col-md-5">
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." id="address"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">图片</label>
+                        <form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        <label for="pic" class="col-md-2 control-label">图片</label>
                         <div class="col-md-5">
 	                        <div id="LXXUploadPic" LXXCol="3" LXXRow="1" LXXWidth="100" LXXHeight="100"></div>
                         </div>
+                    </form>
                     </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
                 <button type="button" class="btn btn-default" onclick="saveInfo()">确定</button>
-                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
+                <button type="button" class="btn btn-default" onclick="returnMachine()">返回</button>
             </div>
             <!-- /.box-footer -->
-        </form>
+        </div>
     </div>
-
-
 </div>
 <script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- date-range-picker -->
@@ -130,6 +115,40 @@
 
 <script src="js/LXXUploadPic.js"></script>
 
+<script type="text/javascript" src="js/index.js"></script>
+
+<script type="text/javascript">
+	function saveInfo() {
+		var ownername = $.trim($("#ownername").val());
+	    var plate = $.trim($("#plate").val());
+	    var type = $.trim($("#type").val());
+	    var brand = $.trim($("#brand").val());
+	    var horsepower = $.trim($("#horsepower").val());
+	    var overdate = $.trim($("#overdate").val());
+	    $.post("../bMachineServlet?op=add", {ownername:ownername, plate:plate, type:type,
+	    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
+	    	if(data == 1) {
+	    		alert("添加成功");
+	    		$("#myform").submit();
+	    	} else {
+	    		alert("添加失败");
+	    	}
+	    });
+	}
+	function returnMachine() {
+	    window.location = "../bMachineServlet?op=searchAll";
+	}
+	$("#ownername").blur(function(){
+		var ownername = $.trim($("#ownername").val());
+		if(ownername == "") {
+			return;
+		}
+		$.post("../bMachineOwnerServlet?op=isExistMachineowner", {ownername:ownername}, function(data) {
+			data =  $.trim(data);
+			check("ownernamediv", "ownername", data);
+		});
+	});
+</script>
 
 </body>
 </html>

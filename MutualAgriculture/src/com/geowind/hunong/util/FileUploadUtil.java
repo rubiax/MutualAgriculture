@@ -18,7 +18,7 @@ import com.jspsmart.upload.Request;
 import com.jspsmart.upload.SmartUpload;
 
 public class FileUploadUtil {
-	public static String PATH="../newspics";//文件上传的路径  与项目评级 在项目部署时不会清空  /表示在server的项目级
+	public static String PATH="../HN_upload";//文件上传的路径  与项目评级 在项目部署时不会清空  /表示在server的项目级
 	private static final String ALLOWED="gif,jpg,jpeg,png,doc,txt,xls";//允许上传文件类型
 	private static final String DENIED="exe,bat,jsp,html,com";//不允许上传的文件类型
 	private static final int SINGLEFILESIZE=1024*1024;//单个文件最大大小

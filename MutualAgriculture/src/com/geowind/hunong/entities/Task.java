@@ -1,17 +1,22 @@
 package com.geowind.hunong.entities;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Task entity. @author MyEclipse Persistence Tools
@@ -21,14 +26,21 @@ import javax.persistence.TemporalType;
 public class Task implements java.io.Serializable {
 
 	// Fields
-
+	@Expose  
 	private Integer taskId;
+	@Expose  
 	private User user;
+	@Expose  
 	private Machine machine;
+	@Expose  
 	private Farmland farmland;
+	@Expose  
 	private Integer workload;
+	@Expose  
 	private Date date;
+	@Expose  
 	private String type;
+	@Expose  
 	private Boolean finished;
 
 	// Constructors

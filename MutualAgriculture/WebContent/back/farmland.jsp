@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -33,7 +36,7 @@
         <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
             <div class="container">
-                <a class="btn btn-default" href="addfarmland.html">
+                <a class="btn btn-default" href="addfarmland.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
                 <a class="btn btn-default" href="javascript:del()">
@@ -63,31 +66,36 @@
                             <thead>
                             <tr>
                                 <th rowspan="1" colspan="1">农田编号</th>
+                                <th rowspan="1" colspan="1">拥有者用户名</th>
+	                            <th rowspan="1" colspan="1">拥有者姓名</th>
 	                            <th rowspan="1" colspan="1">经纬度</th>
 	                            <th rowspan="1" colspan="1">地址</th>
 	                            <th rowspan="1" colspan="1">农田面积</th>
-	                            <th rowspan="1" colspan="1">拥有者姓名</th>
 	                            <th rowspan="1" colspan="1">作物种类</th>
                             </tr>
                             </thead>
                             <tbody>
-                           <!--  <c:forEach items="${allZone }" var="item">
+                            <c:forEach items="${allFarmland }" var="item">
 	                        	<tr role="row" class="odd">
-		                        	<td class=""><label hidden="hidden">${item.zoneId }</label>${item.zonename }</td>
-		                            <td class="sorting_1">${item.area }</td>
-		                            <td>${item.type }</td>
+		                        	<td>${item.farmlandId }</td>
+		                        	<td>${item.user.username }</td>
+		                        	<td>${item.user.realname }</td>
+		                            <td>(${item.longitude },${item.latitude})</td>
 		                            <td>${item.address }</td>
+		                            <td>${item.area }</td>
+		                            <td>${item.zone.type }</td>
 	                        	</tr>
-                        	</c:forEach> -->
+                        	</c:forEach>
 
                             </tbody>
                             <tfoot>
                             <tr>
 	                            <th rowspan="1" colspan="1">农田编号</th>
+	                            <th rowspan="1" colspan="1">拥有者用户名</th>
+	                            <th rowspan="1" colspan="1">拥有者姓名</th>
 	                            <th rowspan="1" colspan="1">经纬度</th>
 	                            <th rowspan="1" colspan="1">地址</th>
 	                            <th rowspan="1" colspan="1">农田面积</th>
-	                            <th rowspan="1" colspan="1">拥有者姓名</th>
 	                            <th rowspan="1" colspan="1">作物种类</th>
                             </tr>
                             </tfoot>
@@ -120,19 +128,21 @@
 <!-- page script -->
 <script>
 
+	var farmlandId;	
+
     $(function () {
         var table = $('#example').DataTable();
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                zoneId = '';
+                farmlandId = '';
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-                zoneId = '';
+                farmlandId = '';
                 $(this).addClass('selected');
-                zoneId = $('.selected td:first label').text();
+                farmlandId = $('.selected td:first').text();
             }
         } );
 
@@ -141,6 +151,38 @@
         } );
         
     });
+    
+    
+    function del() {
+    	if(farmlandId==""||farmlandId==undefined){
+    		return;
+    	}else{
+    		var result= confirm("确认删除？","确认","取消");
+    		if(result==true){
+    			$.post("../bFarmlandServlet", {op:"delete", farmlandId:farmlandId}, function(data) {
+    	        	if(data == 1) {
+    	        		alert("删除成功");
+    	        		location.href = "../bFarmlandServlet?op=searchAll";
+    	        	} else {
+    	        		alert("删除失败");
+    	        	}
+    	        });
+    		}else{
+    			return;
+    		}
+    	}
+    	
+    }
+    
+    function detail() {
+    	if(farmlandId== ""||farmlandId==undefined){
+    		return;
+    	}else{
+    		var uri= "../bFarmlandServlet?op=detail&farmlandId="+farmlandId;
+        	location.href = uri;
+    	}
+    	
+    }
     
   
 </script>

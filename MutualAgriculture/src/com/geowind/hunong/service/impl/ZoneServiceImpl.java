@@ -7,6 +7,7 @@ import java.util.Map;
 import com.geowind.hunong.dao.ZoneDao;
 import com.geowind.hunong.dao.impl.ZoneDaoImpl;
 import com.geowind.hunong.entities.Center;
+import com.geowind.hunong.entities.CenterDAO;
 import com.geowind.hunong.entities.Zone;
 import com.geowind.hunong.service.ZoneService;
 
@@ -29,8 +30,8 @@ public class ZoneServiceImpl implements ZoneService {
 			zone.setArea((double)map.get("area"));
 			zone.setType((String)map.get("type"));
 			zone.setAddress((String)map.get("address"));
-			Center center = new Center();
-			center.setCenterId((int)map.get("centerid"));
+			CenterDAO centerDAO = new CenterDAO();
+			Center center = centerDAO.findById((int)map.get("centerid"));
 			zone.setCenter(center);
 			zone.setValid((int)map.get("valid"));
 			list.add(zone);

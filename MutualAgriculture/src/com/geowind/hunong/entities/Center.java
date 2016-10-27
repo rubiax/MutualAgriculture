@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Center entity. @author MyEclipse Persistence Tools
  */
@@ -23,16 +25,25 @@ import javax.persistence.Table;
 public class Center implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer centerId;
+	@Expose
 	private String address;
+	@Expose
 	private String level;
+	@Expose
 	private String name;
+	@Expose
 	private String principal;
+	@Expose
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Admin> admins = new HashSet<Admin>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Zone> zones = new HashSet<Zone>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Machineowner> machineowners = new HashSet<Machineowner>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<User> users = new HashSet<User>(0);
 
 	// Constructors

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="now" class="java.util.Date" scope="page"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -31,7 +36,7 @@
         <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
             <div class="container">
-                <a class="btn btn-default" href="addmachine.html">
+                <a class="btn btn-default" href="addmachine.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
                 <a class="btn btn-default" href="javascript:del()">
@@ -72,14 +77,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                           <!--  <c:forEach items="${allZone }" var="item">
+                            <c:forEach items="${allMachine }" var="item">
 	                        	<tr role="row" class="odd">
-		                        	<td class=""><label hidden="hidden">${item.zoneId }</label>${item.zonename }</td>
-		                            <td class="sorting_1">${item.area }</td>
+		                        	<td>${item.machineId }</td>
+		                            <td>${item.machineowner.name }</td>
+		                            <td>${item.plate }</td>
 		                            <td>${item.type }</td>
-		                            <td>${item.address }</td>
+		                            <td>${item.brand }</td>
+		                            <td>${item.horsepower }</td>
+		                            <td>${item.state }</td>
+		                            <td>${item.workstate }</td>
+		                            <td><fmt:formatDate value="${item.overdate }" pattern="yyyy-MM-dd"/></td>
 	                        	</tr>
-                        	</c:forEach> -->
+                        	</c:forEach>
 
                             </tbody>
                             <tfoot>
@@ -122,20 +132,20 @@
 <script src="js/dist/demo.js"></script>
 <!-- page script -->
 <script>
-
+	var machineId;	
     $(function () {
         var table = $('#example').DataTable();
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                zoneId = '';
+                machineId = '';
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-                zoneId = '';
+                machineId = '';
                 $(this).addClass('selected');
-                zoneId = $('.selected td:first label').text();
+                machineId = $('.selected td:first').text();
             }
         } );
 
@@ -144,6 +154,37 @@
         } );
         
     });
+    
+    function del() {
+    	if(machineId==""||machineId==undefined){
+    		return;
+    	}else{
+    		var result= confirm("确认删除？","确认","取消");
+    		if(result==true){
+    			$.post("../bMachineServlet", {op:"delete", machineId:machineId}, function(data) {
+    	        	if(data == 1) {
+    	        		alert("删除成功");
+    	        		location.href = "../bMachineServlet?op=searchAll";
+    	        	} else {
+    	        		alert("删除失败");
+    	        	}
+    	        });
+    		}else{
+    			return;
+    		}
+    	}
+    	
+    }
+    
+    function detail() {
+    	if(machineId== ""||machineId==undefined){
+    		return;
+    	}else{
+    		var uri= "../bMachineServlet?op=detail&machineId="+machineId;
+        	location.href = uri;
+    	}
+    	
+    }
     
   
 </script>

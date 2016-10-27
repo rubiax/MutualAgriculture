@@ -2,17 +2,22 @@ package com.geowind.hunong.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Farmland entity. @author MyEclipse Persistence Tools
@@ -22,21 +27,35 @@ import javax.persistence.Table;
 public class Farmland implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer farmlandId;
+	@Expose
 	private User user;
+	@Expose
 	private Zone zone;
+	@Expose
 	private Double longitude;
+	@Expose
 	private Double latitude;
+	@Expose
 	private String address;
+	@Expose
 	private Double area;
+	@Expose
 	private String picture;
+	@Expose
 	private String transtion;
+	@Expose
 	private Double production;
+	@Expose
 	private String ph;
+	@Expose
 	private String npk;
+	@Expose
 	private Integer state;
+	@Expose
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 
 	// Constructors

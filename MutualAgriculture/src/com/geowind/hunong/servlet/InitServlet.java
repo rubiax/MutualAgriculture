@@ -11,7 +11,7 @@ import com.geowind.hunong.util.FileUploadUtil;
 
 public class InitServlet extends HttpServlet {
 
-	private String filePath = "uploadFile";
+	private String filePath = "HN_upload";
 	
 	@Override
 	public void init() throws ServletException {

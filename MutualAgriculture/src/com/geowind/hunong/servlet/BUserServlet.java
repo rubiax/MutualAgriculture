@@ -20,13 +20,7 @@ import com.geowind.hunong.entities.UserDAO;
 import com.geowind.hunong.service.UserService;
 import com.geowind.hunong.service.impl.UserServiceImpl;
 
-public class BUserServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+public class BUserServlet extends BasicServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +28,6 @@ public class BUserServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 
 		String op = request.getParameter("op");
-		
 		switch (op) {
 		//查找所有
 		case "searchAll":
@@ -44,11 +37,36 @@ public class BUserServlet extends HttpServlet {
 		case "detail":
 			detail(request, response);
 			break;
+		case "isExistUser":
+			isExistUser(request, response);
 		default:
 			break;
 		}
 	}
 
+	private void isExistUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserDAO userDAO = new UserDAO();
+		User user = userDAO.findById(request.getParameter("username"));
+		if(user != null) {
+			//System.out.println("{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
+			//this.out(response, "{mark:\"1\",realname:\""+user.getRealname()+"\"}");
+			//this.out(response, "1");
+			if(user.getValid() == 1) {
+				this.out(response, "{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
+			} else {
+				this.out(response, "{\"mark\":\"0\"}");
+			}
+		} else {
+			this.out(response, "{\"mark\":\"0\"}");
+		}
+	}
+
+	/**
+	 * 用户详情
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String type = request.getParameter("type");
 		if (type.equals("v_farmer")) {
@@ -69,6 +87,12 @@ public class BUserServlet extends HttpServlet {
 		
 	}
 
+	/**
+	 * 查找所有用户
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void searchAll(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		UserService userService = new UserServiceImpl();

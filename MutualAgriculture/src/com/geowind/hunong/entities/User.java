@@ -3,6 +3,7 @@ package com.geowind.hunong.entities;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
@@ -23,20 +26,33 @@ import javax.persistence.TemporalType;
 public class User implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private String username;
+	@Expose
 	private Center center;
+	@Expose
 	private String password;
+	@Expose
 	private String realname;
+	@Expose
 	private String sex;
+	@Expose
 	private Date birthday;
+	@Expose
 	private String phone;
+	@Expose
 	private Integer type;
+	@Expose
 	private String picture;
+	@Expose
 	private String address;
+	@Expose
 	private String credit;
+	@Expose
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 
 	// Constructors

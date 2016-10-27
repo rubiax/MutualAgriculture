@@ -150,7 +150,7 @@
     
     
     function del() {
-    	if(ownerId==" "||ownerId==undefined){
+    	if(ownerId==""||ownerId==undefined){
     		return;
     	}else{
     		var result= confirm("确认删除？","确认","取消");
@@ -171,7 +171,7 @@
     }
     
     function detail() {
-    	if(ownerId== " "||ownerId==undefined){
+    	if(ownerId== ""||ownerId==undefined){
     		return;
     	}else{
     		var uri= "../bMachineOwnerServlet?op=detail&ownerId="+ownerId;

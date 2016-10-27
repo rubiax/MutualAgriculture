@@ -130,7 +130,7 @@
         var phone = $.trim($("#phone").val());
         var address = $.trim($("#address").val());
         alert(name+" "+sex+" "+birthday+" "+phone+" "+address);
-        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
+        $.post("../bMachineOwnerServlet?op=add", {name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
         	if(data == 1) {
         		alert("添加成功");
         	} else {

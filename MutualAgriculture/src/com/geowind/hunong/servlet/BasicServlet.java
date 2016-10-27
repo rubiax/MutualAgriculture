@@ -35,6 +35,14 @@ public class BasicServlet extends HttpServlet {
 		out.close();
 	}
 	
+	protected void outJson(HttpServletResponse response, String result) throws IOException {
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		out.println(result);
+		out.flush();
+		out.close();
+	}
+	
 	/**
 	 * 针对分页的json回送
 	 * @param response
@@ -62,8 +70,9 @@ public class BasicServlet extends HttpServlet {
 	public void out(HttpServletResponse response, Object obj) throws IOException {
 //		Gson gson = new Gson();
 		//设置Gson转换时，日期的转换格式
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create(); 
 		PrintWriter out = response.getWriter();
+		System.out.println(gson.toJson(obj));
 		out.println(gson.toJson(obj));
 		out.flush();
 		out.close();

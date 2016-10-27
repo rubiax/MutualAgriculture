@@ -14,6 +14,8 @@ import com.geowind.hunong.entities.Center;
 import com.geowind.hunong.entities.EntityManagerHelper;
 import com.geowind.hunong.entities.Machineowner;
 import com.geowind.hunong.entities.MachineownerDAO;
+import com.geowind.hunong.entities.User;
+import com.geowind.hunong.entities.UserDAO;
 import com.geowind.hunong.service.MachineOwnerService;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
 
@@ -49,8 +51,35 @@ public class BMachineOwnerServlet extends BasicServlet {
 		//删除
 		case "delete":
 			delete(request,response);
+			break;
+		case "isExistMachineowner":
+			isExistMachineowner(request, response);
+			break;
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 是否存在农机主
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void isExistMachineowner(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		MachineownerDAO machineownerDAO = new MachineownerDAO();
+		List<Machineowner> machineownerList = machineownerDAO.findByName(request.getParameter("ownername"));
+		if(machineownerList != null && machineownerList.size()>0) {
+			if(machineownerList.get(0).getValid() == 1) {
+				//this.out(response, "{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
+				this.out(response, "1");
+			} else {
+				//this.out(response, "{\"mark\":\"0\"}");
+				this.out(response, "0");
+			}
+		} else {
+			//this.out(response, "{\"mark\":\"0\"}");
+			this.out(response, "0");
 		}
 	}
 

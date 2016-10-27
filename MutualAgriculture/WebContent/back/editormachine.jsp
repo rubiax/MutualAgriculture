@@ -1,3 +1,25 @@
+<%@page import="com.geowind.hunong.entities.Machine"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Arrays"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	Machine machine = (Machine)request.getSession().getAttribute("currentMachine");
+	if(machine != null) {
+		String images = machine.getPicture();
+		if(images != null) {
+			String[] pic = images.split(",");
+			for(int i=0; i<pic.length; i++) {
+				pic[i] = "../../../"+pic[i];
+				System.out.println(pic[i]);
+			}
+			List<String> picList = Arrays.asList(pic);
+			pageContext.setAttribute("picList", picList);
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,9 +71,16 @@
 
 					<div class="box-body">
 						<div align="center">
-							<img src="img/photo1.png" class="img-rounded" width="220px" height="auto">
+							<!-- <img src="img/photo1.png" class="img-rounded" width="220px" height="auto">
 							<img src="img/photo2.png" class="img-rounded" width="220px" height="auto">
-							<img src="img/photo4.jpg" class="img-rounded" width="220px" height="auto">
+							<img src="img/photo4.jpg" class="img-rounded" width="220px" height="auto"> -->
+							<c:forEach items="${picList}" var="item"> 
+								<div class="row">
+									<img src="${item}"  class="img-rounded" width="220px" height="auto">
+									<hr>
+									<div style="width:10px; height:30px"></div>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
 
@@ -75,47 +104,47 @@
 					<div class="box-body">
 						
 						
-						<div class="form-group">
-							<label for="" class="col-md-2 control-label">拥有者姓名</label>
+						<div class="form-group" id="ownernamediv">
+							<label for="ownername" class="col-md-2 control-label">拥有者姓名</label>
 							<div class="col-md-8">
-								<input class="form-control" id="" disabled="disabled" type="text">
+								<input class="form-control" id="ownername" disabled="disabled" type="text" value="${currentMachine.machineowner.name }">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="" class="col-md-2 control-label">机牌号</label>
+							<label for="plate" class="col-md-2 control-label">机牌号</label>
 							<div class="col-md-8">
-								<input class="form-control" id="" type="text">
+								<input class="form-control" id="plate" type="text" value="${currentMachine.plate }">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="" class="col-md-2 control-label">农机类型</label>
+							<label for="type" class="col-md-2 control-label">农机类型</label>
 							<div class="col-md-8">
-								<input class="form-control" id="" type="text">
+								<input class="form-control" id="type" type="text" value="${currentMachine.plate }">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="" class="col-md-2 control-label">农机品牌</label>
+							<label for="brand" class="col-md-2 control-label">农机品牌</label>
 							<div class="col-md-8">
-								<input class="form-control" id="" type="text" value="${}">
+								<input class="form-control" id="brand" type="text" value="${currentMachine.brand }">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="" class="col-md-2 control-label">马力</label>
+							<label for="horsepower" class="col-md-2 control-label">马力</label>
 							<div class="col-md-8">
-								<input class="form-control" id="" type="text" value="${}">
+								<input class="form-control" id="horsepower" type="text" value="${currentMachine.horsepower }">
 							</div>
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label for="" class="col-md-2 control-label">农机状态</label>
 							<div class="col-md-8">
 								<textarea class="form-control" rows="3">${}</textarea>
 							</div>
-						</div>
+						</div> --%>
 						<div class="form-group">
-							<label for="" class="col-md-2 control-label">报废时间</label>
+							<label for="overdate" class="col-md-2 control-label">报废时间</label>
 
 							<div class="col-md-8">
-								<textarea class="form-control" rows="3">${}</textarea>
+								<textarea class="form-control" id="overdate" rows="3"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></textarea>
 							</div>
 						</div>
 					</div>
@@ -129,7 +158,7 @@
 				<button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
 				<button type="reset" class="btn btn-default">重置</button>
 				<button type="button" class="btn btn-default"
-					onclick="returnFarmer()">返回</button>
+					onclick="returnMachine()">返回</button>
 			</div>
 		</form>
 
@@ -145,6 +174,8 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	
+	<script type="text/javascript" src="js/index.js"></script>
 
 	<script>
 
@@ -153,10 +184,36 @@
 		}
 		function saveInfo() {
 			$(".allInfo").attr("disabled", "disabled");
+			var ownername = $.trim($("#ownername").val());
+		    var plate = $.trim($("#plate").val());
+		    var type = $.trim($("#type").val());
+		    var brand = $.trim($("#brand").val());
+		    var horsepower = $.trim($("#horsepower").val());
+		    var overdate = $.trim($("#overdate").val());
+		    var result= confirm("确认修改？","确认","取消");
+	        if(result == true) {
+	        	$.post("../bMachineServlet", {op:"editor", ownername:ownername, plate:plate, type:type,
+	    	    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
+	            	if(data == 1) {
+	            		alert("修改成功");
+	            	} else {
+	            		alert("修改失败");
+	            	}
+	            });
+	        } else {
+	        	return;
+	        }
 		}
-		function returnFarmer() {
-			window.location = "farmer.jsp";
+		function returnMachine() {
+			window.location = "../bMachineServlet?op=searchAll";
 		}
+		$("#ownername").blur(function(){
+			var ownername = $.trim($("#ownername").val());
+			$.post("../bMachineOwnerServlet?op=isExistMachineowner", {ownername:ownername}, function(data) {
+				data =  $.trim(data);
+				check("ownernamediv", "ownername", data);
+			});
+		});
 		
 	</script>
 

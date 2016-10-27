@@ -4,12 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Admin entity. @author MyEclipse Persistence Tools
@@ -19,12 +23,17 @@ import javax.persistence.UniqueConstraint;
 public class Admin implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer aid;
+	@Expose
 	private Center center;
+	@Expose
 	private String aname;
+	@Expose
 	private String realname;
+	@Expose
 	private String pwd;
+	@Expose
 	private Integer status;
 
 	// Constructors

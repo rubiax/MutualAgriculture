@@ -276,8 +276,8 @@ desired effect
           </ul>
         </li>
         <li><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-link"></i> <span>分区管理</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>农田管理</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>农机管理</span></a></li>
+        <li><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-link"></i> <span>农田管理</span></a></li>
+        <li><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-link"></i> <span>农机管理</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>任务管理</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

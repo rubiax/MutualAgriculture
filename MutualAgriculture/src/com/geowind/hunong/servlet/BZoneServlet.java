@@ -47,8 +47,23 @@ public class BZoneServlet extends BasicServlet {
 		case "delete":
 			delete(request,response);
 			break;
+		case "isExistZone":
+			isExistZone(request, response);
+			break;
 		default:
 			break;
+		}
+	}
+
+	private void isExistZone(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String zonename = request.getParameter("zonename");
+		ZoneDAO zoneDAO = new ZoneDAO();
+		List<Zone> zoneList = zoneDAO.findByZonename(zonename);
+		if(zoneList != null && zoneList.size()>0) {
+			Zone zone = zoneList.get(0);
+			this.out(response, "{\"mark\":\"1\",\"type\":\""+zone.getType()+"\"}");
+		} else {
+			this.out(response, "{\"mark\":\"0\"}");
 		}
 	}
 
