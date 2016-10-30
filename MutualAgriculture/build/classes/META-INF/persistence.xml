@@ -17,6 +17,7 @@
 		<class>com.geowind.hunong.entities.Center</class>
 		<class>com.geowind.hunong.entities.Article</class>
 		<class>com.geowind.hunong.entities.Farmland</class>
+		<class>com.geowind.hunong.entities.Insectcontrol</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />

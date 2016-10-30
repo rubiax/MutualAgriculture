@@ -18,11 +18,11 @@ public class a {
 		Gson gson = new Gson();*/
 		//System.out.println(gson.toJson(center));
 		
-		UserDAO userDAO = new UserDAO();
+		/*UserDAO userDAO = new UserDAO();
 		User user = userDAO.findById("geowind");
 		System.out.println(user);
 		Gson gsonBuilder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();  
 		String str = gsonBuilder.toJson(user, User.class);
-		System.out.println(str);
+		System.out.println(str);*/
 	}
 }

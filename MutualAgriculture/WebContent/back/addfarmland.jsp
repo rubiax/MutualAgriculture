@@ -5,6 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
     <title>AdminLTE 2 | General Form Elements</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -25,6 +27,8 @@
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     
     <link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
+    
+
 
     <title>Document</title>
 
@@ -55,9 +59,22 @@
                         </div>
                     </div>
                     <div class="form-group">
+	                    <label class="col-md-2 control-label"></label>
+	                    <div class="col-md-5">
+	                    <button data-target="#myModal" role="button" class="btn btn-primary" data-toggle="modal" onclick="showModal()">加载地址及经纬度</button>
+	                    </div>
+	                    
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-md-2 control-label">详细地址</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="3" id="address" disabled="disabled"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="lal" class="col-sm-2 control-label">经纬度</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="lal" type="text">
+                            <input class="form-control" id="lal" type="text" disabled="disabled">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,12 +107,7 @@
                             <input class="form-control" id="npk" type="text">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">详细地址</label>
-                        <div class="col-md-5">
-                            <textarea class="form-control" rows="3" id="address"></textarea>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="transtion" class="col-md-2 control-label">流转信息</label>
                         <div class="col-md-5">
@@ -122,7 +134,10 @@
 
 
 </div>
+
+<jsp:include page="smallmap.html"></jsp:include>
 <script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
 <!-- date-range-picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <!-- bootstrap datepicker -->
@@ -134,6 +149,14 @@
 <script type="text/javascript" src="js/index.js"></script>
 
 <script src="js/LXXUploadPic.js"></script>
+<!-- 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+
+<script type="text/javascript" src="js/map/mapInit.js"></script>
+<script type="text/javascript" src="js/map/search.js"></script>
+<script type="text/javascript" src="js/map/location.js"></script>
+<script type="text/javascript" src="js/map/mapType.js"></script> -->
 
 <script type="text/javascript">
 	function saveInfo() {
@@ -172,6 +195,14 @@
 			check("zonenamediv", "zonename", obj.mark);
 		}, "json");
 	});
+	function submitChange() {
+		var coordinate = $.trim($("#coordinate").val());
+		var _address = $.trim($("#_address").val());
+		$("#lal").val(coordinate);
+		$("#address").val(_address);
+		$('#myModal').modal('hide');
+	}
+	
 </script>
 </body>
 </html>

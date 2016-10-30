@@ -54,6 +54,8 @@ public class User implements java.io.Serializable {
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
+	@Expose (serialize = false, deserialize = false)
+	private Set<Insectcontrol> insectcontrols = new HashSet<Insectcontrol>(0);
 
 	// Constructors
 

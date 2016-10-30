@@ -113,6 +113,7 @@ public class UserServlet extends BasicServlet {
 		EntityManagerHelper.beginTransaction();
 		try {
 			userDAO.save(user);
+			EntityManagerHelper.commit();
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

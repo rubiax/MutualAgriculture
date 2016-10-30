@@ -19,36 +19,33 @@
 		}
 	}
 %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | General Form Elements</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Bootstrap 3.3.6 -->
-<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet"
-	href="css/plugins/datatables/dataTables.bootstrap.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <title>AdminLTE 2 | General Form Elements</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
-<!-- bootstrap datepicker -->
-<link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-<!-- <link rel="stylesheet" href="css/plugins/validate/bootstrapValidator.min.css"> -->
+    <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+    
+    <link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
 
 
 <title>Document</title>
@@ -133,18 +130,36 @@
 								<input class="form-control" id="zonename" type="text" value="${currentFarmland.zone.zonename}">
 							</div>
 						</div>
+						
+						<div class="form-group">
+	                    <label class="col-md-2 control-label"></label>
+	                    <div class="col-md-5">
+	                    <!-- <button data-target="#myModal2" role="button" class="btn btn-primary" data-toggle="modal" >加载地址及经纬度</button>
+	                     -->
+	                     <a href="#myModal" role="button" class="btn btn-primary"
+		data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
+	                     </div>
+                    	</div>
+		                <div class="form-group">
+							<label for="address" class="col-md-2 control-label">详细地址</label>
+							<div class="col-md-8">
+								<textarea class="form-control" id="address" rows="3" disabled="disabled">${currentFarmland.address }</textarea>
+							</div>
+						</div>
+	                    <div class="form-group">
+							<label for="lal" class="col-md-2 control-label">经纬度</label>
+							<div class="col-md-8">
+								<input class="form-control" id="lal" type="text" disabled="disabled" value="(${currentFarmland.longitude },${currentFarmland.latitude})">
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label for="type" class="col-md-2 control-label">作物类型</label>
 							<div class="col-md-8">
 								<input class="form-control" id="type" type="text" disabled="disabled" value="${currentFarmland.zone.type}">
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="lal" class="col-md-2 control-label">经纬度</label>
-							<div class="col-md-8">
-								<input class="form-control" id="lal" type="text" value="(${currentFarmland.longitude },${currentFarmland.latitude})">
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label for="area" class="col-md-2 control-label">农田面积</label>
 							<div class="col-md-8">
@@ -169,12 +184,7 @@
 								<input class="form-control" id="phone" type="text" value="${currentFarmland}">
 							</div>
 						</div> --%>
-						<div class="form-group">
-							<label for="address" class="col-md-2 control-label">详细地址</label>
-							<div class="col-md-8">
-								<textarea class="form-control" id="address" rows="3">${currentFarmland.address }</textarea>
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label for="center" class="col-md-2 control-label">流转信息</label>
 
@@ -196,20 +206,23 @@
 			</div>
 		</form>
 
-
 	</div>
-	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- date-range-picker -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	<!-- bootstrap datepicker -->
-	<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
-	<!-- InputMask -->
-	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
-	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	<!-- <script src="js/plugins/validate/bootstrapValidator.min.js"></script> -->
-	<script type="text/javascript" src="js/index.js"></script>
+<jsp:include page="smallmap.html"></jsp:include>
+
+
+<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<!-- bootstrap datepicker -->
+<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- InputMask -->
+<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+<script src="js/LXXUploadPic.js"></script>
 	<script>
 
 		function editInfo() {
@@ -259,6 +272,13 @@
 				$("#type").val(obj.type);
 			}, "json");
 		});
+		function submitChange() {
+			var coordinate = $.trim($("#coordinate").val());
+			var _address = $.trim($("#_address").val());
+			$("#lal").val(coordinate);
+			$("#address").val(_address);
+			$('#myModal').modal('hide');
+		}
 		
 	</script>
 	
