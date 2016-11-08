@@ -43,7 +43,13 @@
         <!-- form start -->
         <div class="form-horizontal">
             <div class="box-body">
-                    <div class="form-group" id="ownernamediv">
+            		<div class="form-group" id="phonediv">
+                        <label for="phone" class="col-sm-2 control-label">拥有者手机号</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="phone" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="ownername" class="col-sm-2 control-label">拥有者姓名</label>
                         <div class="col-sm-5">
                             <input class="form-control" id="ownername" type="text">
@@ -138,15 +144,16 @@
 	function returnMachine() {
 	    window.location = "../bMachineServlet?op=searchAll";
 	}
-	$("#ownername").blur(function(){
-		var ownername = $.trim($("#ownername").val());
-		if(ownername == "") {
+	$("#phone").blur(function(){
+		var phone = $.trim($("#phone").val());
+		if(phone == "") {
 			return;
 		}
-		$.post("../bMachineOwnerServlet?op=isExistMachineowner", {ownername:ownername}, function(data) {
-			data =  $.trim(data);
-			check("ownernamediv", "ownername", data);
-		});
+		$.post("../bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
+			var obj =  eval(data);
+			check("phonediv", "phone", obj.mark);
+			$("#ownername").val(obj.phone);
+		}, "json");
 	});
 </script>
 

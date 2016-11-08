@@ -1,6 +1,5 @@
 package com.geowind.hunong.entities;
 
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
@@ -18,8 +17,11 @@ import javax.persistence.Query;
 public class TaskDAO implements ITaskDAO {
 	// property constants
 	public static final String WORKLOAD = "workload";
+	public static final String PUBLISHDATE = "publishdate";
+	public static final String WORKDATE = "workdate";
 	public static final String TYPE = "type";
 	public static final String FINISHED = "finished";
+	public static final String DESRC = "desrc";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -164,12 +166,24 @@ public class TaskDAO implements ITaskDAO {
 		return findByProperty(WORKLOAD, workload);
 	}
 
+	public List<Task> findByPublishdate(Object publishdate) {
+		return findByProperty(PUBLISHDATE, publishdate);
+	}
+
+	public List<Task> findByWorkdate(Object workdate) {
+		return findByProperty(WORKDATE, workdate);
+	}
+
 	public List<Task> findByType(Object type) {
 		return findByProperty(TYPE, type);
 	}
 
 	public List<Task> findByFinished(Object finished) {
 		return findByProperty(FINISHED, finished);
+	}
+
+	public List<Task> findByDesrc(Object desrc) {
+		return findByProperty(DESRC, desrc);
 	}
 
 	/**

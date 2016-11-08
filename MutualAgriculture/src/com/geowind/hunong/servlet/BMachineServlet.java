@@ -50,9 +50,26 @@ public class BMachineServlet extends BasicServlet {
 		case "uploadImage":
 			uploadImage(request, response);
 			break;
+		case "isExistMachine":
+			isExistMachine(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+
+	private void isExistMachine(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		MachineDAO machineDAO = new MachineDAO();
+		String machineplate = request.getParameter("machineplate");
+		List<Machine> mList = machineDAO.findByPlate(machineplate);
+		if(mList != null && mList.size()>0) {
+			this.out(response, "1");
+		} else {
+			this.out(response, "0");
+		}
+		
 	}
 
 

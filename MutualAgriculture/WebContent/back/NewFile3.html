@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
+
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<title>Document</title>
+
+<style>
+#allmap {
+	font-family: "微软雅黑";
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	width: 100%;
+}
+</style>
+</head>
+<body style="background-color: #ECF0F5">
+
+	<button type="button" data-toggle="modal" data-target="#myModal" onclick="showModal()">Launch modal</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+				
+				<!-- 
+				<div style="position: absolute; display: none;z-index:9999; left: 0px; top: -1px;" class="tangram-suggestion-main" id="tangram-suggestion--TANGRAM__1m-main" data-guid="TANGRAM__1m"><div id="tangram-suggestion--TANGRAM__1m" class="tangram-suggestion" style="position:relative; top:0px; left:0px"></div></div>
+				
+				 -->
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					搜索:<input type="text" id="suggestId" size="20" value=""
+						style="width: 150px;">
+					<div id="searchResultPanel"
+						style="border: 1px solid #C0C0C0; width: 150px; height: auto; display: none;"></div>
+					经纬度：<input type="text" name="showGeography" id="coordinate"
+						value=""> 
+					地址：<input type="text" name="showGeography"
+						id="_address" value="">
+				</div>
+				<div class="modal-body">
+					<div id="allmap"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">提交更改</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="js/map/mapInit.js"></script>
+	<script type="text/javascript" src="js/map/search.js"></script>
+	<script type="text/javascript" src="js/map/location.js"></script>
+	<script type="text/javascript" src="js/map/mapType.js"></script>
+	<!-- <script type="text/javascript" src="js/map/farmlandMark.js"></script> -->
+	<script type="text/javascript">
+		function showModal() {
+			$(".tangram-suggestion-main").css("z-index","9999");
+			$(".modal-header").append($(".tangram-suggestion-main"));
+			
+			var json;
+		    var markera = new Array();
+		    //url:请求获得农田list数据的url地址
+		    var url = "../bFarmlandServlet?op=getFarmlands";
+		    
+		    /**
+		    * 向数据库发送请求数据
+		     * url : 表示请求的url地址
+		     * data:表示后台返回的农田List类型数据
+		    */
+		    $.post(url,{},function getData(data){
+		        alert(data);
+		        json = eval("(" + data + ")");
+		        for(var i=0;i<json.length;i++)
+		        {
+		            //循环数据 json[i]//获取数据操作
+		            //获得经纬度生成piont点
+		             var point = new BMap.Point(json[i].longitude,json[i].latitude);
+		            //添加标注和标签显示农田信息
+		            addMarker(point,new BMap.Label("农田显示数据："+json[i].address,{offset:new BMap.Size(20,-10)}));
+		        }
+		    });
+
+		}
+		
+		// 编写自定义函数,创建标注
+		function addMarker(point,label){
+			var marker = new BMap.Marker(point);
+			map.addOverlay(marker);
+			marker.setLabel(label);
+		}
+	</script>
+</body>
+</html>

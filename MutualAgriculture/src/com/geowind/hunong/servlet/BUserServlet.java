@@ -49,10 +49,10 @@ public class BUserServlet extends BasicServlet {
 		User user = userDAO.findById(request.getParameter("username"));
 		if(user != null) {
 			//System.out.println("{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
-			//this.out(response, "{mark:\"1\",realname:\""+user.getRealname()+"\"}");
 			//this.out(response, "1");
 			if(user.getValid() == 1) {
-				this.out(response, "{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
+				this.out(response, "{\"mark\":\"1\",\"realname\":\""+user.getRealname()
+						+"\",\"phone\":\""+user.getPhone()+"\"}");
 			} else {
 				this.out(response, "{\"mark\":\"0\"}");
 			}

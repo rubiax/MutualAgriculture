@@ -1,6 +1,5 @@
 package com.geowind.hunong.entities;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -92,9 +91,15 @@ public interface ITaskDAO {
 
 	public List<Task> findByWorkload(Object workload);
 
+	public List<Task> findByPublishdate(Object publishdate);
+
+	public List<Task> findByWorkdate(Object workdate);
+
 	public List<Task> findByType(Object type);
 
 	public List<Task> findByFinished(Object finished);
+
+	public List<Task> findByDesrc(Object desrc);
 
 	/**
 	 * Find all Task entities.

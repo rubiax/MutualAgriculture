@@ -43,7 +43,7 @@ public class InsectInfoUploadServlet extends BasicServlet {
             	UserDAO userDAO = new UserDAO();
             	insectcontrol.setUser(userDAO.findById(map.get("username")));
             	insectcontrol.setUploadtime(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(new Date()));
-            	
+            	insectcontrol.setStatus(0);
             	EntityManagerHelper.beginTransaction();
             	try {
             		insectcontrolDAO.save(insectcontrol);

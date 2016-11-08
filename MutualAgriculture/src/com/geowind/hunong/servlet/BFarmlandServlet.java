@@ -46,9 +46,34 @@ public class BFarmlandServlet extends BasicServlet {
 		case "uploadImage":
 			uploadImage(request, response);
 			break;
+		case "getFarmlands":
+			getFarmlands(request, response);
+			break;
+		case "findFarmland":
+			findFarmland(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void findFarmland(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		FarmlandDAO farmlandDAO = new FarmlandDAO();
+		try {
+			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
+			this.out(response, farmland);
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find failed", Level.SEVERE, re);
+			this.out(response, "0");
+		}
+	}
+
+	private void getFarmlands(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		FarmlandDAO farmlandDAO = new FarmlandDAO();
+		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
+		this.out(response, farmlandList);
 	}
 
 	/**

@@ -52,8 +52,8 @@ public class BMachineOwnerServlet extends BasicServlet {
 		case "delete":
 			delete(request,response);
 			break;
-		case "isExistMachineowner":
-			isExistMachineowner(request, response);
+		case "isExistMachineownerByPhone":
+			isExistMachineownerByPhone(request, response);
 			break;
 		default:
 			break;
@@ -66,13 +66,13 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @param response
 	 * @throws IOException 
 	 */
-	private void isExistMachineowner(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void isExistMachineownerByPhone(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
-		List<Machineowner> machineownerList = machineownerDAO.findByName(request.getParameter("ownername"));
+		List<Machineowner> machineownerList = machineownerDAO.findByPhone(request.getParameter("phone"));
 		if(machineownerList != null && machineownerList.size()>0) {
 			if(machineownerList.get(0).getValid() == 1) {
-				//this.out(response, "{\"mark\":\"1\",\"realname\":\""+user.getRealname()+"\"}");
-				this.out(response, "1");
+				this.out(response, "{\"mark\":\"1\",\"phone\":\""+machineownerList.get(0).getName()+"\"}");
+				//this.out(response, "1");
 			} else {
 				//this.out(response, "{\"mark\":\"0\"}");
 				this.out(response, "0");

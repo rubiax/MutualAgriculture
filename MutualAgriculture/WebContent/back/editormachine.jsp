@@ -66,10 +66,11 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">农机图片</h3>
 					</div>
+				</div>
 					<!-- /.box-header -->
 					<!-- form start -->
 
-					<div class="box-body">
+					<div class="box box-body">
 						<div align="center">
 							<!-- <img src="img/photo1.png" class="img-rounded" width="220px" height="auto">
 							<img src="img/photo2.png" class="img-rounded" width="220px" height="auto">
@@ -86,7 +87,7 @@
 
 					<!-- /.box-body -->
 
-				</div>
+				
 
 			</fieldset>
 
@@ -98,18 +99,23 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">详细信息</h3>
 					</div>
+				</div>
 					<!-- /.box-header -->
 					<!-- form start -->
 
-					<div class="box-body">
-						
-						
-						<div class="form-group" id="ownernamediv">
-							<label for="ownername" class="col-md-2 control-label">拥有者姓名</label>
-							<div class="col-md-8">
-								<input class="form-control" id="ownername" disabled="disabled" type="text" value="${currentMachine.machineowner.name }">
-							</div>
-						</div>
+					<div class="box box-body">
+						<div class="form-group" id="phonediv">
+                        <label for="phone" class="col-sm-2 control-label">拥有者手机号</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="phone" type="text" value="${currentMachine.machineowner.phone }">
+                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="ownername" class="col-sm-2 control-label">拥有者姓名</label>
+	                        <div class="col-sm-5">
+	                            <input class="form-control" id="ownername" type="text" value="${currentMachine.machineowner.name }">
+	                        </div>
+	                    </div>
 						<div class="form-group">
 							<label for="plate" class="col-md-2 control-label">机牌号</label>
 							<div class="col-md-8">
@@ -147,7 +153,7 @@
 								<textarea class="form-control" id="overdate" rows="3"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></textarea>
 							</div>
 						</div>
-					</div>
+					
 					<!-- /.box-body -->
 
 				</div>
@@ -207,12 +213,16 @@
 		function returnMachine() {
 			window.location = "../bMachineServlet?op=searchAll";
 		}
-		$("#ownername").blur(function(){
-			var ownername = $.trim($("#ownername").val());
-			$.post("../bMachineOwnerServlet?op=isExistMachineowner", {ownername:ownername}, function(data) {
-				data =  $.trim(data);
-				check("ownernamediv", "ownername", data);
-			});
+		$("#phone").blur(function(){
+			var phone = $.trim($("#phone").val());
+			if(phone == "") {
+				return;
+			}
+			$.post("../bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
+				var obj =  eval(data);
+				check("phonediv", "phone", obj.mark);
+				$("#ownername").val(obj.phone);
+			}, "json");
 		});
 		
 	</script>

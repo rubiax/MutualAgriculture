@@ -1,7 +1,5 @@
 package com.geowind.hunong.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.google.gson.annotations.Expose;
 
@@ -26,22 +22,26 @@ import com.google.gson.annotations.Expose;
 public class Task implements java.io.Serializable {
 
 	// Fields
-	@Expose  
+	@Expose
 	private Integer taskId;
-	@Expose  
+	@Expose
 	private User user;
-	@Expose  
+	@Expose
 	private Machine machine;
-	@Expose  
+	@Expose
 	private Farmland farmland;
-	@Expose  
+	@Expose
 	private Integer workload;
-	@Expose  
-	private Date date;
-	@Expose  
+	@Expose
+	private String publishdate;
+	@Expose
+	private String workdate;
+	@Expose
 	private String type;
-	@Expose  
+	@Expose
 	private Boolean finished;
+	@Expose
+	private String desrc;
 
 	// Constructors
 
@@ -58,14 +58,17 @@ public class Task implements java.io.Serializable {
 
 	/** full constructor */
 	public Task(User user, Machine machine, Farmland farmland,
-			Integer workload, Date date, String type, Boolean finished) {
+			Integer workload, String publishdate, String workdate, String type,
+			Boolean finished, String desrc) {
 		this.user = user;
 		this.machine = machine;
 		this.farmland = farmland;
 		this.workload = workload;
-		this.date = date;
+		this.publishdate = publishdate;
+		this.workdate = workdate;
 		this.type = type;
 		this.finished = finished;
+		this.desrc = desrc;
 	}
 
 	// Property accessors
@@ -119,14 +122,22 @@ public class Task implements java.io.Serializable {
 		this.workload = workload;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", length = 10)
-	public Date getDate() {
-		return this.date;
+	@Column(name = "publishdate", length = 45)
+	public String getPublishdate() {
+		return this.publishdate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPublishdate(String publishdate) {
+		this.publishdate = publishdate;
+	}
+
+	@Column(name = "workdate", length = 45)
+	public String getWorkdate() {
+		return this.workdate;
+	}
+
+	public void setWorkdate(String workdate) {
+		this.workdate = workdate;
 	}
 
 	@Column(name = "type", length = 45)
@@ -145,6 +156,15 @@ public class Task implements java.io.Serializable {
 
 	public void setFinished(Boolean finished) {
 		this.finished = finished;
+	}
+
+	@Column(name = "desrc", length = 1000)
+	public String getDesrc() {
+		return this.desrc;
+	}
+
+	public void setDesrc(String desrc) {
+		this.desrc = desrc;
 	}
 
 }

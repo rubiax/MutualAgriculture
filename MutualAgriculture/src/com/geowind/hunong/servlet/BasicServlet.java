@@ -68,8 +68,6 @@ public class BasicServlet extends HttpServlet {
 	 * @throws IOException 
 	 */
 	public void out(HttpServletResponse response, Object obj) throws IOException {
-//		Gson gson = new Gson();
-		//设置Gson转换时，日期的转换格式
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create(); 
 		PrintWriter out = response.getWriter();
 		System.out.println(gson.toJson(obj));
