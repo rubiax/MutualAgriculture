@@ -32,11 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-    <script>
-        function showpage(obj,page){
-            $("#rightMain").attr("src",page);
-        }
-    </script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -58,7 +53,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -264,7 +259,7 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview active">
-          <a href="#"><i class="fa fa-link"></i> <span>人员管理</span>
+          <a href="#"><i class="fa fa-users"></i> <span>人员管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -275,10 +270,10 @@ desired effect
             <li><a href="javascript:showpage(this,'../bMachineOwnerServlet?op=searchAll')">农机拥有者</a></li>
           </ul>
         </li>
-        <li><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-link"></i> <span>分区管理</span></a></li>
-        <li><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-link"></i> <span>农田管理</span></a></li>
-        <li><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-link"></i> <span>农机管理</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>任务管理</span>
+        <li><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
+        <li><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
+        <li><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
+        <li><a href="#"><i class="fa fa-tasks"></i> <span>任务管理</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -289,18 +284,19 @@ desired effect
             <li><a href="javascript:showpage(this,'tasked.jsp')">历史任务</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>咨询中心</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>文库中心</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>病虫防治</span>
+         <li><a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'pestcontrol.html')">待解决</a></li>
-            <li><a href="javascript:showpage(this,'pestcontroled.html')">已解决</a></li>
+            <li><a href="javascript:showpage(this,'consult.html')">待解决</a></li>
+            <li><a href="javascript:showpage(this,'consulted.html')">已解决</a></li>
           </ul>
         </li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li>
+        <li><a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span></a></li>
+       
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -324,7 +320,7 @@ desired effect
     <!-- Main content -->
     <section class="content" >
         <!-- Your Page Content Here -->
-        <iframe id="rightMain" src="" frameborder="no" scrolling="auto" width="100%" height="500px" allowtransparency="true"></iframe>
+        <iframe id="rightMain" src="" frameborder="no" scrolling="auto" width="100%" height="1000px" allowtransparency="true"></iframe>
 		
     </section>
     <!-- /.content -->
@@ -420,7 +416,6 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
 <script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -428,10 +423,15 @@ desired effect
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/dist/app.min.js"></script>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
+<script type="text/javascript">
+	function showpage(obj,page){
+	    $("#rightMain").attr("src",page);
+	}
+	
+	$("#rightMain").load(function () {
+	    var mainheight = $(this).contents().find("body").height() + 30;
+	    $(this).height(mainheight);
+	});
+</script>
 </body>
 </html>
