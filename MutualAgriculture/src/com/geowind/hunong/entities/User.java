@@ -53,9 +53,13 @@ public class User implements java.io.Serializable {
 	@Expose (serialize = false, deserialize = false)
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 	@Expose (serialize = false, deserialize = false)
-	private Set<Task> tasks = new HashSet<Task>(0);
+	private Set<Pestquestion> pestquestions = new HashSet<Pestquestion>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Insectcontrol> insectcontrols = new HashSet<Insectcontrol>(0);
+	@Expose (serialize = false, deserialize = false)
+	private Set<Task> tasks = new HashSet<Task>(0);
+	@Expose (serialize = false, deserialize = false)
+	private Set<Consult> consults = new HashSet<Consult>(0);
 
 	// Constructors
 
@@ -65,24 +69,22 @@ public class User implements java.io.Serializable {
 
 	/** minimal constructor */
 	public User(String username, Center center, String password,
-			String realname, String sex, Date birthday, String phone,
-			Integer type, String address) {
+			String realname, String phone, Integer type) {
 		this.username = username;
 		this.center = center;
 		this.password = password;
 		this.realname = realname;
-		this.sex = sex;
-		this.birthday = birthday;
 		this.phone = phone;
 		this.type = type;
-		this.address = address;
 	}
 
 	/** full constructor */
 	public User(String username, Center center, String password,
 			String realname, String sex, Date birthday, String phone,
 			Integer type, String picture, String address, String credit,
-			Integer valid, Set<Farmland> farmlands, Set<Task> tasks) {
+			Integer valid, Set<Farmland> farmlands,
+			Set<Pestquestion> pestquestions, Set<Insectcontrol> insectcontrols,
+			Set<Task> tasks, Set<Consult> consults) {
 		this.username = username;
 		this.center = center;
 		this.password = password;
@@ -96,7 +98,10 @@ public class User implements java.io.Serializable {
 		this.credit = credit;
 		this.valid = valid;
 		this.farmlands = farmlands;
+		this.pestquestions = pestquestions;
+		this.insectcontrols = insectcontrols;
 		this.tasks = tasks;
+		this.consults = consults;
 	}
 
 	// Property accessors
@@ -138,7 +143,7 @@ public class User implements java.io.Serializable {
 		this.realname = realname;
 	}
 
-	@Column(name = "sex", nullable = false, length = 45)
+	@Column(name = "sex", length = 45)
 	public String getSex() {
 		return this.sex;
 	}
@@ -148,7 +153,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", nullable = false, length = 10)
+	@Column(name = "birthday", length = 10)
 	public Date getBirthday() {
 		return this.birthday;
 	}
@@ -184,7 +189,7 @@ public class User implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Column(name = "address", nullable = false, length = 80)
+	@Column(name = "address", length = 200)
 	public String getAddress() {
 		return this.address;
 	}
@@ -221,6 +226,24 @@ public class User implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Pestquestion> getPestquestions() {
+		return this.pestquestions;
+	}
+
+	public void setPestquestions(Set<Pestquestion> pestquestions) {
+		this.pestquestions = pestquestions;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Insectcontrol> getInsectcontrols() {
+		return this.insectcontrols;
+	}
+
+	public void setInsectcontrols(Set<Insectcontrol> insectcontrols) {
+		this.insectcontrols = insectcontrols;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Task> getTasks() {
 		return this.tasks;
 	}
@@ -229,16 +252,13 @@ public class User implements java.io.Serializable {
 		this.tasks = tasks;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", center=" + center
-				+ ", password=" + password + ", realname=" + realname
-				+ ", sex=" + sex + ", birthday=" + birthday + ", phone="
-				+ phone + ", type=" + type + ", picture=" + picture
-				+ ", address=" + address + ", credit=" + credit + ", valid="
-				+ valid + ", farmlands=" + farmlands + ", tasks=" + tasks + "]";
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Consult> getConsults() {
+		return this.consults;
 	}
-	
-	
+
+	public void setConsults(Set<Consult> consults) {
+		this.consults = consults;
+	}
 
 }

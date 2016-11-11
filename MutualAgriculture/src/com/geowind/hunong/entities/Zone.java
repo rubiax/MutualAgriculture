@@ -28,20 +28,22 @@ import com.google.gson.annotations.Expose;
 public class Zone implements java.io.Serializable {
 
 	// Fields
-	@Expose  
+	@Expose 
 	private Integer zoneId;
-	@Expose  
+	@Expose 
 	private Center center;
-	@Expose  
+	@Expose 
 	private String zonename;
-	@Expose  
+	@Expose 
 	private Double area;
-	@Expose  
+	@Expose 
 	private String type;
-	@Expose  
+	@Expose 
 	private String address;
-	@Expose  
+	@Expose 
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false) 
+	private Set<Pestzone> pestzones = new HashSet<Pestzone>(0);
 	@Expose (serialize = false, deserialize = false) 
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 
@@ -59,13 +61,15 @@ public class Zone implements java.io.Serializable {
 
 	/** full constructor */
 	public Zone(Center center, String zonename, Double area, String type,
-			String address, Integer valid, Set<Farmland> farmlands) {
+			String address, Integer valid, Set<Pestzone> pestzones,
+			Set<Farmland> farmlands) {
 		this.center = center;
 		this.zonename = zonename;
 		this.area = area;
 		this.type = type;
 		this.address = address;
 		this.valid = valid;
+		this.pestzones = pestzones;
 		this.farmlands = farmlands;
 	}
 
@@ -118,7 +122,7 @@ public class Zone implements java.io.Serializable {
 		this.type = type;
 	}
 
-	@Column(name = "address", length = 45)
+	@Column(name = "address", length = 200)
 	public String getAddress() {
 		return this.address;
 	}
@@ -134,6 +138,15 @@ public class Zone implements java.io.Serializable {
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zone")
+	public Set<Pestzone> getPestzones() {
+		return this.pestzones;
+	}
+
+	public void setPestzones(Set<Pestzone> pestzones) {
+		this.pestzones = pestzones;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zone")
