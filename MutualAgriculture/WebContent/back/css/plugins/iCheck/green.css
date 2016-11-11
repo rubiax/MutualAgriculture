@@ -1,7 +1,7 @@
-/* iCheck plugin Square skin, blue
+/* iCheck plugin Square skin, green
 ----------------------------------- */
-.icheckbox_square-blue,
-.iradio_square-blue {
+.icheckbox_square-green,
+.iradio_square-green {
     display: inline-block;
     *display: inline;
     vertical-align: middle;
@@ -9,42 +9,42 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../../img/blue.png) no-repeat;
+    background: url(../../../img/green.png) no-repeat;
     border: none;
     cursor: pointer;
 }
 
-.icheckbox_square-blue {
+.icheckbox_square-green {
     background-position: 0 0;
 }
-    .icheckbox_square-blue.hover {
+    .icheckbox_square-green.hover {
         background-position: -24px 0;
     }
-    .icheckbox_square-blue.checked {
+    .icheckbox_square-green.checked {
         background-position: -48px 0;
     }
-    .icheckbox_square-blue.disabled {
+    .icheckbox_square-green.disabled {
         background-position: -72px 0;
         cursor: default;
     }
-    .icheckbox_square-blue.checked.disabled {
+    .icheckbox_square-green.checked.disabled {
         background-position: -96px 0;
     }
 
-.iradio_square-blue {
+.iradio_square-green {
     background-position: -120px 0;
 }
-    .iradio_square-blue.hover {
+    .iradio_square-green.hover {
         background-position: -144px 0;
     }
-    .iradio_square-blue.checked {
+    .iradio_square-green.checked {
         background-position: -168px 0;
     }
-    .iradio_square-blue.disabled {
+    .iradio_square-green.disabled {
         background-position: -192px 0;
         cursor: default;
     }
-    .iradio_square-blue.checked.disabled {
+    .iradio_square-green.checked.disabled {
         background-position: -216px 0;
     }
 
@@ -53,9 +53,9 @@
        only screen and (-moz-min-device-pixel-ratio: 1.5),
        only screen and (-o-min-device-pixel-ratio: 3/2),
        only screen and (min-device-pixel-ratio: 1.5) {
-    .icheckbox_square-blue,
-    .iradio_square-blue {
-        background-image: url(../../../img/blue@2x.png);
+    .icheckbox_square-green,
+    .iradio_square-green {
+        background-image: url(../../../img/green@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }

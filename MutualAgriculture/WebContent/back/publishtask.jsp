@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>互农综合管理平台 | 发布任务</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
@@ -38,9 +36,9 @@
 <div class="container">
 
 
-    <div class="box box-info">
+    <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">Horizontal Form</h3>
+            <h3 class="box-title">发布任务</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -94,7 +92,7 @@
                     <div class="form-group">
 	                    <label class="col-md-2 control-label"></label>
 	                    <div class="col-md-5">
-	                    <button data-target="#myModal" role="button" class="btn btn-primary" data-toggle="modal" onclick="showModal()">选择农田</button>
+	                    <button data-target="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">选择农田</button>
 	                    </div>
 	                    
                     </div>
@@ -141,7 +139,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default">确定</button>
+                <button type="button" class="btn btn-success">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->

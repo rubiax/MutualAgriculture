@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>互农综合管理平台 | 农机信息</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
-
+    
+    <link rel="stylesheet" href="css/table.css">
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
@@ -34,8 +34,11 @@
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
-            <div class="container">
+            <h3 class="box-title">农机信息</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+        	<div class="container" style="margin-bottom: 10px;">
                 <a class="btn btn-default" href="addmachine.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
@@ -55,13 +58,10 @@
                     <i class="fa fa-save"></i>&nbsp;导出
                 </a>
             </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example" class="table table-bordered table-striped dataTable" role="grid"
+                        <table id="example" class="table table-bordered dataTable" role="grid"
                                aria-describedby="example1_info">
                             <thead>
                             <tr>
@@ -78,7 +78,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${allMachine }" var="item">
-	                        	<tr role="row" class="odd">
+	                        	<tr role="row" class="odd include">
 		                        	<td>${item.machineId }</td>
 		                            <td>${item.machineowner.name }</td>
 		                            <td>${item.plate }</td>
@@ -130,11 +130,12 @@
 <script src="js/dist/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
+<script src="js/table.js"></script>
 <!-- page script -->
 <script>
 	var machineId;	
     $(function () {
-        var table = $('#example').DataTable();
+        var table = $('#example');
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
@@ -142,7 +143,7 @@
                 machineId = '';
             }
             else {
-                table.$('tr.selected').removeClass('selected');
+                $('tr.selected').removeClass('selected');
                 machineId = '';
                 $(this).addClass('selected');
                 machineId = $('.selected td:first').text();

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>互农综合管理平台 | 种粮大户</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
 
+    <link rel="stylesheet" href="css/table.css">
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
@@ -36,7 +36,11 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">种粮大户</h3>
-            <div class="container">
+            
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+        	<div class="container" style="margin-bottom: 10px;">
                 <a class="btn btn-default">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
@@ -56,13 +60,10 @@
                     <i class="fa fa-save"></i>&nbsp;导出
                 </a>
             </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example" class="table table-bordered table-striped dataTable" role="grid"
+                        <table id="example" class="table table-bordered dataTable" role="grid"
                                aria-describedby="example1_info">
                             <thead>
                             <tr>
@@ -77,15 +78,15 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${allFarmer }" var="item">
-                        	<tr role="row" class="odd">
-                            <td class="">${item.username }</td>
-                            <td class="sorting_1">${item.realname }</td>
-                            <td>${item.sex }</td>
-                            <td>${pageScope.now.year - item.birthday.year}</td>
-                            <td>${item.phone }</td>
-                            <td>${item.address }</td>
-                            <td>${item.credit }</td>
-                        </tr>
+                        	<tr role="row" class="odd include">
+	                            <td class="">${item.username }</td>
+	                            <td class="sorting_1">${item.realname }</td>
+	                            <td>${item.sex }</td>
+	                            <td>${pageScope.now.year - item.birthday.year}</td>
+	                            <td>${item.phone }</td>
+	                            <td>${item.address }</td>
+	                            <td>${item.credit }</td>
+                        	</tr>
                         </c:forEach>
 
                             </tbody>
@@ -128,51 +129,21 @@
 <script src="js/dist/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
+<script src="js/table.js"></script>
 <!-- page script -->
 <script>
 
 	var username;
 	
     $(function () {
-        var table = $('#example').DataTable({
-        	"oLanguage": {
-	                "oAria": {
-	                    "sSortAscending": " - click/return to sort ascending",
-	                    "sSortDescending": " - click/return to sort descending"
-	                },
-	                "sLengthMenu": "显示 _MENU_ 记录",
-	                "sZeroRecords": "对不起，查询不到任何相关数据",
-	                "sEmptyTable": "未有相关数据",
-	                "sLoadingRecords": "正在加载数据-请等待...",
-	                "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。",
-	                "sInfoEmpty": "当前显示0到0条，共0条记录",
-	                "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
-	                "sProcessing": "<img src='../resources/user_share/row_details/select2-spinner.gif'/> 正在加载数据...",
-	                "sSearch": "模糊查询：",
-	                "sUrl": "",
-	                "oPaginate": {
-	                    "sFirst": "首页",
-	                    "sPrevious": " 上一页 ",
-	                    "sNext": " 下一页 ",
-	                    "sLast": " 尾页 "
-	                },
-	                //多语言配置
-	                // set the initial value
-	                "fnCreatedRow": function(nRow, aData, iDataIndex) {
-	                    $('td:eq(0)', nRow).html("<span class='row-details row-details-close' data_id='" + aData[1] + "'></span>&nbsp;" + aData[0]);
-	                }
-                }
-        	});
-
-        
-
+        var table = $('#example');
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
                 username = '';
             }
             else {
-                table.$('tr.selected').removeClass('selected');
+                $('tr.selected').removeClass('selected');
                 username = '';
                 $(this).addClass('selected');
                 //alert(table.$('tr.selected td:first').html());

@@ -185,6 +185,7 @@ function setPlace(){
     	var me=this;     
     	var label;     
     	var point = new BMap.Point(data.longitude,data.latitude);    //建立测试point点
+//    	alert(data.longitude+" "+data.latitude);
     	var marker = new BMap.Marker(point);
     	label = new BMap.Label(data.farmlandId, { offset: new BMap.Size(20, 0) }); //创建marker点的标记,这里注意下,因为百度地图可以对label样式做编辑,所以我这里吧重要的id放在了label(然后再隐藏)
     	//label.setStyle(  {   display:"none"         });//对label 样式隐藏   

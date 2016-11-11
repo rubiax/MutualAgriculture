@@ -5,8 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>互农综合管理平台 | 登录</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
@@ -17,47 +16,44 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="css/plugins/iCheck/blue.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <link rel="stylesheet" href="css/plugins/iCheck/green.css">
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" >
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>互农后台管理</b></a>
+    <a href="index.jsp"><b>互农综合管理平台</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">登录进入后台管理系统</p>
 
       <div class="form-group has-feedback">
         <input type="email" id="username" class="form-control" placeholder="用户名">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" id="password" class="form-control" placeholder="密码">
+        <input type="password" id="password" class="form-control" placeholder="密码" onkeydown='if(event.keyCode==13){$("#login").click()}'>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <p id="error_null" style="color: red; font-size:12px; display:none;">用户名或密码不能为空</p>
+      <p id="error_mismatch" style="color: red; font-size:12px; display:none;">用户名或密码错误</p>
+      
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" > 记住我
             </label>
           </div>
         </div>
-        <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" class="btn btn-primary btn-block btn-flat" onclick="login()">登录</button>
+          <button id="login" type="button" class="btn btn-success btn-block btn-flat" onclick="login()">登录</button>
         </div>
-        <!-- /.col -->
       </div>
-
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -72,24 +68,26 @@
 <script>
   $(function () {
     $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
       increaseArea: '20%' // optional
     });
   });
   
   function login() {
+	  $("#error_mismatch").hide();
+	  $("#error_null").hide();
 	  var username = $.trim($("#username").val());
 	  var password = $.trim($("#password").val());
 	  if(username == "" || password == "") {
-		  alert("用户名或密码不能为空...");
+		  $("#error_null").show();
 		  return;
 	  }
 	  $.post("../adminServlet", {op:"login", username:username, password:password}, function(data) {
 		  if(data == 1) {
 			  location.href = "index.jsp";
 		  } else {
-			  alert("用户名或密码错误...");
+			  $("#error_mismatch").show();
 			  $("#username").val("");
 			  $("#password").val("");
 		  }
