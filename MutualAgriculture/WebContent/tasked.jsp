@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>互农综合管理平台 | 农机拥有者</title>
+    <title>互农综合管理平台 | 历史任务</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -35,18 +35,18 @@
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">农机拥有者</h3>
+            <h3 class="box-title">历史任务</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
             <div class="container" style="margin-bottom: 10px;">
-                <a class="btn btn-default" href="addmachineowner.jsp">
+                <a class="btn btn-default">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
-                <a class="btn btn-default" href="javascript:del()">
+                <a class="btn btn-default">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
-                <a class="btn btn-default" href="javascript:detail()">
+                <a class="btn btn-default" href="javascript:editor()">
                     <i class="fa fa-area-chart"></i>&nbsp;详情
                 </a>
                 <a class="btn btn-default">
@@ -65,37 +65,43 @@
                         <table id="example" class="table table-bordered dataTable" role="grid"
                                aria-describedby="example1_info">
                             <thead>
-                        <tr role="row">
-                            <!--<th class="sorting" tabindex="0" rowspan="1" colspan="1"></th>-->
-                            <th rowspan="1" colspan="1">姓名</th>
-                            <th rowspan="1" colspan="1">性别</th>
-                            <th rowspan="1" colspan="1">年龄</th>
-                            <th rowspan="1" colspan="1">手机号</th>
-                            <th rowspan="1" colspan="1">地址</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${allMachinerOwner }" var="item">
-                            <tr role="row" class="odd include">
-                            <td class=""><label hidden="hidden">${item.ownerId }</label>${item.name }</td>
-                            <td class="sorting_1">${item.sex }</td>
+                            <tr>
+                                 <th rowspan="1" colspan="1">姓名</th>
+	                            <th rowspan="1" colspan="1">任务区号</th>
+	                            <th rowspan="1" colspan="1">农田地址</th>
+	                            <th rowspan="1" colspan="1">经纬度</th>
+	                            <th rowspan="1" colspan="1">农机牌号</th>
+	                            <th rowspan="1" colspan="1">作业类型</th>
+	                            <th rowspan="1" colspan="1">作物类型</th>
+	                            <th rowspan="1" colspan="1">日期</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%-- <c:forEach items="${currentTasked }" var="item">
+                        	<tr role="row" class="odd include">
+                            <td class="">${item.username }</td>
+                            <td class="sorting_1">${item.realname }</td>
+                            <td>${item.sex }</td>
                             <td>${pageScope.now.year - item.birthday.year}</td>
                             <td>${item.phone }</td>
                             <td>${item.address }</td>
+                            <td>${item.credit }</td>
                         </tr>
-                        
-                        </c:forEach>
-                        </tbody>
-                        
-                        <tfoot>
-                        <tr>
-                        <th rowspan="1" colspan="1">姓名</th>
-                            <th rowspan="1" colspan="1">性别</th>
-                            <th rowspan="1" colspan="1">年龄</th>
-                            <th rowspan="1" colspan="1">手机号</th>
-                            <th rowspan="1" colspan="1">地址</th>
+                        </c:forEach> --%>
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                 <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">任务区号</th>
+                            <th rowspan="1" colspan="1">农田地址</th>
+                            <th rowspan="1" colspan="1">经纬度</th>
+                            <th rowspan="1" colspan="1">农机牌号</th>
+                            <th rowspan="1" colspan="1">作业类型</th>
+                            <th rowspan="1" colspan="1">作物类型</th>
+                            <th rowspan="1" colspan="1">日期</th>
                             </tr>
-                        </tfoot>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -127,63 +133,40 @@
 <script src="js/table.js"></script>
 <!-- page script -->
 <script>
-	var ownerId;
+
+	var username;
+	
     $(function () {
         var table = $('#example');
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                ownerId='';
+                username = '';
             }
             else {
                 $('tr.selected').removeClass('selected');
+                username = '';
                 $(this).addClass('selected');
-                ownerId = $('.selected td:first label').text();
+                //alert(table.$('tr.selected td:first').html());
+                username = $('.selected td:first').text();
             }
         } );
 
         $('#button').click( function () {
             table.row('.selected').remove().draw( false );
         } );
-
+        
     });
     
-    
-    function del() {
-    	if(ownerId==""||ownerId==undefined){
+    function editor() {
+    	alert("aaa");
+    	/* if(username == 'undefined') {
     		return;
-    	}else{
-    		var result= confirm("确认删除？","确认","取消");
-    		if(result==true){
-    			$.post("../bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
-    	        	if(data == 1) {
-    	        		alert("删除成功");
-    	        		location.href = "../bMachineOwnerServlet?op=searchAll";
-    	        	} else {
-    	        		alert("删除失败");
-    	        	}
-    	        });
-    		}else{
-    			return;
-    		}
-    	}
-    	
+    	} */
+    	//var uri= "bUserServlet?op=editor&type=v_farmer&username="+username;
+    	//location.href = uri;
     }
-    
-    function detail() {
-    	if(ownerId== ""||ownerId==undefined){
-    		return;
-    	}else{
-    		var uri= "../bMachineOwnerServlet?op=detail&ownerId="+ownerId;
-        	location.href = uri;
-    	}
-    	
-    }
-    
-    
-    
-    
 </script>
 </body>
 </html>

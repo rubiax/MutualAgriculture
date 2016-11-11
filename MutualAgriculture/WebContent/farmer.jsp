@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class="java.util.Date" scope="page"/>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>互农综合管理平台 | 农机信息</title>
+    <title>互农综合管理平台 | 种粮大户</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -24,7 +23,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
-    
+
     <link rel="stylesheet" href="css/table.css">
     <title>Document</title>
 </head>
@@ -32,17 +31,20 @@
 
 <div class="container">
 
+
+
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">农机信息</h3>
+            <h3 class="box-title">种粮大户</h3>
+            
         </div>
         <!-- /.box-header -->
         <div class="box-body">
         	<div class="container" style="margin-bottom: 10px;">
-                <a class="btn btn-default" href="addmachine.jsp">
+                <a class="btn btn-default">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
-                <a class="btn btn-default" href="javascript:del()">
+                <a class="btn btn-default">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
                 <a class="btn btn-default" href="javascript:detail()">
@@ -65,53 +67,50 @@
                                aria-describedby="example1_info">
                             <thead>
                             <tr>
-                                <th rowspan="1" colspan="1">农机编号</th>
-                                <th rowspan="1" colspan="1">农机拥有者</th>
-	                            <th rowspan="1" colspan="1">机牌号</th>
-	                            <th rowspan="1" colspan="1">农机类型</th>
-	                            <th rowspan="1" colspan="1">农机品牌</th>
-	                            <th rowspan="1" colspan="1">马力</th>
-	                            <th rowspan="1" colspan="1">农机状态</th>
-	                            <th rowspan="1" colspan="1">工作状态</th>
-	                            <th rowspan="1" colspan="1">报废时间</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">用户名</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >姓名</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >性别</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >年龄</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >手机号</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >地址</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >信誉</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${allMachine }" var="item">
-	                        	<tr role="row" class="odd include">
-		                        	<td>${item.machineId }</td>
-		                            <td>${item.machineowner.name }</td>
-		                            <td>${item.plate }</td>
-		                            <td>${item.type }</td>
-		                            <td>${item.brand }</td>
-		                            <td>${item.horsepower }</td>
-		                            <td>${item.state }</td>
-		                            <td>${item.workstate }</td>
-		                            <td><fmt:formatDate value="${item.overdate }" pattern="yyyy-MM-dd"/></td>
-	                        	</tr>
-                        	</c:forEach>
+                            <c:forEach items="${allFarmer }" var="item">
+                        	<tr role="row" class="odd include">
+	                            <td class="">${item.username }</td>
+	                            <td class="sorting_1">${item.realname }</td>
+	                            <td>${item.sex }</td>
+	                            <td>${pageScope.now.year - item.birthday.year}</td>
+	                            <td>${item.phone }</td>
+	                            <td>${item.address }</td>
+	                            <td>${item.credit }</td>
+                        	</tr>
+                        </c:forEach>
 
                             </tbody>
                             <tfoot>
                             <tr>
-	                            <th rowspan="1" colspan="1">农机编号</th>
-                                <th rowspan="1" colspan="1">农机拥有者</th>
-	                            <th rowspan="1" colspan="1">机牌号</th>
-	                            <th rowspan="1" colspan="1">农机类型</th>
-	                            <th rowspan="1" colspan="1">农机品牌</th>
-	                            <th rowspan="1" colspan="1">马力</th>
-	                            <th rowspan="1" colspan="1">农机状态</th>
-	                            <th rowspan="1" colspan="1">工作状态</th>
-	                            <th rowspan="1" colspan="1">报废时间</th>
+                                <th rowspan="1" colspan="1">用户名</th>
+                                <th rowspan="1" colspan="1">姓名</th>
+                                <th rowspan="1" colspan="1">性别</th>
+                                <th rowspan="1" colspan="1">年龄</th>
+                                <th rowspan="1" colspan="1">手机号</th>
+                                <th rowspan="1" colspan="1">地址</th>
+                                <th rowspan="1" colspan="1">信誉</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- /.box-body -->
     </div>
+
+
 </div>
 
 
@@ -133,20 +132,22 @@
 <script src="js/table.js"></script>
 <!-- page script -->
 <script>
-	var machineId;	
+
+	var username;
+	
     $(function () {
         var table = $('#example');
-
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                machineId = '';
+                username = '';
             }
             else {
                 $('tr.selected').removeClass('selected');
-                machineId = '';
+                username = '';
                 $(this).addClass('selected');
-                machineId = $('.selected td:first').text();
+                //alert(table.$('tr.selected td:first').html());
+                username = $('.selected td:first').text();
             }
         } );
 
@@ -156,38 +157,13 @@
         
     });
     
-    function del() {
-    	if(machineId==""||machineId==undefined){
-    		return;
-    	}else{
-    		var result= confirm("确认删除？","确认","取消");
-    		if(result==true){
-    			$.post("../bMachineServlet", {op:"delete", machineId:machineId}, function(data) {
-    	        	if(data == 1) {
-    	        		alert("删除成功");
-    	        		location.href = "../bMachineServlet?op=searchAll";
-    	        	} else {
-    	        		alert("删除失败");
-    	        	}
-    	        });
-    		}else{
-    			return;
-    		}
-    	}
-    	
-    }
-    
     function detail() {
-    	if(machineId== ""||machineId==undefined){
+    	if(username == '' || username == undefined) {
     		return;
-    	}else{
-    		var uri= "../bMachineServlet?op=detail&machineId="+machineId;
-        	location.href = uri;
     	}
-    	
+    	var uri= "bUserServlet?op=detail&type=v_farmer&username="+username;
+    	location.href = uri;
     }
-    
-  
 </script>
 </body>
 </html>

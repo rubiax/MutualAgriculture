@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>互农综合管理平台 | 历史任务</title>
+    <title>互农综合管理平台 | 正在进行的任务</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -35,7 +35,7 @@
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">历史任务</h3>
+            <h3 class="box-title">正在进行的任务</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -67,17 +67,17 @@
                             <thead>
                             <tr>
                                  <th rowspan="1" colspan="1">姓名</th>
-	                            <th rowspan="1" colspan="1">任务区号</th>
-	                            <th rowspan="1" colspan="1">农田地址</th>
-	                            <th rowspan="1" colspan="1">经纬度</th>
-	                            <th rowspan="1" colspan="1">农机牌号</th>
-	                            <th rowspan="1" colspan="1">作业类型</th>
-	                            <th rowspan="1" colspan="1">作物类型</th>
-	                            <th rowspan="1" colspan="1">日期</th>
+                            <th rowspan="1" colspan="1">任务区号</th>
+                            <th rowspan="1" colspan="1">农田地址</th>
+                            <th rowspan="1" colspan="1">经纬度</th>
+                            <th rowspan="1" colspan="1">农机牌号</th>
+                            <th rowspan="1" colspan="1">作业类型</th>
+                            <th rowspan="1" colspan="1">作物类型</th>
+                            <th rowspan="1" colspan="1">日期</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <%-- <c:forEach items="${currentTasked }" var="item">
+                            <%-- <c:forEach items="${currentTasking }" var="item">
                         	<tr role="row" class="odd include">
                             <td class="">${item.username }</td>
                             <td class="sorting_1">${item.realname }</td>
@@ -142,11 +142,9 @@
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                username = '';
             }
             else {
                 $('tr.selected').removeClass('selected');
-                username = '';
                 $(this).addClass('selected');
                 //alert(table.$('tr.selected td:first').html());
                 username = $('.selected td:first').text();
@@ -160,12 +158,8 @@
     });
     
     function editor() {
-    	alert("aaa");
-    	/* if(username == 'undefined') {
-    		return;
-    	} */
-    	//var uri= "../bUserServlet?op=editor&type=v_farmer&username="+username;
-    	//location.href = uri;
+    	var uri= "bUserServlet?op=editor&type=v_farmer&username="+username;
+    	location.href = uri;
     }
 </script>
 </body>

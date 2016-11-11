@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="now" class="java.util.Date" scope="page"/>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>互农综合管理平台 | 农田分区</title>
+    <title>互农综合管理平台 | 农田信息</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -20,27 +19,21 @@
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
-
+    
     <link rel="stylesheet" href="css/table.css">
     <title>Document</title>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
-
+<body class="hold-transition skin-green sidebar-mini" style="background-color: #ECF0F5">
 <div class="container">
-
-
-
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">农田分区</h3>
+            <h3 class="box-title">农田信息</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <div class="container" style="margin-bottom: 10px;">
-                <a class="btn btn-default" href="addzone.jsp">
+        	<div class="container" style="margin-bottom: 10px;">
+                <a class="btn btn-default" href="addfarmland.jsp">
                     <i class="fa fa-edit"></i>&nbsp;新增
                 </a>
                 <a class="btn btn-default" href="javascript:del()">
@@ -62,33 +55,42 @@
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example" class="table table-bordered dataTable" role="grid"
+                        <table id="example" class="table dataTable table-bordered" role="grid"
                                aria-describedby="example1_info">
                             <thead>
-	                            <tr>
-	                                <th rowspan="1" colspan="1">分区名</th>
-		                            <th rowspan="1" colspan="1">面积</th>
-		                            <th rowspan="1" colspan="1">作物类型</th>
-		                            <th rowspan="1" colspan="1">地址</th>
-		                        </tr>
+                            <tr>
+                                <th rowspan="1" colspan="1">农田编号</th>
+                                <th rowspan="1" colspan="1">拥有者用户名</th>
+	                            <th rowspan="1" colspan="1">拥有者姓名</th>
+	                            <th rowspan="1" colspan="1">经纬度</th>
+	                            <th rowspan="1" colspan="1">地址</th>
+	                            <th rowspan="1" colspan="1">农田面积</th>
+	                            <th rowspan="1" colspan="1">作物种类</th>
+                            </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${allZone }" var="item">
-                        		<tr role="row" class="odd include">
-		                        	<td class=""><label hidden="hidden">${item.zoneId }</label>${item.zonename }</td>
-		                            <td class="sorting_1">${item.area }</td>
-		                            <td>${item.type }</td>
+                            <c:forEach items="${allFarmland }" var="item">
+	                        	<tr role="row" class="odd include">
+		                        	<td>${item.farmlandId }</td>
+		                        	<td>${item.user.username }</td>
+		                        	<td>${item.user.realname }</td>
+		                            <td>(${item.longitude },${item.latitude})</td>
 		                            <td>${item.address }</td>
+		                            <td>${item.area }</td>
+		                            <td>${item.zone.type }</td>
 	                        	</tr>
                         	</c:forEach>
 
                             </tbody>
                             <tfoot>
                             <tr>
-                                 <th rowspan="1" colspan="1">分区名</th>
-                            <th rowspan="1" colspan="1">面积</th>
-                            <th rowspan="1" colspan="1">作物类型</th>
-                            <th rowspan="1" colspan="1">地址</th>
+	                            <th rowspan="1" colspan="1">农田编号</th>
+	                            <th rowspan="1" colspan="1">拥有者用户名</th>
+	                            <th rowspan="1" colspan="1">拥有者姓名</th>
+	                            <th rowspan="1" colspan="1">经纬度</th>
+	                            <th rowspan="1" colspan="1">地址</th>
+	                            <th rowspan="1" colspan="1">农田面积</th>
+	                            <th rowspan="1" colspan="1">作物种类</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -99,8 +101,6 @@
         </div>
         <!-- /.box-body -->
     </div>
-
-
 </div>
 
 
@@ -119,26 +119,55 @@
 <script src="js/dist/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
-<script src="js/table.js"></script>
 <!-- page script -->
 <script>
 
-	var zoneId;
-	
+	var farmlandId;	
+
     $(function () {
-        var table = $('#example');
+        var table = $('#example').DataTable({
+    	"oLanguage": {
+                "oAria": {
+                    "sSortAscending": " - click/return to sort ascending",
+                    "sSortDescending": " - click/return to sort descending"
+                },
+                "sLengthMenu": "显示 _MENU_ 记录",
+                "sZeroRecords": "对不起，查询不到任何相关数据",
+                "sEmptyTable": "未有相关数据",
+                "sLoadingRecords": "正在加载数据-请等待...",
+                "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。",
+                "sInfoEmpty": "当前显示0到0条，共0条记录",
+                "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+                "sProcessing": "正在加载数据...",
+                "sSearch": "模糊查询：",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": " 上一页 ",
+                    "sNext": " 下一页 ",
+                    "sLast": " 尾页 "
+                },
+                //多语言配置
+                // set the initial value
+                "fnCreatedRow": function(nRow, aData, iDataIndex) {
+                    $('td:eq(0)', nRow).html("<span class='row-details row-details-close' data_id='" + aData[1] + "'></span>&nbsp;" + aData[0]);
+                }
+          },
+          "columnDefs": [
+               { "width": "20%", "targets": 4 }
+          ]
+    });
 
         $('#example tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                zoneId = '';
+                farmlandId = '';
             }
             else {
                 $('tr.selected').removeClass('selected');
-                zoneId = '';
+                farmlandId = '';
                 $(this).addClass('selected');
-                //alert(table.$('tr.selected td:first').html());
-                zoneId = $('.selected td:first label').text();
+                farmlandId = $('.selected td:first').text();
             }
         } );
 
@@ -148,25 +177,16 @@
         
     });
     
-    function detail() {
-    	if(zoneId == '' || zoneId == undefined) {
-    		return;
-    	}
-    	var uri= "../bZoneServlet?op=detail&zoneId="+zoneId;
-    	location.href = uri;
-    }
-    
-    
     function del() {
-    	if(zoneId==" "||zoneId==undefined){
+    	if(farmlandId==""||farmlandId==undefined){
     		return;
     	}else{
     		var result= confirm("确认删除？","确认","取消");
     		if(result==true){
-    			$.post("../bZoneServlet", {op:"delete", zoneId:zoneId}, function(data) {
+    			$.post("bFarmlandServlet", {op:"delete", farmlandId:farmlandId}, function(data) {
     	        	if(data == 1) {
     	        		alert("删除成功");
-    	        		location.href = "../bZoneServlet?op=searchAll";
+    	        		location.href = "bFarmlandServlet?op=searchAll";
     	        	} else {
     	        		alert("删除失败");
     	        	}
@@ -174,6 +194,15 @@
     		}else{
     			return;
     		}
+    	}
+    }
+    
+    function detail() {
+    	if(farmlandId== ""||farmlandId==undefined){
+    		return;
+    	}else{
+    		var uri= "bFarmlandServlet?op=detail&farmlandId="+farmlandId;
+        	location.href = uri;
     	}
     	
     }

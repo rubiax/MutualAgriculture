@@ -159,7 +159,7 @@
     	if(username == '' || username == undefined) {
     		return;
     	}
-    	var uri= "../bUserServlet?op=detail&type=v_machiner&username="+username;
+    	var uri= "bUserServlet?op=detail&type=v_machiner&username="+username;
     	location.href = uri;
     }
 </script>

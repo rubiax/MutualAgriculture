@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                    <form id="myform" action="../bFarmlandServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                    <form id="myform" action="bFarmlandServlet?op=uploadImage" method="post" enctype="multipart/form-data">
                         <label for="pic" class="col-md-2 control-label">图片</label>
                         <div class="col-md-5">
 	                        <div id="LXXUploadPic" LXXCol="3" LXXRow="1" LXXWidth="100" LXXHeight="100"></div>
@@ -168,7 +168,7 @@
         var npk = $.trim($("#npk").val());
         var address = $.trim($("#address").val());
         var transtion = $.trim($("#transtion").val());
-        $.post("../bFarmlandServlet?op=add", {username:username,zonename:zonename,lal:lal,
+        $.post("bFarmlandServlet?op=add", {username:username,zonename:zonename,lal:lal,
         	area:area,ph:ph,npk:npk,address:address,transtion:transtion}, function(data) {
         	if(data == 1) {
         		alert("添加成功");
@@ -179,18 +179,18 @@
         });
 	}
 	function returnFarmland() {
-        window.location = "../bFarmlandServlet?op=searchAll";
+        window.location = "bFarmlandServlet?op=searchAll";
     }
 	$("#username").blur(function(){
 		var username = $.trim($("#username").val());
-		$.post("../bUserServlet?op=isExistUser", {username:username}, function(data) {
+		$.post("bUserServlet?op=isExistUser", {username:username}, function(data) {
 			var obj =  eval(data);
 			check("usernamediv", "username", obj.mark);
 		}, "json");
 	});
 	$("#zonename").blur(function(){
 		var zonename = $.trim($("#zonename").val());
-		$.post("../bZoneServlet?op=isExistZone", {zonename:zonename}, function(data) {
+		$.post("bZoneServlet?op=isExistZone", {zonename:zonename}, function(data) {
 			var obj =  eval(data);
 			check("zonenamediv", "zonename", obj.mark);
 		}, "json");

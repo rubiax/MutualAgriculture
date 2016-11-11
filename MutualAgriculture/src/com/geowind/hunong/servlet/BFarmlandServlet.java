@@ -96,7 +96,7 @@ public class BFarmlandServlet extends BasicServlet {
 				EntityManagerHelper.beginTransaction();
 				farmlandDAO.update(farmland);
 				EntityManagerHelper.commit();
-				response.sendRedirect("back/addfarmland.jsp");
+				response.sendRedirect("addfarmland.jsp");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -248,7 +248,7 @@ public class BFarmlandServlet extends BasicServlet {
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
 			request.getSession().setAttribute("currentFarmland", farmland);
-			response.sendRedirect("back/editorfarmland.jsp");
+			response.sendRedirect("editorfarmland.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
 			// 跳转至错误界面
@@ -267,7 +267,7 @@ public class BFarmlandServlet extends BasicServlet {
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		if (farmlandList != null && farmlandList.size() > 0) {
 			request.getSession().setAttribute("allFarmland", farmlandList);
-			response.sendRedirect("back/farmland.jsp");
+			response.sendRedirect("farmland.jsp");
 		} else {
 			// 跳转至错误页面
 

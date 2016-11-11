@@ -191,7 +191,7 @@
     }
     $("#musername").blur(function(){
 		var username = $.trim($("#musername").val());
-		$.post("../bUserServlet?op=isExistUser", {username:username}, function(data) {
+		$.post("bUserServlet?op=isExistUser", {username:username}, function(data) {
 			var obj =  eval(data);
 			check("musernamediv", "musername", obj.mark);
 			$("#mrealname").val(obj.realname);
@@ -200,7 +200,7 @@
 	});
     $("#machineplate").blur(function(){
 		var machineplate = $.trim($("#machineplate").val());
-		$.post("../bMachineServlet?op=isExistMachine", {machineplate:machineplate}, function(data) {
+		$.post("bMachineServlet?op=isExistMachine", {machineplate:machineplate}, function(data) {
 			check("machineplatediv", "machineplate", data);
 		});
 	});

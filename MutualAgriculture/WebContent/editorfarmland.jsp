@@ -240,7 +240,7 @@
 	        var transtion = $.trim($("#transtion").val());
 	        var result= confirm("确认修改？","确认","取消");
 	        if(result == true) {
-	        	$.post("../bFarmlandServlet", {op:"editor", username:username,zonename:zonename,
+	        	$.post("bFarmlandServlet", {op:"editor", username:username,zonename:zonename,
 	        		lal:lal,area:area,ph:ph,npk:npk,address:address,transtion:transtion}, function(data) {
 	            	if(data == 1) {
 	            		alert("修改成功");
@@ -253,12 +253,12 @@
 	        }
 		}
 		function returnFarmland() {
-			window.location = "../bFarmlandServlet?op=searchAll";
+			window.location = "bFarmlandServlet?op=searchAll";
 		}
 		
 		$("#username").blur(function(){
 			var username = $.trim($("#username").val());
-			$.post("../bUserServlet?op=isExistUser", {username:username}, function(data) {
+			$.post("bUserServlet?op=isExistUser", {username:username}, function(data) {
 				var obj =  eval(data);
 				check("usernamediv", "username", obj.mark);
 				$("#realname").val(obj.realname);
@@ -266,7 +266,7 @@
 		});
 		$("#zonename").blur(function(){
 			var zonename = $.trim($("#zonename").val());
-			$.post("../bZoneServlet?op=isExistZone", {zonename:zonename}, function(data) {
+			$.post("bZoneServlet?op=isExistZone", {zonename:zonename}, function(data) {
 				var obj =  eval(data);
 				check("zonenamediv", "zonename", obj.mark);
 				$("#type").val(obj.type);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -41,43 +41,24 @@
         <form class="form-horizontal">
             <div class="box-body">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <label for="zonename" class="col-sm-2 control-label">分区名</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="name" placeholder="Email" type="email">
+                            <input class="form-control" id="zonename" placeholder="name" type="email">
                         </div>
                     </div>
-                <div class="form-group">
-                    <label for="sex" class="col-md-2 control-label">性别</label>
-                    <div class="radio col-md-10">
-                        <label>
-                            <input name="sex" id="sex" value="男" checked=""
-                                   type="radio">
-                            男
-                        </label>
-                        <label>
-                            <input name="sex" id="sex" value="女" type="radio">
-                            女
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="datemask" class="col-md-2 control-label">出生日期</label>
-                    <div class="col-md-8">
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" id="datemask">
-                        </div>
-                    </div>
-
-                </div>
                     <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">手机</label>
+                        <label for="area" class="col-sm-2 control-label">面积</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="phone" placeholder="Phone" type="text">
+                            <input class="form-control" id="area" placeholder="area" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="col-sm-2 control-label">作物类型</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="type" placeholder="type" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,8 +71,8 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default" onclick="add()">确定</button>
-                <button type="button" class="btn btn-default" onclick="returnMachineOwner()">返回</button>
+                <button type="button" class="btn btn-default" onclick="saveInfo()">确定</button>
+                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->
         </form>
@@ -122,28 +103,26 @@
     function editInfo() {
         $(".allInfo").removeAttr("disabled");
     }
-    function add() {
-        //$(".allInfo").attr("disabled", "disabled");
-        var name = $.trim($("#name").val());
-        var sex = $("#sex:checked").val();
-        var birthday = $.trim($("#datemask").val());
-        var phone = $.trim($("#phone").val());
+    function saveInfo() {
+        $(".allInfo").attr("disabled", "disabled");
+        var zonename = $.trim($("#zonename").val());
+        var area = $.trim($("#area").val());
+        var type = $.trim($("#type").val());
         var address = $.trim($("#address").val());
-        alert(name+" "+sex+" "+birthday+" "+phone+" "+address);
-        $.post("../bMachineOwnerServlet?op=add", {name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
+        alert(zonename+" "+area+" "+type+" "+address);
+        $.post("bZoneServlet", {op:"add", zonename:zonename, area:area, type:type, address:address}, function(data) {
         	if(data == 1) {
         		alert("添加成功");
         	} else {
         		alert("添加失败");
         	}
         });
-        
-        
     }
-    function returnMachineOwner() {
-        window.location = "../bMachineOwnerServlet?op=searchAll";
+    function returnZone() {
+        window.location = "bZoneServlet?op=searchAll";
     }
 
+ 
 
 </script>
 

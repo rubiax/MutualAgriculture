@@ -31,6 +31,7 @@
 
 <div class="container">
 
+
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">Horizontal Form</h3>
@@ -41,54 +42,38 @@
             <div class="box-body">
                 <fieldset disabled="disabled" class="col-md-10 allInfo">
                     <div class="form-group">
-                        <label for="username" class="col-md-2 control-label">姓名</label>
-
-                        <div class="col-md-10">
-                            <input class="form-control" id="username" type="text" value="${currentMachineOwner.name }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sex" class="col-md-2 control-label">性别</label>
-                        <div class="radio col-md-10">
-                            <label>
-								<input name="sex" id="sex"
-									value="男" type="radio" ${currentMachineOwner.sex=='男'?'checked':''}> 男
-								</label> <label> <input name="sex" id="sex"
-									value="女" type="radio" ${currentMachineOwner.sex=='女'?'checked':''}> 女
-								</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="datemask" class="col-md-2 control-label">出生日期</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" id="datemask" value="${currentMachineOwner.birthday }">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">手机</label>
+                        <label for="zonename" class="col-sm-2 control-label">分区名</label>
 
                         <div class="col-sm-10">
-                            <input class="form-control" id="phone" type="text" id="phone" value="${currentMachineOwner.phone }">
+                            <input class="form-control" id="zonename" type="text" value="${currentZone.zonename }">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="area" class="col-sm-2 control-label">面积</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="area" type="text" value="${currentZone.area }">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">作物类型</label>
+
+                        <div class="col-sm-10">
+                            <input class="form-control" id="type" type="text" value="${currentZone.type }">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address" class="col-md-2 control-label">地址</label>
 
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="3" id="address">${currentMachineOwner.address }</textarea>
+                            <textarea class="form-control" rows="3" id="address">${currentZone.address }</textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="center" class="col-sm-2 control-label" >服务中心</label>
+                        <label for="center" class="col-sm-2 control-label">服务中心</label>
 
                         <div class="col-sm-10">
-                            <input disabled="disabled"  class="form-control" id="center" type="text" value="${currentMachineOwner.center.name }">
+                            <input disabled="disabled" class="form-control" id="center" type="text" value="${currentZone.center.name }">
                         </div>
                     </div>
                 </fieldset>
@@ -98,7 +83,7 @@
                 <button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
                 <button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
                 <button type="reset" class="btn btn-default">重置</button>
-                <button type="button" class="btn btn-default" onclick="returnMachinerOwner()">返回</button>
+                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->
         </form>
@@ -131,15 +116,14 @@
     }
     function saveInfo() {
         $(".allInfo").attr("disabled", "disabled");
-        var username = $.trim($("#username").val());
-        var sex = $('input:radio:checked').val();
+        var zonename = $.trim($("#zonename").val());
+        var area = $.trim($("#area").val());
+        var type = $.trim($("#type").val());
         var address = $.trim($("#address").val());
-        var phone = $.trim($("#phone").val());
-        var birthday = $.trim($("#datemask").val());
-        alert(username+" "+sex+" "+address+" "+phone+" "+birthday);
+        alert(zonename+" "+area+" "+type+" "+address);
         var result= confirm("确认修改？","确认","取消");
         if(result == true) {
-        	$.post("../bMachineOwnerServlet", {op:"editor", username:username, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
+        	$.post("bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
             	if(data == 1) {
             		alert("修改成功");
             	} else {
@@ -149,9 +133,10 @@
         } else {
         	return;
         }
+        
     }
-    function returnMachinerOwner() {
-        window.location = "../bMachineOwnerServlet?op=searchAll";
+    function returnZone() {
+        window.location = "bZoneServlet?op=searchAll";
     }
 
 

@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        <form id="myform" action="bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
                         <label for="pic" class="col-md-2 control-label">图片</label>
                         <div class="col-md-5">
 	                        <div id="LXXUploadPic" LXXCol="3" LXXRow="1" LXXWidth="100" LXXHeight="100"></div>
@@ -131,7 +131,7 @@
 	    var brand = $.trim($("#brand").val());
 	    var horsepower = $.trim($("#horsepower").val());
 	    var overdate = $.trim($("#overdate").val());
-	    $.post("../bMachineServlet?op=add", {ownername:ownername, plate:plate, type:type,
+	    $.post("bMachineServlet?op=add", {ownername:ownername, plate:plate, type:type,
 	    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
 	    	if(data == 1) {
 	    		alert("添加成功");
@@ -142,14 +142,14 @@
 	    });
 	}
 	function returnMachine() {
-	    window.location = "../bMachineServlet?op=searchAll";
+	    window.location = "bMachineServlet?op=searchAll";
 	}
 	$("#phone").blur(function(){
 		var phone = $.trim($("#phone").val());
 		if(phone == "") {
 			return;
 		}
-		$.post("../bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
+		$.post("bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
 			var obj =  eval(data);
 			check("phonediv", "phone", obj.mark);
 			$("#ownername").val(obj.phone);

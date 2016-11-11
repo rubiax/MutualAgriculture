@@ -198,7 +198,7 @@
 		    var overdate = $.trim($("#overdate").val());
 		    var result= confirm("确认修改？","确认","取消");
 	        if(result == true) {
-	        	$.post("../bMachineServlet", {op:"editor", ownername:ownername, plate:plate, type:type,
+	        	$.post("bMachineServlet", {op:"editor", ownername:ownername, plate:plate, type:type,
 	    	    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
 	            	if(data == 1) {
 	            		alert("修改成功");
@@ -211,14 +211,14 @@
 	        }
 		}
 		function returnMachine() {
-			window.location = "../bMachineServlet?op=searchAll";
+			window.location = "bMachineServlet?op=searchAll";
 		}
 		$("#phone").blur(function(){
 			var phone = $.trim($("#phone").val());
 			if(phone == "") {
 				return;
 			}
-			$.post("../bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
+			$.post("bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
 				var obj =  eval(data);
 				check("phonediv", "phone", obj.mark);
 				$("#ownername").val(obj.phone);

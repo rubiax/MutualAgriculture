@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>互农综合管理平台</title>
+  <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -33,7 +34,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>互农</b></span>
+      <span class="logo-mini"><b><img alt="" height="42px" src="img/icon_web.png"></b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>互农</b><small>综合管理平台</small></span>
     </a>
@@ -219,14 +220,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'../bUserServlet?op=searchAll&type=v_farmer')">种粮大户</a></li>
-            <li><a href="javascript:showpage(this,'../bUserServlet?op=searchAll&type=v_machiner')">农机手</a></li>
-            <li><a href="javascript:showpage(this,'../bMachineOwnerServlet?op=searchAll')">农机拥有者</a></li>
+            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_farmer')">种粮大户</a></li>
+            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_machiner')">农机手</a></li>
+            <li><a href="javascript:showpage(this,'bMachineOwnerServlet?op=searchAll')">农机拥有者</a></li>
           </ul>
         </li>
-        <li><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
-        <li><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
-        <li><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
+        <li><a href="javascript:showpage(this,'bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
+        <li><a href="javascript:showpage(this,'bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
+        <li><a href="javascript:showpage(this,'bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
         <li><a href="#"><i class="fa fa-tasks"></i> <span>任务管理</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -274,7 +275,7 @@
     <!-- Main content -->
     <section class="content" >
         <!-- Your Page Content Here -->
-        <iframe id="rightMain" src="" frameborder="no" scrolling="auto" width="100%" height="1000px" allowtransparency="true"></iframe>
+        <iframe id="rightMain" src="" frameborder="no" scrolling="auto" width="100%" height="500px" allowtransparency="true"></iframe>
 		
     </section>
     <!-- /.content -->
@@ -307,7 +308,7 @@
 	}
 	
 	$("#rightMain").load(function () {
-	    var mainheight = $(this).contents().find("body").height() + 10;
+	    var mainheight = $(this).contents().find("body").height() + 30;
 	    $(this).height(mainheight);
 	});
 

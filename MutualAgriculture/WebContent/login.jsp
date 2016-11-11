@@ -83,7 +83,7 @@
 		  $("#error_null").show();
 		  return;
 	  }
-	  $.post("../adminServlet", {op:"login", username:username, password:password}, function(data) {
+	  $.post("adminServlet", {op:"login", username:username, password:password}, function(data) {
 		  if(data == 1) {
 			  location.href = "index.jsp";
 		  } else {
