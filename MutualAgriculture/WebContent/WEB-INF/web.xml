@@ -45,7 +45,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>TaskServlet</servlet-name>
-    <url-pattern>/TaskServlet</url-pattern>
+    <url-pattern>/taskServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>BUserServlet</servlet-name>

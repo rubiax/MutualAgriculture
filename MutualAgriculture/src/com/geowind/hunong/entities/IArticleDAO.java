@@ -90,15 +90,23 @@ public interface IArticleDAO {
 	 */
 	public List<Article> findByProperty(String propertyName, Object value);
 
-	public List<Article> findByCategory(Object category);
+	public List<Article> findByClassification(Object classification);
 
 	public List<Article> findByTitle(Object title);
 
-	public List<Article> findByUrl(Object url);
+	public List<Article> findByList(Object list);
 
-	public List<Article> findByDescription(Object description);
+	public List<Article> findBySummary(Object summary);
 
-	public List<Article> findByAuthor(Object author);
+	public List<Article> findByKeyword(Object keyword);
+
+	public List<Article> findByContent(Object content);
+
+	public List<Article> findByImgUrl(Object imgUrl);
+
+	public List<Article> findByVideoUrl(Object videoUrl);
+
+	public List<Article> findByOther(Object other);
 
 	/**
 	 * Find all Article entities.

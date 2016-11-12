@@ -17,11 +17,15 @@ import javax.persistence.Query;
  */
 public class ArticleDAO implements IArticleDAO {
 	// property constants
-	public static final String CATEGORY = "category";
+	public static final String CLASSIFICATION = "classification";
 	public static final String TITLE = "title";
-	public static final String URL = "url";
-	public static final String DESCRIPTION = "description";
-	public static final String AUTHOR = "author";
+	public static final String LIST = "list";
+	public static final String SUMMARY = "summary";
+	public static final String KEYWORD = "keyword";
+	public static final String CONTENT = "content";
+	public static final String IMG_URL = "imgUrl";
+	public static final String VIDEO_URL = "videoUrl";
+	public static final String OTHER = "other";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -163,24 +167,40 @@ public class ArticleDAO implements IArticleDAO {
 		}
 	}
 
-	public List<Article> findByCategory(Object category) {
-		return findByProperty(CATEGORY, category);
+	public List<Article> findByClassification(Object classification) {
+		return findByProperty(CLASSIFICATION, classification);
 	}
 
 	public List<Article> findByTitle(Object title) {
 		return findByProperty(TITLE, title);
 	}
 
-	public List<Article> findByUrl(Object url) {
-		return findByProperty(URL, url);
+	public List<Article> findByList(Object list) {
+		return findByProperty(LIST, list);
 	}
 
-	public List<Article> findByDescription(Object description) {
-		return findByProperty(DESCRIPTION, description);
+	public List<Article> findBySummary(Object summary) {
+		return findByProperty(SUMMARY, summary);
 	}
 
-	public List<Article> findByAuthor(Object author) {
-		return findByProperty(AUTHOR, author);
+	public List<Article> findByKeyword(Object keyword) {
+		return findByProperty(KEYWORD, keyword);
+	}
+
+	public List<Article> findByContent(Object content) {
+		return findByProperty(CONTENT, content);
+	}
+
+	public List<Article> findByImgUrl(Object imgUrl) {
+		return findByProperty(IMG_URL, imgUrl);
+	}
+
+	public List<Article> findByVideoUrl(Object videoUrl) {
+		return findByProperty(VIDEO_URL, videoUrl);
+	}
+
+	public List<Article> findByOther(Object other) {
+		return findByProperty(OTHER, other);
 	}
 
 	/**

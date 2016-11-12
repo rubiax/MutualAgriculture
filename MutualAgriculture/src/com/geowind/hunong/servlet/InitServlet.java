@@ -22,9 +22,24 @@ public class InitServlet extends HttpServlet {
 		}
 		
 		String path = this.getServletContext().getRealPath("/")+filePath;
+		
 		File file = new File(path);
 		if(!file.exists()) {
 			System.out.println(path + "路径创建成功");
+			file.mkdirs();
+		}
+		
+		path = this.getServletContext().getRealPath("/")+filePath+"/imgupload";
+		file = new File(path);
+		if(!file.exists()) {
+			System.out.println(path + "图片文件夹创建成功");
+			file.mkdirs();
+		}
+		
+		path = this.getServletContext().getRealPath("/")+filePath+"/pestlib";
+		file = new File(path);
+		if(!file.exists()) {
+			System.out.println(path + "虫库创建成功");
 			file.mkdirs();
 		}
 		

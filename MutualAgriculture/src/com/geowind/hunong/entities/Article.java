@@ -3,13 +3,9 @@ package com.geowind.hunong.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.google.gson.annotations.Expose;
 
 /**
  * Article entity. @author MyEclipse Persistence Tools
@@ -19,18 +15,17 @@ import com.google.gson.annotations.Expose;
 public class Article implements java.io.Serializable {
 
 	// Fields
-	@Expose
+
 	private Integer articleId;
-	@Expose
-	private Integer category;
-	@Expose
+	private String classification;
 	private String title;
-	@Expose
-	private String url;
-	@Expose
-	private String description;
-	@Expose
-	private String author;
+	private String list;
+	private String summary;
+	private String keyword;
+	private String content;
+	private String imgUrl;
+	private String videoUrl;
+	private String other;
 
 	// Constructors
 
@@ -39,13 +34,18 @@ public class Article implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Article(Integer category, String title, String url,
-			String description, String author) {
-		this.category = category;
+	public Article(String classification, String title, String list,
+			String summary, String keyword, String content, String imgUrl,
+			String videoUrl, String other) {
+		this.classification = classification;
 		this.title = title;
-		this.url = url;
-		this.description = description;
-		this.author = author;
+		this.list = list;
+		this.summary = summary;
+		this.keyword = keyword;
+		this.content = content;
+		this.imgUrl = imgUrl;
+		this.videoUrl = videoUrl;
+		this.other = other;
 	}
 
 	// Property accessors
@@ -60,13 +60,13 @@ public class Article implements java.io.Serializable {
 		this.articleId = articleId;
 	}
 
-	@Column(name = "category")
-	public Integer getCategory() {
-		return this.category;
+	@Column(name = "classification", length = 45)
+	public String getClassification() {
+		return this.classification;
 	}
 
-	public void setCategory(Integer category) {
-		this.category = category;
+	public void setClassification(String classification) {
+		this.classification = classification;
 	}
 
 	@Column(name = "title", length = 45)
@@ -78,31 +78,67 @@ public class Article implements java.io.Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "url", length = 200)
-	public String getUrl() {
-		return this.url;
+	@Column(name = "list", length = 1000)
+	public String getList() {
+		return this.list;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setList(String list) {
+		this.list = list;
 	}
 
-	@Column(name = "description", length = 500)
-	public String getDescription() {
-		return this.description;
+	@Column(name = "summary", length = 500)
+	public String getSummary() {
+		return this.summary;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
-	@Column(name = "author", length = 45)
-	public String getAuthor() {
-		return this.author;
+	@Column(name = "keyword", length = 100)
+	public String getKeyword() {
+		return this.keyword;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	@Column(name = "content", length = 65535)
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@Column(name = "imgUrl", length = 200)
+	public String getImgUrl() {
+		return this.imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	@Column(name = "videoUrl", length = 200)
+	public String getVideoUrl() {
+		return this.videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
+
+	@Column(name = "other", length = 45)
+	public String getOther() {
+		return this.other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
 	}
 
 }

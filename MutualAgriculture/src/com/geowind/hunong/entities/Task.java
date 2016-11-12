@@ -39,7 +39,7 @@ public class Task implements java.io.Serializable {
 	@Expose
 	private String type;
 	@Expose
-	private Boolean finished;
+	private Integer finished;
 	@Expose
 	private String desrc;
 
@@ -59,7 +59,7 @@ public class Task implements java.io.Serializable {
 	/** full constructor */
 	public Task(User user, Machine machine, Farmland farmland,
 			Integer workload, String publishdate, String workdate, String type,
-			Boolean finished, String desrc) {
+			Integer finished, String desrc) {
 		this.user = user;
 		this.machine = machine;
 		this.farmland = farmland;
@@ -150,11 +150,11 @@ public class Task implements java.io.Serializable {
 	}
 
 	@Column(name = "finished")
-	public Boolean getFinished() {
+	public Integer getFinished() {
 		return this.finished;
 	}
 
-	public void setFinished(Boolean finished) {
+	public void setFinished(Integer finished) {
 		this.finished = finished;
 	}
 
