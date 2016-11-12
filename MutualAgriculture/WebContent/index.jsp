@@ -32,7 +32,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="index.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b><img alt="" height="42px" src="img/icon_web.png"></b></span>
       <!-- logo for regular state and mobile devices -->
@@ -220,9 +220,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_farmer')">种粮大户</a></li>
-            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_machiner')">农机手</a></li>
-            <li><a href="javascript:showpage(this,'bMachineOwnerServlet?op=searchAll')">农机拥有者</a></li>
+            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_farmer')"><i class="fa fa-circle-o"></i> 种粮大户</a></li>
+            <li><a href="javascript:showpage(this,'bUserServlet?op=searchAll&type=v_machiner')"><i class="fa fa-circle-o"></i> 农机手</a></li>
+            <li><a href="javascript:showpage(this,'bMachineOwnerServlet?op=searchAll')"><i class="fa fa-circle-o"></i> 农机拥有者</a></li>
           </ul>
         </li>
         <li><a href="javascript:showpage(this,'bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
@@ -234,9 +234,9 @@
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'publishtask.jsp')">发布任务</a></li>
-            <li><a href="javascript:showpage(this,'tasking.jsp')">正在进行</a></li>
-            <li><a href="javascript:showpage(this,'tasked.jsp')">历史任务</a></li>
+            <li><a href="javascript:showpage(this,'publishtask.jsp')"><i class="fa fa-circle-o"></i> 发布任务</a></li>
+            <li><a href="javascript:showpage(this,'tasking.jsp')"><i class="fa fa-circle-o"></i> 正在进行</a></li>
+            <li><a href="javascript:showpage(this,'tasked.jsp')"><i class="fa fa-circle-o"></i> 历史任务</a></li>
           </ul>
         </li>
          <li><a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>
@@ -245,8 +245,8 @@
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'consult.html')">待解决</a></li>
-            <li><a href="javascript:showpage(this,'consulted.html')">已解决</a></li>
+            <li><a href="javascript:showpage(this,'consult.html')"><i class="fa fa-circle-o"></i> 待解决</a></li>
+            <li><a href="javascript:showpage(this,'consulted.html')"><i class="fa fa-circle-o"></i> 已解决</a></li>
           </ul>
         </li>
         <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li>
@@ -261,21 +261,12 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <!-- <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1> 
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>-->
-    </section>
+    <!-- <section class="content-header">
 
     <!-- Main content -->
     <section class="content" >
         <!-- Your Page Content Here -->
-        <iframe id="rightMain" src="" frameborder="no" scrolling="auto" width="100%" height="500px" allowtransparency="true"></iframe>
+        <iframe id="rightMain" src="calendar.html" frameborder="no" scrolling="auto" width="100%" height="500px" allowtransparency="true"></iframe>
 		
     </section>
     <!-- /.content -->
@@ -288,8 +279,8 @@
     <!-- <div class="pull-right hidden-xs">
       Anything you want
     </div> -->
-    <!-- Default to the left -->
     <strong>Copyright &copy; 2016 <a href="http://www.geowind.cn" style="color: green;" target="_Blank">geowind</a>.</strong> All rights reserved.
+    <!-- Default to the left -->
   </footer>
 
 </div>
@@ -309,11 +300,12 @@
 	
 	$("#rightMain").load(function () {
 	    var mainheight = $(this).contents().find("body").height() + 30;
+	    if(mainheight < 500){
+	    	mainheight = 500;
+		}
 	    $(this).height(mainheight);
 	});
-
 	
-	/* $(".active").css() */
 </script>
 </body>
 </html>

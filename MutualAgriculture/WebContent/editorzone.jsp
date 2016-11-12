@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -30,7 +30,16 @@
 <body style="background-color: #ECF0F5">
 
 <div class="container">
-
+	<div class="container">
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li><a href="zone.jsp">分区管理</a></li>
+	        <li class="active">详情</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
 
     <div class="box box-info">
         <div class="box-header with-border">
@@ -137,6 +146,9 @@
     }
     function returnZone() {
         window.location = "bZoneServlet?op=searchAll";
+    }
+    function dashboard() {
+		parent.location.reload();
     }
 
 

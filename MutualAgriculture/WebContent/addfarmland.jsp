@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    
-    <title>AdminLTE 2 | General Form Elements</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -28,17 +27,22 @@
     
     <link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
     
-
-
     <title>Document</title>
 
 </head>
 <body style="background-color: #ECF0F5">
 
 <div class="container">
-
-
-    <div class="box box-info">
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li><a href="farmland.jsp">农田管理</a></li>
+	        <li class="active">新增</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
+    <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">Horizontal Form</h3>
         </div>
@@ -61,7 +65,7 @@
                     <div class="form-group">
 	                    <label class="col-md-2 control-label"></label>
 	                    <div class="col-md-5">
-	                    <button data-target="#myModal" role="button" class="btn btn-primary" data-toggle="modal" onclick="showModal()">加载地址及经纬度</button>
+	                    <button data-target="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">加载地址及经纬度</button>
 	                    </div>
 	                    
                     </div>
@@ -125,7 +129,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default" onclick="saveInfo()">确定</button>
+                <button type="button" class="btn btn-success" onclick="saveInfo()">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnFarmland()">返回</button>
             </div>
             <!-- /.box-footer -->
@@ -202,6 +206,10 @@
 		$("#address").val(_address);
 		$('#myModal').modal('hide');
 	}
+
+	function dashboard() {
+		parent.location.reload();
+    }
 	
 </script>
 </body>

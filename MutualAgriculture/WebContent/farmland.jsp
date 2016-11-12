@@ -22,10 +22,18 @@
     <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
     
     <link rel="stylesheet" href="css/table.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
 </head>
 <body class="hold-transition skin-green sidebar-mini" style="background-color: #ECF0F5">
 <div class="container">
+	<section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+        <li class="active">农田管理</li>
+      </ol>
+    </section>
+    <br/>
+    <br/>
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">农田信息</h3>
@@ -204,8 +212,13 @@
     		var uri= "bFarmlandServlet?op=detail&farmlandId="+farmlandId;
         	location.href = uri;
     	}
-    	
     }
+
+    function dashboard() {
+		parent.location.reload();
+    }
+    
+    
 </script>
 </body>
 </html>

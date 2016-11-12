@@ -25,8 +25,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    
-    <title>AdminLTE 2 | General Form Elements</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -55,6 +54,16 @@
 
 	<div class="container">
 
+		<section class="content-header">
+		      <ol class="breadcrumb">
+		        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+		        <li><a href="farmland.jsp">农田管理</a></li>
+		        <li class="active">详情</li>
+		      </ol>
+		</section>
+		<br/>
+	    <br/>
+	    
 		<!-- <form class="form-horizontal"> -->
 		<form id="myform" method="post" class="form-horizontal">
 
@@ -279,6 +288,10 @@
 			$("#address").val(_address);
 			$('#myModal').modal('hide');
 		}
+
+		function dashboard() {
+			parent.location.reload();
+	    }
 		
 	</script>
 	

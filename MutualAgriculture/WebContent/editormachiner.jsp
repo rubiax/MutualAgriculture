@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | General Form Elements</title>
+<link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -36,11 +36,21 @@
 <body style="background-color: #ECF0F5">
 
 	<div class="container">
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li><a href="machiner.jsp">农机手</a></li>
+	        <li class="active">详情</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
+	
 
 		<form class="form-horizontal">
 
 			<fieldset disabled="disabled" class="col-md-4 allInfo">
-
+				
 
 				<!-- Horizontal Form -->
 				<div class="box box-info">
@@ -217,6 +227,9 @@
 		function returnMachiner() {
 			window.location = "machiner.jsp";
 		}
+		function dashboard() {
+			parent.location.reload();
+	    }
 	</script>
 
 </body>

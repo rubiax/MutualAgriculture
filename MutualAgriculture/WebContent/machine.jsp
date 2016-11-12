@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>互农综合管理平台 | 农机信息</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -31,7 +32,14 @@
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
 
 <div class="container">
-
+	<section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+        <li class="active">农机管理</li>
+      </ol>
+    </section>
+    <br/>
+    <br/>
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">农机信息</h3>
@@ -185,6 +193,10 @@
         	location.href = uri;
     	}
     	
+    }
+
+    function dashboard() {
+		parent.location.reload();
     }
     
   

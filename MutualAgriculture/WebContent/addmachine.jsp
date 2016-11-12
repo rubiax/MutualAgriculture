@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     
     <link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
-    
 
     <title>Document</title>
 
@@ -33,9 +32,17 @@
 <body style="background-color: #ECF0F5">
 
 <div class="container">
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li><a href="machine.jsp">农机管理</a></li>
+	        <li class="active">新增</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
 
-
-    <div class="box box-info">
+    <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">Horizontal Form</h3>
         </div>
@@ -155,6 +162,10 @@
 			$("#ownername").val(obj.phone);
 		}, "json");
 	});
+
+	function dashboard() {
+		parent.location.reload();
+    }
 </script>
 
 </body>
