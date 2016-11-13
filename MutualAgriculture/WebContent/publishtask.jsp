@@ -97,7 +97,12 @@
 	                    </div>
 	                    
                     </div>
-                    
+                    <div class="form-group" id="farmlandIddiv">
+                        <label for="farmlandId" class="col-sm-2 control-label">农田编号</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" name="farmlandId" disabled="disabled" id="farmlandId" type="text">
+                        </div>
+                    </div>
                     <div class="form-group" id="zonenamediv">
                         <label for="zonename" class="col-sm-2 control-label">区名</label>
                         <div class="col-sm-5">
@@ -114,13 +119,13 @@
                     <div class="form-group">
                         <label for="fname" class="col-sm-2 control-label">种粮大户姓名</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="fname" disabled="disabled" type="email">
+                            <input class="form-control" id="fname" disabled="disabled" type="text">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fphone" class="col-sm-2 control-label">种粮大户手机号</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="fphone" disabled="disabled" type="email">
+                            <input class="form-control" id="fphone" disabled="disabled" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -131,16 +136,22 @@
                         </div>
                     </div>
                     <div class="form-group">
-							<label for="center" class="col-md-2 control-label">任务描述</label>
+                        <label for="workload" class="col-sm-2 control-label">工作量</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="workload" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+							<label for="descr" class="col-md-2 control-label">任务描述</label>
 
 							<div class="col-md-5">
-								<textarea class="form-control" id="transtion" rows="3">${currentFarmland.transtion }</textarea>
+								<textarea class="form-control" id="descr" rows="3"></textarea>
 							</div>
 					</div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="center">
-                <button type="button" class="btn btn-success">确定</button>
+                <button type="button" class="btn btn-success" onclick="taskOK();">确定</button>
                 <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
             </div>
             <!-- /.box-footer -->
@@ -164,13 +175,6 @@
 <!--标记农田信息-->
 <script type="text/javascript" src="js/map/clickmark.js"></script>
 <script src="js/index.js"></script>
-<%
-	if(session.getAttribute("farmlandInfo") != null){
-		System.out.println("a");
-	} else {
-		System.out.println("b");
-	}
-%>
 <script>
     $(function () {
         //Datemask dd/mm/yyyy
@@ -206,7 +210,22 @@
 		});
 	});
 
-    
+    function taskOK() {
+    	var musername = $.trim($("#musername").val());
+    	var machineplate = $.trim($("#machineplate").val());
+    	var tasktype = $.trim($("#tasktype").val());
+    	var taskdate = $.trim($("#taskdate").val());
+    	var farmlandId = $.trim($("#farmlandId").val());
+    	var workload = $.trim($("#workload").val());
+    	var descr = $.trim($("#descr").val());
+    	alert(descr);
+    	$.post("taskServlet?op=pulishTask", {musername:musername,machineplate:machineplate,tasktype:tasktype,
+    		taskdate:taskdate,farmlandId:farmlandId,workload:workload,descr:descr}, function(data) {
+    			if(data == 1) {
+    				alert("任务推送成功...")
+    			}
+    		});
+    }
 
 </script>
 
