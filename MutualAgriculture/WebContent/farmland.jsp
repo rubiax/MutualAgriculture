@@ -218,7 +218,6 @@
 		parent.location.reload();
     }
     
-    
 </script>
 </body>
 </html>

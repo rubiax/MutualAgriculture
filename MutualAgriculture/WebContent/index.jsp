@@ -250,8 +250,17 @@
           </ul>
         </li>
         <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li>
-        <li><a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span></a></li>
-       
+       	<li><a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+          <ul class="treeview-menu">
+            <li><a href="javascript:showpage(this,'publishtask.jsp')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li>
+            <li><a href="javascript:showpage(this,'tasking.jsp')"><i class="fa fa-circle-o"></i> 自动识别</a></li>
+            <li><a href="javascript:showpage(this,'tasked.jsp')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -266,7 +275,7 @@
     <!-- Main content -->
     <section class="content" >
         <!-- Your Page Content Here -->
-        <iframe id="rightMain" src="calendar.html" frameborder="no" scrolling="auto" width="100%" height="500px" allowtransparency="true"></iframe>
+        <iframe id="rightMain" src="calendar.html" scrolling="no" onload="changeFrameHeight()" frameborder="0" width="100%" height="500px" allowtransparency="true"></iframe>
 		
     </section>
     <!-- /.content -->
@@ -298,14 +307,15 @@
 	    $("#rightMain").attr("src",page);
 	}
 	
-	$("#rightMain").load(function () {
-	    var mainheight = $(this).contents().find("body").height() + 30;
+	function changeFrameHeight() {
+		var mainheight = $("#rightMain").contents().find("body").height() + 30;
 	    if(mainheight < 500){
 	    	mainheight = 500;
 		}
-	    $(this).height(mainheight);
-	});
-	
+	    $("#rightMain").height(mainheight);
+	} 
+
+	window.setInterval("changeFrameHeight()", 200);
 </script>
 </body>
 </html>

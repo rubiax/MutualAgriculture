@@ -34,7 +34,7 @@
 
       <div class="form-group has-feedback">
         <input type="email" id="username" class="form-control" placeholder="用户名">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input type="password" id="password" class="form-control" placeholder="密码" onkeydown='if(event.keyCode==13){$("#login").click()}'>

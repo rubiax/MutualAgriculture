@@ -173,6 +173,7 @@
     function dashboard() {
 		parent.location.reload();
     }
+
 </script>
 </body>
 </html>
