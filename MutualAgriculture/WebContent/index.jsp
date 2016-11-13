@@ -256,9 +256,9 @@
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'publishtask.jsp')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li>
-            <li><a href="javascript:showpage(this,'tasking.jsp')"><i class="fa fa-circle-o"></i> 自动识别</a></li>
-            <li><a href="javascript:showpage(this,'tasked.jsp')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
+            <!-- <li><a href="javascript:showpage(this,'')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li> -->
+            <li><a href="javascript:showpage(this,'pestidentificationauto.html')"><i class="fa fa-circle-o"></i> 自动识别</a></li>
+            <li><a href="javascript:showpage(this,'pestidentificationmanual.html')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
           </ul>
         </li>
       </ul>

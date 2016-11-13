@@ -26,22 +26,24 @@
 				 -->
 				
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					搜索:<input type="text" id="suggestId" size="20" value=""
-						style="width: 150px;">
+					搜索：<input type="text" id="suggestId" size="20" value=""
+						style="width: 150px; height: 30px;">&nbsp;&nbsp;
 					<div id="searchResultPanel"
 						style="border: 1px solid #C0C0C0; width: 150px; height: auto; display: none;"></div>
 					经纬度：<input type="text" name="showGeography" id="coordinate"
-						value=""> 
-					地址：<input type="text" name="showGeography"
-						id="_address" value="">
-				</div>
-				<div class="modal-body">
+						style="width: 150px; height: 30px;" value="">&nbsp;&nbsp;
+					地址：<input type="text" name="showGeography" style="width: 150px; height: 30px;"
+						id="_address" value="">&nbsp;&nbsp;
+					<button type="button" class="btn btn-success btn-sm" style="margin-top: -4px;" onclick="submitChange()">提交更改</button>
+					<p> </p>
 					<div id="allmap"></div>
+				</div>
+				<!-- <div class="modal-body">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" onclick="submitChange()">提交更改</button>
-				</div>
+				</div> -->
 			</div>
 			<!-- /.modal-content -->
 		</div>

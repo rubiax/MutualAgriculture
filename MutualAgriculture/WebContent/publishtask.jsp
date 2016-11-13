@@ -26,10 +26,6 @@
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     
-    
-
-    <title>Document</title>
-    
 
 </head>
 <body style="background-color: #ECF0F5">
