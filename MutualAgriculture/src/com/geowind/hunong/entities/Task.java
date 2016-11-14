@@ -25,6 +25,8 @@ public class Task implements java.io.Serializable {
 	@Expose
 	private Integer taskId;
 	@Expose
+	private Center center;
+	@Expose
 	private User user;
 	@Expose
 	private Machine machine;
@@ -57,9 +59,10 @@ public class Task implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Task(User user, Machine machine, Farmland farmland,
+	public Task(Center center, User user, Machine machine, Farmland farmland,
 			Integer workload, String publishdate, String workdate, String type,
 			Integer finished, String desrc) {
+		this.center = center;
 		this.user = user;
 		this.machine = machine;
 		this.farmland = farmland;
@@ -81,6 +84,16 @@ public class Task implements java.io.Serializable {
 
 	public void setTaskId(Integer taskId) {
 		this.taskId = taskId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "centerId")
+	public Center getCenter() {
+		return this.center;
+	}
+
+	public void setCenter(Center center) {
+		this.center = center;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

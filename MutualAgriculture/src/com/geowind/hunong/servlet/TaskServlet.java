@@ -3,12 +3,15 @@ package com.geowind.hunong.servlet;
 import com.geowind.hunong.entities.EntityManagerHelper;
 import com.geowind.hunong.entities.Farmland;
 import com.geowind.hunong.entities.FarmlandDAO;
+import com.geowind.hunong.entities.ITaskDAO;
 import com.geowind.hunong.entities.Machine;
 import com.geowind.hunong.entities.MachineDAO;
 import com.geowind.hunong.entities.TaskDAO;
 import com.geowind.hunong.entities.Task;
 import com.geowind.hunong.entities.User;
 import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.service.TaskService;
+import com.geowind.hunong.service.impl.TaskServiceImpl;
 import com.geowind.hunong.util.JPushUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Kui on 2016/7/22.
@@ -81,9 +85,68 @@ public class TaskServlet extends BasicServlet {
 		
 		if("pulishTask".equals(op)) {
 			pulishTask(request, response);
+		} else if("tasking".equals(op)) {
+			tasking(request, response);
+		} else if("tasked".equals(op)) {
+			tasked(request, response);
+		} else if("finishTask".equals(op)) {
+			finishTask(request, response);
 		}
 	}
 
+	private void finishTask(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String taskId = request.getParameter("taskId");
+		TaskDAO taskDAO = new TaskDAO();
+		EntityManagerHelper.beginTransaction();
+		Task task = null;
+		try {
+			task = taskDAO.findById(Integer.parseInt(taskId));
+			task.setFinished(1);
+			taskDAO.update(task);
+			EntityManagerHelper.commit();
+			this.out(response, "1");
+		} catch (RuntimeException re) {
+			this.out(response, "0");
+		}
+
+	}
+
+	/**
+	 * 已经完成的任务
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void tasked(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		TaskService taskService = new TaskServiceImpl();
+		List<Task> tasks = taskService.getTaskInfo(centerId, 1);
+		request.getSession().setAttribute("tasked", tasks);
+		response.sendRedirect("tasked.jsp");
+	}
+
+	/**
+	 * 正在进行的任务
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void tasking(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		TaskService taskService = new TaskServiceImpl();
+		List<Task> tasks = taskService.getTaskInfo(centerId, 0);
+		request.getSession().setAttribute("tasking", tasks);
+		response.sendRedirect("tasking.jsp");
+	}
+
+	/**
+	 * 发布任务
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void pulishTask(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String musername = request.getParameter("musername");
@@ -109,7 +172,6 @@ public class TaskServlet extends BasicServlet {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String publishdate = sdf.format(new Date());
-		System.out.println(publishdate);
 		task.setPublishdate(publishdate);
 		try {
 			EntityManagerHelper.beginTransaction();

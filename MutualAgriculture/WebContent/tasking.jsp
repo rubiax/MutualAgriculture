@@ -66,40 +66,41 @@
                                aria-describedby="example1_info">
                             <thead>
                             <tr>
-                                 <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">用户名</th>
+                            <th rowspan="1" colspan="1">姓名</th>
                             <th rowspan="1" colspan="1">任务区号</th>
                             <th rowspan="1" colspan="1">农田地址</th>
-                            <th rowspan="1" colspan="1">经纬度</th>
                             <th rowspan="1" colspan="1">农机牌号</th>
                             <th rowspan="1" colspan="1">作业类型</th>
-                            <th rowspan="1" colspan="1">作物类型</th>
-                            <th rowspan="1" colspan="1">日期</th>
+                            <th rowspan="1" colspan="1">任务时间</th>
+                            <th rowspan="1" colspan="1"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <%-- <c:forEach items="${currentTasking }" var="item">
+                            <c:forEach items="${tasking }" var="item">
                         	<tr role="row" class="odd include">
-                            <td class="">${item.username }</td>
-                            <td class="sorting_1">${item.realname }</td>
-                            <td>${item.sex }</td>
-                            <td>${pageScope.now.year - item.birthday.year}</td>
-                            <td>${item.phone }</td>
-                            <td>${item.address }</td>
-                            <td>${item.credit }</td>
+                            <td class=""><label hidden="hidden">${item.taskId }</label>${item.user.username }</td>
+                            <td class="sorting_1">${item.user.realname }</td>
+                            <td>${item.farmland.zone.zonename }</td>
+                            <td>${item.farmland.address}</td>
+                            <td>${item.machine.plate }</td>
+                            <td>${item.type }</td>
+                            <td>${item.workdate }</td>
+                            <td><a href="javascript:finishedTask();">完成</a></td>
                         </tr>
-                        </c:forEach> --%>
+                        </c:forEach>
 
                             </tbody>
                             <tfoot>
                             <tr>
-                                 <th rowspan="1" colspan="1">姓名</th>
+                               <th rowspan="1" colspan="1">用户名</th>
+                            <th rowspan="1" colspan="1">姓名</th>
                             <th rowspan="1" colspan="1">任务区号</th>
                             <th rowspan="1" colspan="1">农田地址</th>
-                            <th rowspan="1" colspan="1">经纬度</th>
                             <th rowspan="1" colspan="1">农机牌号</th>
                             <th rowspan="1" colspan="1">作业类型</th>
-                            <th rowspan="1" colspan="1">作物类型</th>
-                            <th rowspan="1" colspan="1">日期</th>
+                            <th rowspan="1" colspan="1">任务时间</th>
+                            <th rowspan="1" colspan="1"></th>
                             </tr>
                             </tfoot>
                         </table>
@@ -134,33 +135,62 @@
 <!-- page script -->
 <script>
 
-	var username;
+var taskId;
+$(function () {
+    var table = $('#example');
+
+    $('#example tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            taskId='';
+        }
+        else {
+            $('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            taskId = $('.selected td:first label').text();
+        }
+    } );
+
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+
+});
+
+
+function finishedTask() {
+	if(taskId==""||taskId==undefined){
+		return;
+	}else{
+		var result= confirm("确认完成","确认","取消");
+		if(result==true){
+			$.post("taskServlet", {op:"finishTask", taskId:taskId}, function(data) {
+	        	if(data == 1) {
+	        		location.href = "taskServlet?op=tasking";
+	        	} else {
+	        		alert("操作失败");
+	        	}
+	        });
+		}else{
+			return;
+		}
+	}
 	
-    $(function () {
-        var table = $('#example');
+}
 
-        $('#example tbody').on( 'click', 'tr', function () {
-            if ( $(this).hasClass('selected') ) {
-                $(this).removeClass('selected');
-            }
-            else {
-                $('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-                //alert(table.$('tr.selected td:first').html());
-                username = $('.selected td:first').text();
-            }
-        } );
-
-        $('#button').click( function () {
-            table.row('.selected').remove().draw( false );
-        } );
-        
-    });
-    
-    function editor() {
-    	var uri= "bUserServlet?op=editor&type=v_farmer&username="+username;
+function detail() {
+	if(taskId== ""||taskId==undefined){
+		return;
+	}else{
+		var uri= "bMachineOwnerServlet?op=detail&ownerId="+ownerId;
     	location.href = uri;
-    }
+	}
+	
+}
+
+function dashboard() {
+	parent.location.reload();
+}
 </script>
 </body>
 </html>

@@ -262,13 +262,15 @@ public class BFarmlandServlet extends BasicServlet {
 	 * @param request
 	 * @param response
 	 * @throws IOException
+	 * @throws ServletException 
 	 */
-	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		if (farmlandList != null && farmlandList.size() > 0) {
+			System.out.println(farmlandList.get(0).getArea());
 			request.getSession().setAttribute("allFarmland", farmlandList);
-			response.sendRedirect("farmland.jsp");
+			 request.getRequestDispatcher("farmland.jsp").forward(request, response);
 		} else {
 			// 跳转至错误页面
 

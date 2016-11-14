@@ -44,6 +44,8 @@ public class Center implements java.io.Serializable {
 	@Expose (serialize = false, deserialize = false)
 	private Set<Machineowner> machineowners = new HashSet<Machineowner>(0);
 	@Expose (serialize = false, deserialize = false)
+	private Set<Task> tasks = new HashSet<Task>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<User> users = new HashSet<User>(0);
 
 	// Constructors
@@ -55,7 +57,7 @@ public class Center implements java.io.Serializable {
 	/** full constructor */
 	public Center(String address, String level, String name, String principal,
 			Integer valid, Set<Admin> admins, Set<Zone> zones,
-			Set<Machineowner> machineowners, Set<User> users) {
+			Set<Machineowner> machineowners, Set<Task> tasks, Set<User> users) {
 		this.address = address;
 		this.level = level;
 		this.name = name;
@@ -64,6 +66,7 @@ public class Center implements java.io.Serializable {
 		this.admins = admins;
 		this.zones = zones;
 		this.machineowners = machineowners;
+		this.tasks = tasks;
 		this.users = users;
 	}
 
@@ -152,6 +155,15 @@ public class Center implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")
+	public Set<Task> getTasks() {
+		return this.tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")
 	public Set<User> getUsers() {
 		return this.users;
 	}
@@ -159,16 +171,5 @@ public class Center implements java.io.Serializable {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-
-	@Override
-	public String toString() {
-		return "Center [centerId=" + centerId + ", address=" + address
-				+ ", level=" + level + ", name=" + name + ", principal="
-				+ principal + ", valid=" + valid + ", admins=" + admins
-				+ ", zones=" + zones + ", machineowners=" + machineowners
-				+ ", users=" + users + "]";
-	}
-
-	
 
 }

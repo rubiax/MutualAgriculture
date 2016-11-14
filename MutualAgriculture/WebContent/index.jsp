@@ -150,7 +150,7 @@
               <!-- The user image in the navbar-->
               <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">${currentAdmin.realname }</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -191,7 +191,7 @@
           <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>${currentAdmin.realname }</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
         </div>
@@ -235,8 +235,8 @@
         </a>
           <ul class="treeview-menu">
             <li><a href="javascript:showpage(this,'publishtask.jsp')"><i class="fa fa-circle-o"></i> 发布任务</a></li>
-            <li><a href="javascript:showpage(this,'tasking.jsp')"><i class="fa fa-circle-o"></i> 正在进行</a></li>
-            <li><a href="javascript:showpage(this,'tasked.jsp')"><i class="fa fa-circle-o"></i> 历史任务</a></li>
+            <li><a href="javascript:showpage(this,'taskServlet?op=tasking')"><i class="fa fa-circle-o"></i> 正在进行</a></li>
+            <li><a href="javascript:showpage(this,'taskServlet?op=tasked')"><i class="fa fa-circle-o"></i> 历史任务</a></li>
           </ul>
         </li>
          <li><a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>

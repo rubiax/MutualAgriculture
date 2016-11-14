@@ -76,22 +76,14 @@ public class BZoneServlet extends BasicServlet {
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneDAO zoneDAO = new ZoneDAO();
 		String zoneId = request.getParameter("zoneId");
-		// List<Zone> list = (List<Zone>)
-		// request.getSession().getAttribute("allZone");
 		Zone zone = null;
 		EntityManagerHelper.beginTransaction();
 
 		try {
-			/*
-			 * for(int i=0; i<list.size(); i++) { if(list.get(i).getZoneId() ==
-			 * Integer.parseInt(zoneId)) { zone = list.get(i); list.remove(i);
-			 * break; } }
-			 */
 			zone = zoneDAO.findById(Integer.parseInt(zoneId));
 			zone.setValid(0);
 			zoneDAO.update(zone);
 			EntityManagerHelper.commit();
-			// request.getSession().setAttribute("allZone", list);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

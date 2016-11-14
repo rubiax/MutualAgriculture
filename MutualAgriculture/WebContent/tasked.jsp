@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>互农综合管理平台 | 历史任务</title>
+    <title>互农综合管理平台 | 正在进行的任务</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -35,7 +35,7 @@
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">历史任务</h3>
+            <h3 class="box-title">正在进行的任务</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -66,40 +66,38 @@
                                aria-describedby="example1_info">
                             <thead>
                             <tr>
-                                 <th rowspan="1" colspan="1">姓名</th>
-	                            <th rowspan="1" colspan="1">任务区号</th>
-	                            <th rowspan="1" colspan="1">农田地址</th>
-	                            <th rowspan="1" colspan="1">经纬度</th>
-	                            <th rowspan="1" colspan="1">农机牌号</th>
-	                            <th rowspan="1" colspan="1">作业类型</th>
-	                            <th rowspan="1" colspan="1">作物类型</th>
-	                            <th rowspan="1" colspan="1">日期</th>
+                            <th rowspan="1" colspan="1">用户名</th>
+                            <th rowspan="1" colspan="1">姓名</th>
+                            <th rowspan="1" colspan="1">任务区号</th>
+                            <th rowspan="1" colspan="1">农田地址</th>
+                            <th rowspan="1" colspan="1">农机牌号</th>
+                            <th rowspan="1" colspan="1">作业类型</th>
+                            <th rowspan="1" colspan="1">任务时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <%-- <c:forEach items="${currentTasked }" var="item">
+                            <c:forEach items="${tasked }" var="item">
                         	<tr role="row" class="odd include">
-                            <td class="">${item.username }</td>
-                            <td class="sorting_1">${item.realname }</td>
-                            <td>${item.sex }</td>
-                            <td>${pageScope.now.year - item.birthday.year}</td>
-                            <td>${item.phone }</td>
-                            <td>${item.address }</td>
-                            <td>${item.credit }</td>
+                            <td class=""><label hidden="hidden">${item.taskId }</label>${item.user.username }</td>
+                            <td class="sorting_1">${item.user.realname }</td>
+                            <td>${item.farmland.zone.zonename }</td>
+                            <td>${item.farmland.address}</td>
+                            <td>${item.machine.plate }</td>
+                            <td>${item.type }</td>
+                            <td>${item.workdate }</td>
                         </tr>
-                        </c:forEach> --%>
+                        </c:forEach>
 
                             </tbody>
                             <tfoot>
                             <tr>
-                                 <th rowspan="1" colspan="1">姓名</th>
+                               <th rowspan="1" colspan="1">用户名</th>
+                            <th rowspan="1" colspan="1">姓名</th>
                             <th rowspan="1" colspan="1">任务区号</th>
                             <th rowspan="1" colspan="1">农田地址</th>
-                            <th rowspan="1" colspan="1">经纬度</th>
                             <th rowspan="1" colspan="1">农机牌号</th>
                             <th rowspan="1" colspan="1">作业类型</th>
-                            <th rowspan="1" colspan="1">作物类型</th>
-                            <th rowspan="1" colspan="1">日期</th>
+                            <th rowspan="1" colspan="1">任务时间</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -134,39 +132,62 @@
 <!-- page script -->
 <script>
 
-	var username;
+var taskId;
+$(function () {
+    var table = $('#example');
+
+    $('#example tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            taskId='';
+        }
+        else {
+            $('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            taskId = $('.selected td:first label').text();
+        }
+    } );
+
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+
+});
+
+
+function finishedTask() {
+	if(taskId==""||taskId==undefined){
+		return;
+	}else{
+		var result= confirm("确认完成","确认","取消");
+		if(result==true){
+			$.post("bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
+	        	if(data == 1) {
+	        		location.href = "bMachineOwnerServlet?op=searchAll";
+	        	} else {
+	        		alert("操作失败");
+	        	}
+	        });
+		}else{
+			return;
+		}
+	}
 	
-    $(function () {
-        var table = $('#example');
+}
 
-        $('#example tbody').on( 'click', 'tr', function () {
-            if ( $(this).hasClass('selected') ) {
-                $(this).removeClass('selected');
-                username = '';
-            }
-            else {
-                $('tr.selected').removeClass('selected');
-                username = '';
-                $(this).addClass('selected');
-                //alert(table.$('tr.selected td:first').html());
-                username = $('.selected td:first').text();
-            }
-        } );
+function detail() {
+	if(taskId== ""||taskId==undefined){
+		return;
+	}else{
+		var uri= "bMachineOwnerServlet?op=detail&ownerId="+ownerId;
+    	location.href = uri;
+	}
+	
+}
 
-        $('#button').click( function () {
-            table.row('.selected').remove().draw( false );
-        } );
-        
-    });
-    
-    function editor() {
-    	alert("aaa");
-    	/* if(username == 'undefined') {
-    		return;
-    	} */
-    	//var uri= "bUserServlet?op=editor&type=v_farmer&username="+username;
-    	//location.href = uri;
-    }
+function dashboard() {
+	parent.location.reload();
+}
 </script>
 </body>
 </html>
