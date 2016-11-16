@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-    <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
+    <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     

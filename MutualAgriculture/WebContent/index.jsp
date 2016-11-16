@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-  <link rel="stylesheet" href="css/dist/skin/_all-skins.min.css">
+  <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
 
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -225,21 +225,23 @@
             <li><a href="javascript:showpage(this,'bMachineOwnerServlet?op=searchAll')"><i class="fa fa-circle-o"></i> 农机拥有者</a></li>
           </ul>
         </li>
-        <li><a href="javascript:showpage(this,'bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
-        <li><a href="javascript:showpage(this,'bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
-        <li><a href="javascript:showpage(this,'bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
-        <li><a href="#"><i class="fa fa-tasks"></i> <span>任务管理</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
+        <li class="single"><a href="javascript:showpage(this,'bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
+        <li class="single"><a href="javascript:showpage(this,'bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
+        <li class="single"><a href="javascript:showpage(this,'bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
+        <li class="treeview">
+	        <a href="#"><i class="fa fa-tasks"></i> <span>任务管理</span>
+	          <span class="pull-right-container">
+	              <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+	        </a>
           <ul class="treeview-menu">
             <li><a href="javascript:showpage(this,'publishtask.jsp')"><i class="fa fa-circle-o"></i> 发布任务</a></li>
             <li><a href="javascript:showpage(this,'taskServlet?op=tasking')"><i class="fa fa-circle-o"></i> 正在进行</a></li>
             <li><a href="javascript:showpage(this,'taskServlet?op=tasked')"><i class="fa fa-circle-o"></i> 历史任务</a></li>
           </ul>
         </li>
-         <li><a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>
+        <li class="treeview">
+         <a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -250,7 +252,8 @@
           </ul>
         </li>
         <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li>
-       	<li><a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span>
+       	<li class="treeview">
+       	 <a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span>
           <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -314,8 +317,20 @@
 		}
 	    $("#rightMain").height(mainheight);
 	} 
-
+	
 	window.setInterval("changeFrameHeight()", 200);
+
+	$(".sidebar-menu .single").click(function () {
+		$(".active").removeClass("active");
+		$(this).addClass("active");
+	})
+	
+	$(".sidebar-menu .treeview li").click(function () {
+		$(this).parent().children().each(function () {
+			$(this).removeClass("active");
+		})
+		$(this).addClass("active");
+	})
 </script>
 </body>
 </html>
