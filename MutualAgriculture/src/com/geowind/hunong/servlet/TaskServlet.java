@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.soap.Detail;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -91,7 +92,17 @@ public class TaskServlet extends BasicServlet {
 			tasked(request, response);
 		} else if("finishTask".equals(op)) {
 			finishTask(request, response);
+		} else if("detail".equals(op)) {
+			detail(request, response);
 		}
+	}
+
+	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String taskId = request.getParameter("taskId");
+		TaskDAO taskDAO = new TaskDAO();
+		Task task = taskDAO.findById(Integer.parseInt(taskId));
+		request.getSession().setAttribute("currentTask", task);
+		response.sendRedirect("taskdetail.jsp");
 	}
 
 	private void finishTask(HttpServletRequest request,

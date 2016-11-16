@@ -46,7 +46,7 @@
                 <a class="btn btn-default">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
-                <a class="btn btn-default" href="javascript:editor()">
+                <a class="btn btn-default" href="javascript:detail()">
                     <i class="fa fa-area-chart"></i>&nbsp;详情
                 </a>
                 <a class="btn btn-default">
@@ -182,7 +182,7 @@ function detail() {
 	if(taskId== ""||taskId==undefined){
 		return;
 	}else{
-		var uri= "bMachineOwnerServlet?op=detail&ownerId="+ownerId;
+		var uri= "taskServlet?op=detail&taskId="+taskId;
     	location.href = uri;
 	}
 	

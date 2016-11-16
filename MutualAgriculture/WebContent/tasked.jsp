@@ -46,7 +46,7 @@
                 <a class="btn btn-default">
                     <i class="fa fa-times"></i>&nbsp;删除
                 </a>
-                <a class="btn btn-default" href="javascript:editor()">
+                <a class="btn btn-default" href="javascript:detail()">
                     <i class="fa fa-area-chart"></i>&nbsp;详情
                 </a>
                 <a class="btn btn-default">
@@ -155,31 +155,12 @@ $(function () {
 });
 
 
-function finishedTask() {
-	if(taskId==""||taskId==undefined){
-		return;
-	}else{
-		var result= confirm("确认完成","确认","取消");
-		if(result==true){
-			$.post("bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
-	        	if(data == 1) {
-	        		location.href = "bMachineOwnerServlet?op=searchAll";
-	        	} else {
-	        		alert("操作失败");
-	        	}
-	        });
-		}else{
-			return;
-		}
-	}
-	
-}
 
 function detail() {
 	if(taskId== ""||taskId==undefined){
 		return;
 	}else{
-		var uri= "bMachineOwnerServlet?op=detail&ownerId="+ownerId;
+		var uri= "taskServlet?op=detail&taskId="+taskId;
     	location.href = uri;
 	}
 	
