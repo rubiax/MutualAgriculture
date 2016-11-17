@@ -66,12 +66,12 @@ public class BUserServlet extends BasicServlet {
 			UserDAO userDAO = new UserDAO();
 			User currentFarmer = userDAO.findById(request.getParameter("username"));
 			request.getSession().setAttribute("currentFarmer", currentFarmer);
-			response.sendRedirect("editorfarmer.jsp");
+			response.sendRedirect("manage/editorfarmer.jsp");
 		} else if (type.equals("v_machiner")) {
 			UserDAO userDAO = new UserDAO();
 			User currentMachiner = userDAO.findById(request.getParameter("username"));
 			request.getSession().setAttribute("currentMachienr", currentMachiner);
-			response.sendRedirect("editormachiner.jsp");
+			response.sendRedirect("manage/editormachiner.jsp");
 		}
 
 	}
@@ -92,13 +92,13 @@ public class BUserServlet extends BasicServlet {
 				List<User> farmerList = userService.search(centerId, type);
 				request.getSession().setAttribute("allFarmer", farmerList);
 			}
-			response.sendRedirect("farmer.jsp");
+			response.sendRedirect("manage/farmer.jsp");
 		} else if (type.equals("v_machiner")) {
 			if (request.getSession().getAttribute("allMachiner") == null) {
 				List<User> farmerList = userService.search(centerId, type);
 				request.getSession().setAttribute("allMachiner", farmerList);
 			}
-			response.sendRedirect("machiner.jsp");
+			response.sendRedirect("manage/machiner.jsp");
 		}
 
 	}

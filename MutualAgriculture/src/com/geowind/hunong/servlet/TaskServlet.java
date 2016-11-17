@@ -102,7 +102,7 @@ public class TaskServlet extends BasicServlet {
 		TaskDAO taskDAO = new TaskDAO();
 		Task task = taskDAO.findById(Integer.parseInt(taskId));
 		request.getSession().setAttribute("currentTask", task);
-		response.sendRedirect("taskdetail.jsp");
+		response.sendRedirect("manage/taskdetail.jsp");
 	}
 
 	private void finishTask(HttpServletRequest request,
@@ -134,7 +134,7 @@ public class TaskServlet extends BasicServlet {
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.getTaskInfo(centerId, 1);
 		request.getSession().setAttribute("tasked", tasks);
-		response.sendRedirect("tasked.jsp");
+		response.sendRedirect("manage/tasked.jsp");
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class TaskServlet extends BasicServlet {
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.getTaskInfo(centerId, 0);
 		request.getSession().setAttribute("tasking", tasks);
-		response.sendRedirect("tasking.jsp");
+		response.sendRedirect("manage/tasking.jsp");
 	}
 
 	/**

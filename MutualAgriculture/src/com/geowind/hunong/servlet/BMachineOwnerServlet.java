@@ -127,7 +127,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		try {
 			Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(request.getParameter("ownerId")));
 			request.getSession().setAttribute("currentMachineOwner", machineowner);
-			response.sendRedirect("editormachineowner.jsp");
+			response.sendRedirect("manage/editormachineowner.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
 		}
@@ -148,7 +148,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);
 		if (machinerOwnerList != null && machinerOwnerList.size() > 0) {
 			request.getSession().setAttribute("allMachinerOwner", machinerOwnerList);
-			response.sendRedirect("machineowner.jsp");
+			response.sendRedirect("manage/machineowner.jsp");
 		} else {
 			// 跳转出错页面
 		}

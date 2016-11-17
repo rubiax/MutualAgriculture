@@ -181,7 +181,7 @@ public class BZoneServlet extends BasicServlet {
 		try {
 			Zone zone = zoneDAO.findById(Integer.parseInt(request.getParameter("zoneId")));
 			request.getSession().setAttribute("currentZone", zone);
-			response.sendRedirect("editorzone.jsp");
+			response.sendRedirect("manage/editorzone.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
 		}
@@ -201,7 +201,7 @@ public class BZoneServlet extends BasicServlet {
 		List<Zone> zoneList = zoneService.search(centerId);
 		if (zoneList != null && zoneList.size() > 0) {
 			request.getSession().setAttribute("allZone", zoneList);
-			response.sendRedirect("zone.jsp");
+			response.sendRedirect("manage/zone.jsp");
 		} else {
 			// 跳转至错误页面
 

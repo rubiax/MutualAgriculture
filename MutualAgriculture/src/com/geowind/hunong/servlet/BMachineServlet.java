@@ -130,7 +130,7 @@ public class BMachineServlet extends BasicServlet {
 				EntityManagerHelper.beginTransaction();
 				machineDAO.update(machine);
 				EntityManagerHelper.commit();
-				response.sendRedirect("addmachine.jsp");
+				response.sendRedirect("manage/addmachine.jsp");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -225,7 +225,7 @@ public class BMachineServlet extends BasicServlet {
 		try {
 			Machine machine = machineDAO.findById(Integer.parseInt(request.getParameter("machineId")));
 			request.getSession().setAttribute("currentMachine", machine);
-			response.sendRedirect("editormachine.jsp");
+			response.sendRedirect("manage/editormachine.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
 			// 跳转至错误界面
@@ -244,7 +244,7 @@ public class BMachineServlet extends BasicServlet {
 		List<Machine> machineList = machineDAO.findByValid(1);
 		if (machineList != null && machineList.size() > 0) {
 			request.getSession().setAttribute("allMachine", machineList);
-			response.sendRedirect("machine.jsp");
+			response.sendRedirect("manage/machine.jsp");
 		} else {
 			// 跳转至错误页面
 

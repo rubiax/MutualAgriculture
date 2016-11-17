@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 public class CheckAdminIsLoginFilter implements Filter {
 
-	private String errorPage = "index.jsp";
+	private String errorPage = "login.html";
 	
 	@Override
 	public void destroy() {
@@ -31,7 +31,7 @@ public class CheckAdminIsLoginFilter implements Filter {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("currentAdmin") == null) {
-			String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getContextPath() + "/back/";
+			String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getContextPath() + "/";
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('请先登录...');location.href='"+basePath+errorPage+"'</script>");
