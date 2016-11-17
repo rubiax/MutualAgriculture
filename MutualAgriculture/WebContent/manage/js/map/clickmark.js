@@ -130,49 +130,9 @@ function setPlace(){
 
 
 
-/**
- * Created by Jiang on 2016/10/19.
- * 农田信息标注显示
- */
-    var json;
-    var markera = new Array();
-    //url:请求获得农田list数据的url地址
-    /**
-    * 向数据库发送请求数据
-     * url : 表示请求的url地址
-     * data:表示后台返回的农田List类型数据
-    */
-    var markers = new Array();
-    /*$.post(url,{},function getData(data){
-        json = eval("(" + data + ")");
-        for(var i=0;i<json.length;i++)
-        {
-            //循环数据 json[i]//获取数据操作
-            //获得经纬度生成piont点
-             var point = new BMap.Point(json[i].longitude,json[i].latitude);
-            //添加标注和标签显示农田信息
-            markers[i] = addMarker(point,new BMap.Label(json[i].farmlandId +"号田:"+json[i].address,{offset:new BMap.Size(20,-10)}));
-            //给农田标注添加点击点击事件，获取农田编号
-            markers[i].addEventListener("click", function() {
-        		var label = this.getLabel().getTitle();
-        		alert(label);
-        		var farmlandId = label.split("号田:")[0];
-        		alert(farmlandId);
-            });
-        }
-    });
-
-	// 编写自定义函数,创建标注
-	function addMarker(point,label){
-		var marker = new BMap.Marker(point);
-		map.addOverlay(marker);
-		marker.setLabel(label);
-		return marker;
-	}*/
+   /* 
     
-    
-    
-    $.post("bFarmlandServlet?op=getFarmlands",{},function getData(data){
+    $.post("../bFarmlandServlet?op=getFarmlands",{},function getData(data){
     	
     	for(var m in data){
     		addMark(data[m]);
@@ -193,10 +153,10 @@ function setPlace(){
     	me.map.addOverlay(marker);  //把maker点添加到 地图上   
     	data["chargerMarker"]=marker;   //这里很重要, 把maker对象放到缓存的data 里面  
     	marker.addEventListener("click", function (e) {      //这里添加maker的监听点击事件,触发自定义div("#info-panel)的展示 
-			/*$("#info-panel").toggle(300);//div展开,关闭         
+			$("#info-panel").toggle(300);//div展开,关闭         
 			me.tag=e.target.getLabel().content; //点击maker点后  获取label里面的内容        
 			$("#id").html(e.target.getLabel().content); //这里就可以获取到marker的id        
-			 */
+			 
     		farmlandId = e.target.getLabel().content;
     		
     		
@@ -207,7 +167,7 @@ function setPlace(){
     function farmlandOK() {
     	if(farmlandId != undefined) {
     		$('#myModal').modal('hide');
-    		$.post("bFarmlandServlet?op=findFarmland",{farmlandId:farmlandId}, function(data) {
+    		$.post("../bFarmlandServlet?op=findFarmland",{farmlandId:farmlandId}, function(data) {
     			$("#farmlandId").val(data.farmlandId);
     			$("#zonename").val(data.zone.zonename);
     			$("#croptype").val(data.zone.type);
@@ -224,4 +184,4 @@ function setPlace(){
 
 	
 
-
+*/

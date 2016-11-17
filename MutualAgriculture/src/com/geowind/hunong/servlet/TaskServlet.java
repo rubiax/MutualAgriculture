@@ -15,6 +15,9 @@ import com.geowind.hunong.service.impl.TaskServiceImpl;
 import com.geowind.hunong.util.JPushUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +29,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Kui on 2016/7/22.
@@ -34,47 +39,6 @@ import java.util.List;
 @WebServlet(name = "TaskServlet")
 public class TaskServlet extends BasicServlet {
 
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String methodName = request.getParameter("method");
-        String resultJson = "";
-        System.out.println(methodName);
-        if (methodName == null) {
-            resultJson = null;
-        } else {
-            // 根据请求的方法，返回对应信息 resultJson
-            resultJson = dealWithRequest(methodName, request);
-        }
-        //response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        System.out.println(resultJson);
-        response.getWriter().write(resultJson);
-    }
-
-    private String dealWithRequest(String methodName, HttpServletRequest request) {
-        String resultJson = "";
-        TaskService ts = new TaskServiceImpl();
-        String userName;
-        List<Task> taskList;
-
-        switch (methodName) {
-            case "getTaskInfo":
-                userName = request.getParameter("username");
-                taskList = ts.getTaskInfo(userName, 0);
-                resultJson = new Gson().toJson(taskList);
-                break;
-            case "getHistoryTaskInfo":
-                userName = request.getParameter("username");
-                taskList = ts.getTaskInfo(userName, 1);
-                resultJson = new Gson().toJson(taskList);
-                break;
-        }
-        return resultJson;
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-    }*/
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -188,8 +152,11 @@ public class TaskServlet extends BasicServlet {
 			EntityManagerHelper.beginTransaction();
 			taskDAO.save(task);
 			EntityManagerHelper.commit();
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create(); 
-			JPushUtil.sendPush(musername, "任务来了", gson.toJson(task));
+		
+			Map<String, String> map = new HashMap<String, String>();
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			JsonObject jsonObject = new JsonParser().parse(gson.toJson(task)).getAsJsonObject();
+			JPushUtil.sendPush(musername, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

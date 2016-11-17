@@ -71,9 +71,6 @@ public class BFarmlandServlet extends BasicServlet {
 	private void getFarmlands(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
-		for (Farmland farmland : farmlandList) {
-			System.out.println(farmland.getFarmlandId());
-		}
 		this.out(response, farmlandList);
 	}
 
@@ -268,7 +265,6 @@ public class BFarmlandServlet extends BasicServlet {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		if (farmlandList != null && farmlandList.size() > 0) {
-			System.out.println(farmlandList.get(0).getArea());
 			request.getSession().setAttribute("allFarmland", farmlandList);
 			 response.sendRedirect("manage/farmland.jsp");
 		} else {

@@ -170,7 +170,7 @@
                   <a href="#" class="btn btn-default btn-flat">设置</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="../adminServlet?op=logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -331,6 +331,7 @@
 		})
 		$(this).addClass("active");
 	})
+	
 </script>
 </body>
 </html>

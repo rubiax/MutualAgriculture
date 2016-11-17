@@ -1,6 +1,7 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,10 +27,26 @@ public class AdminServlet extends BasicServlet {
 		case "login":
 			login(request, response);
 			break;
-
+		case "logout":
+			logout(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 注销
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Enumeration em = request.getSession().getAttributeNames();
+		while(em.hasMoreElements()){
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		response.sendRedirect("login.html");
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws IOException {

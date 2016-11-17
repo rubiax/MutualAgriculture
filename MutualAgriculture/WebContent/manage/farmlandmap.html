@@ -44,7 +44,56 @@
 	function showModal() {
 		$(".tangram-suggestion-main").css("z-index","9999");
 		$(".modal-header").append($(".tangram-suggestion-main"));
+		
+		$.post("../bFarmlandServlet?op=getFarmlands",{},function getData(data){
+	    	
+	    	for(var m in data){
+	    		addMark(data[m]);
+	    	}
+	    }, "json");
 	}
+	
+	var farmlandId;
+    function addMark(data){
+    	var me=this;     
+    	var label;     
+    	var point = new BMap.Point(data.longitude,data.latitude);    //建立测试point点
+    	var marker = new BMap.Marker(point);
+    	label = new BMap.Label(data.farmlandId, { offset: new BMap.Size(20, 0) }); //创建marker点的标记,这里注意下,因为百度地图可以对label样式做编辑,所以我这里吧重要的id放在了label(然后再隐藏)
+    	//label.setStyle(  {   display:"none"         });//对label 样式隐藏   
+    	marker.setLabel(label);  //把label设置到maker上  
+    	//marker.setTitle(data.address); //这里设置maker的title (鼠标放到marker点上,会出现它的title,所以我这里把name,放到title里)   
+    	me.map.addOverlay(marker);  //把maker点添加到 地图上   
+    	data["chargerMarker"]=marker;   //这里很重要, 把maker对象放到缓存的data 里面  
+    	marker.addEventListener("click", function (e) {      //这里添加maker的监听点击事件,触发自定义div("#info-panel)的展示 
+			$("#info-panel").toggle(300);//div展开,关闭         
+			me.tag=e.target.getLabel().content; //点击maker点后  获取label里面的内容        
+			$("#id").html(e.target.getLabel().content); //这里就可以获取到marker的id        
+			 
+    		farmlandId = e.target.getLabel().content;
+    		
+    		
+    	});
+    };
+    
+    
+    function farmlandOK() {
+    	if(farmlandId != undefined) {
+    		$('#myModal').modal('hide');
+    		$.post("../bFarmlandServlet?op=findFarmland",{farmlandId:farmlandId}, function(data) {
+    			$("#farmlandId").val(data.farmlandId);
+    			$("#zonename").val(data.zone.zonename);
+    			$("#croptype").val(data.zone.type);
+    			$("#fname").val(data.user.realname);
+    			$("#fphone").val(data.user.phone);
+    			$("#address").val(data.address);
+    		},"json");
+    		
+    	} else {
+    		alert("先选择农田...")
+    	}
+    }
+
 	</script>
 		
 	

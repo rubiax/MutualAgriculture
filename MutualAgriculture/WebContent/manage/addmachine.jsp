@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <form id="myform" action="bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        <form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
                         <label for="pic" class="col-md-2 control-label">图片</label>
                         <div class="col-md-5">
 	                        <div id="LXXUploadPic" LXXCol="3" LXXRow="1" LXXWidth="100" LXXHeight="100"></div>
