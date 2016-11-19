@@ -166,7 +166,7 @@ public class ArticleDAO implements IArticleDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<Article> findByClassification(Object classification) {
 		return findByProperty(CLASSIFICATION, classification);
 	}
@@ -183,6 +183,8 @@ public class ArticleDAO implements IArticleDAO {
 		return findByProperty(SUMMARY, summary);
 	}
 
+	
+	
 	public List<Article> findByKeyword(Object keyword) {
 		return findByProperty(KEYWORD, keyword);
 	}
