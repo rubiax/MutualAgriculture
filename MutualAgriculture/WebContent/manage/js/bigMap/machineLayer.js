@@ -8,9 +8,9 @@ function addMachineLayer(){
 	    
 	    var json;
 	    var marker = new Array();
-	    var url = "http://localhost:8080/Demo/bMachineOwnerServlet?op=searchAll";
-		$.post(url,{},function getData(data){
-			 //alert(data);
+	    var url = "../bMachineOwnerServlet?op=mapSearchAll";
+		$.post(url,function getData(data){
+			 alert(data);
 			 json = JSON.parse(data);
 			 
 			 for(var i=0;i<json.length;i++)
@@ -20,7 +20,7 @@ function addMachineLayer(){
 				 //alert(json[i].langitude+" "+json[i].latitude);
 				 addMarker(json[i].address,i);
 			 }
-		});
+		},"json");
 		
 		
 		function addMarker(address,i){

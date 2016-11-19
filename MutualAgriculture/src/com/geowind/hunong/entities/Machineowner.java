@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Machineowner entity. @author MyEclipse Persistence Tools
  */
@@ -28,15 +30,23 @@ import javax.persistence.TemporalType;
 public class Machineowner implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer ownerId;
+	@Expose
 	private Center center;
+	@Expose
 	private String name;
+	@Expose
 	private String sex;
+	@Expose
 	private Date birthday;
+	@Expose
 	private String phone;
+	@Expose
 	private String address;
+	@Expose
 	private Integer valid;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Machine> machines = new HashSet<Machine>(0);
 
 	// Constructors

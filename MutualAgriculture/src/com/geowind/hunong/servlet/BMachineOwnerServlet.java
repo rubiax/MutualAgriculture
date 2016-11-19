@@ -52,9 +52,21 @@ public class BMachineOwnerServlet extends BasicServlet {
 		case "isExistMachineownerByPhone":
 			isExistMachineownerByPhone(request, response);
 			break;
+		case "mapSearchAll":
+			mapSearchAll(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void mapSearchAll(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		MachineOwnerService machineService = new MachineOwnerServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Machineowner> machinerOwnerList = machineService.search(centerId);
+		System.out.println(machinerOwnerList);
+		this.out(response, machinerOwnerList);
 	}
 
 	/**
@@ -144,7 +156,6 @@ public class BMachineOwnerServlet extends BasicServlet {
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
-		System.out.println(centerId);
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);
 		if (machinerOwnerList != null && machinerOwnerList.size() > 0) {
 			request.getSession().setAttribute("allMachinerOwner", machinerOwnerList);
