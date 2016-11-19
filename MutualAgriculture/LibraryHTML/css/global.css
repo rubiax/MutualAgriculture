@@ -1,0 +1,37 @@
+#wrapper{
+	width: 100%;
+}
+#main_div{
+	width: 98%;
+	margin: 0 auto;
+}
+#inner{
+	width: 98%;
+	margin: 0 auto;
+}
+#header{
+	width: 100%;
+}
+#header_left{
+	float: left;
+	width: 60%;	
+}
+#header_left h1{
+	font-size:40px;	
+	font-weight:bolder;
+}
+#header_right {
+	float: right;
+	width: 40%;
+}
+#mainbav a{
+	color: blue;
+	cursor: pointer;
+}
+#article_div{
+	width: 100%;
+}
+#article_div h1{
+	font-size:30px;	
+	font-weight:bolder;
+}
