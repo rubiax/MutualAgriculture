@@ -29,6 +29,52 @@
 		<filter-name>CheckAdminIsLoginFilter</filter-name>
 		<url-pattern>/manage/*</url-pattern>
 	</filter-mapping>
+	
+	
+	<servlet>
+		<servlet-name>PestZoneServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.PestZoneServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PestZoneServlet</servlet-name>
+		<url-pattern>/pestZoneServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PestQuestionServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.PestQuestionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PestQuestionServlet</servlet-name>
+		<url-pattern>/pestQuestionServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ServiceStationServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.ServiceStationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceStationServlet</servlet-name>
+		<url-pattern>/serviceStaionServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GasStationServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.GasStationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GasStationServlet</servlet-name>
+		<url-pattern>/gasStationServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CenterServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.CenterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CenterServlet</servlet-name>
+		<url-pattern>/CenterServlet</url-pattern>
+	</servlet-mapping>
+	
 
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
@@ -130,6 +176,8 @@
 		<servlet-name>InsectInfoUploadServlet</servlet-name>
 		<url-pattern>/insectInfoUploadServlet</url-pattern>
 	</servlet-mapping>
+
+	
 
 
 	<welcome-file-list>

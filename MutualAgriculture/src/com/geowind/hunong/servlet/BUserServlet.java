@@ -31,9 +31,27 @@ public class BUserServlet extends BasicServlet {
 			break;
 		case "isExistUser":
 			isExistUser(request, response);
+		case "MapSearchFarmer":
+			MapSearchFarmer(request,response);
+			break;
 		default:
 			break;
 		}
+	}
+	/**
+	 * 地图搜索获得所有农民信息
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+    private void MapSearchFarmer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	UserDAO userDAO = new UserDAO();
+    	List<User> farmerList =  userDAO.findByProperty("type", 0);
+    	if(farmerList!=null&&farmerList.size()>0){
+    		this.out(response,farmerList);
+    	}else{
+    		this.out(response,0);
+    	}
 	}
 
 	private void isExistUser(HttpServletRequest request, HttpServletResponse response) throws IOException {

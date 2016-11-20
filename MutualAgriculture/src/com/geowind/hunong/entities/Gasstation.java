@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Gasstation entity. @author MyEclipse Persistence Tools
  */
@@ -15,11 +17,15 @@ import javax.persistence.Table;
 public class Gasstation implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer gid;
+	@Expose
 	private Double longitude;
+	@Expose
 	private Double latitude;
-
+	
+	
+	
 	// Constructors
 
 	/** default constructor */

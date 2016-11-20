@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Servicestation entity. @author MyEclipse Persistence Tools
  */
@@ -15,11 +17,15 @@ import javax.persistence.Table;
 public class Servicestation implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer sid;
+	@Expose
 	private Double longitude;
+	@Expose
 	private Double latitude;
+	@Expose
 	private String spname;
+	@Expose
 	private String sptel;
 
 	// Constructors

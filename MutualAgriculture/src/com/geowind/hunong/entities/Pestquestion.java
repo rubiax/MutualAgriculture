@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Pestquestion entity. @author MyEclipse Persistence Tools
  */
@@ -18,11 +20,15 @@ import javax.persistence.Table;
 public class Pestquestion implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer qid;
+	@Expose
 	private User user;
+	@Expose
 	private Pestlib pestlib;
+	@Expose
 	private String uploadPic;
+	@Expose
 	private String descr;
 
 	// Constructors

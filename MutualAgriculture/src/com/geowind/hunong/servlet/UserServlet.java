@@ -54,13 +54,17 @@ public class UserServlet extends BasicServlet {
 		case "getCenter":
 			getCenter(request, response);
 			break;
+		
 		default:
 			break;
 		}
     }
 
 
-    /**
+ 
+
+
+	/**
      * 注册前获取所有中心信息
      * @param request
      * @param response

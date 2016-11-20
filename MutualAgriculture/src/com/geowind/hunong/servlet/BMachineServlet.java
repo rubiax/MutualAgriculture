@@ -52,9 +52,22 @@ public class BMachineServlet extends BasicServlet {
 		case "isExistMachine":
 			isExistMachine(request, response);
 			break;
+		case "mapSearchAll":
+			MapSearchAll(request,response);
 		default:
 			break;
 		}
+	}
+
+	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		MachineDAO machineDAO = new MachineDAO();
+		List<Machine> machineList = machineDAO.findAll();
+		if(machineList!=null&&machineList.size()>0){
+			this.out(response, machineList);
+		}else{
+			this.out(response, 0);
+		}
+		
 	}
 
 	private void isExistMachine(HttpServletRequest request, HttpServletResponse response) throws IOException {

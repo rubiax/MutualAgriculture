@@ -52,9 +52,23 @@ public class BFarmlandServlet extends BasicServlet {
 		case "findFarmland":
 			findFarmland(request, response);
 			break;
+		case "MapSearchAll":
+			MapSearchAll(request,response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		FarmlandDAO farmlandDAO = new FarmlandDAO();
+		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
+		if(farmlandList!=null&&farmlandList.size()>0){
+			this.out(response, farmlandList);
+		}else{
+			this.out(response, 0);
+		}
+
 	}
 
 	private void findFarmland(HttpServletRequest request, HttpServletResponse response) throws IOException {

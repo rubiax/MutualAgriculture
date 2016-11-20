@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Pestzone entity. @author MyEclipse Persistence Tools
  */
@@ -18,13 +20,19 @@ import javax.persistence.Table;
 public class Pestzone implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer pzid;
+	@Expose
 	private Zone zone;
+	@Expose
 	private String degree;
+	@Expose
 	private String ptype;
+	@Expose
 	private String itype;
+	@Expose
 	private String time;
+	@Expose
 	private Integer status;
 
 	// Constructors
