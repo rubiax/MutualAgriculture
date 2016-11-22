@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.geowind.hunong.entities.Article;
-import com.geowind.hunong.entities.ArticleDAO;
+import com.geowind.hunong.jpa.Article;
+import com.geowind.hunong.jpa.ArticleDAO;
 
 public class LibraryKeywordSearch {
 	// 匹配单词查询，简单模糊查询、反向查询

@@ -1,4 +1,4 @@
-<%@page import="com.geowind.hunong.entities.Machine"%>
+<%@page import="com.geowind.hunong.jpa.Machine"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Arrays"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

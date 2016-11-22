@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Servicestation;
-import com.geowind.hunong.entities.ServicestationDAO;
+import com.geowind.hunong.jpa.Servicestation;
+import com.geowind.hunong.jpa.ServicestationDAO;
 
 public class ServiceStationServlet extends BasicServlet {
 

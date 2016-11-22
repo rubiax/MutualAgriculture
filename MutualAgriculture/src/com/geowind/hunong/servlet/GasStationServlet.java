@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Gasstation;
-import com.geowind.hunong.entities.GasstationDAO;
+import com.geowind.hunong.jpa.Gasstation;
+import com.geowind.hunong.jpa.GasstationDAO;
 
 public class GasStationServlet extends BasicServlet{
 

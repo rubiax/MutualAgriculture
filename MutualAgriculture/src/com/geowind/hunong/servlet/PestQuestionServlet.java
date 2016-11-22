@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Pestquestion;
-import com.geowind.hunong.entities.PestquestionDAO;
+import com.geowind.hunong.jpa.Pestquestion;
+import com.geowind.hunong.jpa.PestquestionDAO;
 
 public class PestQuestionServlet extends BasicServlet {
 

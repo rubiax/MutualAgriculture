@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Pestzone;
-import com.geowind.hunong.entities.PestzoneDAO;
+import com.geowind.hunong.jpa.Pestzone;
+import com.geowind.hunong.jpa.PestzoneDAO;
 
 public class PestZoneServlet extends BasicServlet {
 

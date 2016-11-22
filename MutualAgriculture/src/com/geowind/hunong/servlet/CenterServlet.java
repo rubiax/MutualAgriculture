@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.CenterDAO;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.CenterDAO;
 
 public class CenterServlet extends BasicServlet {
 

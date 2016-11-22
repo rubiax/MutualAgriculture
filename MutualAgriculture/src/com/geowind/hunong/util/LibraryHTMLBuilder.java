@@ -9,8 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.geowind.hunong.entities.Article;
-import com.geowind.hunong.entities.ArticleDAO;
+import com.geowind.hunong.jpa.Article;
+import com.geowind.hunong.jpa.ArticleDAO;
 
 /*
 //Library data
