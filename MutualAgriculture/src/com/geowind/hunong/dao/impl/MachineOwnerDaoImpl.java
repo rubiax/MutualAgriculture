@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.Machineowner;
-import com.geowind.hunong.entities.User;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.Machineowner;
+import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.dao.MachineOwnerDao;
 import com.geowind.hunong.util.DBHelper;
 

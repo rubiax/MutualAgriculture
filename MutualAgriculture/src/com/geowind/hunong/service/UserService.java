@@ -3,7 +3,7 @@ package com.geowind.hunong.service;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.User;
+import com.geowind.hunong.jpa.User;
 
 /**
  * Created by Kui on 2016/7/20.

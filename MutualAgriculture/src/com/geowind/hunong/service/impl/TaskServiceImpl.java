@@ -2,11 +2,11 @@ package com.geowind.hunong.service.impl;
 
 import com.geowind.hunong.dao.TaskDao;
 import com.geowind.hunong.dao.impl.TaskDaoImpl;
-import com.geowind.hunong.entities.CenterDAO;
-import com.geowind.hunong.entities.FarmlandDAO;
-import com.geowind.hunong.entities.MachineDAO;
-import com.geowind.hunong.entities.Task;
-import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.jpa.CenterDAO;
+import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.MachineDAO;
+import com.geowind.hunong.jpa.Task;
+import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.TaskService;
 
 import java.util.ArrayList;

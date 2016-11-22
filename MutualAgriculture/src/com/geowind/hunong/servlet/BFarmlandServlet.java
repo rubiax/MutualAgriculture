@@ -10,11 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.Farmland;
-import com.geowind.hunong.entities.FarmlandDAO;
-import com.geowind.hunong.entities.UserDAO;
-import com.geowind.hunong.entities.ZoneDAO;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Farmland;
+import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.UserDAO;
+import com.geowind.hunong.jpa.ZoneDAO;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BFarmlandServlet extends BasicServlet {

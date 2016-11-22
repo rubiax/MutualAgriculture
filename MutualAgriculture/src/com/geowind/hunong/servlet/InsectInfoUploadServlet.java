@@ -11,10 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.Insectcontrol;
-import com.geowind.hunong.entities.InsectcontrolDAO;
-import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Insectcontrol;
+import com.geowind.hunong.jpa.InsectcontrolDAO;
+import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.util.FileUploadUtil;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 

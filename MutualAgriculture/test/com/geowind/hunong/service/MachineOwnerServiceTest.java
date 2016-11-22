@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.geowind.hunong.entities.Machineowner;
+import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
 
 public class MachineOwnerServiceTest {

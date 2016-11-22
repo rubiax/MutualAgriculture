@@ -3,7 +3,7 @@ package com.geowind.hunong.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.Machineowner;
+import com.geowind.hunong.jpa.Machineowner;
 
 
 /**

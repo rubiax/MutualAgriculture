@@ -4,7 +4,7 @@ package com.geowind.hunong.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.User;
+import com.geowind.hunong.jpa.User;
 
 /**
  * Created by Kui on 2016/7/19.

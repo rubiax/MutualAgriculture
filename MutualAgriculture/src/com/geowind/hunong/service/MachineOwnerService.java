@@ -2,7 +2,7 @@ package com.geowind.hunong.service;
 
 import java.util.List;
 
-import com.geowind.hunong.entities.Machineowner;
+import com.geowind.hunong.jpa.Machineowner;
 
 
 /**

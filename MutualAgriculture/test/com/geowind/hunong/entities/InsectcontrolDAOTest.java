@@ -8,6 +8,11 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Insectcontrol;
+import com.geowind.hunong.jpa.InsectcontrolDAO;
+import com.geowind.hunong.jpa.UserDAO;
+
 public class InsectcontrolDAOTest {
 
 	@Test

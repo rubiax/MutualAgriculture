@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.Machineowner;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.dao.MachineOwnerDao;
 import com.geowind.hunong.dao.impl.MachineOwnerDaoImpl;
 import com.geowind.hunong.service.MachineOwnerService;

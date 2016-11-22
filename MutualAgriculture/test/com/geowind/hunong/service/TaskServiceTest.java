@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.geowind.hunong.entities.Task;
+import com.geowind.hunong.jpa.Task;
 import com.geowind.hunong.service.impl.TaskServiceImpl;
 
 public class TaskServiceTest {

@@ -1,10 +1,10 @@
 package com.geowind.hunong.servlet;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.CenterDAO;
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.User;
-import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.CenterDAO;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.User;
+import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.UserService;
 import com.geowind.hunong.service.impl.UserServiceImpl;
 

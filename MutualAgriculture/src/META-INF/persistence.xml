@@ -4,26 +4,26 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-		<class>com.geowind.hunong.entities.Task</class>
-		<class>com.geowind.hunong.entities.Pestzone</class>
-		<class>com.geowind.hunong.entities.Zone</class>
-		<class>com.geowind.hunong.entities.Order</class>
-		<class>com.geowind.hunong.entities.Consult</class>
-		<class>com.geowind.hunong.entities.Pestquestion</class>
-		<class>com.geowind.hunong.entities.Pestlib</class>
-		<class>com.geowind.hunong.entities.Servicestation</class>
-		<class>com.geowind.hunong.entities.Machine</class>
-		<class>com.geowind.hunong.entities.Trader</class>
-		<class>com.geowind.hunong.entities.Machineowner</class>
-		<class>com.geowind.hunong.entities.Orderitem</class>
-		<class>com.geowind.hunong.entities.User</class>
-		<class>com.geowind.hunong.entities.Insectcontrol</class>
-		<class>com.geowind.hunong.entities.Resource</class>
-		<class>com.geowind.hunong.entities.Admin</class>
-		<class>com.geowind.hunong.entities.Center</class>
-		<class>com.geowind.hunong.entities.Article</class>
-		<class>com.geowind.hunong.entities.Farmland</class>
-		<class>com.geowind.hunong.entities.Gasstation</class>
+		<class>com.geowind.hunong.jpa.Task</class>
+		<class>com.geowind.hunong.jpa.Pestzone</class>
+		<class>com.geowind.hunong.jpa.Zone</class>
+		<class>com.geowind.hunong.jpa.Order</class>
+		<class>com.geowind.hunong.jpa.Consult</class>
+		<class>com.geowind.hunong.jpa.Pestquestion</class>
+		<class>com.geowind.hunong.jpa.Pestlib</class>
+		<class>com.geowind.hunong.jpa.Servicestation</class>
+		<class>com.geowind.hunong.jpa.Machine</class>
+		<class>com.geowind.hunong.jpa.Trader</class>
+		<class>com.geowind.hunong.jpa.Machineowner</class>
+		<class>com.geowind.hunong.jpa.Orderitem</class>
+		<class>com.geowind.hunong.jpa.User</class>
+		<class>com.geowind.hunong.jpa.Insectcontrol</class>
+		<class>com.geowind.hunong.jpa.Resource</class>
+		<class>com.geowind.hunong.jpa.Admin</class>
+		<class>com.geowind.hunong.jpa.Center</class>
+		<class>com.geowind.hunong.jpa.Article</class>
+		<class>com.geowind.hunong.jpa.Farmland</class>
+		<class>com.geowind.hunong.jpa.Gasstation</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />

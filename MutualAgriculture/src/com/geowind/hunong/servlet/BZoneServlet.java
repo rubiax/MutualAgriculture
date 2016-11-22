@@ -8,10 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Center;
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.Zone;
-import com.geowind.hunong.entities.ZoneDAO;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Zone;
+import com.geowind.hunong.jpa.ZoneDAO;
 import com.geowind.hunong.service.ZoneService;
 import com.geowind.hunong.service.impl.ZoneServiceImpl;
 

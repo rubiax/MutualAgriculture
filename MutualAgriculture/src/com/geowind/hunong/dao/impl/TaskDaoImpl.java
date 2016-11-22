@@ -1,7 +1,7 @@
 package com.geowind.hunong.dao.impl;
 
 import com.geowind.hunong.dao.TaskDao;
-import com.geowind.hunong.entities.Task;
+import com.geowind.hunong.jpa.Task;
 import com.geowind.hunong.util.DBHelper;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package com.geowind.hunong.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.geowind.hunong.entities.Task;
+import com.geowind.hunong.jpa.Task;
 
 /**
  * Created by Kui on 2016/7/21.

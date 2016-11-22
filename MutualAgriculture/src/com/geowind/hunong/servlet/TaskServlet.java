@@ -1,15 +1,16 @@
 package com.geowind.hunong.servlet;
 
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.Farmland;
-import com.geowind.hunong.entities.FarmlandDAO;
-import com.geowind.hunong.entities.ITaskDAO;
-import com.geowind.hunong.entities.Machine;
-import com.geowind.hunong.entities.MachineDAO;
-import com.geowind.hunong.entities.TaskDAO;
-import com.geowind.hunong.entities.Task;
-import com.geowind.hunong.entities.User;
-import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.entity.SimTask;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Farmland;
+import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.ITaskDAO;
+import com.geowind.hunong.jpa.Machine;
+import com.geowind.hunong.jpa.MachineDAO;
+import com.geowind.hunong.jpa.Task;
+import com.geowind.hunong.jpa.TaskDAO;
+import com.geowind.hunong.jpa.User;
+import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.TaskService;
 import com.geowind.hunong.service.impl.TaskServiceImpl;
 import com.geowind.hunong.util.JPushUtil;
@@ -153,13 +154,21 @@ public class TaskServlet extends BasicServlet {
 			taskDAO.save(task);
 			EntityManagerHelper.commit();
 		
-			Map<String, String> map = new HashMap<String, String>();
+			
+			SimTask simTask = new SimTask();
+			simTask = simTask.fromTask(task);
+			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			JsonObject jsonObject = new JsonParser().parse(gson.toJson(task)).getAsJsonObject();
+			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
 			JPushUtil.sendPush(musername, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");
 		}
 	}
+	
+	
+	
+	
 }
+

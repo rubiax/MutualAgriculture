@@ -6,11 +6,11 @@ import java.util.Map;
 
 import com.geowind.hunong.dao.FarmlandDao;
 import com.geowind.hunong.dao.impl.FarmlandDaoImpl;
-import com.geowind.hunong.entities.Farmland;
-import com.geowind.hunong.entities.User;
-import com.geowind.hunong.entities.UserDAO;
-import com.geowind.hunong.entities.Zone;
-import com.geowind.hunong.entities.ZoneDAO;
+import com.geowind.hunong.jpa.Farmland;
+import com.geowind.hunong.jpa.User;
+import com.geowind.hunong.jpa.UserDAO;
+import com.geowind.hunong.jpa.Zone;
+import com.geowind.hunong.jpa.ZoneDAO;
 import com.geowind.hunong.service.FarmlandService;
 
 public class FarmlandServiceImpl implements FarmlandService {

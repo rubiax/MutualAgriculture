@@ -12,11 +12,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.EntityManagerHelper;
-import com.geowind.hunong.entities.Machine;
-import com.geowind.hunong.entities.MachineDAO;
-import com.geowind.hunong.entities.Machineowner;
-import com.geowind.hunong.entities.MachineownerDAO;
+import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Machine;
+import com.geowind.hunong.jpa.MachineDAO;
+import com.geowind.hunong.jpa.Machineowner;
+import com.geowind.hunong.jpa.MachineownerDAO;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BMachineServlet extends BasicServlet {

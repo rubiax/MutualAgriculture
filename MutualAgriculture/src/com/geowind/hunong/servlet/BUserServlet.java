@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.User;
-import com.geowind.hunong.entities.UserDAO;
+import com.geowind.hunong.jpa.User;
+import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.UserService;
 import com.geowind.hunong.service.impl.UserServiceImpl;
 

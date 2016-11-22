@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.entities.Admin;
-import com.geowind.hunong.entities.AdminDAO;
+import com.geowind.hunong.jpa.Admin;
+import com.geowind.hunong.jpa.AdminDAO;
 
 public class AdminServlet extends BasicServlet {
 
