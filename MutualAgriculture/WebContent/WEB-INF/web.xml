@@ -31,6 +31,16 @@
 	</filter-mapping>
 	
 	
+	
+	<servlet>
+		<servlet-name>WeatherServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.WeatherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WeatherServlet</servlet-name>
+		<url-pattern>/weatherServlet</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>PestZoneServlet</servlet-name>
 		<servlet-class>com.geowind.hunong.servlet.PestZoneServlet</servlet-class>

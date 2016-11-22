@@ -1,6 +1,6 @@
 package com.geowind.hunong.servlet;
 
-import com.geowind.hunong.entity.SimTask;
+import com.geowind.hunong.jpa.SimTask;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;

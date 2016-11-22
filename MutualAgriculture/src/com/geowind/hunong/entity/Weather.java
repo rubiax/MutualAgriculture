@@ -1,29 +1,32 @@
 package com.geowind.hunong.entity;
 
+import com.google.gson.annotations.Expose;
+
 public class Weather {
 	
 	
 	//一天有两个天气图标数字，以下类推第一天，第二天，第三天。。。
+	@Expose
 	private String first1;
-	
+	@Expose
 	private String first2;
-	
+	@Expose
 	private String second1;
-	
+	@Expose
 	private String second2;
-	
+	@Expose
 	private String third1;
-	
+	@Expose
 	private String third2;
-	
+	@Expose
 	private String four1;
-	
+	@Expose
 	private String four2;
-	
+	@Expose
 	private String five1;
-	
+	@Expose
 	private String five2;
-	
+	@Expose
 	private String detail;
 
 	

@@ -48,8 +48,21 @@ public class BZoneServlet extends BasicServlet {
 		case "isExistZone":
 			isExistZone(request, response);
 			break;
+		case "MapSearchAll":
+			MapSearchAll(request, response);
+			break;
 		default:
 			break;
+		}
+	}
+
+	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ZoneDAO zoneDAO = new ZoneDAO();
+		List<Zone> zoneList = zoneDAO.findAll();
+		if(zoneList!=null&&zoneList.size()>0){
+			this.out(response, zoneList);
+		}else{
+			this.out(response, 0);
 		}
 	}
 

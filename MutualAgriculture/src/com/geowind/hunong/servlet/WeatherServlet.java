@@ -45,9 +45,9 @@ public class WeatherServlet extends BasicServlet{
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("utf-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		String weather = getWeather("衡阳");
 		
 		System.out.println(weather);
@@ -115,7 +115,7 @@ public class WeatherServlet extends BasicServlet{
 
 		System.out.println("i= "+i+" first is: "+weatherList.get(0).getFirst1()+" five is :"+weatherList.get(0).getFive2());
 			
-		this.out(resp,weatherList);
+		this.out(response,weatherList);
 		System.out.println("over");
 	}
 	/** 
