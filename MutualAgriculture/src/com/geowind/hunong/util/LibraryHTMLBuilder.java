@@ -133,14 +133,14 @@ public class LibraryHTMLBuilder {
 		String ModelPath = HTMLModlePath + "\\" + HTMLModelName; // 模板文件完整路径
 		String NewPath = HTMLModlePath + "\\" + dataMes[0] + ".html";// 新建文件完整路径
 
-		System.out.println(ModelPath);
+		// System.out.println(ModelPath);
 		// step2 set html and setp3 write html 解析html并设置新值，写出html
 		SetHtmlContent(ModelPath, NewPath);
 	}
 
-	public static void main(String[] args) {
-		LibraryHTMLBuilder lhb = new LibraryHTMLBuilder();
-		lhb.CreateAllHTML();
-	}
+	// public static void main(String[] args) {
+	// LibraryHTMLBuilder lhb = new LibraryHTMLBuilder();
+	// lhb.CreateAllHTML();
+	// }
 
 }

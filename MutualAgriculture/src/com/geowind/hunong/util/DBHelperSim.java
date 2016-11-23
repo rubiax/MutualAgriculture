@@ -6,17 +6,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.geowind.hunong.entity.ArticleSim;
+
 public class DBHelperSim {
-	public static List<String> findBykeyword(String keywords, String sql) {
-		List<String> res = new ArrayList<>();
+
+	// other
+	private static List<ArticleSim> sqlExecute(String keywords, String sql) {
+		List<ArticleSim> res = new ArrayList<>();
+
 		try {
 			Connection conn = DBHelper.getConn();
 			Statement stmt = conn.createStatement(); // 创建Statement对象
 			// System.out.println("成功连接到数据库！");
-			System.out.println(sql);
+			// System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql);// 创建数据对象
 			while (rs.next()) {
-				res.add(rs.getString("articleId"));
+
+				String id = rs.getString("articleId");
+				// System.out.println(id_list.size());
+				String title = rs.getString("title");
+
+				res.add(new ArticleSim(id, title));
 			}
 			rs.close();
 			stmt.close();
@@ -27,9 +37,14 @@ public class DBHelperSim {
 		return res;
 	}
 
+	public static List<ArticleSim> GetArticleSimBykeyword(String keywords, String sql) {
+
+		return sqlExecute(keywords, sql);
+	}
 	// public static void main(String[] args) {
-	// String keywords = "我是%";
-	// findBykeyword(keywords, "select * from article where keyword like '" +
-	// keywords + "'");
+	// List<String> list = GetIdBykeyword("我是","select * from article where
+	// keyword like '" + "%我是关键字" + "'");
+	// System.out.println(list.get(0));
 	// }
+
 }
