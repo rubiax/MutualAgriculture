@@ -7,27 +7,136 @@
     <!--<meta name="viewport" content="initial-scale=1.0,use-scalable=no">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-    <style type="text/css">
-        body,html,#allmap{width: 100%;height: 95%;overflow: hidden;margin: 0;font-family: "微软雅黑";}
-    </style>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl"></script>
          <!--<script src="http://api.map.baidu.com/components?ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl&v=1.0"></script>-->
         <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>        
         <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js">   </script>
         <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <title>地图使用测试</title>
+    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+	  <!-- Font Awesome -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	  <!-- Ionicons -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	  <!-- Theme style -->
+	  <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
+	  <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
+	
+	  <!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  <![endif]-->
+	  <style type="text/css">
+	  	#suggestId{
+	  		background-color: #33B87B;
+	  		border: 0;
+	  		color: white;
+	  	}
+	  	body,html,#allmap{width: 100%;height: 96.5%;overflow: hidden;margin: 0;}
+	  	
+	  </style>
 </head>
-<body>
+<body class="hold-transition skin-green-light layout-top-nav">
+  <header class="main-header">
+	<nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.jsp" class="navbar-brand"><b>互农</b><small>综合管理平台</small></a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
 
-    <div>
-        经纬度：<input type="text" name="showGeography" id="show" value="">
-        搜索:<input type="text" id="suggestId" size="20" value="百度" style="width:150px;">
-        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+<!--             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+ -->            <li><a href="javascript:addComputerAreaResult()">计算面积</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">重置 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">天气</a></li>
+                <li><a href="#">虫害</a></li>
+                <li><a href="#">病害</a></li>
+                <li class="divider"></li>
+                <li><a href="#">农民</a></li>
+                <li><a href="#">农机</a></li>
+                <li><a href="#">农作物</a></li>
+                <li class="divider"></li>
+                <li><a href="#">任务</a></li>
+                <li><a href="#">提问</a></li>
+                <li class="divider"></li>
+                <li><a href="#">分区</a></li>
+                <li><a href="#">受灾区</a></li>
+                <li><a href="#">加油点</a></li>
+                <li><a href="#">维修点</a></li>
+                <li><a href="#">服务中心点</a></li>
+              </ul>
+            </li>
+          </ul>
+           
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group" id="">
+              <input type="text" class="form-control" id="suggestId" placeholder="搜索" size="20" style="width:200px;">
+              <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:200px;height:auto; display:none; z-index:99999; top: 20px;"></div>
+<!--               <input type="button" id="computerArea" value="计算面积" onclick="addComputerAreaResult()" >
+ -->            </div>
+          </form>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">${currentAdmin.realname }</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-        <input type="button" onclick="add_control()" name="add" value="add">
-        <input type="button" onclick="delete_control()" name="delete" value="delete">
-    </div>
-
+                <!-- <p>
+                  Alexander Pierce - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p> -->
+                <p>
+                  ${currentAdmin.realname }
+                </p>
+              </li>
+              <!-- Menu Body -->
+              
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">设置</a>
+                </div>
+                <div class="pull-right">
+                  <a href="../adminServlet?op=logout" class="btn btn-default btn-flat">退出登录</a>
+                </div>
+              </li>
+            </ul>
+            <li class="dropdown messages-menu">
+            <!-- Menu toggle button -->
+            <a href="index.jsp">
+              <i class="fa fa-rotate-left">&nbsp;&nbsp;返回首页</i>
+            </a>
+          </li>
+          </ul>
+          
+        </div>
+        <!-- /.navbar-custom-menu -->
+        
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+	</header>
      <div id="allmap"></div>
 	
 	<!-- 初始化地图界面的四个js 文件 -->
@@ -64,7 +173,9 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/dist/app.min.js"></script>
 </body>
 </html>
 

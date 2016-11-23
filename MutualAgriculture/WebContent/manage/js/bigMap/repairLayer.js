@@ -21,7 +21,7 @@ map.clearOverlays();
 				 //循环数据 json[i]//获取数据操作 
 				 //alert(json[i].langitude+" "+json[i].latitude);
 				 var pointa = new BMap.Point(json[i].longitude,json[i].latitude);
-				 var label = new BMap.Label("维修点负责人:"+json[i].spname+" 电话:"+json[i].sptel,{offset:new BMap.Size(20,-10)})	
+				 var label = new BMap.Label("维修点负责人:"+json[i].spname+" 电话:"+json[i].sptel,{offset:new BMap.Size(20,-10)});	
 				 addMarker(pointa,i,label);
 			 }
 		}
