@@ -84,6 +84,8 @@
 	  }
 	  $.post("adminServlet", {op:"login", username:username, password:password}, function(data) {
 		  if(data == 1) {
+			  $("#login").text("正在登录..");
+			  $("#login").attr("disabled","false");
 			  location.href = "manage/index.jsp";
 		  } else {
 			  $("#error_mismatch").show();

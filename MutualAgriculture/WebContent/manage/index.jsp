@@ -157,9 +157,12 @@
               <li class="user-header">
                 <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                <p>
+                <!-- <p>
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>
+                </p> -->
+                <p>
+                  ${currentAdmin.realname }
                 </p>
               </li>
               <!-- Menu Body -->

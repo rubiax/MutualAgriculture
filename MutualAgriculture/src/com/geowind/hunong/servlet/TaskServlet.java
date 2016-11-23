@@ -1,10 +1,19 @@
 package com.geowind.hunong.servlet;
 
-import com.geowind.hunong.jpa.SimTask;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.geowind.hunong.entity.SimTask;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
-import com.geowind.hunong.jpa.ITaskDAO;
 import com.geowind.hunong.jpa.Machine;
 import com.geowind.hunong.jpa.MachineDAO;
 import com.geowind.hunong.jpa.Task;
@@ -18,21 +27,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.soap.Detail;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Kui on 2016/7/22.
@@ -40,24 +34,23 @@ import java.util.Map;
 @WebServlet(name = "TaskServlet")
 public class TaskServlet extends BasicServlet {
 
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+
 		String op = request.getParameter("op");
-		
-		if("pulishTask".equals(op)) {
+
+		if ("pulishTask".equals(op)) {
 			pulishTask(request, response);
-		} else if("tasking".equals(op)) {
+		} else if ("tasking".equals(op)) {
 			tasking(request, response);
-		} else if("tasked".equals(op)) {
+		} else if ("tasked".equals(op)) {
 			tasked(request, response);
-		} else if("finishTask".equals(op)) {
+		} else if ("finishTask".equals(op)) {
 			finishTask(request, response);
-		} else if("detail".equals(op)) {
+		} else if ("detail".equals(op)) {
 			detail(request, response);
 		}
 	}
@@ -70,8 +63,7 @@ public class TaskServlet extends BasicServlet {
 		response.sendRedirect("manage/taskdetail.jsp");
 	}
 
-	private void finishTask(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private void finishTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String taskId = request.getParameter("taskId");
 		TaskDAO taskDAO = new TaskDAO();
 		EntityManagerHelper.beginTransaction();
@@ -90,9 +82,10 @@ public class TaskServlet extends BasicServlet {
 
 	/**
 	 * 已经完成的任务
+	 * 
 	 * @param request
 	 * @param response
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private void tasked(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
@@ -104,12 +97,12 @@ public class TaskServlet extends BasicServlet {
 
 	/**
 	 * 正在进行的任务
+	 * 
 	 * @param request
 	 * @param response
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	private void tasking(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private void tasking(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.getTaskInfo(centerId, 0);
@@ -119,12 +112,12 @@ public class TaskServlet extends BasicServlet {
 
 	/**
 	 * 发布任务
+	 * 
 	 * @param request
 	 * @param response
 	 * @throws IOException
 	 */
-	private void pulishTask(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private void pulishTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String musername = request.getParameter("musername");
 		String machineplate = request.getParameter("machineplate");
 		String tasktype = request.getParameter("tasktype");
@@ -145,7 +138,7 @@ public class TaskServlet extends BasicServlet {
 		task.setWorkload(workload);
 		task.setDesrc(descr);
 		task.setFinished(0);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String publishdate = sdf.format(new Date());
 		task.setPublishdate(publishdate);
@@ -153,11 +146,10 @@ public class TaskServlet extends BasicServlet {
 			EntityManagerHelper.beginTransaction();
 			taskDAO.save(task);
 			EntityManagerHelper.commit();
-		
-			
+
 			SimTask simTask = new SimTask();
 			simTask = simTask.fromTask(task);
-			
+
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
 			JPushUtil.sendPush(musername, "任务提醒", jsonObject);
@@ -166,9 +158,5 @@ public class TaskServlet extends BasicServlet {
 			this.out(response, "0");
 		}
 	}
-	
-	
-	
-	
-}
 
+}
