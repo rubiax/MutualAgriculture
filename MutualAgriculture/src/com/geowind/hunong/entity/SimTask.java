@@ -1,44 +1,66 @@
 package com.geowind.hunong.entity;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import com.geowind.hunong.jpa.Task;
+import com.google.gson.annotations.Expose;
 
 public class SimTask {
 	
 	//任务编号
+	@Expose
 	private int no;
     //农机手
+	@Expose
     private String mUname;
     //种粮大户
+	@Expose
     private String fUname;
     //农田编号
+	@Expose
     private int fno;
     //工作量
+	@Expose
     private String workLoad;
     //农机编号
+	@Expose
     private String mno;
     //作业类型
+	@Expose
     private String  type;
     //日期
+	@Expose
     private String date;
     //状态
+	@Expose
     private String state;
     //农田分区编号
+	@Expose
     private String fzno;
     //农田总面积
+	@Expose
     private double farea;
     //农田地址
+	@Expose
     private String faddr;
     //经度
+	@Expose
     private double longitude;
     //纬度
+	@Expose
     private double latitude;
     //农田照片
+	@Expose
     private String fpic;
     //作物类型
+	@Expose
     private String cropType;
     //农机类型
+	@Expose
     private String mstyle;
     //备注
+	@Expose
     private String note;
     
 	public int getNo() {
@@ -131,6 +153,14 @@ public class SimTask {
 	public void setFpic(String fpic) {
 		this.fpic = fpic;
 	}
+	public void setFpicPath(String fpic) {
+		try {
+			this.fpic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
+			System.out.println("address:"+this.fpic);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+	}
 	public String getCropType() {
 		return cropType;
 	}
@@ -170,7 +200,7 @@ public class SimTask {
 			simTask.setFaddr(task.getFarmland().getAddress());
 			simTask.setLongitude(task.getFarmland().getLongitude());
 			simTask.setLatitude(task.getFarmland().getLatitude());
-			simTask.setFpic(task.getFarmland().getPicture());
+			simTask.setFpicPath(task.getFarmland().getPicture());
 			simTask.setCropType(task.getFarmland().getZone().getType());
 			simTask.setMstyle(task.getMachine().getType());
 			simTask.setNote(task.getDesrc());

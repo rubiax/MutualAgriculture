@@ -157,6 +157,7 @@ public class TaskServlet extends BasicServlet {
 			
 			SimTask simTask = new SimTask();
 			simTask = simTask.fromTask(task);
+			System.out.println(simTask);
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
