@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <style type="text/css">
-        body,html,#allmap{width: 100%;height: 95%;overflow: hidden;margin: 0;font-family: "微软雅黑";}
+        body,html,#allmap{width: 100%;height: 100%;overflow: hidden;margin: 0;font-family: "微软雅黑";}
     </style>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl"></script>
          <!--<script src="http://api.map.baidu.com/components?ak=mcc568Fn4O4pF5ldXtFOs8ILbQGPG1jl&v=1.0"></script>-->
@@ -20,12 +20,10 @@
 <body>
 
     <div>
-        经纬度：<input type="text" name="showGeography" id="show" value="">
         搜索:<input type="text" id="suggestId" size="20" value="百度" style="width:150px;">
+        <input type="button" id="computerArea" value="计算面积" onclick="addComputerAreaResult()" >
         <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
-
-        <input type="button" onclick="add_control()" name="add" value="add">
-        <input type="button" onclick="delete_control()" name="delete" value="delete">
+        
     </div>
 
      <div id="allmap"></div>

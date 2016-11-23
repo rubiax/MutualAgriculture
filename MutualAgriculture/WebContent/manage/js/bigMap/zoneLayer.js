@@ -4,13 +4,27 @@
 function addZoneLayer(){
     map.clearOverlays();
     var marker = new Array();
+    112.5931,26.9034
+    
+   
+   
+   
+    
+   
+    
+    
+  
     var polygon = new BMap.Polygon([
-    	new BMap.Point(112.595778,26.903118),
-        new BMap.Point(112.596847, 26.903481),
-        new BMap.Point(112.597395, 26.904214),
-        new BMap.Point(112.597386, 26.905156),
-        new BMap.Point(112.595805, 26.905736),
-        new BMap.Point(112.594188, 26.906267),
+    	new BMap.Point(112.5931,26.9034),
+        new BMap.Point(112.59578,26.903118),
+        new BMap.Point( 112.59685,26.90348),
+        new BMap.Point( 112.5974,26.904215),
+        new BMap.Point( 112.59739,26.905155),
+        new BMap.Point(112.5958,26.905737),
+        new BMap.Point( 112.594185,26.906267),
+        new BMap.Point(112.59306,26.905155),
+        new BMap.Point(112.59276,26.90473),
+        new BMap.Point(  112.59281,26.904245)
     ], {strokeColor:"red", strokeWeight:2, strokeOpacity:0.5});  //创建多边形
     // polygon.enableEditing();
     map.addOverlay(polygon);   //增加多边形
