@@ -23,9 +23,20 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+	#back_to_top{
+	    position: fixed;
+	    display: none;
+	    bottom: 100px;
+	    right: 100px;
+	    z-index: 30;
+	}
+</style>
 </head>
 
 <body class="hold-transition skin-green-light sidebar-mini ">
+<a name="top"></a>
+<a href="#top" id="back_to_top"><img width="40px" src="img/back_to_top.png"></a>
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -51,98 +62,13 @@
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+            <a href="Map.jsp">
+              <i class="fa fa-map-o">&nbsp;&nbsp;地图</i>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the messages -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <!-- User Image -->
-                        <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <!-- Message title and timestamp -->
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <!-- The message -->
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-                <!-- /.menu -->
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
           </li>
           <!-- /.messages-menu -->
 
-          <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- Inner Menu: contains the notifications -->
-                <ul class="menu">
-                  <li><!-- start notification -->
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <!-- end notification -->
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- Tasks Menu -->
-          <li class="dropdown tasks-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- Inner menu: contains the tasks -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <!-- Task title and progress text -->
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <!-- The progress bar -->
-                      <div class="progress xs">
-                        <!-- Change the css width attribute to simulate progress -->
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
-            </ul>
-          </li>
+          
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -263,8 +189,8 @@
         </a>
           <ul class="treeview-menu">
             <!-- <li><a href="javascript:showpage(this,'')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li> -->
-            <li><a href="javascript:showpage(this,'pestidentificationauto.html')"><i class="fa fa-circle-o"></i> 自动识别</a></li>
-            <li><a href="javascript:showpage(this,'pestidentificationmanual.html')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
+            <li><a href="javascript:showpage(this,'pestlib.html')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li>
+            <li><a href="javascript:showpage(this,'pestidentification.html')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
           </ul>
         </li>
       </ul>
@@ -319,6 +245,7 @@
 	    	mainheight = 500;
 		}
 	    $("#rightMain").height(mainheight);
+	    console.log(mainheight)
 	} 
 	
 	window.setInterval("changeFrameHeight()", 200);
@@ -334,6 +261,23 @@
 		})
 		$(this).addClass("active");
 	})
+	
+	$(window).scroll(function () {
+		        var scrollHeight = $(parent.window).scrollTop();
+		        if (scrollHeight > 500){
+		            $("#back_to_top").fadeIn(300);
+		        } else {
+		            $("#back_to_top").fadeOut(300);
+		        }
+		    });
+         	// 当点击跳转链接后，回到页面顶部位置
+            $("#back_to_top").click(function(){
+                $('body, html').animate({scrollTop:0}, 1000);
+                return false;
+            });
+            function dashboard() {
+        		parent.location.reload();
+            }
 	
 </script>
 </body>
