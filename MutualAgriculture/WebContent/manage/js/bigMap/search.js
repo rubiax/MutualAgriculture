@@ -7,7 +7,7 @@ function G(id) {
 }
 
 var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-    {"input" : "navbar-search-input"
+    {"input" : "suggestId"
         ,"location" : map
     });
 
