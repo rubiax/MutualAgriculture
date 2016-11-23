@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Arrays"%>
-
+<%@page import="com.geowind.hunong.jpa.Farmland"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -71,7 +71,7 @@
 
 
 				<!-- Horizontal Form -->
-				<div class="box box-info">
+				<div class="box box-success">
 					<div class="box-header with-border">
 						<h3 class="box-title">农田图片</h3>
 					</div>
@@ -102,7 +102,7 @@
 			
 			
 				<!-- Horizontal Form -->
-				<div class="box box-info">
+				<div class="box box-success">
 					<div class="box-header with-border">
 						<h3 class="box-title">详细信息</h3>
 					</div>
@@ -120,7 +120,7 @@
 						
 						
 						<div class="form-group" id="usernamediv">
-					        <label class="col-md-2 control-label">用户名</label>
+					        <label class="col-md-3 control-label">用户名</label>
 					        <div class="col-md-8">
 					            <input type="text" class="form-control" name="username" id="username"
 					                 value="${currentFarmland.user.username }"/>
@@ -128,61 +128,61 @@
 					    </div>
 
 						<div class="form-group">
-							<label for="realname" class="col-md-2 control-label">姓名</label>
+							<label for="realname" class="col-md-3 control-label">姓名</label>
 							<div class="col-md-8">
 								<input class="form-control" id="realname" disabled="disabled" type="text" value="${currentFarmland.user.realname}">
 							</div>
 						</div>
 						<div class="form-group" id="zonenamediv">
-							<label for="zonename" class="col-md-2 control-label">区名</label>
+							<label for="zonename" class="col-md-3 control-label">区名</label>
 							<div class="col-md-8">
 								<input class="form-control" id="zonename" type="text" value="${currentFarmland.zone.zonename}">
 							</div>
 						</div>
 						
 						<div class="form-group">
-	                    <label class="col-md-2 control-label"></label>
+	                    <label class="col-md-3 control-label"></label>
 	                    <div class="col-md-5">
 	                    <!-- <button data-target="#myModal2" role="button" class="btn btn-primary" data-toggle="modal" >加载地址及经纬度</button>
 	                     -->
-	                     <a href="#myModal" role="button" class="btn btn-primary"
+	                     <a href="#myModal" role="button" class="btn btn-success"
 		data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
 	                     </div>
                     	</div>
 		                <div class="form-group">
-							<label for="address" class="col-md-2 control-label">详细地址</label>
+							<label for="address" class="col-md-3 control-label">详细地址</label>
 							<div class="col-md-8">
 								<textarea class="form-control" id="address" rows="3" disabled="disabled">${currentFarmland.address }</textarea>
 							</div>
 						</div>
 	                    <div class="form-group">
-							<label for="lal" class="col-md-2 control-label">经纬度</label>
+							<label for="lal" class="col-md-3 control-label">经纬度</label>
 							<div class="col-md-8">
 								<input class="form-control" id="lal" type="text" disabled="disabled" value="(${currentFarmland.longitude },${currentFarmland.latitude})">
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="type" class="col-md-2 control-label">作物类型</label>
+							<label for="type" class="col-md-3 control-label">作物类型</label>
 							<div class="col-md-8">
 								<input class="form-control" id="type" type="text" disabled="disabled" value="${currentFarmland.zone.type}">
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="area" class="col-md-2 control-label">农田面积</label>
+							<label for="area" class="col-md-3 control-label">农田面积</label>
 							<div class="col-md-8">
 								<input class="form-control" id="area" type="text" value="${currentFarmland.area}">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="ph" class="col-md-2 control-label">pH</label>
+							<label for="ph" class="col-md-3 control-label">pH</label>
 							<div class="col-md-8">
 								<input class="form-control" id="ph" type="text" value="${currentFarmland.ph }">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="npk" class="col-md-2 control-label">NPK</label>
+							<label for="npk" class="col-md-3 control-label">NPK</label>
 							<div class="col-md-8">
 								<input class="form-control" id="npk" type="text" value="${currentFarmland.npk}">
 							</div>
@@ -195,7 +195,7 @@
 						</div> --%>
 						
 						<div class="form-group">
-							<label for="center" class="col-md-2 control-label">流转信息</label>
+							<label for="center" class="col-md-3 control-label">流转信息</label>
 
 							<div class="col-md-8">
 								<textarea class="form-control" id="transtion" rows="3">${currentFarmland.transtion }</textarea>

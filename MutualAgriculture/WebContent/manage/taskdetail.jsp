@@ -32,97 +32,106 @@
 
 <div class="container">
 
-
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li><a href="tasked.jsp">历史任务</a></li>
+		    <li class="active">详情</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
+    
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">发布任务</h3>
+            <h3 class="box-title">历史任务详情</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <div class="form-horizontal">
             <div class="box-body">
            			<div class="form-group">
-				        <label for="musername" class="col-md-2 control-label">农机手用户名</label>
+				        <label for="musername" class="col-md-3 control-label">农机手用户名</label>
 				        <div class="col-md-5">
 				            <input type="text" class="form-control" name="musername" id="musername" value="${currentTask.user.username }"/>
 				        </div>
 				    </div>
 					<div class="form-group">
-						<label for="mrealname" class="col-md-2 control-label">农机手姓名</label>
+						<label for="mrealname" class="col-md-3 control-label">农机手姓名</label>
 						<div class="col-md-5">
 							<input class="form-control" id="mrealname" disabled="disabled" type="text" value="${currentTask.user.realname }"/>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="mphone" class="col-md-2 control-label">农机手手机号</label>
+						<label for="mphone" class="col-md-3 control-label">农机手手机号</label>
 						<div class="col-md-5">
 							<input class="form-control" id="mphone" disabled="disabled" type="text" value="${currentTask.user.phone }"/>
 						</div>
 					</div>
 					<div class="form-group" id="machineplatediv">
-                        <label for="machineplate" class="col-sm-2 control-label">农机牌号</label>
-                        <div class="col-sm-5">
+                        <label for="machineplate" class="col-md-3 control-label">农机牌号</label>
+                        <div class="col-md-5">
                             <input class="form-control" name="machineplate" id="machineplate" type="text" value="${currentTask.machine.plate }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tasktype" class="col-sm-2 control-label">任务类型</label>
-                        <div class="col-sm-5">
+                        <label for="tasktype" class="col-md-3 control-label">任务类型</label>
+                        <div class="col-md-5">
                             <input class="form-control" name="tasktype" id="tasktype" type="text" value="${currentTask.type }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="taskdate" class="col-sm-2 control-label">任务时间</label>
-                        <div class="col-sm-5">
+                        <label for="taskdate" class="col-md-3 control-label">任务时间</label>
+                        <div class="col-md-5">
                             <input class="form-control" name="tasktype" id="taskdate" type="text" value="${currentTask.workdate }">
                         </div>
                     </div>
                     <div class="form-group" id="farmlandIddiv">
-                        <label for="farmlandId" class="col-sm-2 control-label">农田编号</label>
-                        <div class="col-sm-5">
+                        <label for="farmlandId" class="col-md-3 control-label">农田编号</label>
+                        <div class="col-md-5">
                             <input class="form-control" name="farmlandId" disabled="disabled" id="farmlandId" type="text" value="${currentTask.farmland.farmlandId }">
                         </div>
                     </div>
                     <div class="form-group" id="zonenamediv">
-                        <label for="zonename" class="col-sm-2 control-label">区名</label>
-                        <div class="col-sm-5">
+                        <label for="zonename" class="col-md-3 control-label">区名</label>
+                        <div class="col-md-5">
                             <input class="form-control" name="zonename" disabled="disabled" id="zonename" type="text" value="${currentTask.farmland.zone.zonename }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="croptype" class="col-sm-2 control-label">作物类型</label>
+                        <label for="croptype" class="col-md-3 control-label">作物类型</label>
 
-                        <div class="col-sm-5">
+                        <div class="col-md-5">
                             <input class="form-control" id="croptype" disabled="disabled"  type="text" value="${currentTask.farmland.zone.type }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="fname" class="col-sm-2 control-label">种粮大户姓名</label>
-                        <div class="col-sm-5">
+                        <label for="fname" class="col-md-3 control-label">种粮大户姓名</label>
+                        <div class="col-md-5">
                             <input class="form-control" id="fname" disabled="disabled" type="text" value="${currentTask.farmland.user.realname }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="fphone" class="col-sm-2 control-label">种粮大户手机号</label>
-                        <div class="col-sm-5">
+                        <label for="fphone" class="col-md-3 control-label">种粮大户手机号</label>
+                        <div class="col-md-5">
                             <input class="form-control" id="fphone" disabled="disabled" type="text" value="${currentTask.farmland.user.phone }">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">地址</label>
+                        <label for="address" class="col-md-3 control-label">地址</label>
 
                         <div class="col-md-5">
                             <textarea class="form-control" rows="3" disabled="disabled" id="address">${currentTask.farmland.address }</textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="workload" class="col-sm-2 control-label">工作量</label>
-                        <div class="col-sm-5">
+                        <label for="workload" class="col-md-3 control-label">工作量</label>
+                        <div class="col-md-5">
                             <input class="form-control" id="workload" type="text" value="${currentTask.workload }">
                         </div>
                     </div>
                     <div class="form-group">
-							<label for="descr" class="col-md-2 control-label">任务描述</label>
+							<label for="descr" class="col-md-3 control-label">任务描述</label>
 
 							<div class="col-md-5">
 								<textarea class="form-control" id="descr" rows="3">${currentTask.desrc }</textarea>
@@ -173,7 +182,9 @@
         history.go(-1);
     }
 
-
+    function dashboard() {
+		parent.location.reload();
+    }
 </script>
 
 </body>

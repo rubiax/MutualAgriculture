@@ -53,7 +53,7 @@
 				
 
 				<!-- Horizontal Form -->
-				<div class="box box-info">
+				<div class="box box-success">
 					<div class="box-header with-border">
 						<h3 class="box-title">基本信息</h3>
 					</div>
@@ -125,7 +125,7 @@
 
 
 				<!-- Horizontal Form -->
-				<div class="box box-info">
+				<div class="box box-success">
 					<div class="box-header with-border">
 						<h3 class="box-title">详细信息</h3>
 					</div>

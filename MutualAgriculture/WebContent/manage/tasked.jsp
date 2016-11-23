@@ -31,11 +31,18 @@
 
 <div class="container">
 
-
+	<section class="content-header">
+	      <ol class="breadcrumb">
+	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+	        <li class="active">历史任务</li>
+	      </ol>
+	</section>
+	<br/>
+    <br/>
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">正在进行的任务</h3>
+            <h3 class="box-title">历史任务</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
