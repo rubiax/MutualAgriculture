@@ -1,5 +1,7 @@
 package com.geowind.hunong.servlet;
 
+import static com.geowind.hunong.util.PathUtil.ServerIP;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,8 +21,7 @@ import com.google.gson.Gson;
 public class LibraryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -30,13 +31,11 @@ public class LibraryServlet extends HttpServlet {
 		System.out.println("library serlvet op=" + keyword);
 		// String keyword = request.getParameter("keyword");
 		List<ArticleSim> ArticleMeg = LibraryKeywordSearch.GetMatchArticlesURL(keyword);
-		String serverIP = request.getLocalAddr();
-		System.out.println("IP=" + serverIP);
 		for (int i = 0; i < ArticleMeg.size(); i++) {
 			ArticleSim now = ArticleMeg.get(i);
-			now.url = "http://" + serverIP + ":8080/MutualAgriculture/LibraryHTML/" + now.id + ".html";
+			now.url = "http://" + ServerIP + ":8080/MutualAgriculture/LibraryHTML/" + now.id + ".html";
 		}
-
+		// System.out.println("IP="+ServerIP);
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
 		String msg = gson.toJson(ArticleMeg);
