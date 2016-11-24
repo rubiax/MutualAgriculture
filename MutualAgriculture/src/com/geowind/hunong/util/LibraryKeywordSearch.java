@@ -41,13 +41,13 @@ public class LibraryKeywordSearch {
 
 		String sql = "select * from article where keyword='" + keyword + "'";
 		System.out.println(sql);
-		res = DBHelperSim.GetArticleSimBykeyword(keyword, sql);// 第一遍查询
+		res = DBHelperSim.GetArticleSimUseSql(sql);// 第一遍查询
 
 		sql = "select * from article where keyword like '" + keyword + "%" + "'";
-		res.addAll(DBHelperSim.GetArticleSimBykeyword(keyword, sql));// 第一遍查询
+		res.addAll(DBHelperSim.GetArticleSimUseSql(sql));// 第一遍查询
 
 		sql = "select * from article where keyword like '" + "%" + keyword + "%" + "'";
-		res.addAll(DBHelperSim.GetArticleSimBykeyword(keyword, sql));// 第一遍查询
+		res.addAll(DBHelperSim.GetArticleSimUseSql(sql));// 第一遍查询
 
 		res = ClearRepeatArticleSim(res);
 
