@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.geowind.hunong.entity.ArticleSim;
 import com.geowind.hunong.util.LibraryKeywordSearch;
 
 public class TestLibraryKeywordSearch {
@@ -23,9 +24,9 @@ public class TestLibraryKeywordSearch {
 	public void test() {
 
 		System.out.println(keyword.length);
-		List<String> res = LibraryKeywordSearch.GetMatchArticlesURL("关键字1");
-		System.out.println(res);
-		assertEquals(listLen[0], res.size());
+		List<ArticleSim> res = LibraryKeywordSearch.GetMatchArticlesURL("我");
+		System.out.println(res.get(0).title);
+		assertEquals(listLen[1], res.size());
 	}
 
 }
