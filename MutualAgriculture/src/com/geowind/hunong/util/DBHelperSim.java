@@ -1,5 +1,7 @@
 package com.geowind.hunong.util;
 
+import static com.geowind.hunong.util.PathUtil.ServerIP;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -11,7 +13,7 @@ import com.geowind.hunong.entity.ArticleSim;
 public class DBHelperSim {
 
 	// other
-	private static List<ArticleSim> sqlExecute(String keywords, String sql) {
+	private static List<ArticleSim> sqlExecute(String sql) {
 		List<ArticleSim> res = new ArrayList<>();
 
 		try {
@@ -25,8 +27,9 @@ public class DBHelperSim {
 				String id = rs.getString("articleId");
 				// System.out.println(id_list.size());
 				String title = rs.getString("title");
-
-				res.add(new ArticleSim(id, title));
+				String url = "http://" + ServerIP + ":8080/MutualAgriculture/LibraryHTML/" + id + ".html";
+				String summary = rs.getString("summary");
+				res.add(new ArticleSim(id, title, summary, url));
 			}
 			rs.close();
 			stmt.close();
@@ -37,9 +40,9 @@ public class DBHelperSim {
 		return res;
 	}
 
-	public static List<ArticleSim> GetArticleSimBykeyword(String keywords, String sql) {
+	public static List<ArticleSim> GetArticleSimUseSql(String sql) {
 
-		return sqlExecute(keywords, sql);
+		return sqlExecute(sql);
 	}
 	// public static void main(String[] args) {
 	// List<String> list = GetIdBykeyword("我是","select * from article where

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.entity.ArticleSim;
+import com.geowind.hunong.util.DBHelperSim;
 import com.geowind.hunong.util.LibraryKeywordSearch;
 import com.google.gson.Gson;
 
@@ -26,7 +27,25 @@ public class LibraryServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		// String method = request.getParameter("method");
+		String method = request.getParameter("method");
+		// searchLib
+		// getArticles
+
+		if (method.equals("serchLib")) {
+			SearchMethod(request, response);
+		} else if (method.equals("getArticles")) {
+			GetArticlesMethod(request, response);
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	private void SearchMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword = request.getParameter("keyword");
 		System.out.println("library serlvet op=" + keyword);
 		// String keyword = request.getParameter("keyword");
@@ -45,10 +64,36 @@ public class LibraryServlet extends HttpServlet {
 		out.close();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void GetArticlesMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String category = request.getParameter("category");
+		String nowPage = request.getParameter("nowPage");
+
+		// 10001 10010
+		int pagN = Integer.parseInt(nowPage);
+
+		int begin_page = 10001 + pagN * 10;
+		int end_page = 10001 + (pagN + 1) * 10 - 1;
+
+		String sql = "select * from article";
+		if (category.equals("0")) {
+			sql += "where articleId between " + begin_page + " and " + end_page;
+		} else {
+			sql += "where classification like '%" + category + "%' and articleId between " + begin_page + " and "
+					+ end_page;
+		}
+		// sql+= begin_page +" and "+end_page;
+
+		System.out.println(sql);
+		List<ArticleSim> res = DBHelperSim.GetArticleSimUseSql(sql);
+
+		PrintWriter out = response.getWriter();
+		Gson gson = new Gson();
+		String msg = gson.toJson(res);
+
+		out.print(msg);
+		out.flush();
+		out.close();
 	}
 
 }
