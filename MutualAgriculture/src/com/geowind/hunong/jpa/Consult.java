@@ -4,11 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * Consult entity. @author MyEclipse Persistence Tools
@@ -18,13 +22,19 @@ import javax.persistence.Table;
 public class Consult implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer cid;
+	@Expose
 	private User user;
+	@Expose
 	private String ccontent;
+	@Expose
 	private String ctime;
+	@Expose
 	private String acontent;
+	@Expose
 	private String atime;
+	@Expose
 	private Integer status;
 
 	// Constructors

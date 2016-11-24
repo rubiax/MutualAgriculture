@@ -176,7 +176,7 @@
             </span>
         </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:showpage(this,'consult.html')"><i class="fa fa-circle-o"></i> 待解决</a></li>
+            <li><a href="javascript:showpage(this,'../consultServlet?op=consulting')"><i class="fa fa-circle-o"></i> 待解决</a></li>
             <li><a href="javascript:showpage(this,'consulted.html')"><i class="fa fa-circle-o"></i> 已解决</a></li>
           </ul>
         </li>
@@ -245,7 +245,7 @@
 	    	mainheight = 500;
 		}
 	    $("#rightMain").height(mainheight);
-	    console.log(mainheight)
+	    //console.log(mainheight)
 	} 
 	
 	window.setInterval("changeFrameHeight()", 200);

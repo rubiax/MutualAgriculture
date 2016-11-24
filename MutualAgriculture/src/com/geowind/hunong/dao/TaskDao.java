@@ -11,4 +11,6 @@ import com.geowind.hunong.jpa.Task;
 public interface TaskDao {
 
 	public List<Map<String, Object>> getTaskInfo(int centerId, int isFinished);
+	
+	public List<Map<String, Object>> historyTaskByUser(int centerId, int isFinished, String username);
 }

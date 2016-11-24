@@ -11,4 +11,6 @@ import com.geowind.hunong.jpa.Task;
 public interface TaskService {
 
     public List<Task> getTaskInfo(int centerId, int isFinished);
+    
+    public List<Task> historyTaskByUser(int centerId, int isFinished, String username);
 }

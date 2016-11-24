@@ -186,6 +186,14 @@
 		<servlet-name>InsectInfoUploadServlet</servlet-name>
 		<url-pattern>/insectInfoUploadServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ConsultServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.ConsultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConsultServlet</servlet-name>
+		<url-pattern>/consultServlet</url-pattern>
+	</servlet-mapping>
 
 	
 

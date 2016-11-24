@@ -17,5 +17,11 @@ public class TaskDaoImpl implements TaskDao {
 		String sql = "select * from task where centerId = ? and finished=?";
 		return DBHelper.doQuery(sql, centerId, isFinished);
 	}
+	
+	@Override
+	public List<Map<String, Object>> historyTaskByUser(int centerId, int isFinished, String username) {
+		String sql = "select * from task where centerId = ? and finished=? and username=?";
+		return DBHelper.doQuery(sql, centerId, isFinished, username);
+	}
 
 }

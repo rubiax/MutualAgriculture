@@ -29,6 +29,7 @@ import javax.xml.soap.Detail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,23 @@ public class TaskServlet extends BasicServlet {
 			finishTask(request, response);
 		} else if("detail".equals(op)) {
 			detail(request, response);
+		} else if("historyTask".equals(op)) {
+			historyTask(request, response);
 		}
+	}
+
+	private void historyTask(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String username = request.getParameter("username");
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		TaskService taskService = new TaskServiceImpl();
+		List<Task> tasks = taskService.historyTaskByUser(centerId, 1, username);
+		List<SimTask> simTasks = new ArrayList<SimTask>();
+		for(Task t : tasks) {
+			SimTask simTask = new SimTask();
+			simTasks.add(simTask.fromTask(t));
+		}
+		this.out(response, simTasks);
 	}
 
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {

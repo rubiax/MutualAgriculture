@@ -46,6 +46,29 @@ public class TaskServiceImpl implements TaskService {
 		return list;
 	}
 
+	@Override
+	public List<Task> historyTaskByUser(int centerId, int isFinished,
+			String username) {
+		List<Map<String, Object>> maps = taskDao.historyTaskByUser(centerId, isFinished, username);
+		List<Task> list = new ArrayList<Task>();
+		for(Map<String, Object> map : maps) {
+			Task task = new Task();
+			task.setTaskId((int)map.get("taskid"));
+			task.setUser(new UserDAO().findById((String)map.get("username")));
+			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
+			task.setWorkload((int)map.get("workload"));
+			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
+			task.setPublishdate((String)map.get("publishdate"));
+			task.setWorkdate((String)map.get("workdate"));
+			task.setType((String)map.get("type"));
+			task.setDesrc((String)map.get("descr"));
+			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
+			task.setFinished((int)map.get("finished"));
+			list.add(task);
+		}
+		return list;
+	}
+
 
 
 
