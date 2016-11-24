@@ -3,6 +3,7 @@ package com.geowind.hunong.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -70,7 +71,8 @@ public class LibraryHTMLBuilder {
 			dataMes[1] = now.getClassification();
 			dataMes[2] = now.getTitle();
 			dataMes[3] = now.getList();
-			dataMes[4] = now.getKeyword();
+			dataMes[4] = now.getSummary();
+			dataMes[5] = now.getKeyword();
 			dataMes[6] = now.getContent();
 			dataMes[7] = now.getImgUrl();
 			// dataMes[8] = now.getVideoUrl();
@@ -106,9 +108,9 @@ public class LibraryHTMLBuilder {
 		// point4:set articles
 		elmt = doc.getElementById("article_div");
 		String[] articles = dataMes[6].split("##");
-
+		int minLen = Math.min(airticlList.length, articles.length);
 		// int articleLen = articles.length;//listLen和articlelen应该是相等的
-		for (int i = 0; i < listLen; i++) {
+		for (int i = 0; i < minLen; i++) {
 			String html = "<div><h1 id=\"info_title" + i + "\">" + airticlList[i] + "</h1>" + articles[i] + "</div>";
 			elmt.append(html);
 		}
@@ -123,15 +125,21 @@ public class LibraryHTMLBuilder {
 			file.delete();
 
 		FileOutputStream fos = new FileOutputStream(NewPath, true);
-		fos.write(doc.html().getBytes());
-		fos.close();
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+
+		osw.write(doc.html());
+		osw.flush();
+		osw.close();
+
+		// fos.write(doc.html().getBytes());
+		// fos.close();
 
 	}
 
 	private void CreateHTML() throws IOException {
 		// step1 build path 制作路径
-		String ModelPath = HTMLModlePath + "\\" + HTMLModelName; // 模板文件完整路径
-		String NewPath = HTMLModlePath + "\\" + dataMes[0] + ".html";// 新建文件完整路径
+		String ModelPath = HTMLModlePath + "/" + HTMLModelName; // 模板文件完整路径
+		String NewPath = HTMLModlePath + "/" + dataMes[0] + ".html";// 新建文件完整路径
 
 		// System.out.println(ModelPath);
 		// step2 set html and setp3 write html 解析html并设置新值，写出html
