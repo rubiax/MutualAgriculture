@@ -11,8 +11,8 @@ var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR
     //map.addControl(mapType1);          //2D图，卫星图
     map.addControl(mapType2);          //左上角，默认地图控件
     map.setCurrentCity("衡阳");        //由于有3D图，需要设置城市哦
-    //map.addControl(overView);          //添加默认缩略地图控件
-    //map.addControl(overViewOpen);      //右下角，打开
+    map.addControl(overView);          //添加默认缩略地图控件
+    map.addControl(overViewOpen);      //右下角，打开
 //}
 //移除地图类型和缩略图
 //function delete_control(){

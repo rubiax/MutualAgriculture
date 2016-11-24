@@ -39,7 +39,8 @@ function addCropLayer(){
 	});
 	
 	
-	
+	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
 	function addMarker(point,i,content){
 		
 		//创建检索信息窗口对象
@@ -56,7 +57,8 @@ function addCropLayer(){
 		//BMAPLIB_TAB_FROM_HERE //从这里出发
 		]
 		});
-		marker[i] = new BMap.Marker(point); //创建marker对象
+		marker[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+            raiseOnDrag: true}); //创建marker对象
 		marker[i].addEventListener("click", function(e){
 		searchInfoWindow.open(marker[i]);
 		});

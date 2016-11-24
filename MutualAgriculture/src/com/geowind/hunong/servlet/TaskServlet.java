@@ -62,6 +62,23 @@ public class TaskServlet extends BasicServlet {
 			detail(request, response);
 		} else if("historyTask".equals(op)) {
 			historyTask(request, response);
+		}else if("MapSearchAll".equals(op)){
+			MapSearchAll(request,response);
+		}
+	}
+	/**
+	 * 地图查找所有任务
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		TaskDAO taskDAO =new TaskDAO();
+		List<Task> taskList = taskDAO.findAll();
+		if(taskList!=null&&taskList.size()>0){
+			this.out(response,taskList);
+		}else{
+			this.out(response, 0);
 		}
 	}
 

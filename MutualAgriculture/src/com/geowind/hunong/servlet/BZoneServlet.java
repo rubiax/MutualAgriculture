@@ -1,19 +1,28 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.FarmlandPoint;
+import com.geowind.hunong.entity.Point;
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Farmland;
+import com.geowind.hunong.jpa.FarmlandDAO;
 import com.geowind.hunong.jpa.Zone;
 import com.geowind.hunong.jpa.ZoneDAO;
 import com.geowind.hunong.service.ZoneService;
 import com.geowind.hunong.service.impl.ZoneServiceImpl;
+import com.geowind.hunong.util.PointSelector;
 
 public class BZoneServlet extends BasicServlet {
 
@@ -51,9 +60,71 @@ public class BZoneServlet extends BasicServlet {
 		case "MapSearchAll":
 			MapSearchAll(request, response);
 			break;
+		case "MapSearchZonePoint":
+			MapSearchZonePoint(request,response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 获得分区凸点并发送给前端
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void MapSearchZonePoint(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	
+		ZoneDAO zoneDAO = new ZoneDAO();
+		List<Zone> zoneList = zoneDAO.findAll();
+		
+		if(zoneList!=null&&zoneList.size()>0){
+			
+			List<FarmlandPoint> farmlandPointList = new ArrayList<FarmlandPoint>();
+
+			//  根据分区数量遍历得出数据
+			for(int i=0;i<zoneList.size();i++){
+				Set<Farmland> farmlandList = new HashSet<Farmland>();
+				//获得指定分区下的农田
+				farmlandList = zoneList.get(i).getFarmlands();
+				
+				if(farmlandList!=null&&farmlandList.size()>0){
+					List<Point> p = new ArrayList<Point>();
+					
+					Iterator<Farmland> f = farmlandList.iterator();
+			
+					while(f.hasNext()){
+						
+						Point p1 = new Point();
+						Farmland tmp = f.next();
+						System.out.println(tmp.getLongitude()+","+tmp.getLatitude());
+						p1.setX(tmp.getLongitude());
+						p1.setY(tmp.getLatitude());
+						
+						p.add(p1);
+						
+					}
+					
+					PointSelector ps = new PointSelector(p);
+					p = ps.GetHullPoints();
+					
+					FarmlandPoint fp = new FarmlandPoint();
+					fp.setPointList(p);
+					farmlandPointList.add(fp);
+				}else{
+					System.out.println(zoneList.get(i).getZonename()+"没有农田");
+				}
+				
+			}
+			this.out(response, farmlandPointList);
+			
+		}else{
+			this.out(response, 0);
+		}
+		
+	
+		
 	}
 
 	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {

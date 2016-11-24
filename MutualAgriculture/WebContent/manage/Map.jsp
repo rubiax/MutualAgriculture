@@ -33,6 +33,7 @@
 	  		border: 0;
 	  		color: white;
 	  	}
+	  	.baidu-maps label {max-width: none;}
 	  	body,html,#allmap{width: 100%;height: 96.5%;overflow: hidden;margin: 0;}
 	  	
 	  </style>
@@ -56,22 +57,22 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">重置 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">天气</a></li>
-                <li><a href="#">虫害</a></li>
-                <li><a href="#">病害</a></li>
+                <li><a href="javascript:addWeatherLayer()" >天气</a></li>
+                <li><a href="javascript:addPestLayer()" >虫害</a></li>
+                <li><a href="javascript:addDiseaseLayer()" >病害</a></li>
                 <li class="divider"></li>
-                <li><a href="#">农民</a></li>
-                <li><a href="#">农机</a></li>
-                <li><a href="#">农作物</a></li>
+                <li><a href="javascript:addFarmerLayer()" >农民</a></li>
+                <li><a href="javascript:addMachineLayer()" >农机</a></li>
+                <li><a href="javascript:addCropLayer()">农作物</a></li>
                 <li class="divider"></li>
-                <li><a href="#">任务</a></li>
-                <li><a href="#">提问</a></li>
+                <li><a href="javascript:addTaskLayer()" >任务</a></li>
+                <li><a href="javascript:addQuestionLayer()" >提问</a></li>
                 <li class="divider"></li>
-                <li><a href="#">分区</a></li>
-                <li><a href="#">受灾区</a></li>
-                <li><a href="#">加油点</a></li>
-                <li><a href="#">维修点</a></li>
-                <li><a href="#">服务中心点</a></li>
+                <li><a href="javascript:addZoneLayer()" >分区</a></li>
+                <li><a href="javascript:addAffectAreasLayer()">受灾区</a></li>
+                <li><a href="javascript:addFuelLayer()" >加油点</a></li>
+                <li><a href="javascript:addRepairLayer()" >维修点</a></li>
+                <li><a href="javascript:addCenterLayer()" >服务中心点</a></li>
               </ul>
             </li>
           </ul>
@@ -137,7 +138,7 @@
       <!-- /.container-fluid -->
     </nav>
 	</header>
-     <div id="allmap"></div>
+     <div id="allmap" class="baidu-maps"></div>
 	
 	<!-- 初始化地图界面的四个js 文件 -->
     <script type="text/javascript" src="js/bigMap/mapInit.js"></script>
@@ -160,9 +161,9 @@
     <script type="text/javascript" src="js/bigMap/fuelLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/repairLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/centerLayer.js" ></script>
-	
+	<script type="text/javascript" src="js/bigMap/computerArea.js"></script>
 	<!-- 统筹控制地图各个功能层块的调度显示js文件 -->
-    <script type="text/javascript" src="js/bigMap/layerControl.js"></script>
+    <!--<script type="text/javascript" src="js/bigMap/layerControl.js"></script>-->
 
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- date-range-picker -->

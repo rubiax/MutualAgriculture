@@ -52,13 +52,19 @@
 	    	}
 	    }, "json");
 	}
+	var temp = new BMap.Marker();
+	var myIcon = new BMap.Icon("img/logoMarker/location.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
 	
+	var myIcon2 = new BMap.Icon("img/logoMarker/location2.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
 	var farmlandId;
     function addMark(data){
     	var me=this;     
     	var label;     
     	var point = new BMap.Point(data.longitude,data.latitude);    //建立测试point点
-    	var marker = new BMap.Marker(point);
+    	var marker = new BMap.Marker(point,{icon:myIcon, enableDragging: true,
+            raiseOnDrag: true});
     	label = new BMap.Label(data.farmlandId, { offset: new BMap.Size(20, 0) }); //创建marker点的标记,这里注意下,因为百度地图可以对label样式做编辑,所以我这里吧重要的id放在了label(然后再隐藏)
     	//label.setStyle(  {   display:"none"         });//对label 样式隐藏   
     	marker.setLabel(label);  //把label设置到maker上  
@@ -70,8 +76,10 @@
 			me.tag=e.target.getLabel().content; //点击maker点后  获取label里面的内容        
 			$("#id").html(e.target.getLabel().content); //这里就可以获取到marker的id        
 			 
+			temp.setIcon(myIcon);
     		farmlandId = e.target.getLabel().content;
-    		
+    		marker.setIcon(myIcon2);
+    		temp = marker;
     		
     	});
     };

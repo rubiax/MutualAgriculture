@@ -6,7 +6,7 @@ function addTaskLayer(){
     
     var json;
     var marker = new Array();
-    var url = "http://localhost:8080/Demo/FarmerServlet";
+    var url = "../taskServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		 alert(data);
 		 json = JSON.parse(data);
@@ -14,28 +14,34 @@ function addTaskLayer(){
 		 { 
 			 //循环数据 json[i]//获取数据操作 
 			 //alert(json[i].langitude+" "+json[i].latitude);
-			 var pointa = new BMap.Point(json[i].longitude,json[i].latitude);
-			 addMarker(pointa,i);
+			 var pointa = new BMap.Point(json[i].farmland.longitude,json[i].farmland.latitude);
+			//农作物显示信息
+				var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+							    '<img src="img/weatherMarker/1.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+							    '农田地址：'+json[i].farmland.address+
+							    '<br/>农民姓名：'+json[i].farmland.user.realname+
+							    '<br/>联系电话：'+json[i].farmland.user.phone+
+							    '<br/>任务类型:'+json[i].type+
+							    '<br/>农机手姓名:'+json[i].machine.machineowner.name+
+							    '<br/>农机手电话：'+json[i].machine.machineowner.phone+
+							    '</div>';
+			 
+			 addMarker(pointa,i,content);
 		 }
 	});
 	
-	//农作物显示信息
-	var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-	    '<img src="weather/1.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
-	    '地址：任务<br/>电话：(010)59928888<br/>简介：衡阳市农机啦啦啦拉拉啦啦啦拉拉' +
-	  '</div>';
 	
-	var myIcon = new BMap.Icon("images/task.png", new BMap.Size(25,24),
-	        {anchor:new BMap.Size(15,24),infoWindowAnchor: new BMap.Size(15, 0)} );
 	
-	function addMarker(point,i){
-		
+	var myIcon = new BMap.Icon("img/logoMarker/task.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	
+	function addMarker(point,i,content){		
 		//创建检索信息窗口对象
 		var searchInfoWindow = null;
 		searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 		title  : "任务",      //标题
 		width  : 290,             //宽度
-		height : 105,              //高度
+		height : 150,              //高度
 		panel  : "panel",         //检索结果面板
 		enableAutoPan : true,     //自动平移
 		searchTypes   :[
@@ -46,7 +52,7 @@ function addTaskLayer(){
 		});
 		marker[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: true,
             raiseOnDrag: true}); //创建marker对象
-		marker[i].addEventListener("mouseover", function(e){
+		marker[i].addEventListener("click", function(e){
 		searchInfoWindow.open(marker[i]);
 		})
 	

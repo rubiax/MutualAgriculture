@@ -34,8 +34,8 @@ function addMachineLayer(){
 			 
 		});
 		
-		var myIcon = new BMap.Icon("img/logoMarker/machine.png", new BMap.Size(25,24),
-		        {anchor:new BMap.Size(15,24),infoWindowAnchor: new BMap.Size(15, 0)} );	
+		var myIcon = new BMap.Icon("img/logoMarker/machine.png", new BMap.Size(30,30),
+		        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );	
 		
 		function addMarker(address,i,content){
 			// 创建地址解析器实例

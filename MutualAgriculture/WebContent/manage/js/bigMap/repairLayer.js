@@ -29,8 +29,8 @@ map.clearOverlays();
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/repair.png", new BMap.Size(25,24),
-	        {anchor:new BMap.Size(15,24),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/repair.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
 		
 	function addMarker(point,i,label){
 		

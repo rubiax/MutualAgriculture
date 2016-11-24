@@ -15,17 +15,19 @@ map.clearOverlays();
 		 { 
 			//服务中心显示信息
 				var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-				    '地址：'+json[i].address+'<br/>中心等级：'+json[i].level+'<br/>负责人：'+json[i].principal+
-				  '</div>';
+				    			'地址：'+json[i].address+
+				    			'<br/>中心等级：'+json[i].level+
+				    			'<br/>负责人：'+json[i].principal+
+				    			'</div>';
 			 //循环数据 json[i]获取数据操作 
 			 addMarker(json[i].address,i,content);
 		 }
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/center.png", new BMap.Size(25,24),
-	        {anchor:new BMap.Size(15,24),infoWindowAnchor: new BMap.Size(15, 0)} );
-	
+	var myIcon = new BMap.Icon("img/logoMarker/center.png", new BMap.Size(30,30),
+	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+
 	function addMarker(address,i,content){
 		
 		// 创建地址解析器实例
