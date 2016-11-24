@@ -12,13 +12,16 @@ import javax.persistence.Query;
  * must be manually added to each of these methods for data to be persisted to
  * the JPA datastore.
  * 
- * @see com.geowind.hunong.jpa.Pestquestion
+ * @see com.geowind.hunong.entities.Pestquestion
  * @author MyEclipse Persistence Tools
  */
 public class PestquestionDAO implements IPestquestionDAO {
 	// property constants
 	public static final String UPLOAD_PIC = "uploadPic";
 	public static final String DESCR = "descr";
+	public static final String UTIME = "utime";
+	public static final String ATIME = "atime";
+	public static final String STATUS = "status";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -171,6 +174,18 @@ public class PestquestionDAO implements IPestquestionDAO {
 
 	public List<Pestquestion> findByDescr(Object descr) {
 		return findByProperty(DESCR, descr);
+	}
+
+	public List<Pestquestion> findByUtime(Object utime) {
+		return findByProperty(UTIME, utime);
+	}
+
+	public List<Pestquestion> findByAtime(Object atime) {
+		return findByProperty(ATIME, atime);
+	}
+
+	public List<Pestquestion> findByStatus(Object status) {
+		return findByProperty(STATUS, status);
 	}
 
 	/**

@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.jpa.EntityManagerHelper;
-import com.geowind.hunong.jpa.Insectcontrol;
-import com.geowind.hunong.jpa.InsectcontrolDAO;
+import com.geowind.hunong.jpa.Pestquestion;
+import com.geowind.hunong.jpa.PestquestionDAO;
 import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.util.FileUploadUtil;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public class InsectInfoUploadServlet extends BasicServlet {
+public class PestInfoUploadServlet extends BasicServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,6 +27,7 @@ public class InsectInfoUploadServlet extends BasicServlet {
 		response.setCharacterEncoding("utf-8");
 		
 		ServletConfig servletConfig = this.getServletConfig();
+		FileUploadUtil.PATH = "../HN_upload/imgupload";
         FileUploadUtil uploadUtil = new FileUploadUtil();
         PrintWriter out = null;
         try {
@@ -35,18 +35,18 @@ public class InsectInfoUploadServlet extends BasicServlet {
             System.out.println(map);
             out = response.getWriter();
             if(map != null && map.size()>0) {
-            	InsectcontrolDAO insectcontrolDAO = new InsectcontrolDAO();
-            	Insectcontrol insectcontrol = new Insectcontrol();
+            	PestquestionDAO pestquestionDAO = new PestquestionDAO();
+            	Pestquestion pestquestion = new Pestquestion();
             	
-            	insectcontrol.setUploadImage(map.get("images"));
-            	insectcontrol.setDescr(map.get("describe"));
+            	pestquestion.setUploadPic(map.get("images"));
+            	pestquestion.setDescr(map.get("describe"));
             	UserDAO userDAO = new UserDAO();
-            	insectcontrol.setUser(userDAO.findById(map.get("username")));
-            	insectcontrol.setUploadtime(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(new Date()));
-            	insectcontrol.setStatus(0);
+            	pestquestion.setUser(userDAO.findById(map.get("username")));
+            	pestquestion.setUtime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            	pestquestion.setStatus(0);
             	EntityManagerHelper.beginTransaction();
             	try {
-            		insectcontrolDAO.save(insectcontrol);
+            		pestquestionDAO.save(pestquestion);
             		EntityManagerHelper.commit();
             	} catch (RuntimeException re) {
             		re.printStackTrace();

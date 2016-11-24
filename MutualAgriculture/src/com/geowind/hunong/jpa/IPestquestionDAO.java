@@ -94,6 +94,12 @@ public interface IPestquestionDAO {
 
 	public List<Pestquestion> findByDescr(Object descr);
 
+	public List<Pestquestion> findByUtime(Object utime);
+
+	public List<Pestquestion> findByAtime(Object atime);
+
+	public List<Pestquestion> findByStatus(Object status);
+
 	/**
 	 * Find all Pestquestion entities.
 	 * 

@@ -131,7 +131,7 @@ public class BMachineServlet extends BasicServlet {
 	 */
 	private void uploadImage(HttpServletRequest request, HttpServletResponse response) {
 		ServletConfig servletConfig = this.getServletConfig();
-		FileUploadUtil.PATH = "../HN_upload\\pestlib";
+		FileUploadUtil.PATH = "../HN_upload/imgupload";
 		FileUploadUtil uploadUtil = new FileUploadUtil();
 		Map<String, String> map = null;
 		try {

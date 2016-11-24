@@ -61,13 +61,11 @@
             
             <!-- /.box-footer -->
             <div class="box-footer">
-              <form action="#" method="post">
                 <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                  <input onkeydown='if(event.keyCode==13){answer(${item.cid})} else{return;}' id="answer${item.cid }" type="text" class="form-control" placeholder="按下回车键提交回复.." />
+                  <input type="text" onkeydown='if(event.keyCode==13){answer(${item.cid})} else{return;}' id="answer${item.cid }"  class="form-control" placeholder="按下回车键提交回复.." />
                 </div>
-              </form>
             </div>
             <!-- /.box-footer -->
           </div>
