@@ -1,9 +1,14 @@
 package com.geowind.hunong.servlet;
 
+import static com.geowind.hunong.util.PathUtil.APageOfTable_N;
+import static com.geowind.hunong.util.PathUtil.ArticleBeginId;
+import static com.geowind.hunong.util.PathUtil.ArticleEndId;
 import static com.geowind.hunong.util.PathUtil.ServerIP;
+import static com.geowind.hunong.util.PathUtil.TabBegin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,15 +31,18 @@ public class LibraryServlet extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
-		String method = request.getParameter("method");
-		// searchLib
-		// getArticles
-
-		if (method.equals("serchLib")) {
-			SearchMethod(request, response);
-		} else if (method.equals("getArticles")) {
-			GetArticlesMethod(request, response);
+		String method = null;
+		try {
+			method = request.getParameter("method");
+			if (method.equals("serchLib")) {
+				SearchMethod(request, response);
+			} else if (method.equals("getArticles")) {
+				GetArticlesMethod(request, response);
+			} else {
+				return;
+			}
+		} catch (NullPointerException e) {
+			return;
 		}
 
 	}
@@ -64,28 +72,48 @@ public class LibraryServlet extends HttpServlet {
 		out.close();
 	}
 
+	// 辅助搜索，由于在分页搜索按条件搜索时可能会出现或不足的情况，需要向后延续。
+	// 记录当前向后延续到了哪里,并从那里继续往下查找
+	private int[] beginOfSearch = new int[9];
+	private boolean isFirstGet = true;
+
 	private void GetArticlesMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		String category = request.getParameter("category");
 		String nowPage = request.getParameter("nowPage");
 
 		// 10001 10010
-		int pagN = Integer.parseInt(nowPage);
+		int type = Integer.parseInt(category); // 需要查的文章类别
+		int pagN = Integer.parseInt(nowPage); // 当前分页数目
 
-		int begin_page = 10001 + pagN * 10;
-		int end_page = 10001 + (pagN + 1) * 10 - 1;
-
-		String sql = "select * from article";
-		if (category.equals("0")) {
-			sql += "where articleId between " + begin_page + " and " + end_page;
-		} else {
-			sql += "where classification like '%" + category + "%' and articleId between " + begin_page + " and "
-					+ end_page;
+		// 如果当前分页是第一页（即第0页),对当前类别给定初始值。
+		if (isFirstGet) {
+			for (int i = 0; i < 9; i++)
+				beginOfSearch[i] = ArticleBeginId;
+			isFirstGet = false;
 		}
-		// sql+= begin_page +" and "+end_page;
+		if (pagN == TabBegin) {
+			beginOfSearch[type] = ArticleBeginId;
+		}
 
-		System.out.println(sql);
-		List<ArticleSim> res = DBHelperSim.GetArticleSimUseSql(sql);
+		List<ArticleSim> res = new ArrayList<>();
+
+		while (res.size() < APageOfTable_N && beginOfSearch[type] <= ArticleEndId) {
+
+			int begin_page = beginOfSearch[type];
+			int end_page = begin_page + (APageOfTable_N - res.size()) - 1;
+			beginOfSearch[type] = end_page + 1;
+
+			String sql = "select * from article ";
+			if (category.equals("0")) {
+				sql += "where articleId between " + begin_page + " and " + end_page;
+			} else {
+				sql += "where classification like '%" + category + "%' and articleId between " + begin_page + " and "
+						+ end_page;
+			}
+
+			res.addAll(DBHelperSim.GetArticleSimUseSql(sql));
+		}
 
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();

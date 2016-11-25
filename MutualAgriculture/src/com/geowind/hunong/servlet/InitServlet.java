@@ -1,13 +1,21 @@
 package com.geowind.hunong.servlet;
 
+import static com.geowind.hunong.util.PathUtil.ArticleBeginId;
+import static com.geowind.hunong.util.PathUtil.ArticleEndId;
+import static com.geowind.hunong.util.PathUtil.ArticleNumber;
+import static com.geowind.hunong.util.PathUtil.Lib_PictureURL;
+import static com.geowind.hunong.util.PathUtil.Util_HTMLpath;
+
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import com.geowind.hunong.entity.ArticleSim;
+import com.geowind.hunong.util.DBHelperSim;
 import com.geowind.hunong.util.FileUploadUtil;
 import com.geowind.hunong.util.LibraryHTMLBuilder;
-import com.geowind.hunong.util.PathUtil;
 
 public class InitServlet extends HttpServlet {
 
@@ -47,9 +55,27 @@ public class InitServlet extends HttpServlet {
 		System.out.println(filePath);
 		System.out.println(path);
 
-		System.out.println("------" + this.getServletContext().getRealPath("/"));
-		PathUtil.Util_HTMLpath = this.getServletContext().getRealPath("/") + PathUtil.Util_HTMLpath;
+		/*
+		 * ---------------------------------------------------------------------
+		 * ----
+		 */
+		Util_HTMLpath = this.getServletContext().getRealPath("/") + Util_HTMLpath;
+
+		// 将图片放到filePath下
+		Lib_PictureURL = this.getServletContext().getRealPath("/") + filePath + Lib_PictureURL;
+		List<ArticleSim> tmp = DBHelperSim.GetArticleSimUseSql("select * from article");
+		ArticleNumber = tmp.size();
+		if (ArticleNumber >= 1) {
+			ArticleBeginId = Integer.parseInt(tmp.get(0).id);
+			ArticleEndId = Integer.parseInt(tmp.get(ArticleNumber - 1).id);
+		}
+
 		LibraryHTMLBuilder lhb = new LibraryHTMLBuilder();
 		lhb.CreateAllHTML();
+
+		System.out.println("文库图片路径" + Lib_PictureURL);
+		System.out.println("总文章数" + ArticleNumber);
+		System.out.println("开始ID" + ArticleBeginId);
+		System.out.println("结束ID" + ArticleEndId);
 	}
 }

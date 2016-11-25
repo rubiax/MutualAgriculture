@@ -27,18 +27,14 @@ String _imgURL;			//图片链接	7
 String _videoURL;		//视频链接	8
 String _other;
 */
-
 public class LibraryHTMLBuilder {
-	String HTMLModlePath = null;
+	String HTMLModlePath = null;// 需要一个原始的模板html路径和名称
 	String HTMLModelName = null;
 	List<Article> articleList = null;
 
 	public LibraryHTMLBuilder() {
 		HTMLModlePath = PathUtil.Util_HTMLpath;
-
-		System.out.println(HTMLModlePath);
-		articleList = new ArticleDAO().findAll();
-
+		articleList = new ArticleDAO().findAll();// 数据库操作，查找所有内容
 		HTMLModelName = PathUtil.Util_HTMLModelName;
 	}
 
@@ -48,13 +44,12 @@ public class LibraryHTMLBuilder {
 		HTMLModlePath = ModelPath;
 		HTMLModelName = ModeName;
 	}
-	// 设置文章信息，提取数据库文件
 
+	// 设置文章信息，提取数据库文件
 	public void CreateAllHTML() {
 		try {
 			SetArticle();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -81,9 +76,7 @@ public class LibraryHTMLBuilder {
 		}
 	}
 
-	/*
-	 * 开始创建html
-	 */
+	/* 开始创建html */
 	private void SetHtmlContent(String ModelPath, String NewPath) throws IOException {
 		File file = new File(ModelPath);
 
@@ -91,7 +84,6 @@ public class LibraryHTMLBuilder {
 		// point1:set title
 		Element elmt = doc.getElementById("title_h1");// title
 		elmt.html(dataMes[2]);
-
 		// point2:set list
 		elmt = doc.getElementById("list");
 		String[] airticlList = dataMes[3].split("##");
@@ -104,10 +96,9 @@ public class LibraryHTMLBuilder {
 		// point3: set description 简介
 		elmt = doc.getElementById("summary");
 		elmt.html(dataMes[4]);
-
 		// point4:set articles
 		elmt = doc.getElementById("article_div");
-		String[] articles = dataMes[6].split("##");
+		String[] articles = dataMes[6].replace("&nbsp", "  ").split("##");
 		int minLen = Math.min(airticlList.length, articles.length);
 		// int articleLen = articles.length;//listLen和articlelen应该是相等的
 		for (int i = 0; i < minLen; i++) {
@@ -115,15 +106,14 @@ public class LibraryHTMLBuilder {
 			elmt.append(html);
 		}
 		// set pictures
-		String imgTag = "<img src=\"images\\" + dataMes[7] + "\" width=\"100%\" height=\"100%\">";
+		String imgTag = "<img src=" + PathUtil.Lib_PictureURL + dataMes[7] + "  width=\"100%\" height=\"100%\">";
+		System.out.println(imgTag);
 		elmt = doc.getElementById("header_right");
 		elmt.append(imgTag);
-
 		// set finished
 		file = new File(NewPath);
 		if (file.exists())
 			file.delete();
-
 		FileOutputStream fos = new FileOutputStream(NewPath, true);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 
@@ -131,7 +121,7 @@ public class LibraryHTMLBuilder {
 		osw.flush();
 		osw.close();
 
-		// fos.write(doc.html().getBytes());
+		// fos.write(doc.html().getBytes());这种会乱码
 		// fos.close();
 
 	}
