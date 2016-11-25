@@ -14,13 +14,7 @@ var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR
     map.addControl(overView);          //添加默认缩略地图控件
     map.addControl(overViewOpen);      //右下角，打开
 //}
-//移除地图类型和缩略图
-//function delete_control(){
-//    map.removeControl(mapType1);   //移除2D图，卫星图
-//    map.removeControl(mapType2);
-//    map.removeControl(overView);
-//    map.removeControl(overViewOpen);
-//}
+
 
 
 

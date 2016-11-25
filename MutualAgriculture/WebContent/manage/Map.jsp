@@ -53,7 +53,8 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
 <!--             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
- -->            <li><a href="javascript:addComputerAreaResult()">计算面积</a></li>
+ -->            <li><a href="javascript:addPoint()" >添加标注点</a></li>
+ 				<li><a href="javascript:addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -189,6 +190,7 @@
 		
 		function clearMark() {
 			map.clearOverlays();
+			map.removeEventListener("rightclick",addPointInMap);
 		}
 	</script>
 </body>
