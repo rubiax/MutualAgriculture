@@ -55,24 +55,26 @@
 <!--             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
  -->            <li><a href="javascript:addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">重置 <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="javascript:addWeatherLayer()" >天气</a></li>
-                <li><a href="javascript:addPestLayer()" >虫害</a></li>
-                <li><a href="javascript:addDiseaseLayer()" >病害</a></li>
+                <li><a href="javascript:clearMark()" >重置<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:addFarmerLayer()" >农民</a></li>
-                <li><a href="javascript:addMachineLayer()" >农机</a></li>
-                <li><a href="javascript:addCropLayer()">农作物</a></li>
+                <li><a href="javascript:addWeatherLayer()" >天气<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addPestLayer()" >虫害<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addDiseaseLayer()" >病害<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:addTaskLayer()" >任务</a></li>
-                <li><a href="javascript:addQuestionLayer()" >提问</a></li>
+                <li><a href="javascript:addFarmerLayer()" >农民<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addMachineLayer()" >农机<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCropLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:addZoneLayer()" >分区</a></li>
-                <li><a href="javascript:addAffectAreasLayer()">受灾区</a></li>
-                <li><a href="javascript:addFuelLayer()" >加油点</a></li>
-                <li><a href="javascript:addRepairLayer()" >维修点</a></li>
-                <li><a href="javascript:addCenterLayer()" >服务中心点</a></li>
+                <li><a href="javascript:addTaskLayer()" >任务<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addQuestionLayer()" >提问<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:addZoneLayer()" >分区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addAffectAreasLayer()">受灾区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addFuelLayer()" >加油点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addRepairLayer()" >维修点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCenterLayer()" >服务中心点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
               </ul>
             </li>
           </ul>
@@ -94,14 +96,14 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="img/admin.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">${currentAdmin.realname }</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="img/admin.png" class="img-circle" alt="User Image">
 
                 <!-- <p>
                   Alexander Pierce - Web Developer
@@ -177,7 +179,17 @@
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="js/dist/app.min.js"></script>
+	<script type="text/javascript">
+		$(".dropdown-menu > li").click(function () {
+			$(".dropdown-menu > li").find("i").each(function () {
+				$(this).hide();
+			})
+			$(this).find("i").show();
+		})
+		
+		function clearMark() {
+			map.clearOverlays();
+		}
+	</script>
 </body>
 </html>
-
-
