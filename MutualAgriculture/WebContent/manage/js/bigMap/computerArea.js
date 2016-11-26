@@ -1,40 +1,49 @@
 /**
- * 
+ * 计算面积
  */
-
-//计算面积
 var pointArray = new Array();
 var pts = [];
 var i=0;
-function showInfo(e){
-        // alert("经纬度为："+e.point.lng+", "+e.point.lat);
-        	//document.getElementById("show").setAttribute("value",e.point.lng+", "+e.point.lat);
-        //计算面积，参数为多边形
-//        function computeAreaByPolygon(){
-           
-            pointArray[i] = new BMap.Point(e.point.lng, e.point.lat);
-            
-            pts.push(pointArray[i]);
-            
-            var marker = new BMap.Marker(pointArray[i]);
-            map.addOverlay(marker);
-            i++;          
-           
+var checkOpenAddPoint = false;
+function addPoint(){
+		if(!checkOpenAddPoint){
+			    var content = '点击“添加标注点”后可使用 鼠标右键 按照顺时针或逆时针有序点击地图添加标注点,' +
+								'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
+								'点击 ”功能选择“的 重置 即可取消该功能！'
+				alert(content);
+			
+			    checkOpenAddPoint = true;
+			    
+				map.addEventListener("rightclick",showInfo);
+		}
 }
-map.addEventListener("rightclick",showInfo);
 
+function showInfo(e){
+    
+    pointArray[i] = new BMap.Point(e.point.lng, e.point.lat);
+
+    pts.push(pointArray[i]);
+    
+    var marker = new BMap.Marker(pointArray[i]);
+    map.addOverlay(marker);
+    i++; 
+  
+}
 function addComputerAreaResult(){
-	 var ply = new BMap.Polygon(pts);    
-     var area = BMapLib.GeoUtils.getPolygonArea(ply);
-     var mu = area.toFixed(2)*0.0015;
-//     ply.addEventListener("click",function(){
-//     	 var label = new BMap.Label("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩",{offset:new BMap.Size(20,-10)})	
-//     	
-//     	 marker.setLabel(label);
-//     });
-     alert("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩");
-
-     //演示：将面添加到地图上    
-    // map.clearOverlays();
-     map.addOverlay(ply);  
+	if(pts.length<3){
+		alert("请选择至三个标注点！");
+	}else{
+		var ply = new BMap.Polygon(pts);    
+	    var area = BMapLib.GeoUtils.getPolygonArea(ply);
+	    var mu = area.toFixed(2)*0.0015;
+	    alert("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩");
+	
+	    //演示：将面添加到地图上    
+	   // map.clearOverlays();
+	    map.addOverlay(ply); 
+	    pts=[];
+	    i=0;
+	}
+   
+    
 }

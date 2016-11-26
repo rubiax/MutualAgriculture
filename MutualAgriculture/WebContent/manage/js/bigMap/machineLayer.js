@@ -12,7 +12,7 @@ function addMachineLayer(){
 			if(data==0){
 				alert("查询出错");
 			}else{
-				 alert("kk:"+data);
+				 alert(data);
 				 json = JSON.parse(data);
 				 for(var i=0;i<json.length;i++)
 				 { 	 
@@ -20,7 +20,7 @@ function addMachineLayer(){
 					 	var state = json[i].state==1?"正常":"不正常";
 					   //农机显示信息
 						var content = '<div style="margin:0;line-height:20px;padding:2px;">'+
-										'<img src="img/weatherMarker/1.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+										'<img src="../'+json[i].picture+'" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 										'牌号：'+json[i].plate+' 类型：'+json[i].type+
 										'<br/>马力：'+json[i].horsepower+' 品牌:'+json[i].brand+
 										'<br/>工作状态：'+workstate+'  农机状态:'+state+
@@ -47,7 +47,7 @@ function addMachineLayer(){
 						searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 						title  : "农机",      //标题
 						width  : 290,             //宽度
-						height : 105,              //高度
+						height : 130,              //高度
 						panel  : "panel",         //检索结果面板
 						enableAutoPan : true,     //自动平移
 						searchTypes   :[

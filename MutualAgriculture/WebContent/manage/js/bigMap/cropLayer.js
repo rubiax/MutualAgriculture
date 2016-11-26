@@ -21,7 +21,7 @@ function addCropLayer(){
 				 var pointa = new BMap.Point(json[i].longitude,json[i].latitude);
 				//农作物显示信息
 					var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-					    '<img src="img/weatherMarker/0.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+					    '<img src="../'+json[i].picture+'" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 					    '地址：'+json[i].address+
 					    '<br/>拥有者：'+json[i].user.realname+
 					    '<br>联系电话：'+json[i].user.phone+
@@ -48,7 +48,7 @@ function addCropLayer(){
 		searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 		title  : "农作物",      //标题
 		width  : 290,             //宽度
-		height : 180,              //高度
+		height : 230,              //高度
 		panel  : "panel",         //检索结果面板
 		enableAutoPan : true,     //自动平移
 		searchTypes   :[
