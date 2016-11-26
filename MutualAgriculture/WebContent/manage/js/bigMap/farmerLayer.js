@@ -21,8 +21,9 @@ function addFarmerLayer(){
 				 //循环数据 json[i]//获取数据操作 
 				//农民显示信息
 				var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-					    '<img src="img/weatherMarker/0.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+					    '<img src="../'+json[i].picture+'" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 					    '地址：'+json[i].address+
+					    '<br>用户名：'+json[i].username+
 					    '<br/>姓名：'+json[i].realname+
 					    '<br/>联系电话：'+json[i].phone+
 					    '<br/>信誉：'+json[i].credit+

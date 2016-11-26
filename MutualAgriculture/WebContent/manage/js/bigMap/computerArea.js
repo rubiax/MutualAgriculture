@@ -4,18 +4,21 @@
 var pointArray = new Array();
 var pts = [];
 var i=0;
+var checkOpenAddPoint = false;
 function addPoint(){
-		
-	    var content = '点击“添加标注点”后可使用 鼠标右键 点击地图添加标注点,' +
-						'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
-						'点击 ”功能选择“的 重置 即可取消该功能！'
-		alert(content);
-	
-
-		map.addEventListener("rightclick",addPointInMap);
+		if(!checkOpenAddPoint){
+			    var content = '点击“添加标注点”后可使用 鼠标右键 按照顺时针或逆时针有序点击地图添加标注点,' +
+								'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
+								'点击 ”功能选择“的 重置 即可取消该功能！'
+				alert(content);
+			
+			    checkOpenAddPoint = true;
+			    
+				map.addEventListener("rightclick",showInfo);
+		}
 }
 
-function addPointInMap(e){
+function showInfo(e){
     
     pointArray[i] = new BMap.Point(e.point.lng, e.point.lat);
 
@@ -24,8 +27,7 @@ function addPointInMap(e){
     var marker = new BMap.Marker(pointArray[i]);
     map.addOverlay(marker);
     i++; 
-       
-   
+  
 }
 function addComputerAreaResult(){
 	if(pts.length<3){

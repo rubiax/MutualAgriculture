@@ -190,7 +190,9 @@
 		
 		function clearMark() {
 			map.clearOverlays();
-			map.removeEventListener("rightclick",addPointInMap);
+			pts = [];
+			checkOpenAddPoint = false;
+			map.removeEventListener("rightclick",showInfo);
 		}
 	</script>
 </body>
