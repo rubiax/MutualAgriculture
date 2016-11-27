@@ -29,16 +29,16 @@
 
 <div class="container">
 
-	<c:forEach items="${consulting }" var="item">
+	<c:forEach items="${questions }" var="item">
 		<div class="row">
         <div class="col-md-10">
             <!-- Box Comment -->
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
+                <img class="img-circle" src="../../${item.uploadPic}" alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.ctime }</span>
+                <span class="description">${item.utime }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -53,10 +53,9 @@
             <!-- /.box-header -->
             <div class="box-body">
             <!-- 问题描述图片 -->
-              <!-- <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo"> -->
-
-              <p>${item.ccontent }</p>
-              <!-- <span class="pull-right text-muted">n个回复</span> -->
+              <p>${item.descr }</p>
+              <img class="img-responsive pad" src="../../${item.uploadPic}" style="width:400px" alt="Photo">
+              <span class="pull-right text-muted">n个回复</span>
             </div>
             
             <!-- /.box-footer -->
@@ -64,7 +63,7 @@
                 <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                  <input type="text" onkeydown='if(event.keyCode==13){answer(${item.cid})} else{return;}' id="answer${item.cid }"  class="form-control" placeholder="按下回车键提交回复.." />
+                  <input type="text"  class="form-control" placeholder="按下回车键提交回复.." />
                 </div>
             </div>
             <!-- /.box-footer -->

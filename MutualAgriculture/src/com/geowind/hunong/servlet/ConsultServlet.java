@@ -62,7 +62,7 @@ public class ConsultServlet extends BasicServlet {
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simConsult)).getAsJsonObject();
-			JPushUtil.sendPush(consult.getUser().getUsername(), "专家咨询", jsonObject);
+			JPushUtil.sendPush(consult.getUser().getUsername(), "专家回复", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

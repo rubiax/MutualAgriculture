@@ -194,6 +194,15 @@
 		<servlet-name>ConsultServlet</servlet-name>
 		<url-pattern>/consultServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PestlibServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.PestlibServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PestlibServlet</servlet-name>
+		<url-pattern>/pestlibServlet</url-pattern>
+	</servlet-mapping>
 
 	
 
