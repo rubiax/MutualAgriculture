@@ -36,7 +36,7 @@
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../../${item.uploadPic}" alt="User Image">
+                <img class="img-circle" src="../../${item.user.picture }" alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
                 <span class="description">${item.utime }</span>
               </div>
@@ -60,7 +60,7 @@
             
             <!-- /.box-footer -->
             <div class="box-footer">
-                <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="img/admin.png" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text"  class="form-control" placeholder="按下回车键提交回复.." />

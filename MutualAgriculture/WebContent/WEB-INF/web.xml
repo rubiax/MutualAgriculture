@@ -179,12 +179,12 @@
 		<url-pattern>/uploadServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>PestInfoUploadServlet</servlet-name>
-		<servlet-class>com.geowind.hunong.servlet.PestInfoUploadServlet</servlet-class>
+		<servlet-name>PestOrConsultInfoUploadServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.PestOrConsultInfoUploadServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>PestInfoUploadServlet</servlet-name>
-		<url-pattern>/pestInfoUploadServlet</url-pattern>
+		<servlet-name>PestOrConsultInfoUploadServlet</servlet-name>
+		<url-pattern>/pestOrConsultInfoUploadServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ConsultServlet</servlet-name>
