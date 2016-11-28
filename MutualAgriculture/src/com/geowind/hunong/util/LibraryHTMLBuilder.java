@@ -106,7 +106,7 @@ public class LibraryHTMLBuilder {
 			elmt.append(html);
 		}
 		// set pictures
-		String imgTag = "<img src=" + PathUtil.Lib_PictureURL + dataMes[7] + "  width=\"100%\" height=\"100%\">";
+		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  width=\"100%\" height=\"100%\">";
 		System.out.println(imgTag);
 		elmt = doc.getElementById("header_right");
 		elmt.append(imgTag);

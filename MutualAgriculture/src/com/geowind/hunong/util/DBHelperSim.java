@@ -1,6 +1,6 @@
 package com.geowind.hunong.util;
 
-import static com.geowind.hunong.util.PathUtil.ServerIP;
+import static com.geowind.hunong.util.PathUtil.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,7 +29,8 @@ public class DBHelperSim {
 				String title = rs.getString("title");
 				String url = "http://" + ServerIP + ":8080/MutualAgriculture/LibraryHTML/" + id + ".html";
 				String summary = rs.getString("summary");
-				res.add(new ArticleSim(id, title, summary, url));
+				String imgUrl = "http://" + ServerIP + ":8080" + Lib_PictureURL+ rs.getString("imgUrl");
+				res.add(new ArticleSim(id, title, summary, url,imgUrl));
 			}
 			rs.close();
 			stmt.close();

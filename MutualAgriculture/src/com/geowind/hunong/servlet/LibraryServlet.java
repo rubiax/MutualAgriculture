@@ -34,7 +34,7 @@ public class LibraryServlet extends HttpServlet {
 		String method = null;
 		try {
 			method = request.getParameter("method");
-			if (method.equals("serchLib")) {
+			if (method.equals("searchLib")) {
 				SearchMethod(request, response);
 			} else if (method.equals("getArticles")) {
 				GetArticlesMethod(request, response);
@@ -108,7 +108,7 @@ public class LibraryServlet extends HttpServlet {
 			if (category.equals("0")) {
 				sql += "where articleId between " + begin_page + " and " + end_page;
 			} else {
-				sql += "where classification like '%" + category + "%' and articleId between " + begin_page + " and "
+				sql += "where classification=1" + category + " and articleId between " + begin_page + " and "
 						+ end_page;
 			}
 

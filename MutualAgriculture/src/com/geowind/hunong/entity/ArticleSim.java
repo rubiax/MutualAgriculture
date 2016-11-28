@@ -6,7 +6,7 @@ public class ArticleSim {
 	public String title;
 
 	public String url = null;
-
+	public String imgURL = null;
 	public String summary = null;
 
 	// public String
@@ -15,10 +15,11 @@ public class ArticleSim {
 		this.title = title;
 	}
 
-	public ArticleSim(String id, String title, String summary, String url) {
+	public ArticleSim(String id, String title, String summary, String url,String imgURL) {
 		this.id = id;
 		this.title = title;
 		this.url = url;
 		this.summary = summary;
+		this.imgURL = imgURL;
 	}
 }

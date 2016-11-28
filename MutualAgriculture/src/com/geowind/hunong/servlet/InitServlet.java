@@ -62,7 +62,7 @@ public class InitServlet extends HttpServlet {
 		Util_HTMLpath = this.getServletContext().getRealPath("/") + Util_HTMLpath;
 
 		// 将图片放到filePath下
-		Lib_PictureURL = this.getServletContext().getRealPath("/") + filePath + Lib_PictureURL;
+		//Lib_PictureURL = this.getServletContext().getRealPath("/") + filePath + Lib_PictureURL;
 		List<ArticleSim> tmp = DBHelperSim.GetArticleSimUseSql("select * from article");
 		ArticleNumber = tmp.size();
 		if (ArticleNumber >= 1) {

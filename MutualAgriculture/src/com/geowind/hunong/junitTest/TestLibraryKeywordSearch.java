@@ -24,8 +24,8 @@ public class TestLibraryKeywordSearch {
 	public void test() {
 
 		System.out.println(keyword.length);
-		List<ArticleSim> res = LibraryKeywordSearch.GetMatchArticlesURL("我");
-		System.out.println(res.get(0).title);
+		List<ArticleSim> res = LibraryKeywordSearch.GetMatchArticlesURL("红萝卜");
+		System.out.println(res.get(0).imgURL);
 		assertEquals(listLen[1], res.size());
 	}
 
