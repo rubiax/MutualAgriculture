@@ -28,6 +28,8 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		
+		System.out.println("kkk");
+		
 		ServletConfig servletConfig = this.getServletConfig();
 		FileUploadUtil.PATH = "../HN_upload/imgupload";
         FileUploadUtil uploadUtil = new FileUploadUtil();
@@ -39,11 +41,11 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
             
             if(map != null && map.size()>0) {
             	
-            	if(map.get("images") == null) {
-                	consultInfo(request, response, map);
-                } else {
-                	pestInfo(request, response, map);
-                }
+            	if(map.containsKey("images")) {
+            		pestInfo(request, response, map);
+            	} else {
+            		consultInfo(request, response, map);
+            	}
             }
             this.out(response, "1");
         } catch (Exception e) {

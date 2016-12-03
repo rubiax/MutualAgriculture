@@ -90,6 +90,7 @@ public class FileUploadUtil {
 	
 	
 	public Map<String,String> upload(ServletConfig servletConfig, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
+		System.out.println("ooo");
 		Map<String,String> map = new HashMap<String, String>();
 		//实例化一个SmartUpload对象
 		SmartUpload su = new SmartUpload();//文件上传包的使用
@@ -113,6 +114,7 @@ public class FileUploadUtil {
 		while(enums.hasMoreElements()){
 			name=enums.nextElement();
 			map.put(name,request.getParameter(name));
+			System.out.println(name);
 		}
 		
 		//将上传文件存到服务器路径下
@@ -151,5 +153,34 @@ public class FileUploadUtil {
 		System.out.println(map);
 		return map;
 	}
+	
+	
+	public Map<String,String> uploadFromForm(ServletConfig servletConfig, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
+		Map<String,String> map = new HashMap<String, String>();
+		//实例化一个SmartUpload对象
+		SmartUpload su = new SmartUpload();//文件上传包的使用
+		//初始化SmartUpload
+		su.initialize(servletConfig, httpServletRequest, httpServletResponse);
+		//设置参数
+		su.setCharset("utf-8");
+		
+		//开始上传
+		su.upload();
+		//获取转换后的请求
+		Request request = su.getRequest();
+		Enumeration<String> enums = request.getParameterNames();//使用集合来装获取所有普通表单元素名
+		
+		//循环取出每一个表单元素名已对一的值 村到map中
+		String name=null;
+		while(enums.hasMoreElements()){
+			name=enums.nextElement();
+			map.put(name,request.getParameter(name));
+			System.out.println(name);
+		}
+		
+		System.out.println(map);
+		return map;
+	}
+
 
 }
