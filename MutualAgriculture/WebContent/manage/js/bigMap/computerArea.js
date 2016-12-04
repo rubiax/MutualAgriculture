@@ -27,8 +27,16 @@ function showInfo(e){
     var marker = new BMap.Marker(pointArray[i]);
     map.addOverlay(marker);
     i++; 
-  
+	  if(i>1){
+			var k = i-1;
+			var polyline = new BMap.Polyline(pts, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   //创建折线
+			map.addOverlay(polyline);   //增加折线
+		  }  
 }
+
+
+
+
 function addComputerAreaResult(){
 	if(pts.length<3){
 		alert("请选择至三个标注点！");

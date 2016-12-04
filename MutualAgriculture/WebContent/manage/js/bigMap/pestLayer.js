@@ -21,7 +21,7 @@ function addPestLayer(){
 			var degree = checkServe(json[i].degree)
 			 //循环数据 json[i]//获取数据操作 
 			 var content =  '<div style="margin:0;line-height:20px;padding:2px;">'+
-							'<img src="img/weatherMarker/1.gif" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+							'<img src="" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 							'病害程度：'+degree+
 							'<br/>虫害类型：'+pestType+
 							'<br/>病害类型：'+diseaseType+
@@ -52,11 +52,11 @@ function addPestLayer(){
 					//BMAPLIB_TAB_FROM_HERE //从这里出发
 					]
 					});
-					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: true,
 			            raiseOnDrag: true}); //创建marker对象
 					marker[i].addEventListener("click", function(e){
 						searchInfoWindow.open(marker[i]);
-					})
+					});
 					map.addOverlay(marker[i]); //在地图中添加marker
 					marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 				}
