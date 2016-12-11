@@ -30,7 +30,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
 
-<div class="container">
+<div class="container" style="width:100%;">
 
 	<section class="content-header">
       <ol class="breadcrumb">
