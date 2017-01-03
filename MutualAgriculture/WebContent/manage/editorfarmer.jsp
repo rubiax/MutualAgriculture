@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,9 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="css/plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -34,7 +37,7 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="depend/bootstrap-table/bootstrap-table.min.css">
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
 
 <title>Document</title>
@@ -78,18 +81,18 @@
 
 				<div class="box-body">
 
-					<table>
+					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<td style="width: 180px" rowspan="6"><img id="stuImg"
-									src="img/avatar.png" alt="无图片" width="120" height="160">
+									src="img/avatar.png" alt="无图片" width="120" height="160"></td>
 								<th style="width: 80px"><label>用户名</label></th>
 								<td style="width: 150px">${currentFarmer.username }</td>
 								<th style="width: 80px"><label>姓名</label></th>
 								<td style="width: 150px"><a href="#" id="realname">${currentFarmer.realname }</a></td>
 								<th style="width: 80px"><label>性别</label></th>
 								<td style="width: 150px"><a href="#" id="sex">${currentFarmer.sex }</a></td>
-								</td>
+								
 							</tr>
 							<tr>
 								<th><label>出生日期</label></th>
@@ -103,7 +106,7 @@
 								<th><label>信誉</label></th>
 								<td><a href="#" id="credit">${currentFarmer.credit }</a></td>
 								<th><label>家庭地址</label></th>
-								<td colspan="4"><a href="#" id="address">${currentFarmer.address }长沙</a></td>
+								<td colspan="4"><a href="#" id="address">${currentFarmer.address }</a></td>
 							</tr>
 
 						</tbody>
@@ -184,14 +187,12 @@
 	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script
-		src="depend/bootstrap-table/bootstrap-table.min.js"></script>
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
 
 	<!-- Latest compiled and minified Locales -->
 	<script
-		src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
-		
-		
 		function actionFormatter(value, row, index) {
 			return [
 					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
@@ -232,10 +233,9 @@
 				showRefresh : true,
 				showToggle : true,
 				showColumns : true,
-				clickToSelect: true,
+				clickToSelect : true,
 				sortName: 'farmlandId',
 				sortOrder: 'desc'
-				
 			});
 		});
 		function editInfo() {

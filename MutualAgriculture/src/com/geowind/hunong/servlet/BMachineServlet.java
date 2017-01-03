@@ -17,6 +17,10 @@ import com.geowind.hunong.jpa.Machine;
 import com.geowind.hunong.jpa.MachineDAO;
 import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.jpa.MachineownerDAO;
+import com.geowind.hunong.jpa.User;
+import com.geowind.hunong.jpa.UserDAO;
+import com.geowind.hunong.service.MachineOwnerService;
+import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BMachineServlet extends BasicServlet {
@@ -54,11 +58,42 @@ public class BMachineServlet extends BasicServlet {
 			break;
 		case "mapSearchAll":
 			MapSearchAll(request,response);
+		case "editeOne":
+			editeOne(request, response);
+			break;
 		default:
 			break;
 		}
 	}
 
+	/**
+	 * 修改单个属性
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	private void editeOne(HttpServletRequest request,
+			HttpServletResponse response) {
+		String pk = request.getParameter("pk");
+		String item = request.getParameter("item");
+		String value = request.getParameter("value");
+		System.out.println(value);
+		MachineDAO machineDAO = new MachineDAO();
+		Machine machine = machineDAO.findById(Integer.parseInt(pk));
+		if("phone".equals(item)) {
+			MachineownerDAO machineownerDao = new MachineownerDAO();
+			Machineowner machineowner = machineownerDao.findByPhone(value).get(0);
+			machine.setMachineowner(machineowner);
+		}
+		EntityManagerHelper.beginTransaction();
+		try {
+			machineDAO.update(machine);
+			EntityManagerHelper.commit();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		}
+	}
+	
 	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineDAO machineDAO = new MachineDAO();
 		List<Machine> machineList = machineDAO.findAll();
@@ -238,6 +273,12 @@ public class BMachineServlet extends BasicServlet {
 		try {
 			Machine machine = machineDAO.findById(Integer.parseInt(request.getParameter("machineId")));
 			request.getSession().setAttribute("currentMachine", machine);
+			MachineOwnerService machineService = new MachineOwnerServiceImpl();
+			int centerId = (int) request.getSession().getAttribute("currentCenterId");
+			List<Machineowner> machinerOwnerList = machineService.search(centerId);
+			if (machinerOwnerList != null && machinerOwnerList.size() > 0) {
+				request.getSession().setAttribute("allMachinerOwner", machinerOwnerList);
+			}
 			response.sendRedirect("manage/editormachine.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);

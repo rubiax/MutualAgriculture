@@ -81,18 +81,17 @@
 
 				<div class="box-body">
 
-					<table>
+					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<td style="width: 180px" rowspan="6"><img id="stuImg"
-									src="img/avatar.png" alt="无图片" width="120" height="160">
+									src="img/avatar.png" alt="无图片" width="120" height="160"></td>
 								<th style="width: 80px"><label>用户名</label></th>
 								<td style="width: 150px">${currentMachiner.username }</td>
 								<th style="width: 80px"><label>姓名</label></th>
 								<td style="width: 150px"><a href="#" id="realname">${currentMachiner.realname }</a></td>
 								<th style="width: 80px"><label>性别</label></th>
 								<td style="width: 150px"><a href="#" id="sex">${currentMachiner.sex }</a></td>
-								</td>
 							</tr>
 							<tr>
 								<th><label>出生日期</label></th>
@@ -107,7 +106,7 @@
 								<th><label>信誉</label></th>
 								<td><a href="#" id="credit">${currentMachiner.credit }</a></td>
 								<th><label>家庭地址</label></th>
-								<td colspan="4"><a href="#" id="address">${currentMachiner.address }长沙</a></td>
+								<td colspan="4"><a href="#" id="address">${currentMachiner.address }</a></td>
 							</tr>
 
 						</tbody>
@@ -125,7 +124,7 @@
 		<!-- Horizontal Form -->
 		<div class="box box-success">
 			<div class="box-header with-border">
-				<h3 class="box-title">农田信息</h3>
+				<h3 class="box-title">任务信息</h3>
 			</div>
 
 			<div class="box-body">
@@ -278,7 +277,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"realname",
 		            value:params.value
 		        }); 
@@ -301,7 +300,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"sex",
 		            value:params.value
 		        }); 
@@ -313,7 +312,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"birthday",
 		            value:params.value
 		        }); 
@@ -329,7 +328,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"phone",
 		            value:params.value
 		        }); 
@@ -345,7 +344,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"credit",
 		            value:params.value
 		        }); 
@@ -361,7 +360,7 @@
 			url: function (params) { 
 		        return $.post('../bUserServlet', { 
 		            op: 'editeOne',
-		            pk: '${currentMachienr.username }',
+		            pk: '${currentMachiner.username }',
 		            item:"address",
 		            value:params.value
 		        }); 

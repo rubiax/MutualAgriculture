@@ -2,14 +2,15 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Arrays"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	Machine machine = (Machine)request.getSession().getAttribute("currentMachine");
 	if(machine != null) {
 		String images = machine.getPicture();
 		if(images != null) {
+			System.out.println(images);
 			String[] pic = images.split(",");
 			for(int i=0; i<pic.length; i++) {
 				pic[i] = "../../../"+pic[i];
@@ -25,11 +26,11 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="img/icon_web_mini.png" type="" />
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-<link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 <!-- Font Awesome -->
@@ -38,146 +39,150 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet"
-	href="css/plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+	folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
 
-<title>Document</title>
 
+<link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
+	rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="depend/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet"
+	href="depend/select2/select2.min.css">
+
+<title>Document</title>
+<style type="text/css">
+#userInfo_left {
+	float: left;
+	width: 40%;
+	height: 320px;
+}
+
+#userInfo_right {
+	float: right;
+	width: 60%;
+	height: 320px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body style="background-color: #ECF0F5">
-
-	<div class="container">
-
+	<div class="container" style="width: 100%;">
 		<section class="content-header">
-		      <ol class="breadcrumb">
-		        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
-		        <li><a href="machine.jsp">农机管理</a></li>
-		        <li class="active">详情</li>
-		      </ol>
+			<ol class="breadcrumb">
+				<li><a href="javascript:dashboard()"><i
+						class="fa fa-dashboard"></i>仪表盘</a></li>
+				<li><a href="machine.jsp">农机</a></li>
+				<li class="active">详情</li>
+			</ol>
 		</section>
-		<br/>
-	    <br/>
-	    
+		<br /> <br />
+
 		<form class="form-horizontal">
-			<fieldset disabled="disabled" class="col-md-4 allInfo">
-				<!-- Horizontal Form -->
-				<div class="box box-success">
-					<div class="box-header with-border">
-						<h3 class="box-title">农机图片</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
 
-					<div class="box-body">
-						<div align="center">
-							<!-- <img src="img/photo1.png" class="img-rounded" width="220px" height="auto">
-							<img src="img/photo2.png" class="img-rounded" width="220px" height="auto">
-							<img src="img/photo4.jpg" class="img-rounded" width="220px" height="auto"> -->
-							<c:forEach items="${picList}" var="item"> 
-								<div class="row">
-									<img src="${item}"  class="img-rounded" width="220px" height="auto">
-									<hr>
-									<div style="width:10px; height:30px"></div>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
+			<!-- Horizontal Form -->
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<h3 class="box-title">基本信息</h3>
 				</div>
 
-					<!-- /.box-body -->
+				<div class="box-body">
 
-				
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td style="width: 150px" rowspan="6">
 
-			</fieldset>
+									<div id="carousel-example-generic" class="carousel slide"
+										data-ride="carousel">
+										<!-- Indicators -->
+										<ol class="carousel-indicators">
+											<li data-target="#carousel-example-generic" data-slide-to="0"
+												class="active"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+										</ol>
 
-			<fieldset disabled="disabled" class="col-md-8 allInfo">
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" role="listbox">
+										
+										<c:forEach items="${picList}" var="item"> 
+											<div class="item">
+												<img src="${item}" alt="无图片" width="100%"
+													height="180">
 
+											</div>
+										</c:forEach>
+										
+										</div>
 
-				<!-- Horizontal Form -->
-				<div class="box box-success">
-					<div class="box-header with-border">
-						<h3 class="box-title">详细信息</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
-
-					<div class="box-body">
-						<div class="form-group" id="phonediv">
-                        <label for="phone" class="col-sm-3 control-label">拥有者手机号</label>
-                        <div class="col-sm-5">
-                            <input class="form-control" id="phone" type="text" value="${currentMachine.machineowner.phone }">
-                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="ownername" class="col-sm-3 control-label">拥有者姓名</label>
-	                        <div class="col-sm-5">
-	                            <input class="form-control" id="ownername" type="text" value="${currentMachine.machineowner.name }">
-	                        </div>
-	                    </div>
-						<div class="form-group">
-							<label for="plate" class="col-md-3 control-label">机牌号</label>
-							<div class="col-md-8">
-								<input class="form-control" id="plate" type="text" value="${currentMachine.plate }">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="type" class="col-md-3 control-label">农机类型</label>
-							<div class="col-md-8">
-								<input class="form-control" id="type" type="text" value="${currentMachine.plate }">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="brand" class="col-md-3 control-label">农机品牌</label>
-							<div class="col-md-8">
-								<input class="form-control" id="brand" type="text" value="${currentMachine.brand }">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="horsepower" class="col-md-3 control-label">马力</label>
-							<div class="col-md-8">
-								<input class="form-control" id="horsepower" type="text" value="${currentMachine.horsepower }">
-							</div>
-						</div>
-						<%-- <div class="form-group">
-							<label for="" class="col-md-2 control-label">农机状态</label>
-							<div class="col-md-8">
-								<textarea class="form-control" rows="3">${}</textarea>
-							</div>
-						</div> --%>
-						<div class="form-group">
-							<label for="overdate" class="col-md-3 control-label">报废时间</label>
-
-							<div class="col-md-8">
-								<textarea class="form-control" id="overdate" rows="3"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></textarea>
-							</div>
-						</div>
-					</div>
-					
-					<!-- /.box-body -->
+										<!-- Controls -->
+										<a class="left carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="prev"> <span
+											class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="right carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="next"> <span
+											class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</td>
+								<th style="width: 80px"><label>拥有者姓名</label></th>
+								<td style="width: 150px">
+									<select class="js-example-basic-single" style="width: 90%">
+										<c:forEach var="item" items="${allMachinerOwner }">
+											<option value="${item.ownerId }">${item.name } ${item.phone } </option>
+										</c:forEach>
+									</select>
+								</td>
+								<th style="width: 80px"><label>拥有者手机号</label></th>
+								<td style="width: 150px" id="phone">${currentMachine.machineowner.phone }</td>
+								
+							</tr>
+							<tr>
+								<th style="width: 80px"><label>农机编号</label></th>
+								<td style="width: 150px">${currentMachine.machineId }</td>
+								<th style="width: 80px"><label>农机类型</label></th>
+								<td style="width: 150px"><a href="#" id="date">${currentMachine.type }</a></td>
+							</tr>
+							<tr>
+								<th><label>农机品牌</label></th>
+								<td><a href="#" id="phone">${currentMachine.brand }</a></td>
+								
+								<th><label>农机牌号</label></th>
+								<td><a href="#" id="phone">${currentMachine.plate }</td>
+							</tr>
+							<tr>
+								<th><label>马力</label></th>
+								<td><a href="#" id="credit">${currentMachine.horsepower }</a></td>
+								
+								<th><label>报废时间</label></th>
+								<td><a href="#" id="address"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></a></td>
+							</tr>
+						</tbody>
+					</table>
 
 				</div>
+				<!-- /.box-body -->
 
-			</fieldset>
-			<div align="center">
-				<button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
-				<button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
-				<button type="reset" class="btn btn-default">重置</button>
-				<button type="button" class="btn btn-default"
-					onclick="returnMachine()">返回</button>
 			</div>
+
 		</form>
-
-
 	</div>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- date-range-picker -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
@@ -187,54 +192,162 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	
-	<script type="text/javascript" src="js/index.js"></script>
+	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="depend/bootstrap-table/bootstrap-table.min.js"></script>
 
+	<!-- Latest compiled and minified Locales -->
+	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
 	<script>
+		function actionFormatter(value, row, index) {
+			return [
+					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>',
+					'<a class="remove ml10" href="javascript:void(0)" title="删除">',
+					'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+					.join('');
+		}
 
+		window.actionEvents = {
+			'click .edit' : function(e, value, row, index) {
+				alert('You click edit icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			},
+			'click .remove' : function(e, value, row, index) {
+				alert('You click remove icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			}
+		};
+		$(function() {
+			$(".js-example-basic-single").select2();
+			$(".js-example-basic-single").val("${currentMachine.machineowner.ownerId }").trigger("change");
+			$(".carousel-inner .item:first").addClass("active");
+		});
 		function editInfo() {
 			$(".allInfo").removeAttr("disabled");
 		}
 		function saveInfo() {
 			$(".allInfo").attr("disabled", "disabled");
-			var ownername = $.trim($("#ownername").val());
-		    var plate = $.trim($("#plate").val());
-		    var type = $.trim($("#type").val());
-		    var brand = $.trim($("#brand").val());
-		    var horsepower = $.trim($("#horsepower").val());
-		    var overdate = $.trim($("#overdate").val());
-		    var result= confirm("确认修改？","确认","取消");
-	        if(result == true) {
-	        	$.post("../bMachineServlet", {op:"editor", ownername:ownername, plate:plate, type:type,
-	    	    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
-	            	if(data == 1) {
-	            		alert("修改成功");
-	            	} else {
-	            		alert("修改失败");
-	            	}
-	            });
-	        } else {
-	        	return;
-	        }
 		}
-		function returnMachine() {
-			window.location = "../bMachineServlet?op=searchAll";
+		function returnFarmer() {
+			window.location = "farmer.jsp";
 		}
-		$("#phone").blur(function(){
-			var phone = $.trim($("#phone").val());
-			if(phone == "") {
-				return;
-			}
-			$.post("../bMachineOwnerServlet?op=isExistMachineownerByPhone", {phone:phone}, function(data) {
-				var obj =  eval(data);
-				check("phonediv", "phone", obj.mark);
-				$("#ownername").val(obj.phone);
-			}, "json");
-		});
-
 		function dashboard() {
 			parent.location.reload();
-	    }
+		}
+		$(".js-example-basic-single").on("select2:select", function (e) {
+			var text = $(".js-example-basic-single").select2('data')[0]['text'];
+			var phone = text.split(' ')[1];
+			$("#phone").text(phone);
+			$.post('../bMachineServlet', {
+				op : 'editeOne',
+				pk : '${currentMachine.machineId }',
+				item : "phone",
+				value : phone
+			});
+		});
+
+		$('#realname').editable({
+			type : 'text',
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentMachine.machineId }',
+					item : "phone",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#sex').editable({
+			type : 'select',
+			source : [ {
+				value : 'ç·',
+				text : 'ç·'
+			}, {
+				value : 'å¥³',
+				text : 'å¥³'
+			} ],
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmer.username }',
+					item : "sex",
+					value : params.value
+				});
+			}
+		});
+		$('#date').editable({
+			type : 'text',
+			placeholder : 'yyyy-MM-dd',
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmer.username }',
+					item : "birthday",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#phone').editable({
+			type : 'text',
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmer.username }',
+					item : "phone",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#credit').editable({
+			type : 'text',
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmer.username }',
+					item : "credit",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#address').editable({
+			type : 'text',
+			url : function(params) {
+				return $.post('../bUserServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmer.username }',
+					item : "address",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
 	</script>
 
 </body>
