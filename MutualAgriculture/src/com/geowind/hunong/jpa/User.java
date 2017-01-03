@@ -261,4 +261,18 @@ public class User implements java.io.Serializable {
 		this.consults = consults;
 	}
 
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", center=" + center
+				+ ", password=" + password + ", realname=" + realname
+				+ ", sex=" + sex + ", birthday=" + birthday + ", phone="
+				+ phone + ", type=" + type + ", picture=" + picture
+				+ ", address=" + address + ", credit=" + credit + ", valid="
+				+ valid + ", farmlands=" + farmlands + ", pestquestions="
+				+ pestquestions + ", insectcontrols=" + insectcontrols
+				+ ", tasks=" + tasks + ", consults=" + consults + "]";
+	}
+	
+	
+
 }

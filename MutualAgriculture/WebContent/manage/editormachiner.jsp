@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
+<link rel="shortcut icon" href="img/icon_web_mini.png" type="" />
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -25,177 +27,176 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+	folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
 
-<title>Document</title>
 
+<link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
+	rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+
+<title>Document</title>
+<style type="text/css">
+#userInfo_left {
+	float: left;
+	width: 40%;
+	height: 320px;
+}
+
+#userInfo_right {
+	float: right;
+	width: 60%;
+	height: 320px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body style="background-color: #ECF0F5">
-
-	<div class="container">
-	<section class="content-header">
-	      <ol class="breadcrumb">
-	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
-	        <li><a href="machiner.jsp">农机手</a></li>
-	        <li class="active">详情</li>
-	      </ol>
-	</section>
-	<br/>
-    <br/>
-	
+	<div class="container" style="width: 100%;">
+		<section class="content-header">
+			<ol class="breadcrumb">
+				<li><a href="javascript:dashboard()"><i
+						class="fa fa-dashboard"></i> 仪表盘</a></li>
+				<li><a href="farmer.jsp">种粮大户</a></li>
+				<li class="active">详情</li>
+			</ol>
+		</section>
+		<br /> <br />
 
 		<form class="form-horizontal">
 
-			<fieldset disabled="disabled" class="col-md-4 allInfo">
-				
-
-				<!-- Horizontal Form -->
-				<div class="box box-success">
-					<div class="box-header with-border">
-						<h3 class="box-title">基本信息</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
-
-					<div align="center">
-						<img src="img/avatar.png" class="img-rounded" width="140px"
-							height="140px">
-					</div>
-
-					<div class="box-body">
-						<div class="form-group">
-							<label for="username" class="col-md-3 control-label">用户名</label>
-
-							<div class="col-md-8">
-								<input class="form-control" id="username" disabled="disabled"
-									type="text" value="${currentMachienr.username}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="col-md-3 control-label">姓名</label>
-
-							<div class="col-md-8">
-								<input class="form-control" id="name" type="text"
-									value="${currentMachienr.realname }">
-							</div>
-						</div>
-						
-						
-				<!-- 		
-						<div class="form-group">
-						<label for="inputPassword3" class="col-md-3 control-label">性别</label>
-                  <div class="radio">
-                    <label>
-                      男<input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      女<input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
-                    </label>
-                  </div>
-                </div>
-						 -->
-						
-						
-						
-						 <div class="form-group">
-							<label for="sex" class="col-md-3 control-label">性别</label>
-							<div class="radio col-md-6">
-								<label>
-								<input name="sex" id="sex"
-									value="男" type="radio" ${currentMachienr.sex=='男'?'checked':''}> 男
-								</label> <label> <input name="sex" id="sex"
-									value="女" type="radio" ${currentMachienr.sex=='女'?'checked':''}> 女
-								</label>
-							</div>
-						</div> 
-
-					</div>
-					<!-- /.box-body -->
-
+			<!-- Horizontal Form -->
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<h3 class="box-title">基本信息</h3>
 				</div>
 
-			</fieldset>
+				<div class="box-body">
 
-			<fieldset disabled="disabled" class="col-md-8 allInfo">
+					<table>
+						<tbody>
+							<tr>
+								<td style="width: 180px" rowspan="6"><img id="stuImg"
+									src="img/avatar.png" alt="无图片" width="120" height="160">
+								<th style="width: 80px"><label>用户名</label></th>
+								<td style="width: 150px">${currentMachiner.username }</td>
+								<th style="width: 80px"><label>姓名</label></th>
+								<td style="width: 150px"><a href="#" id="realname">${currentMachiner.realname }</a></td>
+								<th style="width: 80px"><label>性别</label></th>
+								<td style="width: 150px"><a href="#" id="sex">${currentMachiner.sex }</a></td>
+								</td>
+							</tr>
+							<tr>
+								<th><label>出生日期</label></th>
+								<td><a href="#" id="date"><fmt:formatDate
+											value="${currentMachiner.birthday }" pattern="yyyy-MM-dd" /></a></td>
+								<th><label>手机号</label></th>
+								<td><a href="#" id="phone">${currentMachiner.phone }</a></td>
+								<th><label>服务中心</label></th>
+								<td>${currentMachiner.center.name }</td>
+							</tr>
+							<tr>
+								<th><label>信誉</label></th>
+								<td><a href="#" id="credit">${currentMachiner.credit }</a></td>
+								<th><label>家庭地址</label></th>
+								<td colspan="4"><a href="#" id="address">${currentMachiner.address }长沙</a></td>
+							</tr>
 
-
-				<!-- Horizontal Form -->
-				<div class="box box-success">
-					<div class="box-header with-border">
-						<h3 class="box-title">详细信息</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
-
-					<div class="box-body">
-						<div class="form-group">
-							<label for="inputPassword3" class="col-md-2 control-label">出生日期</label>
-							<div class="col-md-8">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-									<input type="text" class="form-control"
-										data-inputmask="'alias': 'yyyy-mm-dd'" data-mask=""
-										id="datemask" value="${currentMachienr.birthday }">
-								</div>
-							</div>
-
-						</div>
-						<div class="form-group">
-							<label for="inputPassword3" class="col-md-2 control-label">手机号</label>
-
-							<div class="col-md-8">
-								<input class="form-control" id="phone" type="text"
-									value="${currentMachienr.phone }">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="inputPassword3" class="col-md-2 control-label">地址</label>
-
-							<div class="col-md-8">
-								<textarea class="form-control" rows="3">${currentMachienr.address }</textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="credit" class="col-md-2 control-label">信誉</label>
-
-							<div class="col-md-8">
-								<input class="form-control" id="credit" type="text"
-									value="${currentMachienr.credit }">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="center" class="col-md-2 control-label">服务中心</label>
-
-							<div class="col-md-8">
-								<input class="form-control" id="center" type="text">
-							</div>
-						</div>
-					</div>
-					<!-- /.box-body -->
+						</tbody>
+					</table>
 
 				</div>
+				<!-- /.box-body -->
 
-			</fieldset>
-			<div align="center">
-				<button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
-				<button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
-				<button type="reset" class="btn btn-default">重置</button>
-				<button type="button" class="btn btn-default"
-					onclick="returnMachiner()">返回</button>
 			</div>
+
+
+
 		</form>
+
+		<!-- Horizontal Form -->
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">农田信息</h3>
+			</div>
+
+			<div class="box-body">
+				<div id="toolbar" class="btn-group">
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-heart"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+				<table id="table" data-toolbar="#toolbar">
+					<thead>
+						<tr>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="taskId" data-sortable="true">任务编号</th>
+							<th data-field="zone" data-sortable="true">任务区号</th>
+							<th data-field="farmlandId" data-sortable="true">农田编号</th>
+							<th data-field="address" data-sortable="true">地址</th>
+							<th data-field="plate" data-sortable="true">农机牌号</th>
+							<th data-field="worktype" data-sortable="true">作业类型</th>
+							<th data-field="time" data-sortable="true">任务时间</th>
+							<th data-field="result" data-sortable="true">完成状况</th>
+							<th data-field="action" data-formatter="actionFormatter"
+								data-events="actionEvents" data-width="65">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="${currentMachiner.tasks }">
+							<tr>
+								<td data-field="state" data-checkbox="true"></td>
+								<td>${item.taskId }</td>
+								<td>${item.farmland.zone.zonename }</td>
+								<td>${item.farmland.farmlandId }</td>
+								<td>${item.farmland.address }</td>
+								<td>${item.machine.plate }</td>
+								<td>${item.type }</td>
+								<td><fmt:formatDate value="${item.publishdate }"
+										pattern="yyyy-MM-dd" />&nbsp;至&nbsp;<fmt:formatDate
+										value="${item.workdate }" pattern="yyyy-MM-dd" />
+								</td>
+								<td>
+									<%-- <c:choose>
+										<c:when test="${item.finished eq '0' } ">
+											<a href="#">正在进行</a>
+									   	</c:when>
+									    <c:otherwise>
+									    	<a href="#">已经完成</a>${item.finished }
+									    </c:otherwise>
+								    </c:choose> --%>
+								    ${item.finished ==1?"<a style='color:red'>已经完成</a>":"<a href='#'>正在进行</a>"}
+								</td>
+								<td data-field="action" data-formatter="actionFormatter"
+									data-events="actionEvents"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- /.box-body -->
+
+		</div>
 
 
 	</div>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- date-range-picker -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
@@ -205,8 +206,35 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
 
+	<!-- Latest compiled and minified Locales -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
+		function actionFormatter(value, row, index) {
+			return [
+					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>',
+					'<a class="remove ml10" href="javascript:void(0)" title="删除">',
+					'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+					.join('');
+		}
+
+		window.actionEvents = {
+			'click .edit' : function(e, value, row, index) {
+				alert('You click edit icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			},
+			'click .remove' : function(e, value, row, index) {
+				alert('You click remove icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			}
+		};
 		$(function() {
 			//Datemask dd/mm/yyyy
 			$("#datemask").inputmask("yyyy-mm-dd", {
@@ -216,7 +244,21 @@
 			$('#datepicker').datepicker({
 				autoclose : true
 			});
+			$('#table').bootstrapTable({
 
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'farmlandId',
+				sortOrder: 'desc'
+			});
 		});
 		function editInfo() {
 			$(".allInfo").removeAttr("disabled");
@@ -224,12 +266,112 @@
 		function saveInfo() {
 			$(".allInfo").attr("disabled", "disabled");
 		}
-		function returnMachiner() {
-			window.location = "machiner.jsp";
+		function returnFarmer() {
+			window.location = "farmer.jsp";
 		}
 		function dashboard() {
 			parent.location.reload();
-	    }
+		}
+
+		$('#realname').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"realname",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#sex').editable({
+			type : 'select',
+			source : [ {
+				value : '男',
+				text : '男'
+			}, {
+				value : '女',
+				text : '女'
+			} ],
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"sex",
+		            value:params.value
+		        }); 
+		    }
+		});
+		$('#date').editable({
+			type : 'text',
+			placeholder: 'yyyy-MM-dd',
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"birthday",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#phone').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"phone",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#credit').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"credit",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bUserServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachienr.username }',
+		            item:"address",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
 	</script>
 
 </body>

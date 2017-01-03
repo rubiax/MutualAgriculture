@@ -1,9 +1,13 @@
 package com.geowind.hunong.jpa;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -35,9 +39,9 @@ public class Task implements java.io.Serializable {
 	@Expose
 	private Integer workload;
 	@Expose
-	private String publishdate;
+	private Date publishdate;
 	@Expose
-	private String workdate;
+	private Date workdate;
 	@Expose
 	private String type;
 	@Expose
@@ -60,7 +64,7 @@ public class Task implements java.io.Serializable {
 
 	/** full constructor */
 	public Task(Center center, User user, Machine machine, Farmland farmland,
-			Integer workload, String publishdate, String workdate, String type,
+			Integer workload, Date publishdate, Date workdate, String type,
 			Integer finished, String desrc) {
 		this.center = center;
 		this.user = user;
@@ -135,21 +139,23 @@ public class Task implements java.io.Serializable {
 		this.workload = workload;
 	}
 
-	@Column(name = "publishdate", length = 45)
-	public String getPublishdate() {
+	@Temporal(TemporalType.DATE)
+	@Column(name = "publishdate", length = 10)
+	public Date getPublishdate() {
 		return this.publishdate;
 	}
 
-	public void setPublishdate(String publishdate) {
+	public void setPublishdate(Date publishdate) {
 		this.publishdate = publishdate;
 	}
 
-	@Column(name = "workdate", length = 45)
-	public String getWorkdate() {
+	@Temporal(TemporalType.DATE)
+	@Column(name = "workdate", length = 10)
+	public Date getWorkdate() {
 		return this.workdate;
 	}
 
-	public void setWorkdate(String workdate) {
+	public void setWorkdate(Date workdate) {
 		this.workdate = workdate;
 	}
 

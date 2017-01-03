@@ -40,7 +40,7 @@
 <div class="wrapper">
 
   <!-- Main Header -->
-  <header class="main-header">
+  <header class="main-header" style="position:fixed;z-index=1;width:100%">
 
     <!-- Logo -->
     <a href="index.jsp" class="logo">
@@ -109,7 +109,7 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="position:fixed;z-index=1">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -200,7 +200,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-top:35px;">
     <!-- Content Header (Page header) -->
     <!-- <section class="content-header">
 

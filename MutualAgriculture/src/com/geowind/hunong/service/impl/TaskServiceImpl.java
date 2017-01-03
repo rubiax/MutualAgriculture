@@ -10,6 +10,7 @@ import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.TaskService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +36,8 @@ public class TaskServiceImpl implements TaskService {
 			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
 			task.setWorkload((int)map.get("workload"));
 			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
-			task.setPublishdate((String)map.get("publishdate"));
-			task.setWorkdate((String)map.get("workdate"));
+			task.setPublishdate((Date)map.get("publishdate"));
+			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
 			task.setDesrc((String)map.get("descr"));
 			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
@@ -58,8 +59,8 @@ public class TaskServiceImpl implements TaskService {
 			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
 			task.setWorkload((int)map.get("workload"));
 			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
-			task.setPublishdate((String)map.get("publishdate"));
-			task.setWorkdate((String)map.get("workdate"));
+			task.setPublishdate((Date)map.get("publishdate"));
+			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
 			task.setDesrc((String)map.get("descr"));
 			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));

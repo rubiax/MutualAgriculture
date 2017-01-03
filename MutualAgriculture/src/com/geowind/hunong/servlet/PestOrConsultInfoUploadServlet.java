@@ -16,6 +16,7 @@ import com.geowind.hunong.jpa.ConsultDAO;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Pestquestion;
 import com.geowind.hunong.jpa.PestquestionDAO;
+import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.util.FileUploadUtil;
 
@@ -27,8 +28,6 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
-		System.out.println("kkk");
 		
 		ServletConfig servletConfig = this.getServletConfig();
 		FileUploadUtil.PATH = "../HN_upload/imgupload";
@@ -97,7 +96,12 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
 		ConsultDAO consultDAO = new ConsultDAO();
 		Consult consult = new Consult();
 		UserDAO userDAO = new UserDAO();
-		consult.setUser(userDAO.findById(map.get("username")));
+		User user = userDAO.findById(map.get("username"));
+		if(user == null) {
+			this.out(response, "0");
+			return;
+		}
+		consult.setUser(user);
 		consult.setCcontent(map.get("describe"));
 		consult.setCtime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		consult.setStatus(0);

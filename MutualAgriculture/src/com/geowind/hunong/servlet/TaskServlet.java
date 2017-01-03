@@ -28,6 +28,7 @@ import javax.xml.soap.Detail;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -175,14 +176,18 @@ public class TaskServlet extends BasicServlet {
 		Farmland farmland = new FarmlandDAO().findById(farmlandId);
 		task.setFarmland(farmland);
 		task.setType(tasktype);
-		task.setWorkdate(taskdate);
+		try {
+			task.setWorkdate(new SimpleDateFormat("yyyy-MM-dd").parse(taskdate));
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
 		task.setWorkload(workload);
 		task.setDesrc(descr);
 		task.setFinished(0);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String publishdate = sdf.format(new Date());
-		task.setPublishdate(publishdate);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		task.setPublishdate(new Date());
 		try {
 			EntityManagerHelper.beginTransaction();
 			taskDAO.save(task);

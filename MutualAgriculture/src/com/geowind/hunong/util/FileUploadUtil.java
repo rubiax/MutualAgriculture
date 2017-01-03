@@ -90,7 +90,6 @@ public class FileUploadUtil {
 	
 	
 	public Map<String,String> upload(ServletConfig servletConfig, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
-		System.out.println("ooo");
 		Map<String,String> map = new HashMap<String, String>();
 		//实例化一个SmartUpload对象
 		SmartUpload su = new SmartUpload();//文件上传包的使用

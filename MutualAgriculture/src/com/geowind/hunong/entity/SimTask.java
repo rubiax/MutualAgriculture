@@ -2,6 +2,7 @@ package com.geowind.hunong.entity;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 
 import com.geowind.hunong.jpa.Task;
 import com.google.gson.annotations.Expose;
@@ -31,7 +32,7 @@ public class SimTask {
     private String  type;
     //日期
 	@Expose
-    private String date;
+    private Date date;
     //状态
 	@Expose
     private String state;
@@ -105,10 +106,10 @@ public class SimTask {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getState() {
