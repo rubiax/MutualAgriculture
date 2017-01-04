@@ -141,7 +141,7 @@
 								</td>
 								<th style="width: 80px"><label>拥有者姓名</label></th>
 								<td style="width: 150px">
-									<select class="js-example-basic-single" style="width: 90%">
+									<select id="select1" class="js-example-basic-single" style="width: 90%">
 										<c:forEach var="item" items="${allMachinerOwner }">
 											<option value="${item.ownerId }">${item.name } ${item.phone } </option>
 										</c:forEach>
@@ -152,24 +152,36 @@
 								
 							</tr>
 							<tr>
+								<th style="width: 80px"><label>农机类型</label></th>
+								<td style="width: 150px">
+									<select id="select2" class="js-example-basic-single" style="width: 90%">
+										<option value="收获机械">收获机械</option>
+										<option value="耕种机械">耕种机械</option>
+										<option value="排灌机械">排灌机械</option>
+										<option value="动力传送机械">动力传送机械</option>
+										<option value="种植施肥机械">种植施肥机械</option>
+										<option value="植保机械">植保机械</option>
+										<option value="粮油机械">粮油机械</option>
+										<option value="果蔬机械">果蔬机械</option>
+										<option value="饲料机械">饲料机械</option>
+									</select>
+								</td>
 								<th style="width: 80px"><label>农机编号</label></th>
 								<td style="width: 150px">${currentMachine.machineId }</td>
-								<th style="width: 80px"><label>农机类型</label></th>
-								<td style="width: 150px"><a href="#" id="date">${currentMachine.type }</a></td>
 							</tr>
 							<tr>
 								<th><label>农机品牌</label></th>
-								<td><a href="#" id="phone">${currentMachine.brand }</a></td>
+								<td><a href="#" id="brand">${currentMachine.brand }</a></td>
 								
 								<th><label>农机牌号</label></th>
-								<td><a href="#" id="phone">${currentMachine.plate }</td>
+								<td><a href="#" id="plate">${currentMachine.plate }</a></td>
 							</tr>
 							<tr>
 								<th><label>马力</label></th>
-								<td><a href="#" id="credit">${currentMachine.horsepower }</a></td>
+								<td><a href="#" id="horsepower">${currentMachine.horsepower }</a></td>
 								
 								<th><label>报废时间</label></th>
-								<td><a href="#" id="address"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></a></td>
+								<td><a href="#" id="overdate"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -221,8 +233,10 @@
 			}
 		};
 		$(function() {
-			$(".js-example-basic-single").select2();
-			$(".js-example-basic-single").val("${currentMachine.machineowner.ownerId }").trigger("change");
+			$("#select1").select2();
+			$("#select1").val("${currentMachine.machineowner.ownerId }").trigger("change");
+			$("#select2").select2();
+			$("#select2").val("${currentMachine.type }").trigger("change");
 			$(".carousel-inner .item:first").addClass("active");
 		});
 		function editInfo() {
@@ -237,25 +251,35 @@
 		function dashboard() {
 			parent.location.reload();
 		}
-		$(".js-example-basic-single").on("select2:select", function (e) {
-			var text = $(".js-example-basic-single").select2('data')[0]['text'];
+		$("#select1").on("select2:select", function (e) {
+			var text = $("#select1").select2('data')[0]['text'];
 			var phone = text.split(' ')[1];
 			$("#phone").text(phone);
+			var ownerId = $("#select1").val();
 			$.post('../bMachineServlet', {
 				op : 'editeOne',
 				pk : '${currentMachine.machineId }',
-				item : "phone",
-				value : phone
+				item : "ownerId",
+				value : ownerId
+			});
+		});
+		$("#select2").on("select2:select", function (e) {
+			var value = $("#select2").val();
+			$.post('../bMachineServlet', {
+				op : 'editeOne',
+				pk : '${currentMachine.machineId }',
+				item : "type",
+				value : value
 			});
 		});
 
-		$('#realname').editable({
+		$('#brand').editable({
 			type : 'text',
 			url : function(params) {
-				return $.post('../bUserServlet', {
+				return $.post('../bMachineServlet', {
 					op : 'editeOne',
 					pk : '${currentMachine.machineId }',
-					item : "phone",
+					item : "brand",
 					value : params.value
 				});
 			},
@@ -265,32 +289,13 @@
 				}
 			}
 		});
-		$('#sex').editable({
-			type : 'select',
-			source : [ {
-				value : 'ç·',
-				text : 'ç·'
-			}, {
-				value : 'å¥³',
-				text : 'å¥³'
-			} ],
-			url : function(params) {
-				return $.post('../bUserServlet', {
-					op : 'editeOne',
-					pk : '${currentFarmer.username }',
-					item : "sex",
-					value : params.value
-				});
-			}
-		});
-		$('#date').editable({
+		$('#plate').editable({
 			type : 'text',
-			placeholder : 'yyyy-MM-dd',
 			url : function(params) {
-				return $.post('../bUserServlet', {
+				return $.post('../bMachineServlet', {
 					op : 'editeOne',
-					pk : '${currentFarmer.username }',
-					item : "birthday",
+					pk : '${currentMachine.machineId }',
+					item : "plate",
 					value : params.value
 				});
 			},
@@ -300,13 +305,13 @@
 				}
 			}
 		});
-		$('#phone').editable({
+		$('#horsepower').editable({
 			type : 'text',
 			url : function(params) {
-				return $.post('../bUserServlet', {
+				return $.post('../bMachineServlet', {
 					op : 'editeOne',
-					pk : '${currentFarmer.username }',
-					item : "phone",
+					pk : '${currentMachine.machineId }',
+					item : "horsepower",
 					value : params.value
 				});
 			},
@@ -316,29 +321,13 @@
 				}
 			}
 		});
-		$('#credit').editable({
+		$('#overdate').editable({
 			type : 'text',
 			url : function(params) {
-				return $.post('../bUserServlet', {
+				return $.post('../bMachineServlet', {
 					op : 'editeOne',
-					pk : '${currentFarmer.username }',
-					item : "credit",
-					value : params.value
-				});
-			},
-			validate : function(value) {
-				if (value == '') {
-					return '不能为空';
-				}
-			}
-		});
-		$('#address').editable({
-			type : 'text',
-			url : function(params) {
-				return $.post('../bUserServlet', {
-					op : 'editeOne',
-					pk : '${currentFarmer.username }',
-					item : "address",
+					pk : '${currentMachine.machineId }',
+					item : "overdate",
 					value : params.value
 				});
 			},

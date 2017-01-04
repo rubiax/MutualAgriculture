@@ -1,6 +1,8 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -13,8 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
+import com.geowind.hunong.jpa.Zone;
 import com.geowind.hunong.jpa.ZoneDAO;
+import com.geowind.hunong.service.UserService;
+import com.geowind.hunong.service.ZoneService;
+import com.geowind.hunong.service.impl.UserServiceImpl;
+import com.geowind.hunong.service.impl.ZoneServiceImpl;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BFarmlandServlet extends BasicServlet {
@@ -55,8 +63,58 @@ public class BFarmlandServlet extends BasicServlet {
 		case "MapSearchAll":
 			MapSearchAll(request,response);
 			break;
+		case "editeOne":
+			editeOne(request, response);
 		default:
 			break;
+		}
+	}
+	
+	/**
+	 * 修改单个属性
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	private void editeOne(HttpServletRequest request, HttpServletResponse response) {
+		String pk = request.getParameter("pk");
+		String item = request.getParameter("item");
+		String value = request.getParameter("value");
+		System.out.println(value);
+		FarmlandDAO farmlandDAO = new FarmlandDAO();
+		Farmland farmland = farmlandDAO.findById(Integer.parseInt(pk));
+		if ("username".equals(item)) {
+			UserDAO userDAO = new UserDAO();
+			User user = userDAO.findById(value);
+			farmland.setUser(user);
+		} else if ("zoneId".equals(item)) {
+			ZoneDAO zoneDAO = new ZoneDAO();
+			Zone zone = zoneDAO.findById(Integer.parseInt(value));
+			farmland.setZone(zone);
+		} else if ("jingweidu".equals(item)) {
+			String jingweidu = value.substring(1, value.length()-1);
+			String latitude = jingweidu.split(", ")[0];
+			String longitude = jingweidu.split(", ")[1];
+			System.out.println(latitude + " " + longitude);
+			farmland.setLatitude(Double.parseDouble(latitude));
+			farmland.setLongitude(Double.parseDouble(longitude));
+		} else if ("address".equals(item)) {
+			farmland.setAddress(value);
+		} else if ("area".equals(item)) {
+			farmland.setArea(Double.parseDouble(value));
+		} else if ("ph".equals(item)) {
+			farmland.setPh(value);
+		} else if("npk".equals(item)) {
+			farmland.setNpk(value);
+		} else if("transtion".equals(item)) {
+			farmland.setTranstion(value);
+		}
+		EntityManagerHelper.beginTransaction();
+		try {
+			farmlandDAO.update(farmland);
+			EntityManagerHelper.commit();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
 		}
 	}
 
@@ -260,6 +318,19 @@ public class BFarmlandServlet extends BasicServlet {
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
 			request.getSession().setAttribute("currentFarmland", farmland);
+			
+			int centerId = (int) request.getSession().getAttribute("currentCenterId");
+			
+			UserService userService = new UserServiceImpl();
+			List<User> farmerList = userService.search(centerId, "v_farmer");
+			request.getSession().setAttribute("allFarmer", farmerList);
+			
+			ZoneService zoneService = new ZoneServiceImpl();
+			List<Zone> zoneList = zoneService.search(centerId);
+			if (zoneList != null && zoneList.size() > 0) {
+				request.getSession().setAttribute("allZone", zoneList);
+			} 
+			
 			response.sendRedirect("manage/editorfarmland.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);

@@ -80,10 +80,24 @@ public class BMachineServlet extends BasicServlet {
 		System.out.println(value);
 		MachineDAO machineDAO = new MachineDAO();
 		Machine machine = machineDAO.findById(Integer.parseInt(pk));
-		if("phone".equals(item)) {
+		if("ownerId".equals(item)) {
 			MachineownerDAO machineownerDao = new MachineownerDAO();
-			Machineowner machineowner = machineownerDao.findByPhone(value).get(0);
+			Machineowner machineowner = machineownerDao.findById(Integer.parseInt(value));
 			machine.setMachineowner(machineowner);
+		} else if("type".equals(item)) {
+			machine.setType(value);
+		} else if("brand".equals(item)) {
+			machine.setBrand(value);
+		} else if("plate".equals(item)) {
+			machine.setPlate(value);
+		} else if("horsepower".equals(item)) {
+			machine.setHorsepower(value);
+		} else if("overdate".equals(item)) {
+			try {
+				machine.setOverdate(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		EntityManagerHelper.beginTransaction();
 		try {
@@ -296,6 +310,7 @@ public class BMachineServlet extends BasicServlet {
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineDAO machineDAO = new MachineDAO();
 		List<Machine> machineList = machineDAO.findByValid(1);
+		request.getSession().removeAttribute("allMachine");
 		if (machineList != null && machineList.size() > 0) {
 			request.getSession().setAttribute("allMachine", machineList);
 			response.sendRedirect("manage/machine.jsp");
