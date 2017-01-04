@@ -79,7 +79,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" onclick="add();">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -88,6 +88,32 @@
 					<button type="button" class="btn btn-default">
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
+				</div>
+				<div class="collapse" id="collapseExample">
+				  <div class="well">
+				  	<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width: 80px"><label>编号</label></th>
+								<td style="width: 150px">${currentMachineOwner.ownerId }</td>
+								<th style="width: 80px"><label>姓名</label></th>
+								<td style="width: 150px"><a href="#" id="name">${currentMachineOwner.name }</a></td>
+							</tr>
+							<tr>
+								<th><label>性别</label></th>
+								<td><a href="#" id="sex">${currentMachineOwner.sex }</a></td>
+								<th><label>出生日期</label></th>
+								<td><a href="#" id="date"><fmt:formatDate value="${currentMachineOwner.birthday }" pattern="yyyy-MM-dd"/></a></td>
+							</tr>
+							<tr>
+								<th><label>手机号</label></th>
+								<td><a href="#" id="phone">${currentMachineOwner.phone }</a></td>
+								<th><label>家庭地址</label></th>
+								<td colspan="6"><a href="#" id="address">${currentMachineOwner.address }</a></td>
+							</tr>
+						</tbody>
+					</table>
+				  </div>
 				</div>
 				<table id="table" data-toolbar="#toolbar">
 					<thead>
@@ -117,7 +143,6 @@
                         </c:forEach>
 					</tbody>
 				</table>
-
 			</div>
 			<!-- /.box-body -->
 
@@ -197,8 +222,91 @@
 				sortName: 'ownerId',
 				sortOrder: 'desc'
 			});
+			$('.collapse').collapse('hide');
 		});
-		
+		$('#name').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"name",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#sex').editable({
+			type : 'select',
+			source : [ {
+				value : '男',
+				text : '男'
+			}, {
+				value : '女',
+				text : '女'
+			} ],
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"sex",
+		            value:params.value
+		        }); 
+		    }
+		});
+		$('#date').editable({
+			type : 'text',
+			placeholder: 'yyyy-MM-dd',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"birthday",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#phone').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"phone",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"address",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
 		function add() {
 			location.href = 'addmachineowner.jsp';
 		}

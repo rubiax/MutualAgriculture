@@ -74,7 +74,7 @@
 		<!-- Horizontal Form -->
 		<div class="box box-success">
 			<div class="box-header with-border">
-				<h3 class="box-title">农田信息</h3>
+				<h3 class="box-title">种粮大户信息</h3>
 			</div>
 
 			<div class="box-body">

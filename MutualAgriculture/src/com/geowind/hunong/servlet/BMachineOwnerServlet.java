@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
+import com.geowind.hunong.jpa.Machine;
+import com.geowind.hunong.jpa.MachineDAO;
 import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.jpa.MachineownerDAO;
 import com.geowind.hunong.service.MachineOwnerService;
@@ -55,8 +57,48 @@ public class BMachineOwnerServlet extends BasicServlet {
 		case "mapSearchAll":
 			mapSearchAll(request, response);
 			break;
+		case "editeOne":
+			editeOne(request, response);
+			break;
 		default:
 			break;
+		}
+	}
+	
+	/**
+	 * 修改单个属性
+	 * @param request
+	 * @param response
+	 */
+	private void editeOne(HttpServletRequest request,
+			HttpServletResponse response) {
+		String pk = request.getParameter("pk");
+		String item = request.getParameter("item");
+		String value = request.getParameter("value");
+		System.out.println(value);
+		MachineownerDAO machineownerDAO = new MachineownerDAO();
+		Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(pk));
+		if("name".equals(item)) {
+			machineowner.setName(value);
+		} else if("sex".equals(item)) {
+			machineowner.setSex(value);
+		} else if("birthday".equals(item)) {
+			try {
+				machineowner.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else if("phone".equals(item)) {
+			machineowner.setPhone(value);
+		} else if("address".equals(item)) {
+			machineowner.setAddress(value);
+		}
+		EntityManagerHelper.beginTransaction();
+		try {
+			machineownerDAO.update(machineowner);
+			EntityManagerHelper.commit();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
 		}
 	}
 

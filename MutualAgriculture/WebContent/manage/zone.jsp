@@ -65,7 +65,7 @@
 			<ol class="breadcrumb">
 				<li><a href="javascript:dashboard()"><i
 						class="fa fa-dashboard"></i> 仪表盘</a></li>
-				<li><a href="farmer.jsp">农机拥有者</a></li>
+				<li><a href="farmer.jsp">分区</a></li>
 				<li class="active">详情</li>
 			</ol>
 		</section>
@@ -74,7 +74,7 @@
 		<!-- Horizontal Form -->
 		<div class="box box-success">
 			<div class="box-header with-border">
-				<h3 class="box-title">农机拥有者信息</h3>
+				<h3 class="box-title">分区信息</h3>
 			</div>
 
 			<div class="box-body">

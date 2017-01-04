@@ -99,14 +99,12 @@
 								<td><a href="#" id="date"><fmt:formatDate value="${currentFarmer.birthday }" pattern="yyyy-MM-dd"/></a></td>
 								<th><label>手机号</label></th>
 								<td><a href="#" id="phone">${currentFarmer.phone }</a></td>
-								<th><label>服务中心</label></th>
-								<td>${currentFarmer.center.name }</td>
-							</tr>
-							<tr>
 								<th><label>信誉</label></th>
 								<td><a href="#" id="credit">${currentFarmer.credit }</a></td>
+							</tr>
+							<tr>
 								<th><label>家庭地址</label></th>
-								<td colspan="4"><a href="#" id="address">${currentFarmer.address }</a></td>
+								<td colspan="6"><a href="#" id="address">${currentFarmer.address }</a></td>
 							</tr>
 
 						</tbody>
@@ -144,10 +142,11 @@
 						<tr>
 							<th data-field="state" data-checkbox="true"></th>
 							<th data-field="farmlandId" data-sortable="true">农田编号</th>
+							<th data-field="zonename" data-sortable="true">分区名</th>
 							<th data-field="jingweidu" data-sortable="true">经纬度</th>
 							<th data-field="address" data-sortable="true">地址</th>
-							<th data-field="area" data-sortable="true">面积</th>
 							<th data-field="type" data-sortable="true">作物类型</th>
+							<th data-field="area" data-sortable="true">面积</th>
 							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-width="65">操作</th>
 						</tr>
 					</thead>
@@ -156,10 +155,11 @@
 							<tr>
 								<td data-field="state" data-checkbox="true"></td>
 								<td>${item.farmlandId }</td>
+								<td>${item.zone.zonename }</td>
 								<td>(${item.latitude}, ${item.longitude })</td>
 								<td>${item.address }</td>
-								<td>${item.area }</td>
 								<td>${item.zone.type }</td>
+								<td>${item.area }</td>
 								<td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
 							</tr>
 						</c:forEach>

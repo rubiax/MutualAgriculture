@@ -99,12 +99,10 @@
 											value="${currentMachiner.birthday }" pattern="yyyy-MM-dd" /></a></td>
 								<th><label>手机号</label></th>
 								<td><a href="#" id="phone">${currentMachiner.phone }</a></td>
-								<th><label>服务中心</label></th>
-								<td>${currentMachiner.center.name }</td>
-							</tr>
-							<tr>
 								<th><label>信誉</label></th>
 								<td><a href="#" id="credit">${currentMachiner.credit }</a></td>
+							</tr>
+							<tr>
 								<th><label>家庭地址</label></th>
 								<td colspan="4"><a href="#" id="address">${currentMachiner.address }</a></td>
 							</tr>

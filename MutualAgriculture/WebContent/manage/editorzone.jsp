@@ -1,158 +1,293 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="img/icon_web_mini.png" type="" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="css/plugins/datatables/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/dist/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+	folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
 
-    <title>Document</title>
 
+<link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
+	rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+
+<title>Document</title>
+<style type="text/css">
+#userInfo_left {
+	float: left;
+	width: 40%;
+	height: 320px;
+}
+
+#userInfo_right {
+	float: right;
+	width: 60%;
+	height: 320px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body style="background-color: #ECF0F5">
+	<div class="container" style="width: 100%;">
+		<section class="content-header">
+			<ol class="breadcrumb">
+				<li><a href="javascript:dashboard()"><i
+						class="fa fa-dashboard"></i> 仪表盘</a></li>
+				<li><a href="farmer.jsp">农机主</a></li>
+				<li class="active">详情</li>
+			</ol>
+		</section>
+		<br /> <br />
 
-<div class="container">
-	<div class="container">
-	<section class="content-header">
-	      <ol class="breadcrumb">
-	        <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
-	        <li><a href="zone.jsp">分区管理</a></li>
-	        <li class="active">详情</li>
-	      </ol>
-	</section>
-	<br/>
-    <br/>
+		<form class="form-horizontal">
 
-    <div class="box box-success">
-        <div class="box-header with-border">
-            <h3 class="box-title">详细信息</h3>
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form class="form-horizontal">
-            <div class="box-body">
-                <fieldset disabled="disabled" class="col-md-10 allInfo">
-                    <div class="form-group">
-                        <label for="zonename" class="col-sm-2 control-label">分区名</label>
+			<!-- Horizontal Form -->
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<h3 class="box-title">基本信息</h3>
+				</div>
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="zonename" type="text" value="${currentZone.zonename }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="area" class="col-sm-2 control-label">面积</label>
+				<div class="box-body">
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="area" type="text" value="${currentZone.area }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">作物类型</label>
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width: 80px"><label>编号</label></th>
+								<td style="width: 150px">${currentZone.zoneId }</td>
+								<th style="width: 80px"><label>分区名</label></th>
+								<td style="width: 150px"><a href="#" id="zonename">${currentZone.zonename }</a></td>
+							</tr>
+							<tr>
+								<th><label>作物类型</label></th>
+								<td><a href="#" id="type">${currentZone.type }</a></td>
+								<th><label>面积</label></th>
+								<td><a href="#" id="area">${currentZone.area }</a></td>
+							</tr>
+							<tr>
+								<th><label>地址</label></th>
+								<td colspan="3"><a href="#" id="address">${currentZone.address }</a></td>
+							</tr>
+						</tbody>
+					</table>
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="type" type="text" value="${currentZone.type }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">地址</label>
+				</div>
+				<!-- /.box-body -->
 
-                        <div class="col-md-10">
-                            <textarea class="form-control" rows="3" id="address">${currentZone.address }</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="center" class="col-sm-2 control-label">服务中心</label>
-
-                        <div class="col-sm-10">
-                            <input disabled="disabled" class="form-control" id="center" type="text" value="${currentZone.center.name }">
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
-                <button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
-                <button type="reset" class="btn btn-default">重置</button>
-                <button type="button" class="btn btn-default" onclick="returnZone()">返回</button>
-            </div>
-            <!-- /.box-footer -->
-        </form>
-    </div>
+			</div>
 
 
-</div>
-<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<!-- bootstrap datepicker -->
-<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- InputMask -->
-<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-<script>
-    $(function () {
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
+		</form>
 
-    });
-    function editInfo() {
-        $(".allInfo").removeAttr("disabled");
-    }
-    function saveInfo() {
-        $(".allInfo").attr("disabled", "disabled");
-        var zonename = $.trim($("#zonename").val());
-        var area = $.trim($("#area").val());
-        var type = $.trim($("#type").val());
-        var address = $.trim($("#address").val());
-        alert(zonename+" "+area+" "+type+" "+address);
-        var result= confirm("确认修改？","确认","取消");
-        if(result == true) {
-        	$.post("../bZoneServlet", {op:"editor", zonename:zonename, area:area, type:type, address:address}, function(data) {
-            	if(data == 1) {
-            		alert("修改成功");
-            	} else {
-            		alert("修改失败");
-            	}
-            });
-        } else {
-        	return;
-        }
-        
-    }
-    function returnZone() {
-        window.location = "../bZoneServlet?op=searchAll";
-    }
-    function dashboard() {
-		parent.location.reload();
-    }
+		<!-- Horizontal Form -->
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">农田信息</h3>
+			</div>
+
+			<div class="box-body">
+				<div id="toolbar" class="btn-group">
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-heart"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+				<table id="table" data-toolbar="#toolbar">
+					<thead>
+						<tr>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="farmlandId" data-sortable="true">农田编号</th>
+							<th data-field="realname" data-sortable="true">拥有者姓名</th>
+							<th data-field="jingweidu" data-sortable="true">经纬度</th>
+							<th data-field="address" data-sortable="true">地址</th>
+							<th data-field="type" data-sortable="true">作物类型</th>
+							<th data-field="area" data-sortable="true">面积</th>
+							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-width="65">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="${currentZone.farmlands }">
+							<tr>
+								<td data-field="state" data-checkbox="true"></td>
+								<td>${item.farmlandId }</td>
+								<td>${item.user.realname }</td>
+								<td>(${item.latitude}, ${item.longitude })</td>
+								<td>${item.address }</td>
+								<td>${item.zone.type }</td>
+								<td>${item.area }</td>
+								<td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- /.box-body -->
+
+		</div>
 
 
-</script>
+	</div>
+	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- date-range-picker -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<!-- InputMask -->
+	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+	<!-- Latest compiled and minified Locales -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script>
+		function actionFormatter(value, row, index) {
+			return [
+					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>',
+					'<a class="remove ml10" href="javascript:void(0)" title="删除">',
+					'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+					.join('');
+		}
+
+		window.actionEvents = {
+			'click .edit' : function(e, value, row, index) {
+				alert('You click edit icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			},
+			'click .remove' : function(e, value, row, index) {
+				alert('You click remove icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			}
+		};
+		$(function() {
+			$('#table').bootstrapTable({
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'machineId',
+				sortOrder: 'desc'
+			});
+		});
+
+		$('#zonename').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bZoneServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentZone.zoneId }',
+		            item:"zonename",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#type').editable({
+			type : 'text',
+			placeholder: 'yyyy-MM-dd',
+			url: function (params) { 
+		        return $.post('../bZoneServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentZone.zoneId }',
+		            item:"type",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#area').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bZoneServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentZone.zoneId }',
+		            item:"area",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bZoneServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentZone.zoneId }',
+		            item:"address",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+	</script>
 
 </body>
 </html>

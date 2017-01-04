@@ -1,171 +1,313 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="img/icon_web_mini.png" type="" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="css/plugins/datatables/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/dist/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+	folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
 
-    <title>Document</title>
 
+<link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
+	rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+
+<title>Document</title>
+<style type="text/css">
+#userInfo_left {
+	float: left;
+	width: 40%;
+	height: 320px;
+}
+
+#userInfo_right {
+	float: right;
+	width: 60%;
+	height: 320px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body style="background-color: #ECF0F5">
+	<div class="container" style="width: 100%;">
+		<section class="content-header">
+			<ol class="breadcrumb">
+				<li><a href="javascript:dashboard()"><i
+						class="fa fa-dashboard"></i> 仪表盘</a></li>
+				<li><a href="farmer.jsp">农机主</a></li>
+				<li class="active">详情</li>
+			</ol>
+		</section>
+		<br /> <br />
 
-<div class="container">
-	<section class="content-header">
-		     <ol class="breadcrumb">
-		       <li><a href="javascript:dashboard()"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
-		       <li><a href="machineowner.jsp">农机拥有者</a></li>
-		       <li class="active">详情</li>
-		     </ol>
-	</section>
-	<br/>
-    <br/>
-	    
-    <div class="box box-success">
-        <div class="box-header with-border">
-            <h3 class="box-title">详细信息</h3>
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form class="form-horizontal">
-            <div class="box-body">
-                <fieldset disabled="disabled" class="col-md-10 allInfo">
-                    <div class="form-group">
-                        <label for="username" class="col-md-2 control-label">姓名</label>
+		<form class="form-horizontal">
 
-                        <div class="col-md-10">
-                            <input class="form-control" id="username" type="text" value="${currentMachineOwner.name }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sex" class="col-md-2 control-label">性别</label>
-                        <div class="radio col-md-10">
-                            <label>
-								<input name="sex" id="sex"
-									value="男" type="radio" ${currentMachineOwner.sex=='男'?'checked':''}> 男
-								</label> <label> <input name="sex" id="sex"
-									value="女" type="radio" ${currentMachineOwner.sex=='女'?'checked':''}> 女
-								</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="datemask" class="col-md-2 control-label">出生日期</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" id="datemask" value="${currentMachineOwner.birthday }">
-                            </div>
-                        </div>
+			<!-- Horizontal Form -->
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<h3 class="box-title">基本信息</h3>
+				</div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">手机</label>
+				<div class="box-body">
 
-                        <div class="col-sm-10">
-                            <input class="form-control" id="phone" type="text" id="phone" value="${currentMachineOwner.phone }">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">地址</label>
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width: 80px"><label>编号</label></th>
+								<td style="width: 150px">${currentMachineOwner.ownerId }</td>
+								<th style="width: 80px"><label>姓名</label></th>
+								<td style="width: 150px"><a href="#" id="name">${currentMachineOwner.name }</a></td>
+							</tr>
+							<tr>
+								<th><label>性别</label></th>
+								<td><a href="#" id="sex">${currentMachineOwner.sex }</a></td>
+								<th><label>出生日期</label></th>
+								<td><a href="#" id="date"><fmt:formatDate value="${currentMachineOwner.birthday }" pattern="yyyy-MM-dd"/></a></td>
+							</tr>
+							<tr>
+								<th><label>手机号</label></th>
+								<td><a href="#" id="phone">${currentMachineOwner.phone }</a></td>
+								<th><label>家庭地址</label></th>
+								<td colspan="6"><a href="#" id="address">${currentMachineOwner.address }</a></td>
+							</tr>
+						</tbody>
+					</table>
 
-                        <div class="col-md-10">
-                            <textarea class="form-control" rows="3" id="address">${currentMachineOwner.address }</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="center" class="col-sm-2 control-label" >服务中心</label>
+				</div>
+				<!-- /.box-body -->
 
-                        <div class="col-sm-10">
-                            <input disabled="disabled"  class="form-control" id="center" type="text" value="${currentMachineOwner.center.name }">
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer" align="center">
-                <button type="button" class="btn btn-default" onclick="editInfo()">修改</button>
-                <button type="button" class="btn btn-default" onclick="saveInfo()">保存</button>
-                <button type="reset" class="btn btn-default">重置</button>
-                <button type="button" class="btn btn-default" onclick="returnMachinerOwner()">返回</button>
-            </div>
-            <!-- /.box-footer -->
-        </form>
-    </div>
+			</div>
 
 
-</div>
-<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<!-- bootstrap datepicker -->
-<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- InputMask -->
-<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-<script>
-    $(function () {
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
+		</form>
 
-    });
-    function editInfo() {
-        $(".allInfo").removeAttr("disabled");
-    }
-    function saveInfo() {
-        $(".allInfo").attr("disabled", "disabled");
-        var username = $.trim($("#username").val());
-        var sex = $('input:radio:checked').val();
-        var address = $.trim($("#address").val());
-        var phone = $.trim($("#phone").val());
-        var birthday = $.trim($("#datemask").val());
-        var result= confirm("确认修改？","确认","取消");
-        if(result == true) {
-        	$.post("../bMachineOwnerServlet", {op:"editor", username:username, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
-            	if(data == 1) {
-            		alert("修改成功");
-            	} else {
-            		alert("修改失败");
-            	}
-            });
-        } else {
-        	return;
-        }
-    }
-    function returnMachinerOwner() {
-        window.location = "../bMachineOwnerServlet?op=searchAll";
-    }
-    function dashboard() {
-		parent.location.reload();
-    }
+		<!-- Horizontal Form -->
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">农机信息</h3>
+			</div>
 
-</script>
+			<div class="box-body">
+				<div id="toolbar" class="btn-group">
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-heart"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+				<table id="table" data-toolbar="#toolbar">
+					<thead>
+						<tr>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="machineId" data-sortable="true">编号</th>
+							<th data-field="plate" data-sortable="true">机牌号</th>
+							<th data-field="type" data-sortable="true">类型</th>
+							<th data-field="brand" data-sortable="true">品牌</th>
+							<th data-field="horsepower" data-sortable="true">马力</th>
+							<th data-field="time" data-sortable="true">报废时间</th>
+							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-width="65">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="${currentMachineOwner.machines }">
+							<tr>
+								<td data-field="state" data-checkbox="true"></td>
+	                        	<td>${item.machineId }</td>
+	                            <td>${item.plate }</td>
+	                            <td>${item.type }</td>
+	                            <td>${item.brand }</td>
+	                            <td>${item.horsepower }</td>
+	                            <td><fmt:formatDate value="${item.overdate }" pattern="yyyy-MM-dd"/></td>
+	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- /.box-body -->
+
+		</div>
+
+
+	</div>
+	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<!-- date-range-picker -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<!-- InputMask -->
+	<script src="js/plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+	<!-- Latest compiled and minified Locales -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script>
+		function actionFormatter(value, row, index) {
+			return [
+					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>',
+					'<a class="remove ml10" href="javascript:void(0)" title="删除">',
+					'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+					.join('');
+		}
+
+		window.actionEvents = {
+			'click .edit' : function(e, value, row, index) {
+				alert('You click edit icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			},
+			'click .remove' : function(e, value, row, index) {
+				alert('You click remove icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+			}
+		};
+		$(function() {
+			$('#table').bootstrapTable({
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'machineId',
+				sortOrder: 'desc'
+			});
+		});
+
+		$('#name').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"name",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#sex').editable({
+			type : 'select',
+			source : [ {
+				value : '男',
+				text : '男'
+			}, {
+				value : '女',
+				text : '女'
+			} ],
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"sex",
+		            value:params.value
+		        }); 
+		    }
+		});
+		$('#date').editable({
+			type : 'text',
+			placeholder: 'yyyy-MM-dd',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"birthday",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#phone').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"phone",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../bMachineOwnerServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentMachineOwner.ownerId }',
+		            item:"address",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+	</script>
 
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,6 +20,8 @@ import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.Machineowner;
+import com.geowind.hunong.jpa.MachineownerDAO;
 import com.geowind.hunong.jpa.Zone;
 import com.geowind.hunong.jpa.ZoneDAO;
 import com.geowind.hunong.service.ZoneService;
@@ -63,8 +67,41 @@ public class BZoneServlet extends BasicServlet {
 		case "MapSearchZonePoint":
 			MapSearchZonePoint(request,response);
 			break;
+		case "editeOne":
+			editeOne(request, response);
+			break;
 		default:
 			break;
+		}
+	}
+	
+	/**
+	 * 修改单个属性
+	 * @param request
+	 * @param response
+	 */
+	private void editeOne(HttpServletRequest request, HttpServletResponse response) {
+		String pk = request.getParameter("pk");
+		String item = request.getParameter("item");
+		String value = request.getParameter("value");
+		System.out.println(value);
+		ZoneDAO zoneDAO = new ZoneDAO();
+		Zone zone = zoneDAO.findById(Integer.parseInt(pk));
+		if("zonename".equals(item)) {
+			zone.setZonename(value);
+		} else if("type".equals(item)) {
+			zone.setType(value);
+		} else if("area".equals(item)) {
+			zone.setArea(Double.parseDouble(value));
+		} else if("address".equals(item)) {
+			zone.setAddress(value);
+		}
+		EntityManagerHelper.beginTransaction();
+		try {
+			zoneDAO.update(zone);
+			EntityManagerHelper.commit();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
 		}
 	}
 
