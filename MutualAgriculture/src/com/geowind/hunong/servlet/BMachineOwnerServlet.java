@@ -104,18 +104,11 @@ public class BMachineOwnerServlet extends BasicServlet {
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
 		String ownerId = request.getParameter("ownerId");
-		// List<Machineowner> list = (List<Machineowner>)
-		// request.getSession().getAttribute("allMachinerOwner");
 		Machineowner machineowner = null;
 		EntityManagerHelper.beginTransaction();
 
 		try {
 			machineowner = machineownerDAO.findById(Integer.parseInt(ownerId));
-			/*
-			 * for(int i=0; i<list.size(); i++) { if(list.get(i).getOwnerId() ==
-			 * Integer.parseInt(ownerId)) { machineowner = list.get(i);
-			 * list.remove(i); break; } }
-			 */
 			machineowner.setValid(0);
 			machineownerDAO.update(machineowner);
 			EntityManagerHelper.commit();
@@ -157,6 +150,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);
+		request.getSession().removeAttribute("allMachinerOwner");
 		if (machinerOwnerList != null && machinerOwnerList.size() > 0) {
 			request.getSession().setAttribute("allMachinerOwner", machinerOwnerList);
 			response.sendRedirect("manage/machineowner.jsp");

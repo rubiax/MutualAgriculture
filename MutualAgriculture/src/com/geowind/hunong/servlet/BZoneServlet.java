@@ -160,6 +160,7 @@ public class BZoneServlet extends BasicServlet {
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneDAO zoneDAO = new ZoneDAO();
 		String zoneId = request.getParameter("zoneId");
+		System.out.println(zoneId);
 		Zone zone = null;
 		EntityManagerHelper.beginTransaction();
 
@@ -283,6 +284,7 @@ public class BZoneServlet extends BasicServlet {
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Zone> zoneList = zoneService.search(centerId);
+		request.getSession().removeAttribute("allZone");
 		if (zoneList != null && zoneList.size() > 0) {
 			request.getSession().setAttribute("allZone", zoneList);
 			response.sendRedirect("manage/zone.jsp");
