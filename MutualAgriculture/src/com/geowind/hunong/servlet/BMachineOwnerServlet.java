@@ -3,6 +3,7 @@ package com.geowind.hunong.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.SimMachineOwner;
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Machine;
@@ -60,9 +62,30 @@ public class BMachineOwnerServlet extends BasicServlet {
 		case "editeOne":
 			editeOne(request, response);
 			break;
+		case "getAllData":
+			getAllData(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+	
+	/**
+	 * 向前端传送所有拥有者信息
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	private void getAllData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		MachineOwnerService machineService = new MachineOwnerServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Machineowner> machinerOwnerList = machineService.search(centerId);
+		List<SimMachineOwner> list = new ArrayList<SimMachineOwner>();
+		for(Machineowner machineowner : machinerOwnerList) {
+			list.add(SimMachineOwner.fromMachineOwner(machineowner));
+		}
+		this.out(response, list);
+
 	}
 	
 	/**
@@ -201,6 +224,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		}
 
 	}
+	
 
 	/**
 	 * 添加

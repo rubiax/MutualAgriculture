@@ -42,17 +42,6 @@
 
 <title>Document</title>
 <style type="text/css">
-#userInfo_left {
-	float: left;
-	width: 40%;
-	height: 320px;
-}
-
-#userInfo_right {
-	float: right;
-	width: 60%;
-	height: 320px;
-}
 
 .ml10 {
 	margin-left: 10px;
@@ -79,7 +68,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -89,38 +78,38 @@
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
-				<div class="collapse" id="collapseExample">
-				  <div class="well">
-				  	<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<th style="width: 80px"><label>编号</label></th>
-								<td style="width: 150px">${currentMachineOwner.ownerId }</td>
-								<th style="width: 80px"><label>姓名</label></th>
-								<td style="width: 150px"><a href="#" id="name">${currentMachineOwner.name }</a></td>
-							</tr>
-							<tr>
-								<th><label>性别</label></th>
-								<td><a href="#" id="sex">${currentMachineOwner.sex }</a></td>
-								<th><label>出生日期</label></th>
-								<td><a href="#" id="date"><fmt:formatDate value="${currentMachineOwner.birthday }" pattern="yyyy-MM-dd"/></a></td>
-							</tr>
-							<tr>
-								<th><label>手机号</label></th>
-								<td><a href="#" id="phone">${currentMachineOwner.phone }</a></td>
-								<th><label>家庭地址</label></th>
-								<td colspan="6"><a href="#" id="address">${currentMachineOwner.address }</a></td>
-							</tr>
-						</tbody>
-					</table>
-				  </div>
-				</div>
+				<div id="collapseOne" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th style="width: 80px"><label>姓名</label></th>
+									<td style="width: 150px"><a href="#" id="name"></a></td>
+									<th style="width: 80px"><label>性别</label></th>
+									<td style="width: 150px"><a href="#" id="sex"></a></td>
+								</tr>
+								<tr>
+									<th><label>出生日期</label></th>
+									<td><a href="#" id="date"></a></td>
+									<th><label>手机号</label></th>
+									<td><a href="#" id="phone"></a></td>
+								</tr>
+								<tr>
+									<th><label>家庭地址</label></th>
+									<td colspan="6"><a href="#" id="address"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
+			      </div>
+			    </div>
 				<table id="table" data-toolbar="#toolbar">
 					<thead>
 						<tr>
 							<th data-field="state" data-checkbox="true"></th>
 							<th data-field="ownerId" data-sortable="true">编号</th>
-							<th data-field="realname" data-sortable="true">姓名</th>
+							<th data-field="name" data-sortable="true">姓名</th>
 							<th data-field="sex" data-sortable="true">性别</th>
 							<th data-field="age" data-sortable="true">年龄</th>
 							<th data-field="phone" data-sortable="true">手机</th>
@@ -196,7 +185,14 @@
 	    			$.post("../bMachineOwnerServlet", {op:"delete", ownerId:ownerId}, function(data) {
 	    	        	if(data == 1) {
 	    	        		alert("删除成功");
-	    	        		location.href = "../bMachineOwnerServlet?op=searchAll";
+	    	        		$.post("../bMachineOwnerServlet", {op:"getAllData"}, function(data) {
+	    	        			data = eval("("+ data +")");
+	    	        			for(var i=0; i<data.length; i++) {
+	    	        				data[i].state = '';
+	    	        				data[i].action = '';
+	    	        			}
+	    	        			$("#table").bootstrapTable('load', data);
+	    	        		});
 	    	        	} else {
 	    	        		alert("删除失败");
 	    	        	}
@@ -222,18 +218,13 @@
 				sortName: 'ownerId',
 				sortOrder: 'desc'
 			});
-			$('.collapse').collapse('hide');
+			//$('.collapse').collapse();
 		});
+		function dashboard() {
+			parent.location.reload();
+	    }
 		$('#name').editable({
 			type : 'text',
-			url: function (params) { 
-		        return $.post('../bMachineOwnerServlet', { 
-		            op: 'editeOne',
-		            pk: '${currentMachineOwner.ownerId }',
-		            item:"name",
-		            value:params.value
-		        }); 
-		    },
 		    validate: function (value) { 
 		        if (value == '') { 
 		            return '不能为空'; 
@@ -249,26 +240,10 @@
 				value : '女',
 				text : '女'
 			} ],
-			url: function (params) { 
-		        return $.post('../bMachineOwnerServlet', { 
-		            op: 'editeOne',
-		            pk: '${currentMachineOwner.ownerId }',
-		            item:"sex",
-		            value:params.value
-		        }); 
-		    }
 		});
 		$('#date').editable({
 			type : 'text',
 			placeholder: 'yyyy-MM-dd',
-			url: function (params) { 
-		        return $.post('../bMachineOwnerServlet', { 
-		            op: 'editeOne',
-		            pk: '${currentMachineOwner.ownerId }',
-		            item:"birthday",
-		            value:params.value
-		        }); 
-		    },
 		    validate: function (value) { 
 		        if (value == '') { 
 		            return '不能为空'; 
@@ -277,14 +252,6 @@
 		});
 		$('#phone').editable({
 			type : 'text',
-			url: function (params) { 
-		        return $.post('../bMachineOwnerServlet', { 
-		            op: 'editeOne',
-		            pk: '${currentMachineOwner.ownerId }',
-		            item:"phone",
-		            value:params.value
-		        }); 
-		    },
 		    validate: function (value) { 
 		        if (value == '') { 
 		            return '不能为空'; 
@@ -293,23 +260,50 @@
 		});
 		$('#address').editable({
 			type : 'text',
-			url: function (params) { 
-		        return $.post('../bMachineOwnerServlet', { 
-		            op: 'editeOne',
-		            pk: '${currentMachineOwner.ownerId }',
-		            item:"address",
-		            value:params.value
-		        }); 
-		    },
 		    validate: function (value) { 
 		        if (value == '') { 
 		            return '不能为空'; 
 		        } 
 		    }
 		});
-		function add() {
-			location.href = 'addmachineowner.jsp';
-		}
+		$("#cancelAdd-btn").click(function() {
+			$("#name").editable('setValue', null).removeClass('editable-unsaved');
+			$("#sex").editable('setValue', null).removeClass('editable-unsaved');
+			$("#date").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+			$("#collapseOne").collapse('hide');
+		});	
+		$("#confirmAdd-btn").click(function() {
+			var name = $("#name").editable('getValue', true);
+			var sex = $("#sex").editable('getValue', true);
+			var birthday = $("#date").editable('getValue', true);
+			var phone = $("#phone").editable('getValue', true);
+			var address = $("#address").editable('getValue', true);
+			alert(name+" "+sex+" "+birthday+" "+phone+" "+address);
+	        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
+	        	if(data == 1) {
+	        		alert("添加成功");
+	        		$.post("../bMachineOwnerServlet", {op:"getAllData"}, function(data) {
+	        			data = eval("("+ data +")");
+	        			for(var i=0; i<data.length; i++) {
+	        				data[i].state = '';
+	        				data[i].action = '';
+	        			}
+	        			$("#table").bootstrapTable('load', data);
+	        		});
+	        	} else {
+	        		alert("添加失败");
+	        	}
+	        });
+	        $("#name").editable('setValue', null).removeClass('editable-unsaved');
+			$("#sex").editable('setValue', null).removeClass('editable-unsaved');
+			$("#date").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+	        $("#collapseOne").collapse('hide');
+	   	});
+			
 	</script>
 
 </body>
