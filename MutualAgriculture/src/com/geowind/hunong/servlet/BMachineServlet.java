@@ -177,25 +177,28 @@ public class BMachineServlet extends BasicServlet {
 	 * 
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 */
-	private void uploadImage(HttpServletRequest request, HttpServletResponse response) {
+	private void uploadImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ServletConfig servletConfig = this.getServletConfig();
 		FileUploadUtil.PATH = "../HN_upload/imgupload";
 		FileUploadUtil uploadUtil = new FileUploadUtil();
 		Map<String, String> map = null;
 		try {
 			map = (Map<String, String>) uploadUtil.upload(servletConfig, request, response);
+			for(String key:map.keySet()) {
+				System.out.println(key +" " + map.get(key));
+			}
 			if (map != null && map.size() > 0) {
 				MachineDAO machineDAO = new MachineDAO();
 				Machine machine = (Machine) request.getSession().getAttribute("currentMachine");
-				machine.setPicture(map.get("pic1"));
+				machine.setPicture(map.get("uploadImg"));
 				EntityManagerHelper.beginTransaction();
 				machineDAO.update(machine);
 				EntityManagerHelper.commit();
-				response.sendRedirect("manage/addmachine.jsp");
+				response.sendRedirect("bMachineServlet?op=searchAll");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -234,24 +237,22 @@ public class BMachineServlet extends BasicServlet {
 	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineDAO machineDAO = new MachineDAO();
 		Machine machine = new Machine();
-		String ownername = request.getParameter("ownername");
+		String ownerId = request.getParameter("ownerId");
 		String plate = request.getParameter("plate");
 		String type = request.getParameter("type");
 		String brand = request.getParameter("brand");
 		String horsepower = request.getParameter("horsepower");
 		String overdate = request.getParameter("overdate");
 
-		System.out.println(ownername + " " + plate + " " + type + " " + brand + " " + horsepower + " " + overdate);
+		System.out.println(ownerId + " " + plate + " " + type + " " + brand + " " + horsepower + " " + overdate);
 
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
-		List<Machineowner> machineowners = machineownerDAO.findByName(ownername);
-		if (machineowners != null && machineowners.size() > 0) {
-			machine.setMachineowner(machineowners.get(0));
-		}
+		Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(ownerId));
 		machine.setPlate(plate);
 		machine.setType(type);
 		machine.setBrand(brand);
 		machine.setHorsepower(horsepower);
+		machine.setMachineowner(machineowner);
 		try {
 			machine.setOverdate(new SimpleDateFormat("yyyy-MM-dd").parse(overdate));
 		} catch (ParseException e) {
@@ -309,6 +310,14 @@ public class BMachineServlet extends BasicServlet {
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MachineDAO machineDAO = new MachineDAO();
+		
+		MachineOwnerService machineService = new MachineOwnerServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Machineowner> machinerOwnerList = machineService.search(centerId);
+		if (machinerOwnerList != null && machinerOwnerList.size() > 0) {
+			request.getSession().setAttribute("allMachinerOwner", machinerOwnerList);
+		}
+		
 		List<Machine> machineList = machineDAO.findByValid(1);
 		request.getSession().removeAttribute("allMachine");
 		if (machineList != null && machineList.size() > 0) {

@@ -36,8 +36,7 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+<link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 
 
 <title>Document</title>
@@ -140,12 +139,10 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table.min.js"></script>
 
 	<!-- Latest compiled and minified Locales -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [

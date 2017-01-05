@@ -36,23 +36,11 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+<link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 
 
 <title>Document</title>
 <style type="text/css">
-#userInfo_left {
-	float: left;
-	width: 40%;
-	height: 320px;
-}
-
-#userInfo_right {
-	float: right;
-	width: 60%;
-	height: 320px;
-}
 
 .ml10 {
 	margin-left: 10px;
@@ -79,7 +67,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" onclick="add();">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -89,6 +77,28 @@
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
+				<div id="collapseOne" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th style="width: 80px"><label>分区名</label></th>
+									<td style="width: 150px"><a href="#" id="zonename"></a></td>
+									<th style="width: 80px"><label>面积</label></th>
+									<td style="width: 150px"><a href="#" id="area"></a></td>
+								</tr>
+								<tr>
+									<th><label>作物类型</label></th>
+									<td><a href="#" id="type"></a></td>
+									<th><label>地址</label></th>
+									<td><a href="#" id="address"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
+			      </div>
+			    </div>
 				<table id="table" data-toolbar="#toolbar">
 					<thead>
 						<tr>
@@ -136,12 +146,10 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table.min.js"></script>
 
 	<!-- Latest compiled and minified Locales -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [
@@ -169,7 +177,14 @@
 	    			$.post("../bZoneServlet", {op:"delete", zoneId:zoneId}, function(data) {
 	    	        	if(data == 1) {
 	    	        		alert("删除成功");
-	    	        		location.href = "../bZoneServlet?op=searchAll";
+	    	        		$.post("../bZoneServlet", {op:"getAllData"}, function(data) {
+	    	        			data = eval("("+ data +")");
+	    	        			for(var i=0; i<data.length; i++) {
+	    	        				data[i].state = '';
+	    	        				data[i].action = '';
+	    	        			}
+	    	        			$("#table").bootstrapTable('load', data);
+	    	        		});
 	    	        	} else {
 	    	        		alert("删除失败");
 	    	        	}
@@ -180,7 +195,6 @@
 			}
 		};
 		$(function() {
-			//Datemask dd/mm/yyyy
 			$('#table').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
@@ -196,10 +210,77 @@
 				sortOrder: 'desc'
 			});
 		});
-		
-		function add() {
-			location.href = 'addzone.jsp';
-		}
+		function dashboard() {
+			parent.location.reload();
+	    }
+		$('#zonename').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#area').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});$('#type').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$("#cancelAdd-btn").click(function() {
+			$("#zonename").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area").editable('setValue', null).removeClass('editable-unsaved');
+			$("#type").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+			$("#collapseOne").collapse('hide');
+		});	
+		$("#confirmAdd-btn").click(function() {
+			var zonename = $("#zonename").editable('getValue', true);
+			var area = $("#area").editable('getValue', true);
+			var type = $("#type").editable('getValue', true);
+			var address = $("#address").editable('getValue', true);
+			if(zonename == null || area == null || type == null || address == null) {
+				alert("请完成信息");
+				return;
+			}
+	        $.post("../bZoneServlet", {op:"add", zonename:zonename, area:area, type:type, address:address}, function(data) {
+	        	if(data == 1) {
+	        		alert("添加成功");
+	        		$.post("../bZoneServlet", {op:"getAllData"}, function(data) {
+	        			data = eval("("+ data +")");
+	        			for(var i=0; i<data.length; i++) {
+	        				data[i].state = '';
+	        				data[i].action = '';
+	        			}
+	        			$("#table").bootstrapTable('load', data);
+	        		});
+	        	} else {
+	        		alert("添加失败");
+	        	}
+	        });
+	        $("#zonename").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area").editable('setValue', null).removeClass('editable-unsaved');
+			$("#type").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+	        $("#collapseOne").collapse('hide');
+	   	});
 	</script>
 
 </body>

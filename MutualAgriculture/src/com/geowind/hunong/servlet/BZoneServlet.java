@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.entity.FarmlandPoint;
 import com.geowind.hunong.entity.Point;
+import com.geowind.hunong.entity.SimZone;
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
@@ -70,11 +71,31 @@ public class BZoneServlet extends BasicServlet {
 		case "editeOne":
 			editeOne(request, response);
 			break;
+		case "getAllData":
+			getAllData(request, response);
+			break;
 		default:
 			break;
 		}
 	}
 	
+	/**
+	 * 服务器向客户端写入数据
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void getAllData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ZoneService zoneService = new ZoneServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Zone> zoneList = zoneService.search(centerId);
+		List<SimZone> list = new ArrayList<SimZone>();
+		for(Zone zone : zoneList) {
+			list.add(SimZone.fromZone(zone));
+		}
+		this.out(response, list);
+	}
+
 	/**
 	 * 修改单个属性
 	 * @param request

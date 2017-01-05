@@ -49,8 +49,7 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="depend/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet"
 	href="depend/select2/select2.min.css">
 

@@ -36,24 +36,13 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+<link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
+<link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
+<link rel="stylesheet" href="depend/select2/select2.min.css">
 
-
+<link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
 <title>Document</title>
 <style type="text/css">
-#userInfo_left {
-	float: left;
-	width: 40%;
-	height: 320px;
-}
-
-#userInfo_right {
-	float: right;
-	width: 60%;
-	height: 320px;
-}
-
 .ml10 {
 	margin-left: 10px;
 }
@@ -79,7 +68,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" onclick="add();">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -89,6 +78,61 @@
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
+				<div id="collapseOne" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+							<tbody>
+							<tr>
+								<th style="width: 80px"><label>拥有者姓名</label></th>
+								<td style="width: 150px">
+									<select id="select1" class="js-example-basic-single" style="width: 90%">
+										<c:forEach var="item" items="${allMachinerOwner }">
+											<option value="${item.ownerId }">${item.name } ${item.phone } </option>
+										</c:forEach>
+									</select>
+								</td>
+								<th style="width: 80px"><label>拥有者手机号</label></th>
+								<td style="width: 150px" id="phone"></td>
+							</tr>
+							<tr>
+								<th style="width: 80px"><label>农机类型</label></th>
+								<td style="width: 150px">
+									<select id="select2" class="js-example-basic-single" style="width: 90%">
+										<option value="收获机械">收获机械</option>
+										<option value="耕种机械">耕种机械</option>
+										<option value="排灌机械">排灌机械</option>
+										<option value="动力传送机械">动力传送机械</option>
+										<option value="种植施肥机械">种植施肥机械</option>
+										<option value="植保机械">植保机械</option>
+										<option value="粮油机械">粮油机械</option>
+										<option value="果蔬机械">果蔬机械</option>
+										<option value="饲料机械">饲料机械</option>
+									</select>
+								</td>
+								<th><label>品牌</label></th>
+								<td><a href="#" id="brand"></a></td>
+							</tr>
+							<tr>
+								<th><label>机牌号</label></th>
+								<td><a href="#" id="plate"></a></td>
+								<th><label>马力</label></th>
+								<td><a href="#" id="horsepower"></a></td>
+							</tr>
+							<tr>
+								<th><label>报废时间</label></th>
+								<td colspan="1"><a href="#" id="overdate"></a></td>
+							</tr>
+						</tbody>
+						</table>
+						<label class="control-label">选择图片</label>
+						<form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        	<input id="uploadImg" name="uploadImg" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpg", "png","gif","jpeg"]'>
+						</form>
+						<br>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
+			      </div>
+			    </div>
 				<table id="table" data-toolbar="#toolbar">
 					<thead>
 						<tr>
@@ -140,13 +184,39 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
-
+	<script src="depend/bootstrap-table/bootstrap-table.min.js"></script>
 	<!-- Latest compiled and minified Locales -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
+	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
 	<script>
+		
+		$(function() {
+			$('#table').bootstrapTable({
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'machineId',
+				sortOrder: 'desc'
+			});
+			$("#select1").select2();
+			//$("#select1").val("${currentMachine.machineowner.ownerId }").trigger("change");
+			$("#select1").select2('val',' ');
+			$("#select2").select2();
+			$("#select2").select2('val',' ');
+		});
+		
+		function dashboard() {
+			parent.location.reload();
+	    }
 		function actionFormatter(value, row, index) {
 			return [
 					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
@@ -183,27 +253,88 @@
 	    		}
 			}
 		};
-		$(function() {
-			//Datemask dd/mm/yyyy
-			$('#table').bootstrapTable({
-				pagination : true,
-				pageNumber : 1,
-				pageSize : 5,
-				pageList : [ 5, 10, 20, 50 ],
-				search : true,
-				height : 380,
-				showRefresh : true,
-				showToggle : true,
-				showColumns : true,
-				clickToSelect : true,
-				sortName: 'machineId',
-				sortOrder: 'desc'
-			});
+		
+		$("#select1").on("select2:select", function (e) {
+			var text = $("#select1").select2('data')[0]['text'];
+			var phone = text.split(' ')[1];
+			$("#phone").text(phone);
+			var ownerId = $("#select1").val();
+		});
+		$("#select2").on("select2:select", function (e) {
+			var value = $("#select2").val();
 		});
 		
-		function add() {
-			location.href = 'addmachine.jsp';
-		}
+		$('#brand').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#plate').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#horsepower').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#overdate').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$("#cancelAdd-btn").click(function() {
+			$("#select1").select2('val',' ');
+			$("#select2").select2('val',' ');
+	        $("#brand").editable('setValue', null).removeClass('editable-unsaved');
+			$("#plate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#horsepower").editable('setValue', null).removeClass('editable-unsaved');
+			$("#overdate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").val('');
+	        $("#collapseOne").collapse('hide');
+		});	
+		$("#confirmAdd-btn").click(function() {
+			var ownerId = $("#select1").val();
+			var type = $("#select2").val();
+			var brand = $("#brand").editable('getValue', true);
+			var plate = $("#plate").editable('getValue', true);
+			var horsepower = $("#horsepower").editable('getValue', true);
+			var overdate = $("#overdate").editable('getValue', true);
+			if(ownerId == null || type == null || brand == null || plate == null || horsepower == null || overdate== null) {
+				alert("请完成信息");
+				return;
+			}
+			$.post("../bMachineServlet?op=add", {ownerId:ownerId, type:type, plate:plate,
+		    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
+		    	if(data == 1) {
+		    		alert("添加成功");
+		    		$("#myform").submit();
+		    	} else {
+		    		alert("添加失败");
+		    	}
+		    });
+			$("#select1").select2('val',' ');
+			$("#select2").select2('val',' ');
+	        $("#brand").editable('setValue', null).removeClass('editable-unsaved');
+			$("#plate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#horsepower").editable('setValue', null).removeClass('editable-unsaved');
+			$("#overdate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").val('');
+	        $("#collapseOne").collapse('hide');
+	   	});
 	</script>
 
 </body>

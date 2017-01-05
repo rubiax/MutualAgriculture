@@ -105,7 +105,7 @@ public class Machine implements java.io.Serializable {
 		this.machineowner = machineowner;
 	}
 
-	@Column(name = "plate", length = 45)
+	@Column(name = "plate", unique = true, nullable = false, length = 45)
 	public String getPlate() {
 		return this.plate;
 	}

@@ -36,9 +36,7 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
-
+<link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 
 <title>Document</title>
 <style type="text/css">
@@ -68,7 +66,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -152,12 +150,10 @@
 	<script src="js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	<script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table.min.js"></script>
 
 	<!-- Latest compiled and minified Locales -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [
@@ -280,6 +276,10 @@
 			var birthday = $("#date").editable('getValue', true);
 			var phone = $("#phone").editable('getValue', true);
 			var address = $("#address").editable('getValue', true);
+			if(name == null || sex== null || birthday == null || phone == null || address == null) {
+				alert("请完成信息");
+				return;
+			}
 			alert(name+" "+sex+" "+birthday+" "+phone+" "+address);
 	        $.post("../bMachineOwnerServlet", {op:"add", name:name, sex:sex, address:address, phone:phone, birthday:birthday}, function(data) {
 	        	if(data == 1) {
