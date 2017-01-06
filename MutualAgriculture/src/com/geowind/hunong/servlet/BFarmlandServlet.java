@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
+import com.geowind.hunong.jpa.Machine;
 import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.jpa.Zone;
@@ -347,14 +349,12 @@ public class BFarmlandServlet extends BasicServlet {
 	 * @throws ServletException 
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
-		if (farmlandList != null && farmlandList.size() > 0) {
-			request.getSession().setAttribute("allFarmland", farmlandList);
-			 response.sendRedirect("manage/farmland.jsp");
-		} else {
-			// 跳转至错误页面
-
-		}
+		request.getSession().setAttribute("allFarmland", farmlandList);
+		response.sendRedirect("manage/farmland.jsp");
 	}
 }

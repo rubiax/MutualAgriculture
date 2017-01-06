@@ -37,7 +37,6 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
-<link href="css/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
 <link rel="stylesheet" href="depend/select2/select2.min.css">
 
 <link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
@@ -205,7 +204,10 @@
 				showColumns : true,
 				clickToSelect : true,
 				sortName: 'machineId',
-				sortOrder: 'desc'
+				sortOrder: 'desc',
+				formatLoadingMessage: function() {
+					return '<img src="img/loading_spinner.gif"/>'
+				}
 			});
 			$("#select1").select2();
 			//$("#select1").val("${currentMachine.machineowner.ownerId }").trigger("change");

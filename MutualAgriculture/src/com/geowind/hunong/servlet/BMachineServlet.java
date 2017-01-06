@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +18,13 @@ import com.geowind.hunong.jpa.Machine;
 import com.geowind.hunong.jpa.MachineDAO;
 import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.jpa.MachineownerDAO;
-import com.geowind.hunong.jpa.User;
-import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.service.MachineOwnerService;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BMachineServlet extends BasicServlet {
+
+	private static final long serialVersionUID = -2248323716518493306L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -309,8 +310,10 @@ public class BMachineServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		MachineDAO machineDAO = new MachineDAO();
-		
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);

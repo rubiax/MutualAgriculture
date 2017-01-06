@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -157,8 +158,10 @@ public class BUserServlet extends BasicServlet {
 	 * @param response
 	 * @throws IOException
 	 */
-	private void searchAll(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		UserService userService = new UserServiceImpl();
 		String type = request.getParameter("type");
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -339,6 +340,9 @@ public class BZoneServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Zone> zoneList = zoneService.search(centerId);

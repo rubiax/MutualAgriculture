@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -212,6 +213,9 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);

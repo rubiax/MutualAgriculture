@@ -37,7 +37,9 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
+<link rel="stylesheet" href="depend/select2/select2.min.css">
 
+<link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
 
 <title>Document</title>
 <style type="text/css">
@@ -78,7 +80,7 @@
 
 			<div class="box-body">
 				<div id="toolbar" class="btn-group">
-					<button type="button" class="btn btn-default" onclick="add();">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						<i class="glyphicon glyphicon-plus"></i>
 					</button>
 					<button type="button" class="btn btn-default">
@@ -88,6 +90,72 @@
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
+				<div id="collapseOne" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+			      			<tbody>
+							<tr>
+								<th style="width: 80px"><label>拥有者姓名</label></th>
+								<td style="width: 150px">
+									<select id="select1" class="js-example-basic-single" style="width: 90%">
+										<c:forEach var="item" items="${allFarmer }">
+											<option value="${item.username }">${item.realname } ${item.phone } </option>
+										</c:forEach>
+									</select>
+								</td>
+								<th style="width: 80px"><label>拥有者手机号</label></th>
+								<td style="width: 150px" id="phone">${currentFarmland.user.phone }</td>
+								
+							</tr>
+							<tr>
+								<th style="width: 80px"><label>所属分区名</label></th>
+								<td style="width: 150px">
+									<select id="select2" class="js-example-basic-single" style="width: 90%">
+										<c:forEach var="item" items="${allZone }">
+											<option value="${item.zoneId } ${item.type }">${item.zonename }</option>
+										</c:forEach>
+									</select>
+								</td>
+								<th style="width: 80px"><label>作物类型</label></th>
+								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
+								</td>
+							</tr>
+							<tr>
+								<th><label>经纬度</label></th>
+								<td><a href="#" id="jingweidu"></a></td>
+								
+								<th><label>地址</label></th>
+								<td><a href="#" id="address"></a></td>
+							</tr>
+							<tr>
+								<th><label>面积</label></th>
+								<td><a href="#" id="area"></a></td>
+								
+								<th><label>土壤酸碱度</label></th>
+								<td><a href="#" id="ph"></a></td>
+							</tr>
+							<tr>
+								<th><label>氮磷钾含量</label></th>
+								<td><a href="#" id="npk"></a></td>
+								
+								<th><label>流转信息</label></th>
+								<td><a href="#" id="transtion"></a></td>
+							</tr>
+						</tbody>
+						</table>
+						<label class="control-label">选择图片</label>
+						<form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        	<input id="uploadImg" name="uploadImg" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpg", "png","gif","jpeg"]'>
+						</form>
+						<br>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
+			      </div>
+			    </div>
 				<table id="table" data-toolbar="#toolbar">
 					<thead>
 						<tr>
@@ -123,9 +191,8 @@
 			<!-- /.box-body -->
 
 		</div>
-
-
 	</div>
+	<jsp:include page="smallmap.html"></jsp:include>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- date-range-picker -->
@@ -143,6 +210,9 @@
 
 	<!-- Latest compiled and minified Locales -->
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
+	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [
@@ -181,7 +251,6 @@
 			}
 		};
 		$(function() {
-			//Datemask dd/mm/yyyy
 			$('#table').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
@@ -196,10 +265,81 @@
 				sortName: 'farmlandId',
 				sortOrder: 'desc'
 			});
+			$("#select1").select2();
+			//$("#select1").val("${currentMachine.machineowner.ownerId }").trigger("change");
+			$("#select1").select2('val',' ');
+			$("#select2").select2();
+			$("#select2").select2('val',' ');
 		});
 		
-		function add() {
-			location.href = 'addfarmland.jsp';
+		$("#select1").on("select2:select", function (e) {
+			var text = $("#select1").select2('data')[0]['text'];
+			var phone = text.split(' ')[1];
+			$("#phone").text(phone);
+			var username = $("#select1").val();
+		});
+		$("#select2").on("select2:select", function (e) {
+			var value = $("#select2").val();
+			var type = value.split(' ')[1];
+			var zoneId = value.split(' ')[0];
+			$("#type").text(type);
+		});
+
+		$('#jingweidu').editable({
+			type : 'text',
+			placeholder: '(纬度, 经度)',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#address').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#area').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#ph').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#npk').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#transtion').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		function submitChange() {
+			var coordinate = $.trim($("#coordinate").val());
+			var _address = $.trim($("#_address").val());
+			$("#jingweidu").text(coordinate);
+			$("#address").text(_address);
+			$('#myModal').modal('hide');
 		}
 	</script>
 

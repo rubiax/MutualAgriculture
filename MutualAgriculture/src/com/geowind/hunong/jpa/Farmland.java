@@ -3,6 +3,7 @@ package com.geowind.hunong.jpa;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -231,4 +232,16 @@ public class Farmland implements java.io.Serializable {
 		this.tasks = tasks;
 	}
 
+	@Override
+	public String toString() {
+		return "Farmland [farmlandId=" + farmlandId + ", user=" + user
+				+ ", zone=" + zone + ", longitude=" + longitude + ", latitude="
+				+ latitude + ", address=" + address + ", area=" + area
+				+ ", picture=" + picture + ", transtion=" + transtion
+				+ ", production=" + production + ", ph=" + ph + ", npk=" + npk
+				+ ", state=" + state + ", valid=" + valid + ", tasks=" + tasks
+				+ "]";
+	}
+
+	
 }
