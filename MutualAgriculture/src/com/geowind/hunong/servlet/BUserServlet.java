@@ -131,8 +131,10 @@ public class BUserServlet extends BasicServlet {
 	 * @param response
 	 * @throws IOException
 	 */
-	private void detail(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		String type = request.getParameter("type");
 		if (type.equals("v_farmer")) {
 			UserDAO userDAO = new UserDAO();

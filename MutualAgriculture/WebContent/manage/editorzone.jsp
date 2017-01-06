@@ -146,7 +146,7 @@
 								<td data-field="state" data-checkbox="true"></td>
 								<td>${item.farmlandId }</td>
 								<td>${item.user.realname }</td>
-								<td>(${item.latitude}, ${item.longitude })</td>
+								<td>${item.longitude }, ${item.latitude }</td>
 								<td>${item.address }</td>
 								<td>${item.zone.type }</td>
 								<td>${item.area }</td>

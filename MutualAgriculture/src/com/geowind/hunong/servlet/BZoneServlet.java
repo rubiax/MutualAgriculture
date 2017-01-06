@@ -321,6 +321,9 @@ public class BZoneServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		ZoneDAO zoneDAO = new ZoneDAO();
 		try {
 			Zone zone = zoneDAO.findById(Integer.parseInt(request.getParameter("zoneId")));

@@ -43,18 +43,6 @@
 
 <title>Document</title>
 <style type="text/css">
-#userInfo_left {
-	float: left;
-	width: 40%;
-	height: 320px;
-}
-
-#userInfo_right {
-	float: right;
-	width: 60%;
-	height: 320px;
-}
-
 .ml10 {
 	margin-left: 10px;
 }
@@ -104,7 +92,7 @@
 									</select>
 								</td>
 								<th style="width: 80px"><label>拥有者手机号</label></th>
-								<td style="width: 150px" id="phone">${currentFarmland.user.phone }</td>
+								<td style="width: 150px" id="phone"></td>
 								
 							</tr>
 							<tr>
@@ -117,7 +105,7 @@
 									</select>
 								</td>
 								<th style="width: 80px"><label>作物类型</label></th>
-								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
+								<td style="width: 150px" id="type"></td>
 							</tr>
 							<tr>
 								<td colspan="4">
@@ -148,7 +136,7 @@
 						</tbody>
 						</table>
 						<label class="control-label">选择图片</label>
-						<form id="myform" action="../bMachineServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+						<form id="myform" action="../bFarmlandServlet?op=uploadImage" method="post" enctype="multipart/form-data">
                         	<input id="uploadImg" name="uploadImg" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpg", "png","gif","jpeg"]'>
 						</form>
 						<br>
@@ -177,7 +165,7 @@
 	                        	<td>${item.farmlandId }</td>
 	                        	<td>${item.user.realname }</td>
 	                        	<td>${item.zone.zonename }</td>
-	                            <td>(${item.longitude }, ${item.latitude})</td>
+	                            <td>${item.longitude }, ${item.latitude}</td>
 	                            <td>${item.address }</td>
 	                            <td>${item.zone.type }</td>
 	                            <td>${item.area }</td>
@@ -271,12 +259,13 @@
 			$("#select2").select2();
 			$("#select2").select2('val',' ');
 		});
-		
+		function dashboard() {
+			parent.location.reload();
+	    }
 		$("#select1").on("select2:select", function (e) {
 			var text = $("#select1").select2('data')[0]['text'];
 			var phone = text.split(' ')[1];
 			$("#phone").text(phone);
-			var username = $("#select1").val();
 		});
 		$("#select2").on("select2:select", function (e) {
 			var value = $("#select2").val();
@@ -287,7 +276,7 @@
 
 		$('#jingweidu').editable({
 			type : 'text',
-			placeholder: '(纬度, 经度)',
+			placeholder: '经度, 纬度',
 			validate : function(value) {
 				if (value == '') {
 					return '不能为空';
@@ -334,11 +323,64 @@
 				}
 			}
 		});
+		$("#cancelAdd-btn").click(function() {
+			$("#select1").select2('val',' ');
+			$("#select2").select2('val',' ');
+	        $("#jingweidu").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area").editable('setValue', null).removeClass('editable-unsaved');
+			$("#ph").editable('setValue', null).removeClass('editable-unsaved');
+			$("#npk").editable('setValue', null).removeClass('editable-unsaved');
+			$("#transtion").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").val('');
+			$("#type").val('');
+	        $("#collapseOne").collapse('hide');
+		});	
+		$("#confirmAdd-btn").click(function() {
+			var username = $("#select1").val();
+			var value = $("#select2").val();
+			if(value == null || value =='') {
+				alert("请完善信息");
+				return;
+			}
+			var zoneId = value.split(' ')[0];
+			var jingweidu = $("#jingweidu").editable('getValue', true);
+			var address = $("#address").editable('getValue', true);
+			var area = $("#area").editable('getValue', true);
+			var ph = $("#ph").editable('getValue', true);
+			var npk = $("#npk").editable('getValue', true);
+			var transtion = $("#transtion").editable('getValue', true);
+			if(username == null || zoneId == null || jingweidu == null || address == null || area == null ||
+					username == '' || zoneId == '' || jingweidu == '' || address == '' || area == '') {
+				alert("请完善信息");
+				return;
+			}
+			$.post("../bFarmlandServlet", {op:"add", username:username, zoneId:zoneId, jingweidu:jingweidu, address:address,
+				area:area, ph:ph, npk:npk, transtion:transtion}, function(data) {
+		    	if(data == 1) {
+		    		alert("添加成功");
+		    		$("#myform").submit();
+		    	} else {
+		    		alert("添加失败");
+		    	}
+		    });
+			$("#select1").select2('val',' ');
+			$("#select2").select2('val',' ');
+	        $("#jingweidu").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area").editable('setValue', null).removeClass('editable-unsaved');
+			$("#ph").editable('setValue', null).removeClass('editable-unsaved');
+			$("#npk").editable('setValue', null).removeClass('editable-unsaved');
+			$("#transtion").editable('setValue', null).removeClass('editable-unsaved');
+			$("#phone").val('');
+			$("#type").val('');
+	        $("#collapseOne").collapse('hide');
+	   	});
 		function submitChange() {
 			var coordinate = $.trim($("#coordinate").val());
 			var _address = $.trim($("#_address").val());
-			$("#jingweidu").text(coordinate);
-			$("#address").text(_address);
+			$("#jingweidu").editable('setValue', coordinate)
+			$("#address").editable('setValue', _address)
 			$('#myModal').modal('hide');
 		}
 	</script>

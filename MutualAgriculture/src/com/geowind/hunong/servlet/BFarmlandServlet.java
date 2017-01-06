@@ -94,10 +94,9 @@ public class BFarmlandServlet extends BasicServlet {
 			Zone zone = zoneDAO.findById(Integer.parseInt(value));
 			farmland.setZone(zone);
 		} else if ("jingweidu".equals(item)) {
-			String jingweidu = value.substring(1, value.length()-1);
-			String latitude = jingweidu.split(", ")[0];
-			String longitude = jingweidu.split(", ")[1];
-			System.out.println(latitude + " " + longitude);
+			String longitude = value.split(", ")[0];
+			String latitude = value.split(", ")[1];
+			System.out.println(longitude + " " + latitude);
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));
 		} else if ("address".equals(item)) {
@@ -164,11 +163,11 @@ public class BFarmlandServlet extends BasicServlet {
 			if (map != null && map.size() > 0) {
 				FarmlandDAO farmlandDAO = new FarmlandDAO();
 				Farmland farmland = (Farmland) request.getSession().getAttribute("currentFarmland");
-				farmland.setPicture(map.get("pic1"));
+				farmland.setPicture(map.get("uploadImg"));
 				EntityManagerHelper.beginTransaction();
 				farmlandDAO.update(farmland);
 				EntityManagerHelper.commit();
-				response.sendRedirect("manage/addfarmland.jsp");
+				response.sendRedirect("bFarmlandServlet?op=searchAll");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -186,25 +185,29 @@ public class BFarmlandServlet extends BasicServlet {
 	private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
+		Farmland farmland = new Farmland();
+		
 		String username = request.getParameter("username");
-		String zonename = request.getParameter("zonename");
-		String lal = request.getParameter("lal");
+		String zondId = request.getParameter("zoneId");
+		String jingweidu = request.getParameter("jingweidu");
 		String longitude = null;
 		String latitude = null;
-		if (!"".equals(lal) && lal != null) {
-			longitude = lal.split(",")[0];
-			latitude = lal.split(",")[1];
+		if (!"".equals(jingweidu) && jingweidu != null) {
+			longitude = jingweidu.split(",")[0];
+			latitude = jingweidu.split(",")[1];
 		}
 		double area = Double.parseDouble(request.getParameter("area"));
 		String ph = request.getParameter("ph");
 		String npk = request.getParameter("npk");
 		String address = request.getParameter("address");
 		String transtion = request.getParameter("transtion");
+		
 		UserDAO userDAO = new UserDAO();
-		Farmland farmland = new Farmland();
 		farmland.setUser(userDAO.findById(username));
+		
 		ZoneDAO zoneDAO = new ZoneDAO();
-		farmland.setZone(zoneDAO.findByZonename(zonename).get(0));
+		farmland.setZone(zoneDAO.findById(Integer.parseInt(zondId)));
+		
 		if (longitude != null && latitude != null) {
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));
@@ -316,6 +319,9 @@ public class BFarmlandServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
@@ -329,9 +335,7 @@ public class BFarmlandServlet extends BasicServlet {
 			
 			ZoneService zoneService = new ZoneServiceImpl();
 			List<Zone> zoneList = zoneService.search(centerId);
-			if (zoneList != null && zoneList.size() > 0) {
-				request.getSession().setAttribute("allZone", zoneList);
-			} 
+			request.getSession().setAttribute("allZone", zoneList);
 			
 			response.sendRedirect("manage/editorfarmland.jsp");
 		} catch (RuntimeException re) {
@@ -355,6 +359,17 @@ public class BFarmlandServlet extends BasicServlet {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		request.getSession().setAttribute("allFarmland", farmlandList);
+		
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		
+		UserService userService = new UserServiceImpl();
+		List<User> farmerList = userService.search(centerId, "v_farmer");
+		request.getSession().setAttribute("allFarmer", farmerList);
+		
+		ZoneService zoneService = new ZoneServiceImpl();
+		List<Zone> zoneList = zoneService.search(centerId);
+		request.getSession().setAttribute("allZone", zoneList);
+		
 		response.sendRedirect("manage/farmland.jsp");
 	}
 }

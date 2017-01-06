@@ -187,9 +187,6 @@ public class BMachineServlet extends BasicServlet {
 		Map<String, String> map = null;
 		try {
 			map = (Map<String, String>) uploadUtil.upload(servletConfig, request, response);
-			for(String key:map.keySet()) {
-				System.out.println(key +" " + map.get(key));
-			}
 			if (map != null && map.size() > 0) {
 				MachineDAO machineDAO = new MachineDAO();
 				Machine machine = (Machine) request.getSession().getAttribute("currentMachine");
@@ -285,6 +282,9 @@ public class BMachineServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		MachineDAO machineDAO = new MachineDAO();
 		try {
 			Machine machine = machineDAO.findById(Integer.parseInt(request.getParameter("machineId")));

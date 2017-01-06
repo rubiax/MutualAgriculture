@@ -169,7 +169,7 @@
 							</tr>
 							<tr>
 								<th><label>经纬度</label></th>
-								<td><a href="#" id="jingweidu">(${currentFarmland.latitude }, ${currentFarmland.longitude })</a></td>
+								<td><a href="#" id="jingweidu">${currentFarmland.longitude }, ${currentFarmland.latitude }</a></td>
 								
 								<th><label>地址</label></th>
 								<td><a href="#" id="address">${currentFarmland.address }</a></td>
@@ -382,8 +382,8 @@
 		function submitChange() {
 			var coordinate = $.trim($("#coordinate").val());
 			var _address = $.trim($("#_address").val());
-			$("#jingweidu").text(coordinate);
-			$("#address").text(_address);
+			$("#jingweidu").editable('setValue', coordinate)
+			$("#address").editable('setValue', _address)
 			$('#myModal').modal('hide');
 			$.post('../bFarmlandServlet', {
 				op : 'editeOne',

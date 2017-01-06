@@ -194,6 +194,9 @@ public class BMachineOwnerServlet extends BasicServlet {
 	 * @throws IOException
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
 		try {
 			Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(request.getParameter("ownerId")));
