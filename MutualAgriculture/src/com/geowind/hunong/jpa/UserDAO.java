@@ -27,6 +27,7 @@ public class UserDAO implements IUserDAO {
 	public static final String ADDRESS = "address";
 	public static final String CREDIT = "credit";
 	public static final String VALID = "valid";
+	public static final String STATUS = "status";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -201,6 +202,10 @@ public class UserDAO implements IUserDAO {
 
 	public List<User> findByValid(Object valid) {
 		return findByProperty(VALID, valid);
+	}
+
+	public List<User> findByStatus(Object status) {
+		return findByProperty(STATUS, status);
 	}
 
 	/**

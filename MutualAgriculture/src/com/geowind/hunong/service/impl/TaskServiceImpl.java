@@ -31,17 +31,17 @@ public class TaskServiceImpl implements TaskService {
 		List<Task> list = new ArrayList<Task>();
 		for(Map<String, Object> map : maps) {
 			Task task = new Task();
-			task.setTaskId((int)map.get("taskid"));
+			task.setTaskId((Integer)map.get("taskid"));
 			task.setUser(new UserDAO().findById((String)map.get("username")));
 			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
-			task.setWorkload((int)map.get("workload"));
+			task.setWorkload((Integer)map.get("workload"));
 			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
 			task.setPublishdate((Date)map.get("publishdate"));
 			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
-			task.setDesrc((String)map.get("descr"));
+			task.setDescr((String)map.get("descr"));
 			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
-			task.setFinished((int)map.get("finished"));
+			task.setFinished((Integer)map.get("finished"));
 			list.add(task);
 		}
 		return list;
@@ -62,7 +62,7 @@ public class TaskServiceImpl implements TaskService {
 			task.setPublishdate((Date)map.get("publishdate"));
 			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
-			task.setDesrc((String)map.get("descr"));
+			task.setDescr((String)map.get("descr"));
 			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
 			task.setFinished((int)map.get("finished"));
 			list.add(task);

@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.google.gson.annotations.Expose;
 
@@ -26,6 +26,7 @@ import com.google.gson.annotations.Expose;
 public class Task implements java.io.Serializable {
 
 	// Fields
+
 	@Expose
 	private Integer taskId;
 	@Expose
@@ -43,11 +44,13 @@ public class Task implements java.io.Serializable {
 	@Expose
 	private Date workdate;
 	@Expose
+	private Date finishdate;
+	@Expose
 	private String type;
 	@Expose
 	private Integer finished;
 	@Expose
-	private String desrc;
+	private String descr;
 
 	// Constructors
 
@@ -64,8 +67,8 @@ public class Task implements java.io.Serializable {
 
 	/** full constructor */
 	public Task(Center center, User user, Machine machine, Farmland farmland,
-			Integer workload, Date publishdate, Date workdate, String type,
-			Integer finished, String desrc) {
+			Integer workload, Date publishdate, Date workdate, Date finishdate,
+			String type, Integer finished, String descr) {
 		this.center = center;
 		this.user = user;
 		this.machine = machine;
@@ -73,9 +76,10 @@ public class Task implements java.io.Serializable {
 		this.workload = workload;
 		this.publishdate = publishdate;
 		this.workdate = workdate;
+		this.finishdate = finishdate;
 		this.type = type;
 		this.finished = finished;
-		this.desrc = desrc;
+		this.descr = descr;
 	}
 
 	// Property accessors
@@ -159,6 +163,16 @@ public class Task implements java.io.Serializable {
 		this.workdate = workdate;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "finishdate", length = 10)
+	public Date getFinishdate() {
+		return this.finishdate;
+	}
+
+	public void setFinishdate(Date finishdate) {
+		this.finishdate = finishdate;
+	}
+
 	@Column(name = "type", length = 45)
 	public String getType() {
 		return this.type;
@@ -177,13 +191,13 @@ public class Task implements java.io.Serializable {
 		this.finished = finished;
 	}
 
-	@Column(name = "desrc", length = 1000)
-	public String getDesrc() {
-		return this.desrc;
+	@Column(name = "descr", length = 1000)
+	public String getDescr() {
+		return this.descr;
 	}
 
-	public void setDesrc(String desrc) {
-		this.desrc = desrc;
+	public void setDescr(String descr) {
+		this.descr = descr;
 	}
 
 }

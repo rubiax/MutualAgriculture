@@ -1,5 +1,8 @@
 package com.geowind.hunong.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.geowind.hunong.jpa.Machine;
 
 
@@ -11,4 +14,6 @@ import com.geowind.hunong.jpa.Machine;
 public interface MachineDao {
 
     public int insertMachine(Machine machine);
+
+	public List<Map<String, Object>> findFreeUser();
 }

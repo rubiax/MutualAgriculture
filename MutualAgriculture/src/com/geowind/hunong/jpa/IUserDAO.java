@@ -109,6 +109,8 @@ public interface IUserDAO {
 
 	public List<User> findByValid(Object valid);
 
+	public List<User> findByStatus(Object status);
+
 	/**
 	 * Find all User entities.
 	 * 

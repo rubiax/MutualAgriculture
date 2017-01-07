@@ -61,4 +61,29 @@ public class UserServiceImpl implements UserService {
 		}
 		return list;
 	}
+
+	@Override
+	public List<User> findFreeUser(int centerId, String type) {
+		List<Map<String, Object>> maps = userDao.findFreeUser(centerId, type);
+		List<User> list = new ArrayList<User>();
+		for(Map<String, Object> map : maps) {
+			User user = new User();
+			user.setUsername((String)map.get("username"));
+			user.setPassword((String)map.get("password"));
+			user.setRealname((String)map.get("realname"));
+			user.setSex((String)map.get("sex"));
+			user.setBirthday((Date)map.get("birthday"));
+			user.setPhone((String)map.get("phone"));
+			user.setType((int)map.get("type"));
+			user.setPicture((String)map.get("picture"));
+			user.setAddress((String)map.get("address"));
+			user.setCredit((String)map.get("credit"));
+			CenterDAO centerDAO = new CenterDAO();
+			Center center = centerDAO.findById((int)map.get("centerid"));
+			user.setCenter(center);
+			user.setValid((int)map.get("valid"));
+			list.add(user);
+		}
+		return list;
+	}
 }

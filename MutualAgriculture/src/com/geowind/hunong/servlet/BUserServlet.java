@@ -3,6 +3,7 @@ package com.geowind.hunong.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.SimUser;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
@@ -41,9 +43,30 @@ public class BUserServlet extends BasicServlet {
 			break;
 		case "editeOne":
 			editeOne(request, response);
+			break;
+		case "findFreeUser":
+			findFreeUser(request, response);
 		default:
 			break;
 		}
+	}
+
+	private void findFreeUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
+		UserService userService = new UserServiceImpl();
+		String type = request.getParameter("type");
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		if (type.equals("v_machiner")) {
+			List<User> farmerList = userService.findFreeUser(centerId, type);
+			List<SimUser> list = new ArrayList<SimUser>();
+			for(User user : farmerList) {
+				list.add(SimUser.fromUser(user));
+			}
+			this.out(response, list);
+
+		} 
 	}
 
 	/**

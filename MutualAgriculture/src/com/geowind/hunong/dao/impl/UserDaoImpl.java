@@ -22,4 +22,10 @@ public class UserDaoImpl implements UserDao {
     	return DBHelper.doQuery(sql ,centerId);
     	
     }
+
+	@Override
+	public List<Map<String, Object>> findFreeUser(int centerId, String type) {
+		String sql = "select * from " + type + " where centerId=? and valid=1 and status = 0";
+    	return DBHelper.doQuery(sql ,centerId);
+	}
 }

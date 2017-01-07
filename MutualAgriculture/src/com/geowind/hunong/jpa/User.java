@@ -50,13 +50,14 @@ public class User implements java.io.Serializable {
 	private String credit;
 	@Expose
 	private Integer valid;
+	@Expose
+	private Integer status;
 	@Expose (serialize = false, deserialize = false)
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Pestquestion> pestquestions = new HashSet<Pestquestion>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Insectcontrol> insectcontrols = new HashSet<Insectcontrol>(0);
-	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Consult> consults = new HashSet<Consult>(0);
@@ -82,7 +83,7 @@ public class User implements java.io.Serializable {
 	public User(String username, Center center, String password,
 			String realname, String sex, Date birthday, String phone,
 			Integer type, String picture, String address, String credit,
-			Integer valid, Set<Farmland> farmlands,
+			Integer valid, Integer status, Set<Farmland> farmlands,
 			Set<Pestquestion> pestquestions, Set<Insectcontrol> insectcontrols,
 			Set<Task> tasks, Set<Consult> consults) {
 		this.username = username;
@@ -97,6 +98,7 @@ public class User implements java.io.Serializable {
 		this.address = address;
 		this.credit = credit;
 		this.valid = valid;
+		this.status = status;
 		this.farmlands = farmlands;
 		this.pestquestions = pestquestions;
 		this.insectcontrols = insectcontrols;
@@ -216,6 +218,15 @@ public class User implements java.io.Serializable {
 		this.valid = valid;
 	}
 
+	@Column(name = "status")
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Farmland> getFarmlands() {
 		return this.farmlands;
@@ -260,19 +271,5 @@ public class User implements java.io.Serializable {
 	public void setConsults(Set<Consult> consults) {
 		this.consults = consults;
 	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", center=" + center
-				+ ", password=" + password + ", realname=" + realname
-				+ ", sex=" + sex + ", birthday=" + birthday + ", phone="
-				+ phone + ", type=" + type + ", picture=" + picture
-				+ ", address=" + address + ", credit=" + credit + ", valid="
-				+ valid + ", farmlands=" + farmlands + ", pestquestions="
-				+ pestquestions + ", insectcontrols=" + insectcontrols
-				+ ", tasks=" + tasks + ", consults=" + consults + "]";
-	}
-	
-	
 
 }

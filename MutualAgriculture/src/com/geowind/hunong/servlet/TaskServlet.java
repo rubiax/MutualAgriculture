@@ -1,6 +1,8 @@
 package com.geowind.hunong.servlet;
 
 import com.geowind.hunong.entity.SimTask;
+import com.geowind.hunong.jpa.Center;
+import com.geowind.hunong.jpa.CenterDAO;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
@@ -53,8 +55,8 @@ public class TaskServlet extends BasicServlet {
 		
 		if("pulishTask".equals(op)) {
 			pulishTask(request, response);
-		} else if("tasking".equals(op)) {
-			tasking(request, response);
+		} else if("listTask".equals(op)) {
+			listTask(request, response);
 		} else if("tasked".equals(op)) {
 			tasked(request, response);
 		} else if("finishTask".equals(op)) {
@@ -65,8 +67,9 @@ public class TaskServlet extends BasicServlet {
 			historyTask(request, response);
 		}else if("MapSearchAll".equals(op)){
 			MapSearchAll(request,response);
-		}
+		} 
 	}
+	
 	/**
 	 * 地图查找所有任务
 	 * @param request
@@ -108,6 +111,7 @@ public class TaskServlet extends BasicServlet {
 	private void finishTask(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String taskId = request.getParameter("taskId");
+		System.out.println(taskId);
 		TaskDAO taskDAO = new TaskDAO();
 		EntityManagerHelper.beginTransaction();
 		Task task = null;
@@ -138,18 +142,19 @@ public class TaskServlet extends BasicServlet {
 	}
 
 	/**
-	 * 正在进行的任务
+	 * 任务清单
 	 * @param request
 	 * @param response
 	 * @throws IOException 
 	 */
-	private void tasking(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private void listTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.getTaskInfo(centerId, 0);
 		request.getSession().setAttribute("tasking", tasks);
-		response.sendRedirect("manage/tasking.jsp");
+		List<Task> tasks2 = taskService.getTaskInfo(centerId, 1);
+		request.getSession().setAttribute("tasked", tasks2);
+		response.sendRedirect("manage/task.jsp");
 	}
 
 	/**
@@ -160,34 +165,33 @@ public class TaskServlet extends BasicServlet {
 	 */
 	private void pulishTask(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		String musername = request.getParameter("musername");
-		String machineplate = request.getParameter("machineplate");
-		String tasktype = request.getParameter("tasktype");
-		String taskdate = request.getParameter("taskdate");
-		int farmlandId = Integer.parseInt(request.getParameter("farmlandId"));
-		int workload = Integer.parseInt(request.getParameter("workload"));
+		String username = request.getParameter("username");
+		String machineId = request.getParameter("machineId");
+		String farmlandId = request.getParameter("farmlandId");
+		String workdate = request.getParameter("workdate");
 		String descr = request.getParameter("descr");
 		TaskDAO taskDAO = new TaskDAO();
 		Task task = new Task();
-		User user = new UserDAO().findById(musername);
+		User user = new UserDAO().findById(username);
+		user.setStatus(1);
 		task.setUser(user);
-		Machine machine = new MachineDAO().findByPlate(machineplate).get(0);
+		Machine machine = new MachineDAO().findById(Integer.parseInt(machineId));
+		machine.setWorkstate(1);
 		task.setMachine(machine);
-		Farmland farmland = new FarmlandDAO().findById(farmlandId);
+		Farmland farmland = new FarmlandDAO().findById(Integer.parseInt(farmlandId));
 		task.setFarmland(farmland);
-		task.setType(tasktype);
+		Center center = new CenterDAO().findById((int)request.getSession().getAttribute("currentCenterId"));
+		task.setCenter(center);
 		try {
-			task.setWorkdate(new SimpleDateFormat("yyyy-MM-dd").parse(taskdate));
+			task.setWorkdate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(workdate));
 		} catch (ParseException e) {
 			
 			e.printStackTrace();
 		}
-		task.setWorkload(workload);
-		task.setDesrc(descr);
+		task.setDescr(descr);
 		task.setFinished(0);
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		task.setPublishdate(new Date());
+		
 		try {
 			EntityManagerHelper.beginTransaction();
 			taskDAO.save(task);
@@ -200,7 +204,7 @@ public class TaskServlet extends BasicServlet {
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
-			JPushUtil.sendPush(musername, "任务提醒", jsonObject);
+			JPushUtil.sendPush(username, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

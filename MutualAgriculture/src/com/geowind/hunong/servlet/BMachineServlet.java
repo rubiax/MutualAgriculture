@@ -19,7 +19,9 @@ import com.geowind.hunong.jpa.MachineDAO;
 import com.geowind.hunong.jpa.Machineowner;
 import com.geowind.hunong.jpa.MachineownerDAO;
 import com.geowind.hunong.service.MachineOwnerService;
+import com.geowind.hunong.service.MachineService;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
+import com.geowind.hunong.service.impl.MachineServiceImpl;
 import com.geowind.hunong.util.FileUploadUtil;
 
 public class BMachineServlet extends BasicServlet {
@@ -62,9 +64,28 @@ public class BMachineServlet extends BasicServlet {
 		case "editeOne":
 			editeOne(request, response);
 			break;
+		case "findFreeMachine":
+			findFreeMachine(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 查询空闲农机
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void findFreeMachine(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
+		
+		MachineService machineService = new MachineServiceImpl();
+		List<Machine> machineList = machineService.findFreeMachine();
+		this.out(response, machineList);
 	}
 
 	/**
@@ -73,8 +94,7 @@ public class BMachineServlet extends BasicServlet {
 	 * @param request
 	 * @param response
 	 */
-	private void editeOne(HttpServletRequest request,
-			HttpServletResponse response) {
+	private void editeOne(HttpServletRequest request, HttpServletResponse response) {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");

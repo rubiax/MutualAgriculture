@@ -89,12 +89,12 @@
     	if(farmlandId != undefined) {
     		$('#myModal').modal('hide');
     		$.post("../bFarmlandServlet?op=findFarmland",{farmlandId:farmlandId}, function(data) {
-    			$("#farmlandId").val(data.farmlandId);
-    			$("#zonename").val(data.zone.zonename);
-    			$("#croptype").val(data.zone.type);
-    			$("#fname").val(data.user.realname);
-    			$("#fphone").val(data.user.phone);
-    			$("#address").val(data.address);
+    			$("#farmername").text(data.user.realname);
+    			$("#farmerphone").text(data.user.phone);
+    			$("#zonename").text(data.zone.zonename);
+    			$("#zonetype").text(data.zone.type);
+    			$("#farmlandId").text(data.farmlandId);
+    			$("#address").editable('setValue', data.address)
     		},"json");
     		
     	} else {

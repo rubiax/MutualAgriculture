@@ -13,6 +13,8 @@ public interface UserDao {
 
     public Map<String, Object> selectAccounts(String userId, String password);
     
-    public List<Map<String, Object>> search(int centerId, String type); 
+    public List<Map<String, Object>> search(int centerId, String type);
+
+	public List<Map<String, Object>> findFreeUser(int centerId, String type); 
 
 }

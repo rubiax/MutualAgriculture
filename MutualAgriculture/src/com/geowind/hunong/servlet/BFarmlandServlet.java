@@ -134,6 +134,7 @@ public class BFarmlandServlet extends BasicServlet {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
+			System.out.println(farmland);
 			this.out(response, farmland);
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);

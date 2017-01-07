@@ -157,7 +157,8 @@
         <li class="single"><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
         <li class="single"><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
         <li class="single"><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
-        <li class="treeview">
+        <li class="single"><a href="javascript:showpage(this,'../taskServlet?op=listTask')"><i class="fa fa-tasks"></i> <span>任务管理</span></a></li>
+        <!-- <li class="treeview">
 	        <a href="#"><i class="fa fa-tasks"></i> <span>任务管理</span>
 	          <span class="pull-right-container">
 	              <i class="fa fa-angle-left pull-right"></i>
@@ -168,7 +169,7 @@
             <li><a href="javascript:showpage(this,'../taskServlet?op=tasking')"><i class="fa fa-circle-o"></i> 正在进行</a></li>
             <li><a href="javascript:showpage(this,'../taskServlet?op=tasked')"><i class="fa fa-circle-o"></i> 历史任务</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="treeview">
          <a href="#"><i class="fa fa-user-md"></i> <span>咨询中心</span>
           <span class="pull-right-container">

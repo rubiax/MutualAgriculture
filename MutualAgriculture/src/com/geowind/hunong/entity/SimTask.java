@@ -204,7 +204,7 @@ public class SimTask {
 			simTask.setFpicPath(task.getFarmland().getPicture());
 			simTask.setCropType(task.getFarmland().getZone().getType());
 			simTask.setMstyle(task.getMachine().getType());
-			simTask.setNote(task.getDesrc());
+			simTask.setNote(task.getDescr());
 			return simTask;
 		}
 	}
