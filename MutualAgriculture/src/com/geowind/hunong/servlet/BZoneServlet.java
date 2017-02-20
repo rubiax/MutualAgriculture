@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.Data;
 import com.geowind.hunong.entity.FarmlandPoint;
 import com.geowind.hunong.entity.Point;
 import com.geowind.hunong.entity.SimZone;
@@ -75,11 +76,31 @@ public class BZoneServlet extends BasicServlet {
 		case "getAllData":
 			getAllData(request, response);
 			break;
+		case "getZoneArea":
+			getZoneArea(request, response);
+			break;
+		case "getCropType":
+			getCropType(request, response);
+			break;
 		default:
 			break;
 		}
 	}
 	
+	private void getCropType(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ZoneService zoneService = new ZoneServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Data> data = zoneService.getCropType(centerId);
+		this.out(response, data);
+	}
+
+	private void getZoneArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ZoneService zoneService = new ZoneServiceImpl();
+		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		List<Data> data = zoneService.getZoneArea(centerId);
+		this.out(response, data);
+	}
+
 	/**
 	 * 服务器向客户端写入数据
 	 * @param request
