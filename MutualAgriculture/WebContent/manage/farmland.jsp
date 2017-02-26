@@ -151,6 +151,7 @@
 							<th data-field="farmlandId" data-sortable="true">编号</th>
 							<th data-field="realname" data-sortable="true">拥有者姓名</th>
 							<th data-field="zonename" data-sortable="true">分区名</th>
+							<th data-field="bname" data-sortable="true">分片名</th>
 							<th data-field="jingweidu" data-sortable="true">经纬度</th>
 							<th data-field="address" data-sortable="true">地址</th>
 							<th data-field="type" data-sortable="true">作物类型</th>
@@ -165,6 +166,7 @@
 	                        	<td>${item.farmlandId }</td>
 	                        	<td>${item.user.realname }</td>
 	                        	<td>${item.zone.zonename }</td>
+	                        	<td>${item.block.bname }</td>
 	                            <td>${item.longitude }, ${item.latitude}</td>
 	                            <td>${item.address }</td>
 	                            <td>${item.zone.type }</td>

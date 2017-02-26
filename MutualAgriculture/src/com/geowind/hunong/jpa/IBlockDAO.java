@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Interface for ZoneDAO.
+ * Interface for BlockDAO.
  * 
  * @author MyEclipse Persistence Tools
  */
 
-public interface IZoneDAO {
+public interface IBlockDAO {
 	/**
-	 * Perform an initial save of a previously unsaved Zone entity. All
+	 * Perform an initial save of a previously unsaved Block entity. All
 	 * subsequent persist actions of this entity should use the #update()
 	 * method. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -21,19 +21,19 @@ public interface IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * IZoneDAO.save(entity);
+	 * IBlockDAO.save(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to persist
+	 *            Block entity to persist
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void save(Zone entity);
+	public void save(Block entity);
 
 	/**
-	 * Delete a persistent Zone entity. This operation must be performed within
+	 * Delete a persistent Block entity. This operation must be performed within
 	 * the a database transaction context for the entity's data to be
 	 * permanently deleted from the persistence store, i.e., database. This
 	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
@@ -41,21 +41,21 @@ public interface IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * IZoneDAO.delete(entity);
+	 * IBlockDAO.delete(entity);
 	 * EntityManagerHelper.commit();
 	 * entity = null;
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to delete
+	 *            Block entity to delete
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void delete(Zone entity);
+	public void delete(Block entity);
 
 	/**
-	 * Persist a previously saved Zone entity and return it or a copy of it to
-	 * the sender. A copy of the Zone entity parameter is returned when the JPA
+	 * Persist a previously saved Block entity and return it or a copy of it to
+	 * the sender. A copy of the Block entity parameter is returned when the JPA
 	 * persistence mechanism has not previously been tracking the updated
 	 * entity. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -65,45 +65,43 @@ public interface IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * entity = IZoneDAO.update(entity);
+	 * entity = IBlockDAO.update(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to update
-	 * @return Zone the persisted Zone entity instance, may not be the same
+	 *            Block entity to update
+	 * @return Block the persisted Block entity instance, may not be the same
 	 * @throws RuntimeException
 	 *             if the operation fails
 	 */
-	public Zone update(Zone entity);
+	public Block update(Block entity);
 
-	public Zone findById(Integer id);
+	public Block findById(Integer id);
 
 	/**
-	 * Find all Zone entities with a specific property value.
+	 * Find all Block entities with a specific property value.
 	 * 
 	 * @param propertyName
-	 *            the name of the Zone property to query
+	 *            the name of the Block property to query
 	 * @param value
 	 *            the property value to match
-	 * @return List<Zone> found by query
+	 * @return List<Block> found by query
 	 */
-	public List<Zone> findByProperty(String propertyName, Object value);
+	public List<Block> findByProperty(String propertyName, Object value);
 
-	public List<Zone> findByZonename(Object zonename);
+	public List<Block> findByBname(Object bname);
 
-	public List<Zone> findByArea(Object area);
+	public List<Block> findByArea(Object area);
 
-	public List<Zone> findByType(Object type);
+	public List<Block> findByAddress(Object address);
 
-	public List<Zone> findByAddress(Object address);
-
-	public List<Zone> findByValid(Object valid);
+	public List<Block> findByValid(Object valid);
 
 	/**
-	 * Find all Zone entities.
+	 * Find all Block entities.
 	 * 
-	 * @return List<Zone> all Zone entities
+	 * @return List<Block> all Block entities
 	 */
-	public List<Zone> findAll();
+	public List<Block> findAll();
 }

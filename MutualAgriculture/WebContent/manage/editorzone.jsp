@@ -104,10 +104,85 @@
 				<!-- /.box-body -->
 
 			</div>
-
-
-
 		</form>
+		
+		
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">分片信息</h3>
+			</div>
+
+			<div class="box-body">
+				<div id="toolbar2" class="btn-group">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="false" aria-controls="collapseOne2">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-heart"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+				<%-- <div id="collapseOne2" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th style="width: 80px"><label>分片名</label></th>
+									<td style="width: 150px"><a href="#" id="bname"></a></td>
+									<th style="width: 80px"><label>所属区号</label></th>
+									<td style="width: 150px">
+										<select id="select1" class="js-example-basic-single" style="width: 90%">
+											<c:forEach var="item" items="${allZone }">
+												<option value="${item.zoneId }">${item.zonename }</option>
+											</c:forEach>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><label>面积</label></th>
+									<td><a href="#" id="area2"></a></td>
+									<th><label>地址</label></th>
+									<td><a href="#" id="address2"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn2">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn2">取消</button>
+			      </div>
+			    </div> --%>
+				<table id="table1" data-toolbar="#toolbar2">
+					<thead>
+						<tr>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="bid" data-sortable="true">编号</th>
+							<th data-field="bname" data-sortable="true">分片名</th>
+							<th data-field="zoneId" data-sortable="true">所属区号</th>
+							<th data-field="area" data-sortable="true">面积</th>
+							<th data-field="address" data-sortable="true">地址</th>
+							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents2" data-width="65">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+                        <c:forEach items="${currentZone.blocks }" var="item">
+                       		<tr>
+                       			<td data-field="state" data-checkbox="true"></td>
+                       			<td>${item.bid }</td>
+	                        	<td>${item.bname }</td>
+	                            <td>${item.zone.zonename }</td>
+	                            <td>${item.area }</td>
+	                            <td>${item.address }</td>
+	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents2"></td>
+                        	</tr>
+                        </c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- /.box-body -->
+
+		</div>
 
 		<!-- Horizontal Form -->
 		<div class="box box-success">
@@ -127,12 +202,13 @@
 						<i class="glyphicon glyphicon-trash"></i>
 					</button>
 				</div>
-				<table id="table" data-toolbar="#toolbar">
+				<table id="table2" data-toolbar="#toolbar">
 					<thead>
 						<tr>
 							<th data-field="state" data-checkbox="true"></th>
 							<th data-field="farmlandId" data-sortable="true">农田编号</th>
 							<th data-field="realname" data-sortable="true">拥有者姓名</th>
+							<th data-field="bname" data-sortable="true">分片名</th>
 							<th data-field="jingweidu" data-sortable="true">经纬度</th>
 							<th data-field="address" data-sortable="true">地址</th>
 							<th data-field="type" data-sortable="true">作物类型</th>
@@ -146,6 +222,7 @@
 								<td data-field="state" data-checkbox="true"></td>
 								<td>${item.farmlandId }</td>
 								<td>${item.user.realname }</td>
+								<td>${item.block.bname }</td>
 								<td>${item.longitude }, ${item.latitude }</td>
 								<td>${item.address }</td>
 								<td>${item.zone.type }</td>
@@ -202,7 +279,7 @@
 			}
 		};
 		$(function() {
-			$('#table').bootstrapTable({
+			$('#table1').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
 				pageSize : 5,
@@ -213,7 +290,21 @@
 				showToggle : true,
 				showColumns : true,
 				clickToSelect : true,
-				sortName: 'machineId',
+				sortName: 'bid',
+				sortOrder: 'desc'
+			});
+			$('#table2').bootstrapTable({
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'farmlandId',
 				sortOrder: 'desc'
 			});
 		});

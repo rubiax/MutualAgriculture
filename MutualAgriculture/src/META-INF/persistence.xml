@@ -7,6 +7,7 @@
 		<class>com.geowind.hunong.jpa.Task</class>
 		<class>com.geowind.hunong.jpa.Pestzone</class>
 		<class>com.geowind.hunong.jpa.Zone</class>
+		<class>com.geowind.hunong.jpa.Block</class>
 		<class>com.geowind.hunong.jpa.Order</class>
 		<class>com.geowind.hunong.jpa.Consult</class>
 		<class>com.geowind.hunong.jpa.Pestquestion</class>

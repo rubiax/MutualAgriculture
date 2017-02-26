@@ -154,7 +154,7 @@
             <li><a href="javascript:showpage(this,'../bMachineOwnerServlet?op=searchAll')"><i class="fa fa-circle-o"></i> 农机拥有者</a></li>
           </ul>
         </li>
-        <li class="single"><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>分区管理</span></a></li>
+        <li class="single"><a href="javascript:showpage(this,'../bZoneServlet?op=searchAll')"><i class="fa fa-th"></i> <span>区片管理</span></a></li>
         <li class="single"><a href="javascript:showpage(this,'../bFarmlandServlet?op=searchAll')"><i class="fa fa-th-large"></i> <span>农田管理</span></a></li>
         <li class="single"><a href="javascript:showpage(this,'../bMachineServlet?op=searchAll')"><i class="fa fa-truck"></i> <span>农机管理</span></a></li>
         <li class="single"><a href="javascript:showpage(this,'../taskServlet?op=listTask')"><i class="fa fa-tasks"></i> <span>任务管理</span></a></li>

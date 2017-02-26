@@ -3,7 +3,6 @@ package com.geowind.hunong.jpa;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +29,8 @@ public class Farmland implements java.io.Serializable {
 	// Fields
 	@Expose
 	private Integer farmlandId;
+	@Expose
+	private Block block;
 	@Expose
 	private User user;
 	@Expose
@@ -66,16 +67,17 @@ public class Farmland implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Farmland(User user, Zone zone) {
+	public Farmland(Block block, User user) {
+		this.block = block;
 		this.user = user;
-		this.zone = zone;
 	}
 
 	/** full constructor */
-	public Farmland(User user, Zone zone, Double longitude, Double latitude,
-			String address, Double area, String picture, String transtion,
-			Double production, String ph, String npk, Integer state,
-			Integer valid, Set<Task> tasks) {
+	public Farmland(Block block, User user, Zone zone, Double longitude,
+			Double latitude, String address, Double area, String picture,
+			String transtion, Double production, String ph, String npk,
+			Integer state, Integer valid, Set<Task> tasks) {
+		this.block = block;
 		this.user = user;
 		this.zone = zone;
 		this.longitude = longitude;
@@ -105,6 +107,16 @@ public class Farmland implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bid")
+	public Block getBlock() {
+		return this.block;
+	}
+
+	public void setBlock(Block block) {
+		this.block = block;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "username", nullable = false)
 	public User getUser() {
 		return this.user;
@@ -115,7 +127,7 @@ public class Farmland implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "zoneId", nullable = false)
+	@JoinColumn(name = "zoneId")
 	public Zone getZone() {
 		return this.zone;
 	}
@@ -232,16 +244,4 @@ public class Farmland implements java.io.Serializable {
 		this.tasks = tasks;
 	}
 
-	@Override
-	public String toString() {
-		return "Farmland [farmlandId=" + farmlandId + ", user=" + user
-				+ ", zone=" + zone + ", longitude=" + longitude + ", latitude="
-				+ latitude + ", address=" + address + ", area=" + area
-				+ ", picture=" + picture + ", transtion=" + transtion
-				+ ", production=" + production + ", ph=" + ph + ", npk=" + npk
-				+ ", state=" + state + ", valid=" + valid + ", tasks=" + tasks
-				+ "]";
-	}
-
-	
 }

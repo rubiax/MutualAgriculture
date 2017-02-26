@@ -204,7 +204,14 @@
 		<url-pattern>/pestlibServlet</url-pattern>
 	</servlet-mapping>
 
-	
+	<servlet>
+		<servlet-name>BlockServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.BlockServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BlockServlet</servlet-name>
+		<url-pattern>/blockServlet</url-pattern>
+	</servlet-mapping>
 
 
 	<welcome-file-list>

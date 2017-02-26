@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="depend/select2/select2.min.css">
 
 
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css"
@@ -53,7 +54,7 @@
 			<ol class="breadcrumb">
 				<li><a href="javascript:dashboard()"><i
 						class="fa fa-dashboard"></i> 仪表盘</a></li>
-				<li><a href="farmer.jsp">分区</a></li>
+				<li><a href="farmer.jsp">片区</a></li>
 				<li class="active">详情</li>
 			</ol>
 		</section>
@@ -99,7 +100,7 @@
 						<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
 			      </div>
 			    </div>
-				<table id="table" data-toolbar="#toolbar">
+				<table id="table1" data-toolbar="#toolbar">
 					<thead>
 						<tr>
 							<th data-field="state" data-checkbox="true"></th>
@@ -121,6 +122,85 @@
 	                            <td>${item.type }</td>
 	                            <td>${item.address }</td>
 	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
+                        	</tr>
+                        </c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- /.box-body -->
+
+		</div>
+		
+		
+		
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">分片信息</h3>
+			</div>
+
+			<div class="box-body">
+				<div id="toolbar2" class="btn-group">
+					<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="false" aria-controls="collapseOne2">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-heart"></i>
+					</button>
+					<button type="button" class="btn btn-default">
+						<i class="glyphicon glyphicon-trash"></i>
+					</button>
+				</div>
+				<div id="collapseOne2" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      		<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th style="width: 80px"><label>分片名</label></th>
+									<td style="width: 150px"><a href="#" id="bname"></a></td>
+									<th style="width: 80px"><label>所属区号</label></th>
+									<td style="width: 150px">
+										<select id="select1" class="js-example-basic-single" style="width: 90%">
+											<c:forEach var="item" items="${allZone }">
+												<option value="${item.zoneId }">${item.zonename }</option>
+											</c:forEach>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><label>面积</label></th>
+									<td><a href="#" id="area2"></a></td>
+									<th><label>地址</label></th>
+									<td><a href="#" id="address2"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-success" id="confirmAdd-btn2">确定</button>
+						<button type="button" class="btn btn-default" id="cancelAdd-btn2">取消</button>
+			      </div>
+			    </div>
+				<table id="table2" data-toolbar="#toolbar2">
+					<thead>
+						<tr>
+							<th data-field="state" data-checkbox="true"></th>
+							<th data-field="bid" data-sortable="true">编号</th>
+							<th data-field="bname" data-sortable="true">分片名</th>
+							<th data-field="zoneId" data-sortable="true">所属区号</th>
+							<th data-field="area" data-sortable="true">面积</th>
+							<th data-field="address" data-sortable="true">地址</th>
+							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents2" data-width="65">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+                        <c:forEach items="${allBlock }" var="item">
+                       		<tr>
+                       			<td data-field="state" data-checkbox="true"></td>
+                       			<td>${item.bid }</td>
+	                        	<td>${item.bname }</td>
+	                            <td>${item.zone.zonename }</td>
+	                            <td>${item.area }</td>
+	                            <td>${item.address }</td>
+	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents2"></td>
                         	</tr>
                         </c:forEach>
 					</tbody>
@@ -176,6 +256,7 @@
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	
 	<script src="depend/echarts/echarts.common.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [
@@ -220,8 +301,43 @@
 	    		}
 			}
 		};
+		
+		window.actionEvents2 = {
+				'click .edit' : function(e, value, row, index) {
+					//alert('You click edit icon, row: ' + JSON.stringify(row));
+					//console.log(value, row, index);
+					var bid = row.bid;
+					location.href= "../blockServlet?op=detail&bid="+bid;
+				},
+				'click .remove' : function(e, value, row, index) {
+					//alert('You click remove icon, row: ' + JSON.stringify(row));
+					//console.log(value, row, index);
+					var bid = row.bid;
+					var result= confirm("确认删除？","确认","取消");
+		    		if(result==true){
+		    			$.post("../blockServlet", {op:"delete", bid:bid}, function(data) {
+		    	        	if(data == 1) {
+		    	        		alert("删除成功");
+		    	        		$.post("../blockServlet", {op:"getAllBlockData"}, function(data) {
+		    	        			data = eval("("+ data +")");
+		    	        			for(var i=0; i<data.length; i++) {
+		    	        				data[i].state = '';
+		    	        				data[i].action = '';
+		    	        			}
+		    	        			$("#table2").bootstrapTable('load', data);
+		    	        		});
+		    	        	} else {
+		    	        		alert("删除失败");
+		    	        	}
+		    	        });
+		    		}else{
+		    			return;
+		    		}
+				}
+			};
+		
 		$(function() {
-			$('#table').bootstrapTable({
+			$('#table1').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
 				pageSize : 5,
@@ -233,6 +349,20 @@
 				showColumns : true,
 				clickToSelect : true,
 				sortName: 'zoneId',
+				sortOrder: 'desc'
+			});
+			$('#table2').bootstrapTable({
+				pagination : true,
+				pageNumber : 1,
+				pageSize : 5,
+				pageList : [ 5, 10, 20, 50 ],
+				search : true,
+				height : 380,
+				showRefresh : true,
+				showToggle : true,
+				showColumns : true,
+				clickToSelect : true,
+				sortName: 'bid',
 				sortOrder: 'desc'
 			});
 			//生成面积图表
@@ -257,7 +387,25 @@
 		function dashboard() {
 			parent.location.reload();
 	    }
+		
+		$("#select1").select2();
+		$("#select1").select2('val',' ');
+		
+		$("#select1").on("select2:select", function (e) {
+			var text = $("#select1").select2('data')[0]['text'];
+			//var phone = text.split(' ')[1];
+			//$("#phone").text(phone);
+		});
+		
 		$('#zonename').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#bname').editable({
 			type : 'text',
 		    validate: function (value) { 
 		        if (value == '') { 
@@ -272,7 +420,16 @@
 		            return '不能为空'; 
 		        } 
 		    }
-		});$('#type').editable({
+		});
+		$('#area2').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#type').editable({
 			type : 'text',
 		    validate: function (value) { 
 		        if (value == '') { 
@@ -281,6 +438,14 @@
 		    }
 		});
 		$('#address').editable({
+			type : 'text',
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#address2').editable({
 			type : 'text',
 		    validate: function (value) { 
 		        if (value == '') { 
@@ -313,7 +478,7 @@
 	        				data[i].state = '';
 	        				data[i].action = '';
 	        			}
-	        			$("#table").bootstrapTable('load', data);
+	        			$("#table1").bootstrapTable('load', data);
 	        		});
 	        	} else {
 	        		alert("添加失败");
@@ -326,7 +491,43 @@
 	        $("#collapseOne").collapse('hide');
 	   	});
 		
-		
+		$("#cancelAdd-btn2").click(function() {
+			$("#select1").select2('val',' ');
+			$("#bname").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area2").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address2").editable('setValue', null).removeClass('editable-unsaved');
+			$("#collapseOne2").collapse('hide');
+		});	
+		$("#confirmAdd-btn2").click(function() {
+			var zoneId = $("#select1").val();
+			var bname = $("#bname").editable('getValue', true);
+			var area = $("#area2").editable('getValue', true);
+			var address = $("#address2").editable('getValue', true);
+			if(bname == null || area == null || zoneId == null || address == null) {
+				alert("请完成信息");
+				return;
+			}
+	        $.post("../blockServlet", {op:"addBlock", bname:bname, area:area, zoneId:zoneId, address:address}, function(data) {
+	        	if(data == 1) {
+	        		alert("添加成功");
+	        		$.post("../blockServlet", {op:"getAllBlockData"}, function(data) {
+	        			data = eval("("+ data +")");
+	        			for(var i=0; i<data.length; i++) {
+	        				data[i].state = '';
+	        				data[i].action = '';
+	        			}
+	        			$("#table2").bootstrapTable('load', data);
+	        		});
+	        	} else {
+	        		alert("添加失败");
+	        	}
+	        });
+	        $("#select1").select2('val',' ');
+			$("#bname").editable('setValue', null).removeClass('editable-unsaved');
+			$("#area2").editable('setValue', null).removeClass('editable-unsaved');
+			$("#address2").editable('setValue', null).removeClass('editable-unsaved');
+			$("#collapseOne2").collapse('hide');
+	   	});
 		
 		function createChart1(name, value) {
 			//图表生成

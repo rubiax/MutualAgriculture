@@ -7,19 +7,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
- * A data access object (DAO) providing persistence and search support for Zone
+ * A data access object (DAO) providing persistence and search support for Block
  * entities. Transaction control of the save(), update() and delete() operations
  * must be handled externally by senders of these methods or must be manually
  * added to each of these methods for data to be persisted to the JPA datastore.
  * 
- * @see com.geowind.hunong.jpa.Zone
+ * @see com.geowind.hunong.jpa.Block
  * @author MyEclipse Persistence Tools
  */
-public class ZoneDAO implements IZoneDAO {
+public class BlockDAO implements IBlockDAO {
 	// property constants
-	public static final String ZONENAME = "zonename";
+	public static final String BNAME = "bname";
 	public static final String AREA = "area";
-	public static final String TYPE = "type";
 	public static final String ADDRESS = "address";
 	public static final String VALID = "valid";
 
@@ -28,7 +27,7 @@ public class ZoneDAO implements IZoneDAO {
 	}
 
 	/**
-	 * Perform an initial save of a previously unsaved Zone entity. All
+	 * Perform an initial save of a previously unsaved Block entity. All
 	 * subsequent persist actions of this entity should use the #update()
 	 * method. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -38,17 +37,17 @@ public class ZoneDAO implements IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * ZoneDAO.save(entity);
+	 * BlockDAO.save(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to persist
+	 *            Block entity to persist
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void save(Zone entity) {
-		EntityManagerHelper.log("saving Zone instance", Level.INFO, null);
+	public void save(Block entity) {
+		EntityManagerHelper.log("saving Block instance", Level.INFO, null);
 		try {
 			getEntityManager().persist(entity);
 			EntityManagerHelper.log("save successful", Level.INFO, null);
@@ -59,7 +58,7 @@ public class ZoneDAO implements IZoneDAO {
 	}
 
 	/**
-	 * Delete a persistent Zone entity. This operation must be performed within
+	 * Delete a persistent Block entity. This operation must be performed within
 	 * the a database transaction context for the entity's data to be
 	 * permanently deleted from the persistence store, i.e., database. This
 	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
@@ -67,21 +66,21 @@ public class ZoneDAO implements IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * ZoneDAO.delete(entity);
+	 * BlockDAO.delete(entity);
 	 * EntityManagerHelper.commit();
 	 * entity = null;
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to delete
+	 *            Block entity to delete
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void delete(Zone entity) {
-		EntityManagerHelper.log("deleting Zone instance", Level.INFO, null);
+	public void delete(Block entity) {
+		EntityManagerHelper.log("deleting Block instance", Level.INFO, null);
 		try {
-			entity = getEntityManager().getReference(Zone.class,
-					entity.getZoneId());
+			entity = getEntityManager().getReference(Block.class,
+					entity.getBid());
 			getEntityManager().remove(entity);
 			EntityManagerHelper.log("delete successful", Level.INFO, null);
 		} catch (RuntimeException re) {
@@ -91,8 +90,8 @@ public class ZoneDAO implements IZoneDAO {
 	}
 
 	/**
-	 * Persist a previously saved Zone entity and return it or a copy of it to
-	 * the sender. A copy of the Zone entity parameter is returned when the JPA
+	 * Persist a previously saved Block entity and return it or a copy of it to
+	 * the sender. A copy of the Block entity parameter is returned when the JPA
 	 * persistence mechanism has not previously been tracking the updated
 	 * entity. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -102,20 +101,20 @@ public class ZoneDAO implements IZoneDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * entity = ZoneDAO.update(entity);
+	 * entity = BlockDAO.update(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Zone entity to update
-	 * @return Zone the persisted Zone entity instance, may not be the same
+	 *            Block entity to update
+	 * @return Block the persisted Block entity instance, may not be the same
 	 * @throws RuntimeException
 	 *             if the operation fails
 	 */
-	public Zone update(Zone entity) {
-		EntityManagerHelper.log("updating Zone instance", Level.INFO, null);
+	public Block update(Block entity) {
+		EntityManagerHelper.log("updating Block instance", Level.INFO, null);
 		try {
-			Zone result = getEntityManager().merge(entity);
+			Block result = getEntityManager().merge(entity);
 			EntityManagerHelper.log("update successful", Level.INFO, null);
 			return result;
 		} catch (RuntimeException re) {
@@ -124,11 +123,11 @@ public class ZoneDAO implements IZoneDAO {
 		}
 	}
 
-	public Zone findById(Integer id) {
-		EntityManagerHelper.log("finding Zone instance with id: " + id,
+	public Block findById(Integer id) {
+		EntityManagerHelper.log("finding Block instance with id: " + id,
 				Level.INFO, null);
 		try {
-			Zone instance = getEntityManager().find(Zone.class, id);
+			Block instance = getEntityManager().find(Block.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
@@ -137,20 +136,20 @@ public class ZoneDAO implements IZoneDAO {
 	}
 
 	/**
-	 * Find all Zone entities with a specific property value.
+	 * Find all Block entities with a specific property value.
 	 * 
 	 * @param propertyName
-	 *            the name of the Zone property to query
+	 *            the name of the Block property to query
 	 * @param value
 	 *            the property value to match
-	 * @return List<Zone> found by query
+	 * @return List<Block> found by query
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Zone> findByProperty(String propertyName, final Object value) {
-		EntityManagerHelper.log("finding Zone instance with property: "
+	public List<Block> findByProperty(String propertyName, final Object value) {
+		EntityManagerHelper.log("finding Block instance with property: "
 				+ propertyName + ", value: " + value, Level.INFO, null);
 		try {
-			final String queryString = "select model from Zone model where model."
+			final String queryString = "select model from Block model where model."
 					+ propertyName + "= :propertyValue";
 			Query query = getEntityManager().createQuery(queryString);
 			query.setParameter("propertyValue", value);
@@ -162,36 +161,33 @@ public class ZoneDAO implements IZoneDAO {
 		}
 	}
 
-	public List<Zone> findByZonename(Object zonename) {
-		return findByProperty(ZONENAME, zonename);
+	public List<Block> findByBname(Object bname) {
+		return findByProperty(BNAME, bname);
 	}
 
-	public List<Zone> findByArea(Object area) {
+	public List<Block> findByArea(Object area) {
 		return findByProperty(AREA, area);
 	}
 
-	public List<Zone> findByType(Object type) {
-		return findByProperty(TYPE, type);
-	}
-
-	public List<Zone> findByAddress(Object address) {
+	public List<Block> findByAddress(Object address) {
 		return findByProperty(ADDRESS, address);
 	}
 
-	public List<Zone> findByValid(Object valid) {
+	public List<Block> findByValid(Object valid) {
 		return findByProperty(VALID, valid);
 	}
 
 	/**
-	 * Find all Zone entities.
+	 * Find all Block entities.
 	 * 
-	 * @return List<Zone> all Zone entities
+	 * @return List<Block> all Block entities
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Zone> findAll() {
-		EntityManagerHelper.log("finding all Zone instances", Level.INFO, null);
+	public List<Block> findAll() {
+		EntityManagerHelper
+				.log("finding all Block instances", Level.INFO, null);
 		try {
-			final String queryString = "select model from Zone model";
+			final String queryString = "select model from Block model";
 			Query query = getEntityManager().createQuery(queryString);
 			return query.getResultList();
 		} catch (RuntimeException re) {

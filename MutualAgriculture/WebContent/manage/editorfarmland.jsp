@@ -97,7 +97,7 @@
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
-								<td style="width: 150px" rowspan="6">
+								<td style="width: 150px" rowspan="7">
 
 									<div id="carousel-example-generic" class="carousel slide"
 										data-ride="carousel">
@@ -116,7 +116,6 @@
 											<div class="item">
 												<img src="${item}" alt="无图片" width="100%"
 													height="180">
-
 											</div>
 										</c:forEach>
 										
@@ -152,18 +151,25 @@
 								<th style="width: 80px"><label>所属分区名</label></th>
 								<td style="width: 150px">
 									<select id="select2" class="js-example-basic-single" style="width: 90%">
-										<c:forEach var="item" items="${allZone }">
-											<option value="${item.zoneId } ${item.type }">${item.zonename }</option>
+										<c:forEach var="item1" items="${allZone }">
+											<option value="${item1.zoneId } ${item1.type }">${item1.zonename }</option>
 										</c:forEach>
 									</select>
 								</td>
-								<th style="width: 80px"><label>作物类型</label></th>
-								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
+								<td style="width: 150px">
+									<select id="select3" class="js-example-basic-single" style="width: 90%">
+										<%-- <option value="${farmland.block.bid }">${farmland.block.bname }</option> --%>
+									</select>
+								</td>
 							</tr>
 							<tr>
+								<th style="width: 80px"><label>作物类型</label></th>
+								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
 								<th style="width: 80px"><label>农田编号</label></th>
 								<td style="width: 150px">${currentFarmland.farmlandId }</td>
-								<td colspan="2">
+							</tr>
+							<tr>
+								<td colspan="4">
 									<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
 								</td>
 							</tr>
@@ -218,6 +224,7 @@
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
 	<script>
+	
 		function actionFormatter(value, row, index) {
 			return [
 					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
@@ -243,7 +250,29 @@
 			$("#select1").val("${currentFarmland.user.username }").trigger("change");
 			$("#select2").select2();
 			$("#select2").val("${currentFarmland.zone.zoneId } ${currentFarmland.zone.type}").trigger("change");
+			$("#select3").select2();
 			$(".carousel-inner .item:first").addClass("active");
+			
+			var value = $("#select2").val();
+			var zoneId = value.split(' ')[0];
+			$.post("../blockServlet", {op:"findBlocksByZoneId", zoneId:zoneId}, function(data) {
+				var obj = [];
+				for(var i=0; i<data.length; i++) {
+					obj.push({id:data[i].bid, text:data[i].bname});
+				}
+				$("#select3").select2({
+					placeholder: {
+					    id: -1, // the value of the option
+					    text: 'Select an option'
+					  },
+					data:obj
+				});
+				var bid = -1;
+				bid = "${currentFarmland.block.bid}";
+				$("#select3").val(bid).trigger("change");
+			}, "json");
+			//$("#select2-select3-container").attr("title", "${currentFarmland.block.bid}");
+			//$("#select2-select3-container").text("${currentFarmland.block.bname}");
 		});
 		function editInfo() {
 			$(".allInfo").removeAttr("disabled");
@@ -270,6 +299,7 @@
 			});
 		});
 		$("#select2").on("select2:select", function (e) {
+			$("#select3").val(null).trigger("change");
 			var value = $("#select2").val();
 			var type = value.split(' ')[1];
 			var zoneId = value.split(' ')[0];
@@ -280,8 +310,44 @@
 				item : "zoneId",
 				value : zoneId
 			});
+			$.post("../blockServlet", {op:"findBlocksByZoneId", zoneId:zoneId}, function(data) {
+				var obj = [];
+				for(var i=0; i<data.length; i++) {
+					obj.push({id:data[i].bid, text:data[i].bname});
+				}
+				$("#select3").select2({
+					placeholder: {
+					    id: -1, // the value of the option
+					    text: 'Select an option'
+					  },
+					data:obj
+				});
+				var bid = $("#select3").val();
+				alert(bid);
+				if(bid == null || bid=="") {
+					bid = -1;
+				}
+				$.post('../bFarmlandServlet', {
+					op : 'editeOne',
+					pk : '${currentFarmland.farmlandId }',
+					item : "bid",
+					value : bid
+				});
+			}, "json");
+			
 		});
-
+		$("#select3").on("select2:select", function (e) {
+			var bid = $("#select3").val();
+			if(bid  == null || bid=="") {
+				bid = -1;
+			}
+			$.post('../bFarmlandServlet', {
+				op : 'editeOne',
+				pk : '${currentFarmland.farmlandId }',
+				item : "bid",
+				value : bid
+			});
+		});
 		$('#jingweidu').editable({
 			type : 'text',
 			placeholder: '(纬度, 经度)',
@@ -398,7 +464,7 @@
 				value : _address
 			});
 		}
-
+		
 	</script>
 
 </body>

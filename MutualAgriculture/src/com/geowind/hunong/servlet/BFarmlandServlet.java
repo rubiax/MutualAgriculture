@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.jpa.Block;
+import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
@@ -26,6 +28,7 @@ import com.geowind.hunong.service.ZoneService;
 import com.geowind.hunong.service.impl.UserServiceImpl;
 import com.geowind.hunong.service.impl.ZoneServiceImpl;
 import com.geowind.hunong.util.FileUploadUtil;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 public class BFarmlandServlet extends BasicServlet {
 
@@ -79,6 +82,9 @@ public class BFarmlandServlet extends BasicServlet {
 	 * @param response
 	 */
 	private void editeOne(HttpServletRequest request, HttpServletResponse response) {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
@@ -90,6 +96,7 @@ public class BFarmlandServlet extends BasicServlet {
 			User user = userDAO.findById(value);
 			farmland.setUser(user);
 		} else if ("zoneId".equals(item)) {
+			System.out.println("zoneId:"+value);
 			ZoneDAO zoneDAO = new ZoneDAO();
 			Zone zone = zoneDAO.findById(Integer.parseInt(value));
 			farmland.setZone(zone);
@@ -109,6 +116,16 @@ public class BFarmlandServlet extends BasicServlet {
 			farmland.setNpk(value);
 		} else if("transtion".equals(item)) {
 			farmland.setTranstion(value);
+		} else if("bid".equals(item)) {
+			System.out.println(value);
+			if("-1".equals(value)) {
+				System.out.println("aaaaaaaaaaaaa");
+				farmland.setBlock(null);
+			} else {
+				BlockDAO blockDAO = new BlockDAO();
+				Block block = blockDAO.findById(Integer.parseInt(value));
+				farmland.setBlock(block);
+			}
 		}
 		EntityManagerHelper.beginTransaction();
 		try {

@@ -19,6 +19,8 @@ import com.geowind.hunong.entity.Data;
 import com.geowind.hunong.entity.FarmlandPoint;
 import com.geowind.hunong.entity.Point;
 import com.geowind.hunong.entity.SimZone;
+import com.geowind.hunong.jpa.Block;
+import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Farmland;
@@ -87,6 +89,12 @@ public class BZoneServlet extends BasicServlet {
 		}
 	}
 	
+	/**
+	 * 获取庄家类型
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void getCropType(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
@@ -94,6 +102,12 @@ public class BZoneServlet extends BasicServlet {
 		this.out(response, data);
 	}
 
+	/**
+	 * 获取分区面积
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void getZoneArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
@@ -367,17 +381,18 @@ public class BZoneServlet extends BasicServlet {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
 		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
 		entityManager.clear(); //清空一级缓存
+		
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Zone> zoneList = zoneService.search(centerId);
-		request.getSession().removeAttribute("allZone");
-		if (zoneList != null && zoneList.size() > 0) {
-			request.getSession().setAttribute("allZone", zoneList);
-			response.sendRedirect("manage/zone.jsp");
-		} else {
-			// 跳转至错误页面
-
-		}
+		
+		BlockDAO blockDAO = new BlockDAO();
+		List<Block> blockList = blockDAO.findByValid(1);
+		
+		request.getSession().setAttribute("allZone", zoneList);
+		request.getSession().setAttribute("allBlock", blockList);
+		
+		response.sendRedirect("manage/zone.jsp");
 
 	}
 
