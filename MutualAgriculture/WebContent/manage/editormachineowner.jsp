@@ -138,6 +138,7 @@
 							<th data-field="plate" data-sortable="true">机牌号</th>
 							<th data-field="type" data-sortable="true">类型</th>
 							<th data-field="brand" data-sortable="true">品牌</th>
+							<th data-field="efficiency" data-sortable="true">工作效率</th>
 							<th data-field="horsepower" data-sortable="true">马力</th>
 							<th data-field="time" data-sortable="true">报废时间</th>
 							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-width="65">操作</th>
@@ -151,6 +152,7 @@
 	                            <td>${item.plate }</td>
 	                            <td>${item.type }</td>
 	                            <td>${item.brand }</td>
+	                            <td>${item.efficiency }</td>
 	                            <td>${item.horsepower }</td>
 	                            <td><fmt:formatDate value="${item.overdate }" pattern="yyyy-MM-dd"/></td>
 	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>

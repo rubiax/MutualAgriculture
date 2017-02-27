@@ -114,12 +114,14 @@
 							<tr>
 								<th><label>机牌号</label></th>
 								<td><a href="#" id="plate"></a></td>
-								<th><label>马力</label></th>
-								<td><a href="#" id="horsepower"></a></td>
+								<th><label>工作效率</label></th>
+								<td><a href="#" id="efficiency"></a></td>
 							</tr>
 							<tr>
+								<th><label>马力</label></th>
+								<td><a href="#" id="horsepower"></a></td>
 								<th><label>报废时间</label></th>
-								<td colspan="1"><a href="#" id="overdate"></a></td>
+								<td><a href="#" id="overdate"></a></td>
 							</tr>
 						</tbody>
 						</table>
@@ -141,6 +143,7 @@
 							<th data-field="plate" data-sortable="true">机牌号</th>
 							<th data-field="type" data-sortable="true">类型</th>
 							<th data-field="brand" data-sortable="true">品牌</th>
+							<th data-field="efficiency" data-sortable="true">工作效率</th>
 							<th data-field="horsepower" data-sortable="true">马力</th>
 							<th data-field="time" data-sortable="true">报废时间</th>
 							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-width="65">操作</th>
@@ -155,6 +158,7 @@
 	                            <td>${item.plate }</td>
 	                            <td>${item.type }</td>
 	                            <td>${item.brand }</td>
+	                            <td>${item.efficiency }</td>
 	                            <td>${item.horsepower }</td>
 	                            <td><fmt:formatDate value="${item.overdate }" pattern="yyyy-MM-dd"/></td>
 	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
@@ -282,6 +286,14 @@
 				}
 			}
 		});
+		$('#efficiency').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
 		$('#horsepower').editable({
 			type : 'text',
 			validate : function(value) {
@@ -303,6 +315,7 @@
 			$("#select2").select2('val',' ');
 	        $("#brand").editable('setValue', null).removeClass('editable-unsaved');
 			$("#plate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#efficiency").editable('setValue', null).removeClass('editable-unsaved');
 			$("#horsepower").editable('setValue', null).removeClass('editable-unsaved');
 			$("#overdate").editable('setValue', null).removeClass('editable-unsaved');
 			$("#phone").val('');
@@ -313,6 +326,7 @@
 			var type = $("#select2").val();
 			var brand = $("#brand").editable('getValue', true);
 			var plate = $("#plate").editable('getValue', true);
+			var efficiency = $("#efficiency").editable('getValue', true);
 			var horsepower = $("#horsepower").editable('getValue', true);
 			var overdate = $("#overdate").editable('getValue', true);
 			if(ownerId == null || type == null || brand == null || plate == null || horsepower == null || overdate== null) {
@@ -320,7 +334,7 @@
 				return;
 			}
 			$.post("../bMachineServlet?op=add", {ownerId:ownerId, type:type, plate:plate,
-		    	brand:brand, horsepower:horsepower, overdate:overdate}, function(data) {
+		    	brand:brand, efficiency:efficiency,horsepower:horsepower, overdate:overdate}, function(data) {
 		    	if(data == 1) {
 		    		alert("添加成功");
 		    		$("#myform").submit();
@@ -332,6 +346,7 @@
 			$("#select2").select2('val',' ');
 	        $("#brand").editable('setValue', null).removeClass('editable-unsaved');
 			$("#plate").editable('setValue', null).removeClass('editable-unsaved');
+			$("#efficiency").editable('setValue', null).removeClass('editable-unsaved');
 			$("#horsepower").editable('setValue', null).removeClass('editable-unsaved');
 			$("#overdate").editable('setValue', null).removeClass('editable-unsaved');
 			$("#phone").val('');

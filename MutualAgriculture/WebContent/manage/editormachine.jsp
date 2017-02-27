@@ -163,9 +163,12 @@
 								<td><a href="#" id="plate">${currentMachine.plate }</a></td>
 							</tr>
 							<tr>
+								<th><label>工作效率</label></th>
+								<td><a href="#" id="efficiency">${currentMachine.efficiency }</a></td>
 								<th><label>马力</label></th>
 								<td><a href="#" id="horsepower">${currentMachine.horsepower }</a></td>
-								
+							</tr>
+							<tr>
 								<th><label>报废时间</label></th>
 								<td><a href="#" id="overdate"><fmt:formatDate value="${currentMachine.overdate }" pattern="yyyy-MM-dd"/></a></td>
 							</tr>
@@ -282,6 +285,22 @@
 					op : 'editeOne',
 					pk : '${currentMachine.machineId }',
 					item : "plate",
+					value : params.value
+				});
+			},
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
+		$('#efficiency').editable({
+			type : 'text',
+			url : function(params) {
+				return $.post('../bMachineServlet', {
+					op : 'editeOne',
+					pk : '${currentMachine.machineId }',
+					item : "efficiency",
 					value : params.value
 				});
 			},

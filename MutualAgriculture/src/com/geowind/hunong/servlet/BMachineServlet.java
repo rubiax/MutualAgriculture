@@ -111,6 +111,8 @@ public class BMachineServlet extends BasicServlet {
 			machine.setBrand(value);
 		} else if("plate".equals(item)) {
 			machine.setPlate(value);
+		} else if("efficiency".equals(item)) {
+			machine.setEfficiency(Double.parseDouble(value));
 		} else if("horsepower".equals(item)) {
 			machine.setHorsepower(value);
 		} else if("overdate".equals(item)) {
@@ -259,6 +261,7 @@ public class BMachineServlet extends BasicServlet {
 		String plate = request.getParameter("plate");
 		String type = request.getParameter("type");
 		String brand = request.getParameter("brand");
+		double efficiency = Double.parseDouble(request.getParameter("efficiency"));
 		String horsepower = request.getParameter("horsepower");
 		String overdate = request.getParameter("overdate");
 
@@ -269,6 +272,7 @@ public class BMachineServlet extends BasicServlet {
 		machine.setPlate(plate);
 		machine.setType(type);
 		machine.setBrand(brand);
+		machine.setEfficiency(efficiency);
 		machine.setHorsepower(horsepower);
 		machine.setMachineowner(machineowner);
 		try {

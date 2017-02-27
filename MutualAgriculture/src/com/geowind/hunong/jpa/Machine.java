@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import com.google.gson.annotations.Expose;
 
@@ -26,7 +27,7 @@ import com.google.gson.annotations.Expose;
  * Machine entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "machine", catalog = "mutualagriculture")
+@Table(name = "machine", catalog = "mutualagriculture", uniqueConstraints = @UniqueConstraint(columnNames = "plate"))
 public class Machine implements java.io.Serializable {
 
 	// Fields
@@ -42,6 +43,8 @@ public class Machine implements java.io.Serializable {
 	private String brand;
 	@Expose
 	private String horsepower;
+	@Expose
+	private Double efficiency;
 	@Expose
 	private Date overdate;
 	@Expose
@@ -62,19 +65,22 @@ public class Machine implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Machine(Machineowner machineowner) {
+	public Machine(Machineowner machineowner, String plate) {
 		this.machineowner = machineowner;
+		this.plate = plate;
 	}
 
 	/** full constructor */
 	public Machine(Machineowner machineowner, String plate, String type,
-			String brand, String horsepower, Date overdate, String picture,
-			Integer state, Integer workstate, Integer valid, Set<Task> tasks) {
+			String brand, String horsepower, Double efficiency, Date overdate,
+			String picture, Integer state, Integer workstate, Integer valid,
+			Set<Task> tasks) {
 		this.machineowner = machineowner;
 		this.plate = plate;
 		this.type = type;
 		this.brand = brand;
 		this.horsepower = horsepower;
+		this.efficiency = efficiency;
 		this.overdate = overdate;
 		this.picture = picture;
 		this.state = state;
@@ -139,6 +145,15 @@ public class Machine implements java.io.Serializable {
 
 	public void setHorsepower(String horsepower) {
 		this.horsepower = horsepower;
+	}
+
+	@Column(name = "efficiency", precision = 22, scale = 0)
+	public Double getEfficiency() {
+		return this.efficiency;
+	}
+
+	public void setEfficiency(Double efficiency) {
+		this.efficiency = efficiency;
 	}
 
 	@Temporal(TemporalType.DATE)
