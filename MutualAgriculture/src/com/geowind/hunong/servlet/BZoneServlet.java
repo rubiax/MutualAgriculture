@@ -304,6 +304,7 @@ public class BZoneServlet extends BasicServlet {
 			// request.getSession().setAttribute("allZone", list);
 			this.out(response, "1");
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.out(response, "0");
 		}
 

@@ -1,35 +1,33 @@
 package com.geowind.hunong.jpa;
 
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * Center entities. Transaction control of the save(), update() and delete()
- * operations must be handled externally by senders of these methods or must be
- * manually added to each of these methods for data to be persisted to the JPA
- * datastore.
+ * Planstandard entities. Transaction control of the save(), update() and
+ * delete() operations must be handled externally by senders of these methods or
+ * must be manually added to each of these methods for data to be persisted to
+ * the JPA datastore.
  * 
- * @see com.geowind.hunong.jpa.Center
+ * @see com.geowind.hunong.jpa.Planstandard
  * @author MyEclipse Persistence Tools
  */
-public class CenterDAO implements ICenterDAO {
+public class PlanstandardDAO implements IPlanstandardDAO {
 	// property constants
-	public static final String ADDRESS = "address";
-	public static final String LEVEL = "level";
-	public static final String NAME = "name";
-	public static final String PRINCIPAL = "principal";
-	public static final String VALID = "valid";
+	public static final String EVENT = "event";
+	public static final String BEGIN = "begin";
+	public static final String END = "end";
+	public static final String DAYS = "days";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
 	}
 
 	/**
-	 * Perform an initial save of a previously unsaved Center entity. All
+	 * Perform an initial save of a previously unsaved Planstandard entity. All
 	 * subsequent persist actions of this entity should use the #update()
 	 * method. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -39,17 +37,18 @@ public class CenterDAO implements ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * CenterDAO.save(entity);
+	 * PlanstandardDAO.save(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to persist
+	 *            Planstandard entity to persist
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void save(Center entity) {
-		EntityManagerHelper.log("saving Center instance", Level.INFO, null);
+	public void save(Planstandard entity) {
+		EntityManagerHelper.log("saving Planstandard instance", Level.INFO,
+				null);
 		try {
 			getEntityManager().persist(entity);
 			EntityManagerHelper.log("save successful", Level.INFO, null);
@@ -60,7 +59,7 @@ public class CenterDAO implements ICenterDAO {
 	}
 
 	/**
-	 * Delete a persistent Center entity. This operation must be performed
+	 * Delete a persistent Planstandard entity. This operation must be performed
 	 * within the a database transaction context for the entity's data to be
 	 * permanently deleted from the persistence store, i.e., database. This
 	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
@@ -68,21 +67,22 @@ public class CenterDAO implements ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * CenterDAO.delete(entity);
+	 * PlanstandardDAO.delete(entity);
 	 * EntityManagerHelper.commit();
 	 * entity = null;
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to delete
+	 *            Planstandard entity to delete
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void delete(Center entity) {
-		EntityManagerHelper.log("deleting Center instance", Level.INFO, null);
+	public void delete(Planstandard entity) {
+		EntityManagerHelper.log("deleting Planstandard instance", Level.INFO,
+				null);
 		try {
-			entity = getEntityManager().getReference(Center.class,
-					entity.getCenterId());
+			entity = getEntityManager().getReference(Planstandard.class,
+					entity.getPid());
 			getEntityManager().remove(entity);
 			EntityManagerHelper.log("delete successful", Level.INFO, null);
 		} catch (RuntimeException re) {
@@ -92,10 +92,10 @@ public class CenterDAO implements ICenterDAO {
 	}
 
 	/**
-	 * Persist a previously saved Center entity and return it or a copy of it to
-	 * the sender. A copy of the Center entity parameter is returned when the
-	 * JPA persistence mechanism has not previously been tracking the updated
-	 * entity. This operation must be performed within the a database
+	 * Persist a previously saved Planstandard entity and return it or a copy of
+	 * it to the sender. A copy of the Planstandard entity parameter is returned
+	 * when the JPA persistence mechanism has not previously been tracking the
+	 * updated entity. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
 	 * persistence store, i.e., database. This method uses the
 	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
@@ -103,20 +103,22 @@ public class CenterDAO implements ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * entity = CenterDAO.update(entity);
+	 * entity = PlanstandardDAO.update(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to update
-	 * @return Center the persisted Center entity instance, may not be the same
+	 *            Planstandard entity to update
+	 * @return Planstandard the persisted Planstandard entity instance, may not
+	 *         be the same
 	 * @throws RuntimeException
 	 *             if the operation fails
 	 */
-	public Center update(Center entity) {
-		EntityManagerHelper.log("updating Center instance", Level.INFO, null);
+	public Planstandard update(Planstandard entity) {
+		EntityManagerHelper.log("updating Planstandard instance", Level.INFO,
+				null);
 		try {
-			Center result = getEntityManager().merge(entity);
+			Planstandard result = getEntityManager().merge(entity);
 			EntityManagerHelper.log("update successful", Level.INFO, null);
 			return result;
 		} catch (RuntimeException re) {
@@ -125,11 +127,12 @@ public class CenterDAO implements ICenterDAO {
 		}
 	}
 
-	public Center findById(Integer id) {
-		EntityManagerHelper.log("finding Center instance with id: " + id,
+	public Planstandard findById(Integer id) {
+		EntityManagerHelper.log("finding Planstandard instance with id: " + id,
 				Level.INFO, null);
 		try {
-			Center instance = getEntityManager().find(Center.class, id);
+			Planstandard instance = getEntityManager().find(Planstandard.class,
+					id);
 			return instance;
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
@@ -138,20 +141,21 @@ public class CenterDAO implements ICenterDAO {
 	}
 
 	/**
-	 * Find all Center entities with a specific property value.
+	 * Find all Planstandard entities with a specific property value.
 	 * 
 	 * @param propertyName
-	 *            the name of the Center property to query
+	 *            the name of the Planstandard property to query
 	 * @param value
 	 *            the property value to match
-	 * @return List<Center> found by query
+	 * @return List<Planstandard> found by query
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Center> findByProperty(String propertyName, final Object value) {
-		EntityManagerHelper.log("finding Center instance with property: "
+	public List<Planstandard> findByProperty(String propertyName,
+			final Object value) {
+		EntityManagerHelper.log("finding Planstandard instance with property: "
 				+ propertyName + ", value: " + value, Level.INFO, null);
 		try {
-			final String queryString = "select model from Center model where model."
+			final String queryString = "select model from Planstandard model where model."
 					+ propertyName + "= :propertyValue";
 			Query query = getEntityManager().createQuery(queryString);
 			query.setParameter("propertyValue", value);
@@ -163,37 +167,33 @@ public class CenterDAO implements ICenterDAO {
 		}
 	}
 
-	public List<Center> findByAddress(Object address) {
-		return findByProperty(ADDRESS, address);
+	public List<Planstandard> findByEvent(Object event) {
+		return findByProperty(EVENT, event);
 	}
 
-	public List<Center> findByLevel(Object level) {
-		return findByProperty(LEVEL, level);
+	public List<Planstandard> findByBegin(Object begin) {
+		return findByProperty(BEGIN, begin);
 	}
 
-	public List<Center> findByName(Object name) {
-		return findByProperty(NAME, name);
+	public List<Planstandard> findByEnd(Object end) {
+		return findByProperty(END, end);
 	}
 
-	public List<Center> findByPrincipal(Object principal) {
-		return findByProperty(PRINCIPAL, principal);
-	}
-
-	public List<Center> findByValid(Object valid) {
-		return findByProperty(VALID, valid);
+	public List<Planstandard> findByDays(Object days) {
+		return findByProperty(DAYS, days);
 	}
 
 	/**
-	 * Find all Center entities.
+	 * Find all Planstandard entities.
 	 * 
-	 * @return List<Center> all Center entities
+	 * @return List<Planstandard> all Planstandard entities
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Center> findAll() {
-		EntityManagerHelper.log("finding all Center instances", Level.INFO,
-				null);
+	public List<Planstandard> findAll() {
+		EntityManagerHelper.log("finding all Planstandard instances",
+				Level.INFO, null);
 		try {
-			final String queryString = "select model from Center model";
+			final String queryString = "select model from Planstandard model";
 			Query query = getEntityManager().createQuery(queryString);
 			return query.getResultList();
 		} catch (RuntimeException re) {

@@ -1,4 +1,8 @@
 /META-INF/
 /com/
+<<<<<<< HEAD
 /db.properties
 /log4j2.xml
+=======
+/META-INF/
+>>>>>>> d37ac7cea92d33c07db65ac77442e7080fd7f636

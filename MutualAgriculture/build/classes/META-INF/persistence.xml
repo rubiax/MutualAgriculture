@@ -26,6 +26,8 @@
 		<class>com.geowind.hunong.jpa.Farmland</class>
 		<class>com.geowind.hunong.jpa.Gasstation</class>
 		<class>com.geowind.hunong.jpa.Systeminfo</class>
+		<class>com.geowind.hunong.jpa.Planstandard</class>
+		<class>com.geowind.hunong.jpa.Aiplanning</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
