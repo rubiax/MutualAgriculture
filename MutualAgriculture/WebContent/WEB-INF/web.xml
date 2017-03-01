@@ -212,6 +212,16 @@
 		<servlet-name>BlockServlet</servlet-name>
 		<url-pattern>/blockServlet</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>TreeServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.TreeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TreeServlet</servlet-name>
+		<url-pattern>/treeServlet</url-pattern>
+	</servlet-mapping>
 
 
 	<welcome-file-list>
