@@ -69,6 +69,7 @@ public class TreeServlet extends BasicServlet {
 			//将区 数组放入服务中心 对象
 			centerObject.add("children", zoneArray);
 		}
+		System.out.println(centerObject.toString());
 		try{
 			String s = centerObject.toString();
 			
