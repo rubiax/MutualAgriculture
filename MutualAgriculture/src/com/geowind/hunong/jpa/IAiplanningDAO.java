@@ -1,17 +1,17 @@
 package com.geowind.hunong.jpa;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
- * Interface for CenterDAO.
+ * Interface for AiplanningDAO.
  * 
  * @author MyEclipse Persistence Tools
  */
 
-public interface ICenterDAO {
+public interface IAiplanningDAO {
 	/**
-	 * Perform an initial save of a previously unsaved Center entity. All
+	 * Perform an initial save of a previously unsaved Aiplanning entity. All
 	 * subsequent persist actions of this entity should use the #update()
 	 * method. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
@@ -21,19 +21,19 @@ public interface ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * ICenterDAO.save(entity);
+	 * IAiplanningDAO.save(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to persist
+	 *            Aiplanning entity to persist
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void save(Center entity);
+	public void save(Aiplanning entity);
 
 	/**
-	 * Delete a persistent Center entity. This operation must be performed
+	 * Delete a persistent Aiplanning entity. This operation must be performed
 	 * within the a database transaction context for the entity's data to be
 	 * permanently deleted from the persistence store, i.e., database. This
 	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
@@ -41,23 +41,23 @@ public interface ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * ICenterDAO.delete(entity);
+	 * IAiplanningDAO.delete(entity);
 	 * EntityManagerHelper.commit();
 	 * entity = null;
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to delete
+	 *            Aiplanning entity to delete
 	 * @throws RuntimeException
 	 *             when the operation fails
 	 */
-	public void delete(Center entity);
+	public void delete(Aiplanning entity);
 
 	/**
-	 * Persist a previously saved Center entity and return it or a copy of it to
-	 * the sender. A copy of the Center entity parameter is returned when the
-	 * JPA persistence mechanism has not previously been tracking the updated
-	 * entity. This operation must be performed within the a database
+	 * Persist a previously saved Aiplanning entity and return it or a copy of
+	 * it to the sender. A copy of the Aiplanning entity parameter is returned
+	 * when the JPA persistence mechanism has not previously been tracking the
+	 * updated entity. This operation must be performed within the a database
 	 * transaction context for the entity's data to be permanently saved to the
 	 * persistence store, i.e., database. This method uses the
 	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
@@ -65,45 +65,42 @@ public interface ICenterDAO {
 	 * 
 	 * <pre>
 	 * EntityManagerHelper.beginTransaction();
-	 * entity = ICenterDAO.update(entity);
+	 * entity = IAiplanningDAO.update(entity);
 	 * EntityManagerHelper.commit();
 	 * </pre>
 	 * 
 	 * @param entity
-	 *            Center entity to update
-	 * @return Center the persisted Center entity instance, may not be the same
+	 *            Aiplanning entity to update
+	 * @return Aiplanning the persisted Aiplanning entity instance, may not be
+	 *         the same
 	 * @throws RuntimeException
 	 *             if the operation fails
 	 */
-	public Center update(Center entity);
+	public Aiplanning update(Aiplanning entity);
 
-	public Center findById(Integer id);
+	public Aiplanning findById(Integer id);
 
 	/**
-	 * Find all Center entities with a specific property value.
+	 * Find all Aiplanning entities with a specific property value.
 	 * 
 	 * @param propertyName
-	 *            the name of the Center property to query
+	 *            the name of the Aiplanning property to query
 	 * @param value
 	 *            the property value to match
-	 * @return List<Center> found by query
+	 * @return List<Aiplanning> found by query
 	 */
-	public List<Center> findByProperty(String propertyName, Object value);
+	public List<Aiplanning> findByProperty(String propertyName, Object value);
 
-	public List<Center> findByAddress(Object address);
+	public List<Aiplanning> findByEvent(Object event);
 
-	public List<Center> findByLevel(Object level);
+	public List<Aiplanning> findByBreakpoint(Object breakpoint);
 
-	public List<Center> findByName(Object name);
-
-	public List<Center> findByPrincipal(Object principal);
-
-	public List<Center> findByValid(Object valid);
+	public List<Aiplanning> findByDays(Object days);
 
 	/**
-	 * Find all Center entities.
+	 * Find all Aiplanning entities.
 	 * 
-	 * @return List<Center> all Center entities
+	 * @return List<Aiplanning> all Aiplanning entities
 	 */
-	public List<Center> findAll();
+	public List<Aiplanning> findAll();
 }

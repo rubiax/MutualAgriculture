@@ -44,6 +44,8 @@ public class Center implements java.io.Serializable {
 	@Expose (serialize = false, deserialize = false)
 	private Set<Machineowner> machineowners = new HashSet<Machineowner>(0);
 	@Expose (serialize = false, deserialize = false)
+	private Set<Planstandard> planstandards = new HashSet<Planstandard>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<User> users = new HashSet<User>(0);
@@ -57,7 +59,8 @@ public class Center implements java.io.Serializable {
 	/** full constructor */
 	public Center(String address, String level, String name, String principal,
 			Integer valid, Set<Admin> admins, Set<Zone> zones,
-			Set<Machineowner> machineowners, Set<Task> tasks, Set<User> users) {
+			Set<Machineowner> machineowners, Set<Planstandard> planstandards,
+			Set<Task> tasks, Set<User> users) {
 		this.address = address;
 		this.level = level;
 		this.name = name;
@@ -66,6 +69,7 @@ public class Center implements java.io.Serializable {
 		this.admins = admins;
 		this.zones = zones;
 		this.machineowners = machineowners;
+		this.planstandards = planstandards;
 		this.tasks = tasks;
 		this.users = users;
 	}
@@ -152,6 +156,15 @@ public class Center implements java.io.Serializable {
 
 	public void setMachineowners(Set<Machineowner> machineowners) {
 		this.machineowners = machineowners;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")
+	public Set<Planstandard> getPlanstandards() {
+		return this.planstandards;
+	}
+
+	public void setPlanstandards(Set<Planstandard> planstandards) {
+		this.planstandards = planstandards;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "center")

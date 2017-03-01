@@ -213,6 +213,14 @@
 		<url-pattern>/blockServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>AiPlanningServlet</servlet-name>
+		<servlet-class>com.geowind.hunong.servlet.AiPlanningServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AiPlanningServlet</servlet-name>
+		<url-pattern>/aiPlanningServlet</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>login.html</welcome-file>

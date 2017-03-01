@@ -329,7 +329,7 @@
 			var efficiency = $("#efficiency").editable('getValue', true);
 			var horsepower = $("#horsepower").editable('getValue', true);
 			var overdate = $("#overdate").editable('getValue', true);
-			if(ownerId == null || type == null || brand == null || plate == null || horsepower == null || overdate== null) {
+			if(ownerId == null || type == null || efficiency==null || brand == null || plate == null || horsepower == null || overdate== null) {
 				alert("请完成信息");
 				return;
 			}

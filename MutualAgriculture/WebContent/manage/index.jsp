@@ -142,7 +142,8 @@
       <ul class="sidebar-menu">
         <li class="header">管理栏目</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="treeview active">
+        <li class="single"><a href="javascript:showpage(this,'calendar.html')"><i class="fa fa-truck"></i> <span>智能调度</span></a></li>
+        <li class="treeview">
           <a href="#"><i class="fa fa-users"></i> <span>人员管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

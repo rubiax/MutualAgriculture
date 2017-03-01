@@ -41,6 +41,8 @@ public class Block implements java.io.Serializable {
 	@Expose
 	private Integer valid;
 	@Expose (serialize = false, deserialize = false)
+	private Set<Aiplanning> aiplannings = new HashSet<Aiplanning>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 
 	// Constructors
@@ -57,12 +59,13 @@ public class Block implements java.io.Serializable {
 
 	/** full constructor */
 	public Block(Zone zone, String bname, Double area, String address,
-			Integer valid, Set<Farmland> farmlands) {
+			Integer valid, Set<Aiplanning> aiplannings, Set<Farmland> farmlands) {
 		this.zone = zone;
 		this.bname = bname;
 		this.area = area;
 		this.address = address;
 		this.valid = valid;
+		this.aiplannings = aiplannings;
 		this.farmlands = farmlands;
 	}
 
@@ -122,6 +125,15 @@ public class Block implements java.io.Serializable {
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "block")
+	public Set<Aiplanning> getAiplannings() {
+		return this.aiplannings;
+	}
+
+	public void setAiplannings(Set<Aiplanning> aiplannings) {
+		this.aiplannings = aiplannings;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "block")
