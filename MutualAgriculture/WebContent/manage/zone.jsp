@@ -257,7 +257,7 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row"   id="tree-container">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -269,9 +269,6 @@
 				</div>
 			</div>
 		</div>
-		
-
-
 
 
 	</div>
@@ -280,53 +277,8 @@
 
 	<!-- 二叉树 -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script>
-		
-		
-		 
-		
-		var width = 600, height = 600;
-
-		var tree = d3.layout.tree().size([ width, height - 200 ]).separation(
-				function(a, b) {
-					return (a.parent == b.parent ? 1 : 2);
-				});
-
-		var diagonal = d3.svg.diagonal().projection(function(d) {
-			return [ d.y, d.x ];
-		});
-
-		var svg = d3.select("body #tree").append("svg").attr("width", width).attr(
-				"height", height).append("g").attr("transform",
-				"translate(40,0)");
-
-		d3.json("../jsonData/tree.json", function(error, root) {
-
-			var nodes = tree.nodes(root);
-			var links = tree.links(nodes);
-
-			console.log(nodes);
-			console.log(links);
-
-			var link = svg.selectAll(".link").data(links).enter()
-					.append("path").attr("class", "link").attr("d", diagonal);
-
-			var node = svg.selectAll(".node").data(nodes).enter().append("g")
-					.attr("class", "node").attr("transform", function(d) {
-						return "translate(" + d.y + "," + d.x + ")";
-					})
-
-			node.append("circle").attr("r", 4);//数字表示圆圈大小
-
-			node.append("text").attr("dx", function(d) {
-				return d.children ? -8 : 8;
-			}).attr("dy", 3).style("text-anchor", function(d) {
-				return d.children ? "end" : "start";
-			}).text(function(d) {
-				return d.name;
-			});
-		});
-	</script>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="js/dndTree.js"></script>
 	<!-- 二叉数 -->
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>

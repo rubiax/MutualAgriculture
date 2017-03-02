@@ -72,20 +72,20 @@ public class TreeServlet extends BasicServlet {
 		System.out.println(centerObject.toString());
 		try{
 			
-			//System.out.println();
 			String s = centerObject.toString();
 			
 			//URL base = this.getClass().getResource("");
 			//String path = new File(base.getFile(), "../../").getCanonicalPath(); 
 		
 			String dirString = request.getSession().getServletContext().getRealPath("")+"\\jsonData";
+			System.out.println(dirString);
 			File dir = new File(dirString);
 			if(!dir.exists()) {
 				dir.mkdirs();
 			}
 			
 			File treeJsonFile = new File(request.getSession().getServletContext().getRealPath("")+"\\jsonData\\tree.json");
-			//System.out.println(base+ "1:"+path);
+			
 			
 			if(!treeJsonFile.exists()){
 				treeJsonFile.createNewFile();
@@ -164,10 +164,10 @@ public class TreeServlet extends BasicServlet {
 			blockObject = new JsonObject();
 			blockObject.addProperty("name", map.get("bname").toString());
 			//获取农田数组
-			//farmlandArray = getFarmlandJson(map.get("bid").toString());
+			farmlandArray = getFarmlandJson(map.get("bid").toString());
 			
 			//将农田数组 放入块对象中			
-			//blockObject.add("children",farmlandArray);
+			blockObject.add("children",farmlandArray);
 			
 			//将块对象放入块数组
 			blockArray.add(blockObject);
