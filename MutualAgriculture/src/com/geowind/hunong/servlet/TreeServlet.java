@@ -18,6 +18,7 @@ import org.junit.Test;
 import com.geowind.hunong.util.DBHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jspsmart.upload.Request;
 
 public class TreeServlet extends BasicServlet {
 
@@ -36,7 +37,7 @@ public class TreeServlet extends BasicServlet {
 		switch(op){
 		
 			case "getTreeJson":
-				getTreeJson();
+				getTreeJson(request, response);
 			
 			default:
 				break;
@@ -49,8 +50,7 @@ public class TreeServlet extends BasicServlet {
 	
 	
 	
-	public void getTreeJson(){
-		
+	public void getTreeJson(HttpServletRequest request, HttpServletResponse sresponse){
 		//获取服务中心
 		String sql = "select * from center;";
 		List<Map<String,Object>> maps = DBHelper.doQuery(sql);
@@ -70,14 +70,21 @@ public class TreeServlet extends BasicServlet {
 			centerObject.add("children", zoneArray);
 		}
 		try{
+			
+			//System.out.println();
 			String s = centerObject.toString();
 			
-			URL base = this.getClass().getResource("/");
-			String path = new File(base.getFile(), "../../manage/jsonData/tree.json").getCanonicalPath(); 
+			//URL base = this.getClass().getResource("");
+			//String path = new File(base.getFile(), "../../").getCanonicalPath(); 
 		
+			String dirString = request.getSession().getServletContext().getRealPath("")+"\\jsonData";
+			File dir = new File(dirString);
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
 			
-			File treeJsonFile = new File(path);
-			System.out.println(base+ "1:"+path);
+			File treeJsonFile = new File(request.getSession().getServletContext().getRealPath("")+"\\jsonData\\tree.json");
+			//System.out.println(base+ "1:"+path);
 			
 			if(!treeJsonFile.exists()){
 				treeJsonFile.createNewFile();

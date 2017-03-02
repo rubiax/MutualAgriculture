@@ -256,13 +256,27 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">级别树状图展示</h3>
+					</div>
+					<div class="panel-body">
+						<div id="tree" style="height: 600px;margin-left: 20px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+
 
 
 	</div>
 	
-	<div id="tree">
-        <center> <strong>  级别树状图展示：</strong> </center>
-	</div>
+	
 
 	<!-- 二叉树 -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
@@ -271,7 +285,7 @@
 		
 		 
 		
-		var width = 1100, height = 1100;
+		var width = 600, height = 600;
 
 		var tree = d3.layout.tree().size([ width, height - 200 ]).separation(
 				function(a, b) {
@@ -282,11 +296,11 @@
 			return [ d.y, d.x ];
 		});
 
-		var svg = d3.select("body").append("svg").attr("width", width).attr(
+		var svg = d3.select("body #tree").append("svg").attr("width", width).attr(
 				"height", height).append("g").attr("transform",
 				"translate(40,0)");
 
-		d3.json("../manage/jsonData/tree.json", function(error, root) {
+		d3.json("../jsonData/tree.json", function(error, root) {
 
 			var nodes = tree.nodes(root);
 			var links = tree.links(nodes);
