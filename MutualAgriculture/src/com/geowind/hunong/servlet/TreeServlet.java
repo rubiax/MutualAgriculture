@@ -77,14 +77,14 @@ public class TreeServlet extends BasicServlet {
 			//URL base = this.getClass().getResource("");
 			//String path = new File(base.getFile(), "../../").getCanonicalPath(); 
 		
-			String dirString = request.getSession().getServletContext().getRealPath("")+"\\jsonData";
+			String dirString = request.getSession().getServletContext().getRealPath("")+File.separator+"jsonData";
 			System.out.println(dirString);
 			File dir = new File(dirString);
 			if(!dir.exists()) {
 				dir.mkdirs();
 			}
 			
-			File treeJsonFile = new File(request.getSession().getServletContext().getRealPath("")+"\\jsonData\\tree.json");
+			File treeJsonFile = new File(request.getSession().getServletContext().getRealPath("")+File.separator+"jsonData"+File.separator+"tree.json");
 			
 			
 			if(!treeJsonFile.exists()){

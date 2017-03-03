@@ -46,21 +46,44 @@
 	margin-left: 10px;
 }
 
-.node circle {
-	fill: #fff;
-	stroke: steelblue;
-	stroke-width: 1.5px;
-}
-
 .node {
-	font: 12px sans-serif;
-}
+    cursor: pointer;
+  }
 
-.link {
-	fill: none;
-	stroke: #ccc;
-	stroke-width: 1.5px;
-}
+  .overlay{
+      background-color:#EEE;
+  }
+   
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+   
+  .node text {
+    font-size:10px; 
+    font-family:sans-serif;
+  }
+   
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .ghostCircle.show{
+      display:block;
+  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+       display: none;
+  }
 </style>
 </head>
 <body style="background-color: #ECF0F5">
@@ -257,14 +280,14 @@
 			</div>
 		</div>
 		
-		<div class="row"   id="tree-container">
+		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">级别树状图展示</h3>
 					</div>
 					<div class="panel-body">
-						<div id="tree" style="height: 600px;margin-left: 20px;"></div>
+						<div id="tree-container" style="height: 600px;"></div>
 					</div>
 				</div>
 			</div>
