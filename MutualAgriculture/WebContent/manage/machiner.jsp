@@ -123,7 +123,8 @@
 			<!-- /.box-body -->
 
 		</div>
-
+		
+	
 
 	</div>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -143,6 +144,8 @@
 
 	<!-- Latest compiled and minified Locales -->
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="depend/echarts/echarts.common.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [
@@ -182,7 +185,9 @@
 				sortName: 'username',
 				sortOrder: 'desc'
 			});
-		});
+		}
+		}
+			
 	</script>
 
 </body>

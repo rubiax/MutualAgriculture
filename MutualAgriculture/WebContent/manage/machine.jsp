@@ -171,7 +171,20 @@
 			<!-- /.box-body -->
 
 		</div>
-
+		
+			<!-- 图表 -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">农机数量统计</h3>
+					</div>
+					<div class="panel-body">
+						<div id="machinenum_chart1" style="height: 350px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -193,6 +206,8 @@
 	<script src="depend/select2/select2.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
+	<script src="depend/echarts/echarts.common.min.js"></script>
+	<script src="depend/select2/select2.min.js"></script>
 	<script>
 		
 		$(function() {
@@ -213,6 +228,25 @@
 					return '<img src="img/loading_spinner.gif"/>'
 				}
 			});
+			
+			//农机数量统计
+			$.post("../bMachineServlet", {
+				op : "getMachineNum"
+			}, function(data) {
+				var name = [];
+				var value = [];
+				for (var i = 0; i < data.length; i++) {
+					name[i] = data[i].type;
+					value[i] = parseInt(data[i].num);
+				}
+				createChart1(name, value);
+			}, "json");
+			
+		
+		
+			<!--以上为农机数量统计-->
+			
+		
 			$("#select1").select2();
 			//$("#select1").val("${currentMachine.machineowner.ownerId }").trigger("change");
 			$("#select1").select2('val',' ');
@@ -342,6 +376,9 @@
 		    		alert("添加失败");
 		    	}
 		    });
+			
+			
+			
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
 	        $("#brand").editable('setValue', null).removeClass('editable-unsaved');
@@ -352,6 +389,54 @@
 			$("#phone").val('');
 	        $("#collapseOne").collapse('hide');
 	   	});
+function createChart1(name,value){
+			
+			//图表生成
+			var dom = document.getElementById("machinenum_chart1");
+			var myChart = echarts.init(dom);
+
+			option = {
+			    color: ['#3398DB'],
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : name,
+			            axisTick: {
+			                alignWithLabel: true
+			            }
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'直接访问',
+			            type:'bar',
+			            barWidth: '60%',
+			            data:value
+			        }
+			    ]
+			};
+
+			if (option && typeof option === "object") {
+				myChart.setOption(option, true);
+			}
+		}
 	</script>
 
 </body>

@@ -3,6 +3,7 @@ package com.geowind.hunong.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.MachineNum;
 import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Machine;
 import com.geowind.hunong.jpa.MachineDAO;
@@ -22,7 +24,9 @@ import com.geowind.hunong.service.MachineOwnerService;
 import com.geowind.hunong.service.MachineService;
 import com.geowind.hunong.service.impl.MachineOwnerServiceImpl;
 import com.geowind.hunong.service.impl.MachineServiceImpl;
+import com.geowind.hunong.util.DBHelper;
 import com.geowind.hunong.util.FileUploadUtil;
+import com.google.gson.Gson;
 
 public class BMachineServlet extends BasicServlet {
 
@@ -67,9 +71,28 @@ public class BMachineServlet extends BasicServlet {
 		case "findFreeMachine":
 			findFreeMachine(request, response);
 			break;
+		case "getMachineNum":
+			getMachineNum(request,response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 获得农机类型统计数量
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void getMachineNum(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+	
+		MachineServiceImpl machineService = new MachineServiceImpl();
+		
+		List<MachineNum> machineNumList = machineService.getMachineNum();
+	
+		this.out(response,machineNumList);
 	}
 
 	/**

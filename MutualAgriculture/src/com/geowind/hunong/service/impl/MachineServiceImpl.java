@@ -12,7 +12,9 @@ import com.geowind.hunong.jpa.MachineownerDAO;
 import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.dao.MachineDao;
 import com.geowind.hunong.dao.impl.MachineDaoImpl;
+import com.geowind.hunong.entity.MachineNum;
 import com.geowind.hunong.service.MachineService;
+import com.geowind.hunong.util.DBHelper;
 
 /**
  * Created by Kui on 2016/9/4.
@@ -51,5 +53,26 @@ public class MachineServiceImpl implements MachineService {
 			list.add(machine);
 		}
 		return list;
+	}
+
+	@Override
+	public List<MachineNum> getMachineNum() {
+
+		
+		String sql = "select count(machineid) as num,type from machine group by type";
+		List<Map<String,Object>> maps = DBHelper.doQuery(sql);
+		List<MachineNum> machineList = new ArrayList<MachineNum>();
+		for(Map<String,Object> map : maps){
+			
+			System.out.println(map.get("type") + "  "+map.get("num"));
+			
+			MachineNum machineNum = new MachineNum();
+			machineNum.setType((String)map.get("type"));
+			machineNum.setNum(String.valueOf(map.get("num")));
+			
+			machineList.add(machineNum);
+		}
+		
+		return machineList ;
 	}
 }
