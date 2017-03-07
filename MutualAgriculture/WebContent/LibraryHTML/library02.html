@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>互农文库</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="css/amazeui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../manage/css/bootstrap/bootstrap.min.css">
+  <style>
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .col-center-block {  
+		 float: none;  
+		 display: block;  
+		 margin-left: auto;  
+		 margin-right: auto;  
+	}  
+  </style>
+</head>
+<body>
+<header class="navbar-fixed-top am-topbar am-topbar-inverse ">
+  <div class="am-topbar-brand">
+    <strong>互农</strong> <small>文库百科</small>
+  </div>
+  <a href="#sidebar" class="am-btn am-btn-sm am-btn-success am-icon-bars am-show-sm-only my-button" data-am-offcanvas style="margin-top: 10px; margin-right: 10px;"><span class="am-sr-only" >侧栏导航</span></a>
+</header>
+<hr class="am-article-divider"/>
+<div style="background-color: black; filter:alpha(opacity=60); opacity:0.6;" id="img_Wrapper">
+        <!-- <img src="images/p1.jpg" alt="" id="top_pic" class="col-center-block"> -->
+        <!--<img src="images/p3.png" alt="" id="top_pic" class="col-center-block" width="95%" style=" position: relative;">-->
+</div>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-9 am-u-md-push-3">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+        <div class="am-cf am-article" id="article_div">
+    
+		 <div style="margin-top: 10px;">
+          <span style="border-bottom: 1px solid #919491;font-size: 24px;padding-bottom: 5px; " id="title_h1">豌豆</span>
+        </div>
+		    <div id="summary" style="margin-top: 10px;"> 
+		    </div> 
+        </div>
+        <hr/>
+      </div>
+    </div>
+  </div>
+  <div class="am-u-md-3 am-u-md-pull-9 my-sidebar">
+    <div class="am-offcanvas" id="sidebar">
+      <div class="am-offcanvas-bar">
+        <ul class="am-nav" id="sidebar_list">
+        <!--<li><a href="#">豌豆</a></li>
+          <li class="am-nav-header">目录</li>
+          <li><a href="#haa1">条目1</a></li>
+          <li><a href="#">条目2</a></li>  -->
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="my-footer">
+  <small>© Copyright 2017. by the geowind.</small></p>
+</footer>
+<script src="../manage/js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!--<![endif]-->
+<script src="js/amazeui.min.js"></script>
+<script type="text/javascript">
+		function getById(sname){
+				return document.getElementById(sname);
+		}
+		$(document).ready(function(){
+			//when the windows changed , we chan rechange the relative
+			init();
+
+			window.onresize = function(){
+				// console.log("change!!");
+    			init();
+			}
+		});
+		function init(){
+			// img_Wrapper
+			var img_Wrapper = getById("img_Wrapper");
+			var widthLen = img_Wrapper.scrollWidth;
+			var heightLen = widthLen * 0.618;
+			img_Wrapper.style.height = heightLen +'px';
+			var real_width,real_height,
+	         _im         = document.getElementById('top_pic'),
+	         im          = document.createElement('img');
+	         im.src      = _im.src,
+	         real_width  = im.width,
+	         real_height = im.height;
+			var p_w = real_width,p_h = real_height;
+			var set_w,set_h;
+			if(p_w > widthLen || p_h > heightLen){
+
+				if(p_w > widthLen && p_h > heightLen){
+					//console.log('1');
+					set_w = widthLen;
+					set_h = widthLen * ((p_h * 1.0/ p_w * 1.0) * 1.0);
+					if(set_h > heightLen){
+						set_h = heightLen ;
+						set_w = heightLen * ((p_w * 1.0/ p_h * 1.0) * 1.0);
+					}
+				}
+				else if(p_w > widthLen){
+					//console.log('2');
+					set_w = widthLen;
+					set_h = widthLen * ((p_h * 1.0/ p_w * 1.0) * 1.0);
+				}
+				else{
+					//console.log('3');
+					set_h = heightLen ;
+					set_w = heightLen * ((p_w * 1.0/ p_h * 1.0) * 1.0);
+				}
+				set_h = set_h * 0.98;
+				set_w = set_w * 0.98;
+				top_pic.style.height = set_h   +'px';
+				top_pic.style.width = set_w  +'px';
+				var dx = (heightLen - set_h) / 2.0 + 0.5 ;
+				widthLen = top_pic.style.width;
+				 top_pic.style.top = dx+'px';
+				//console.log(widthLen);
+
+			} 
+
+		}
+</script>
+
+</body>
+</html>

@@ -85,9 +85,9 @@ public class LibraryHTMLBuilder {
 		Element elmt = doc.getElementById("title_h1");// title
 		elmt.html(dataMes[2]);
 		// point2:set list
-		elmt = doc.getElementById("list");
+		elmt = doc.getElementById("sidebar_list");
 		String[] airticlList = dataMes[3].split("##");
-
+		elmt.append("<li><a href=\"#\">"+dataMes[2]+"</a></li><li class=\"am-nav-header\">目录</li>");
 		int listLen = airticlList.length;
 		for (int i = 0; i < listLen; i++) {
 			String html = "<li><a href=\"#" + ("info_title" + i) + "\">" + airticlList[i] + "</a><li>";
@@ -101,19 +101,22 @@ public class LibraryHTMLBuilder {
 		String[] articles = dataMes[6].replace("&nbsp", "  ").split("##");
 		int minLen = Math.min(airticlList.length, articles.length);
 		// int articleLen = articles.length;//listLen和articlelen应该是相等的
+		
 		for (int i = 0; i < minLen; i++) {
-			String html = "<div><h1 id=\"info_title" + i + "\">" + airticlList[i] + "</h1>" + articles[i] + "</div>";
+			String html = "<div id=\"info_title"+i+"\" style=\"margin-top: 20px;\"><blockquote style=\"font-family:'黑体'; margin-bottom: 0px; padding-left: 10px;\">"+airticlList[i]+" </blockquote>"+articles[i]+"</div>";
+			//String html = "<div><h1 id=\"info_title" + i + "\">" + airticlList[i] + "</h1>" + articles[i] + "</div>";
 			elmt.append(html);
 		}
 		// set pictures
-		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  width=\"100%\" height=\"100%\">";
+		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  id=\"top_pic\" class=\"col-center-block\" width=\"95%\" style=\" position: relative;\">";
 		System.out.println(imgTag);
-		elmt = doc.getElementById("header_right");
+		elmt = doc.getElementById("img_Wrapper");
 		elmt.append(imgTag);
 		// set finished
 		file = new File(NewPath);
 		if (file.exists())
 			file.delete();
+		
 		FileOutputStream fos = new FileOutputStream(NewPath, true);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 
