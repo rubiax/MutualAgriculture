@@ -84,10 +84,11 @@ public class LibraryHTMLBuilder {
 		// point1:set title
 		Element elmt = doc.getElementById("title_h1");// title
 		elmt.html(dataMes[2]);
+		elmt = doc.getElementById("view_title");// title
+		elmt.html(dataMes[2]);
 		// point2:set list
-		elmt = doc.getElementById("sidebar_list");
+		elmt = doc.getElementById("view_list");
 		String[] airticlList = dataMes[3].split("##");
-		elmt.append("<li><a href=\"#\">"+dataMes[2]+"</a></li><li class=\"am-nav-header\">目录</li>");
 		int listLen = airticlList.length;
 		for (int i = 0; i < listLen; i++) {
 			String html = "<li><a href=\"#" + ("info_title" + i) + "\">" + airticlList[i] + "</a><li>";
