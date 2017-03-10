@@ -3,7 +3,7 @@
 	var time=[];
 	
 	
-	$.post("../manage/jsonData/weather.json",function(data) {
+	$.post("../jsonData/weather.json",function(data) {
 		for(var i=0;i<data.length;i++){
 			
 			min[i]=data[i].hmin;

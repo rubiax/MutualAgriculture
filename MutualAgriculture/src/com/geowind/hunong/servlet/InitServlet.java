@@ -6,7 +6,12 @@ import static com.geowind.hunong.util.PathUtil.ArticleNumber;
 import static com.geowind.hunong.util.PathUtil.Lib_PictureURL;
 import static com.geowind.hunong.util.PathUtil.Util_HTMLpath;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,6 +21,7 @@ import com.geowind.hunong.entity.ArticleSim;
 import com.geowind.hunong.util.DBHelperSim;
 import com.geowind.hunong.util.FileUploadUtil;
 import com.geowind.hunong.util.LibraryHTMLBuilder;
+import com.geowind.hunong.util.WeatherDataTimerTask;
 
 public class InitServlet extends HttpServlet {
 
@@ -77,5 +83,36 @@ public class InitServlet extends HttpServlet {
 		System.out.println("总文章数" + ArticleNumber);
 		System.out.println("开始ID" + ArticleBeginId);
 		System.out.println("结束ID" + ArticleEndId);
+		
+		
+		/**
+		 * 生成weather.json
+		 */
+		String p = WeatherDataTimerTask.class.getClassLoader().getResource("../../").getPath();
+    	String weatherPath = null;
+    	try {
+    		weatherPath = URLDecoder.decode(p, "UTF-8").substring(1);
+    		weatherPath += "jsonData/weather.json";
+			System.out.println(weatherPath);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String json = new WeatherDataTimerTask().getWeatherJson();
+		File weatherFile = new File(weatherPath);
+		
+		if(!weatherFile.exists()) {
+			try {
+				file.createNewFile();
+				BufferedWriter writer = new BufferedWriter(new FileWriter(weatherFile, true));
+				writer.write(json);
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

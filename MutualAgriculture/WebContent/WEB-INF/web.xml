@@ -245,4 +245,7 @@
 		<error-code>500</error-code>
 		<location>/500.html</location>
 	</error-page>
+	<listener>
+    	<listener-class>com.geowind.hunong.listener.WeatherDataTaskListener</listener-class>
+	</listener>
 </web-app>
