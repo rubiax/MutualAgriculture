@@ -201,11 +201,11 @@
     	  for(var i=0; i<data.length; i++) {
     		  var mod = i % 7 ; 
     		  events.push({
-    			  title:data[i].block.zone.zonename+"区"+data[i].block.bname + "片, " + data[i].event+", "+data[i].mnum+"台农机", 
+    			  title:data[i].bname + data[i].event+", "+data[i].mnum+"台农机", 
     			  start:changeDate(new Date(Date.parse(data[i].begin))), 
-    			  end:changeDate(getEndDate(new Date(Date.parse(data[i].begin)), data[i].days)),
-    			  backgroundColor: colors[mod],
-	   	          borderColor: colors[mod]
+    			  end:changeDate(new Date(Date.parse(data[i].end))),
+    			  //backgroundColor: colors[mod],
+	   	          //borderColor: colors[mod]
     	      })
     	  }
     	  

@@ -37,7 +37,7 @@ public class Aiplanning implements java.io.Serializable {
 	@Expose
 	private Date end;
 	@Expose
-	private String breakpoint;
+	private String bname;
 	@Expose
 	private Double maxdays;
 	@Expose
@@ -57,13 +57,13 @@ public class Aiplanning implements java.io.Serializable {
 
 	/** full constructor */
 	public Aiplanning(Block block, String event, Date begin, Date end,
-			String breakpoint, Double maxdays, Double days, Integer mnum,
+			String bname, Double maxdays, Double days, Integer mnum,
 			Double totalwork, Double efficiency) {
 		this.block = block;
 		this.event = event;
 		this.begin = begin;
 		this.end = end;
-		this.breakpoint = breakpoint;
+		this.bname = bname;
 		this.maxdays = maxdays;
 		this.days = days;
 		this.mnum = mnum;
@@ -122,13 +122,13 @@ public class Aiplanning implements java.io.Serializable {
 		this.end = end;
 	}
 
-	@Column(name = "breakpoint", length = 100)
-	public String getBreakpoint() {
-		return this.breakpoint;
+	@Column(name = "bname", length = 100)
+	public String getBname() {
+		return this.bname;
 	}
 
-	public void setBreakpoint(String breakpoint) {
-		this.breakpoint = breakpoint;
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 
 	@Column(name = "maxdays", precision = 22, scale = 0)
@@ -179,8 +179,8 @@ public class Aiplanning implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Aiplanning [aid=" + aid + ", block=" + block + ", event="
-				+ event + ", begin=" + begin + ", end=" + end + ", breakpoint="
-				+ breakpoint + ", maxdays=" + maxdays + ", days=" + days
+				+ event + ", begin=" + begin + ", end=" + end + ", bname="
+				+ bname + ", maxdays=" + maxdays + ", days=" + days
 				+ ", mnum=" + mnum + ", totalwork=" + totalwork
 				+ ", efficiency=" + efficiency + "]";
 	}

@@ -185,8 +185,7 @@
 				sortName: 'username',
 				sortOrder: 'desc'
 			});
-		}
-		}
+		})
 			
 	</script>
 
