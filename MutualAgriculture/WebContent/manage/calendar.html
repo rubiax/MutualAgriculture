@@ -202,8 +202,8 @@
     		  var mod = i % 7 ; 
     		  events.push({
     			  title:data[i].bname + data[i].event+", "+data[i].mnum+"台农机", 
-    			  start:changeDate(new Date(Date.parse(data[i].begin))), 
-    			  end:changeDate(new Date(Date.parse(data[i].end))),
+    			  start:formatDate(data[i].aid), 
+    			  end:getEndDate(formatDate(data[i].aid), 1),
     			  //backgroundColor: colors[mod],
 	   	          //borderColor: colors[mod]
     	      })
@@ -361,6 +361,13 @@
   }
   
 
+  function formatDate(obj) {
+	  obj = obj.toString();
+	  var y = obj.substring(0,4),
+	  m = obj.substring(4,6)-1,
+	  d = obj.substring(6,8);
+	  return new Date(y,m,d);
+  }
 </script>
 </body>
 </html>

@@ -6,8 +6,8 @@
 	$.post("../jsonData/weather.json",function(data) {
 		for(var i=0;i<data.length;i++){
 			
-			min[i]=data[i].hmin;
-			max[i]=data[i].hmax;
+			min[i]=data[i].min;
+			max[i]=data[i].max;
 			time[i]=data[i].date;
 			console.log(data[i].date);
 			create(min,max,time);	

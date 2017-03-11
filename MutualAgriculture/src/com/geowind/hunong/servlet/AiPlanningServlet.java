@@ -1,14 +1,15 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geowind.hunong.jpa.Aiplanning;
-import com.geowind.hunong.jpa.AiplanningDAO;
+import com.geowind.hunong.jpa.Aiplan;
+import com.geowind.hunong.jpa.AiplanDAO;
 
 public class AiPlanningServlet extends BasicServlet {
 
@@ -30,8 +31,15 @@ public class AiPlanningServlet extends BasicServlet {
 	}
 
 	private void getPlan(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		AiplanningDAO aiplanningDAO = new AiplanningDAO();
-		List<Aiplanning> list = aiplanningDAO.findAll();
+		AiplanDAO aiplanDAO = new AiplanDAO();
+		List<Aiplan> list = aiplanDAO.findAll();
+		Iterator<Aiplan> it = list.iterator();
+		while(it.hasNext()){
+			Aiplan ai = it.next();
+		    if(ai.getBname() == null){
+		        it.remove();
+		    }
+		}
 		this.out(response, list);
 	}
 	

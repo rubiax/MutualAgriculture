@@ -21,6 +21,7 @@ import com.geowind.hunong.entity.ArticleSim;
 import com.geowind.hunong.util.DBHelperSim;
 import com.geowind.hunong.util.FileUploadUtil;
 import com.geowind.hunong.util.LibraryHTMLBuilder;
+import com.geowind.hunong.util.WeatherDataCrawler;
 import com.geowind.hunong.util.WeatherDataTimerTask;
 
 public class InitServlet extends HttpServlet {
@@ -84,7 +85,7 @@ public class InitServlet extends HttpServlet {
 		System.out.println("开始ID" + ArticleBeginId);
 		System.out.println("结束ID" + ArticleEndId);
 		
-		
+		/********************************************************************/
 		/**
 		 * 生成weather.json
 		 */
@@ -99,7 +100,7 @@ public class InitServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		String json = new WeatherDataTimerTask().getWeatherJson();
+		String json = new WeatherDataCrawler().getWeatherJson();
 		File weatherFile = new File(weatherPath);
 		
 		if(!weatherFile.exists()) {

@@ -7,7 +7,7 @@ public class AiplanningDaoImpl implements AiplanningDao {
 
 	@Override
 	public int deleteAll() {
-		String sql = "delete from aiplanning";
+		String sql = "delete from aiplan";
 		return DBHelper.doUpdate(sql);
 	}
 

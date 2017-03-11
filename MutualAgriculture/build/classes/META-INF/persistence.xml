@@ -28,6 +28,7 @@
 		<class>com.geowind.hunong.jpa.Systeminfo</class>
 		<class>com.geowind.hunong.jpa.Planstandard</class>
 		<class>com.geowind.hunong.jpa.Aiplanning</class>
+		<class>com.geowind.hunong.jpa.Aiplan</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />

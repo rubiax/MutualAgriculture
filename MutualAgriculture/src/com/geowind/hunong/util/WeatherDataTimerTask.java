@@ -39,7 +39,7 @@ public class WeatherDataTimerTask extends TimerTask {
 				e.printStackTrace();
 			}
 			
-			String json = getWeatherJson();
+			String json = new WeatherDataCrawler().getWeatherJson();
 			File file = new File(path);
 			
 			if(!file.exists()) {
@@ -59,32 +59,4 @@ public class WeatherDataTimerTask extends TimerTask {
         }*/
     }
     
-    public String getWeatherJson() {
-    	String weatherJson = null;
-    	URL url;
-		try {
-			url = new URL("http://d1.weather.com.cn/calendar_new/2017/101250401_201703.html");
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-	        con.setRequestMethod("GET");
-	        con.setRequestProperty("Referer", "http://www.weather.com.cn/weather40d/101250401.shtml");
-	        con.connect();
-	        Scanner in  = new Scanner(con.getInputStream());
-	        StringBuffer sb = new StringBuffer();
-	        while (in.hasNextLine()) {
-	        	sb.append(in.nextLine());
-			}
-	        String weatherInfo = sb.toString();
-	        System.out.println(weatherInfo);
-	        int index = weatherInfo.indexOf("[");
-	        weatherJson = weatherInfo.substring(index);
-	        System.out.println(weatherJson);
-	        in.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return weatherJson;
-		
-    }
-     
 }
