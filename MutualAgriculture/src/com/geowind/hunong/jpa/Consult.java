@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -76,7 +74,7 @@ public class Consult implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "ccontent", length = 200)
+	@Column(name = "ccontent", length = 500)
 	public String getCcontent() {
 		return this.ccontent;
 	}
@@ -94,7 +92,7 @@ public class Consult implements java.io.Serializable {
 		this.ctime = ctime;
 	}
 
-	@Column(name = "acontent", length = 200)
+	@Column(name = "acontent", length = 500)
 	public String getAcontent() {
 		return this.acontent;
 	}

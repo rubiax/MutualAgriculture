@@ -21,6 +21,9 @@ public class BlockDAO implements IBlockDAO {
 	public static final String AREA = "area";
 	public static final String ADDRESS = "address";
 	public static final String VALID = "valid";
+	public static final String LONGITUDE = "longitude";
+	public static final String LATITUDE = "latitude";
+	public static final String PICTURE = "picture";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -175,6 +178,18 @@ public class BlockDAO implements IBlockDAO {
 
 	public List<Block> findByValid(Object valid) {
 		return findByProperty(VALID, valid);
+	}
+
+	public List<Block> findByLongitude(Object longitude) {
+		return findByProperty(LONGITUDE, longitude);
+	}
+
+	public List<Block> findByLatitude(Object latitude) {
+		return findByProperty(LATITUDE, latitude);
+	}
+
+	public List<Block> findByPicture(Object picture) {
+		return findByProperty(PICTURE, picture);
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package com.geowind.hunong.servlet;
 
 import com.geowind.hunong.entity.SimTask;
+import com.geowind.hunong.jpa.Block;
+import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.Center;
 import com.geowind.hunong.jpa.CenterDAO;
 import com.geowind.hunong.jpa.EntityManagerHelper;
@@ -167,7 +169,7 @@ public class TaskServlet extends BasicServlet {
 			HttpServletResponse response) throws IOException {
 		String username = request.getParameter("username");
 		String machineId = request.getParameter("machineId");
-		String farmlandId = request.getParameter("farmlandId");
+		String bid = request.getParameter("bid");
 		String workdate = request.getParameter("workdate");
 		String descr = request.getParameter("descr");
 		TaskDAO taskDAO = new TaskDAO();
@@ -178,8 +180,8 @@ public class TaskServlet extends BasicServlet {
 		Machine machine = new MachineDAO().findById(Integer.parseInt(machineId));
 		machine.setWorkstate(1);
 		task.setMachine(machine);
-		Farmland farmland = new FarmlandDAO().findById(Integer.parseInt(farmlandId));
-		task.setFarmland(farmland);
+		Block block = new BlockDAO().findById(Integer.parseInt(bid));
+		task.setBlock(block);
 		Center center = new CenterDAO().findById((int)request.getSession().getAttribute("currentCenterId"));
 		task.setCenter(center);
 		try {

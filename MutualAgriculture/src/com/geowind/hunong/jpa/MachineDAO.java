@@ -1,6 +1,8 @@
 package com.geowind.hunong.jpa;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -21,6 +23,7 @@ public class MachineDAO implements IMachineDAO {
 	public static final String TYPE = "type";
 	public static final String BRAND = "brand";
 	public static final String HORSEPOWER = "horsepower";
+	public static final String EFFICIENCY = "efficiency";
 	public static final String PICTURE = "picture";
 	public static final String STATE = "state";
 	public static final String WORKSTATE = "workstate";
@@ -180,6 +183,10 @@ public class MachineDAO implements IMachineDAO {
 
 	public List<Machine> findByHorsepower(Object horsepower) {
 		return findByProperty(HORSEPOWER, horsepower);
+	}
+
+	public List<Machine> findByEfficiency(Object efficiency) {
+		return findByProperty(EFFICIENCY, efficiency);
 	}
 
 	public List<Machine> findByPicture(Object picture) {

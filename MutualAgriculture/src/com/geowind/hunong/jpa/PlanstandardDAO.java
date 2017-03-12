@@ -20,7 +20,9 @@ public class PlanstandardDAO implements IPlanstandardDAO {
 	public static final String EVENT = "event";
 	public static final String BEGIN = "begin";
 	public static final String END = "end";
-	public static final String DAYS = "days";
+	public static final String MAXDAYS = "maxdays";
+	public static final String TOTALWORK = "totalwork";
+	public static final String EFFICIENCY = "efficiency";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -179,8 +181,16 @@ public class PlanstandardDAO implements IPlanstandardDAO {
 		return findByProperty(END, end);
 	}
 
-	public List<Planstandard> findByDays(Object days) {
-		return findByProperty(DAYS, days);
+	public List<Planstandard> findByMaxdays(Object maxdays) {
+		return findByProperty(MAXDAYS, maxdays);
+	}
+
+	public List<Planstandard> findByTotalwork(Object totalwork) {
+		return findByProperty(TOTALWORK, totalwork);
+	}
+
+	public List<Planstandard> findByEfficiency(Object efficiency) {
+		return findByProperty(EFFICIENCY, efficiency);
 	}
 
 	/**

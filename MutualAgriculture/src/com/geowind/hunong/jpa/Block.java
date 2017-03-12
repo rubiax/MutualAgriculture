@@ -2,15 +2,12 @@ package com.geowind.hunong.jpa;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,8 +37,14 @@ public class Block implements java.io.Serializable {
 	private String address;
 	@Expose
 	private Integer valid;
+	@Expose
+	private Double longitude;
+	@Expose
+	private Double latitude;
+	@Expose
+	private String picture;
 	@Expose (serialize = false, deserialize = false)
-	private Set<Aiplanning> aiplannings = new HashSet<Aiplanning>(0);
+	private Set<Task> tasks = new HashSet<Task>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
 
@@ -59,13 +62,17 @@ public class Block implements java.io.Serializable {
 
 	/** full constructor */
 	public Block(Zone zone, String bname, Double area, String address,
-			Integer valid, Set<Aiplanning> aiplannings, Set<Farmland> farmlands) {
+			Integer valid, Double longitude, Double latitude, String picture,
+			Set<Task> tasks, Set<Farmland> farmlands) {
 		this.zone = zone;
 		this.bname = bname;
 		this.area = area;
 		this.address = address;
 		this.valid = valid;
-		this.aiplannings = aiplannings;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.picture = picture;
+		this.tasks = tasks;
 		this.farmlands = farmlands;
 	}
 
@@ -127,13 +134,40 @@ public class Block implements java.io.Serializable {
 		this.valid = valid;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<Aiplanning> getAiplannings() {
-		return this.aiplannings;
+	@Column(name = "longitude", precision = 22, scale = 0)
+	public Double getLongitude() {
+		return this.longitude;
 	}
 
-	public void setAiplannings(Set<Aiplanning> aiplannings) {
-		this.aiplannings = aiplannings;
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	@Column(name = "latitude", precision = 22, scale = 0)
+	public Double getLatitude() {
+		return this.latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	@Column(name = "picture", length = 200)
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "block")
+	public Set<Task> getTasks() {
+		return this.tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "block")

@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Article entity. @author MyEclipse Persistence Tools
  */
@@ -15,16 +17,25 @@ import javax.persistence.Table;
 public class Article implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer articleId;
+	@Expose
 	private String classification;
+	@Expose
 	private String title;
+	@Expose
 	private String list;
+	@Expose
 	private String summary;
+	@Expose
 	private String keyword;
+	@Expose
 	private String content;
+	@Expose
 	private String imgUrl;
+	@Expose
 	private String videoUrl;
+	@Expose
 	private String other;
 
 	// Constructors

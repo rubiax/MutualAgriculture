@@ -1,20 +1,13 @@
 package com.geowind.hunong.jpa;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.google.gson.annotations.Expose;
@@ -33,8 +26,6 @@ public class Farmland implements java.io.Serializable {
 	private Block block;
 	@Expose
 	private User user;
-	@Expose
-	private Zone zone;
 	@Expose
 	private Double longitude;
 	@Expose
@@ -57,8 +48,6 @@ public class Farmland implements java.io.Serializable {
 	private Integer state;
 	@Expose
 	private Integer valid;
-	@Expose (serialize = false, deserialize = false)
-	private Set<Task> tasks = new HashSet<Task>(0);
 
 	// Constructors
 
@@ -67,19 +56,17 @@ public class Farmland implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Farmland(Block block, User user) {
-		this.block = block;
+	public Farmland(User user) {
 		this.user = user;
 	}
 
 	/** full constructor */
-	public Farmland(Block block, User user, Zone zone, Double longitude,
-			Double latitude, String address, Double area, String picture,
-			String transtion, Double production, String ph, String npk,
-			Integer state, Integer valid, Set<Task> tasks) {
+	public Farmland(Block block, User user, Double longitude, Double latitude,
+			String address, Double area, String picture, String transtion,
+			Double production, String ph, String npk, Integer state,
+			Integer valid) {
 		this.block = block;
 		this.user = user;
-		this.zone = zone;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.address = address;
@@ -91,7 +78,6 @@ public class Farmland implements java.io.Serializable {
 		this.npk = npk;
 		this.state = state;
 		this.valid = valid;
-		this.tasks = tasks;
 	}
 
 	// Property accessors
@@ -124,16 +110,6 @@ public class Farmland implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "zoneId")
-	public Zone getZone() {
-		return this.zone;
-	}
-
-	public void setZone(Zone zone) {
-		this.zone = zone;
 	}
 
 	@Column(name = "longitude", precision = 22, scale = 0)
@@ -233,15 +209,6 @@ public class Farmland implements java.io.Serializable {
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "farmland")
-	public Set<Task> getTasks() {
-		return this.tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
 	}
 
 }

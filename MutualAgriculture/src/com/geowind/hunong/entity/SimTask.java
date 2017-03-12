@@ -15,12 +15,12 @@ public class SimTask {
     //农机手
 	@Expose
     private String mUname;
-    //种粮大户
+    //块编号
 	@Expose
-    private String fUname;
-    //农田编号
+    private int bid;
+	//块名
 	@Expose
-    private int fno;
+	private String bname;
     //工作量
 	@Expose
     private String workLoad;
@@ -76,17 +76,18 @@ public class SimTask {
 	public void setmUname(String mUname) {
 		this.mUname = mUname;
 	}
-	public String getfUname() {
-		return fUname;
+	public int getBid() {
+		return bid;
 	}
-	public void setfUname(String fUname) {
-		this.fUname = fUname;
+	public void setBid(int bid) {
+		this.bid = bid;
 	}
-	public int getFno() {
-		return fno;
+	
+	public String getBname() {
+		return bname;
 	}
-	public void setFno(int fno) {
-		this.fno = fno;
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 	public String getWorkLoad() {
 		return workLoad;
@@ -189,20 +190,20 @@ public class SimTask {
 			SimTask simTask = new SimTask();
 			simTask.setNo(task.getTaskId());
 			simTask.setmUname(task.getUser().getUsername());
-			simTask.setfUname(task.getFarmland().getUser().getUsername());
-			simTask.setFno(task.getFarmland().getFarmlandId());
+			simTask.setBid(task.getBlock().getBid());
+			simTask.setBname(task.getBlock().getBname());
 			simTask.setWorkLoad(String.valueOf(task.getWorkload()));
 			simTask.setMno(task.getMachine().getPlate());
 			simTask.setType(task.getType());
 			simTask.setDate(task.getWorkdate());
 			simTask.setState(String.valueOf(task.getFinished()));
-			simTask.setFzno(task.getFarmland().getZone().getZonename());
-			simTask.setFarea(task.getFarmland().getArea());
-			simTask.setFaddr(task.getFarmland().getAddress());
-			simTask.setLongitude(task.getFarmland().getLongitude());
-			simTask.setLatitude(task.getFarmland().getLatitude());
-			simTask.setFpicPath(task.getFarmland().getPicture());
-			simTask.setCropType(task.getFarmland().getZone().getType());
+			simTask.setFzno(task.getBlock().getZone().getZonename());
+			simTask.setFarea(task.getBlock().getArea());
+			simTask.setFaddr(task.getBlock().getAddress());
+			simTask.setLongitude(task.getBlock().getLongitude());
+			simTask.setLatitude(task.getBlock().getLatitude());
+			simTask.setFpicPath(task.getBlock().getPicture());
+			simTask.setCropType(task.getBlock().getZone().getType());
 			simTask.setMstyle(task.getMachine().getType());
 			simTask.setNote(task.getDescr());
 			return simTask;

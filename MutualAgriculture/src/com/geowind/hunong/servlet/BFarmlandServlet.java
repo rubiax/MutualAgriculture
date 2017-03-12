@@ -95,11 +95,11 @@ public class BFarmlandServlet extends BasicServlet {
 			UserDAO userDAO = new UserDAO();
 			User user = userDAO.findById(value);
 			farmland.setUser(user);
-		} else if ("zoneId".equals(item)) {
-			System.out.println("zoneId:"+value);
-			ZoneDAO zoneDAO = new ZoneDAO();
-			Zone zone = zoneDAO.findById(Integer.parseInt(value));
-			farmland.setZone(zone);
+		} else if ("bid".equals(item)) {
+			System.out.println("bid:"+value);
+			BlockDAO blockDAO = new BlockDAO();
+			Block block = blockDAO.findById(Integer.parseInt(value));
+			farmland.setBlock(block);
 		} else if ("jingweidu".equals(item)) {
 			String longitude = value.split(", ")[0];
 			String latitude = value.split(", ")[1];
@@ -206,7 +206,7 @@ public class BFarmlandServlet extends BasicServlet {
 		Farmland farmland = new Farmland();
 		
 		String username = request.getParameter("username");
-		String zondId = request.getParameter("zoneId");
+		String bid = request.getParameter("bid");
 		String jingweidu = request.getParameter("jingweidu");
 		String longitude = null;
 		String latitude = null;
@@ -223,8 +223,8 @@ public class BFarmlandServlet extends BasicServlet {
 		UserDAO userDAO = new UserDAO();
 		farmland.setUser(userDAO.findById(username));
 		
-		ZoneDAO zoneDAO = new ZoneDAO();
-		farmland.setZone(zoneDAO.findById(Integer.parseInt(zondId)));
+		BlockDAO blockDAO = new BlockDAO();
+		farmland.setBlock(blockDAO.findById(Integer.parseInt(bid)));
 		
 		if (longitude != null && latitude != null) {
 			farmland.setLatitude(Double.parseDouble(latitude));
@@ -286,7 +286,7 @@ public class BFarmlandServlet extends BasicServlet {
 	private void editor(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		String username = request.getParameter("username");
-		String zonename = request.getParameter("zonename");
+		String bname = request.getParameter("bname");
 		String lal = request.getParameter("lal");
 		String longitude = null;
 		String latitude = null;
@@ -303,8 +303,8 @@ public class BFarmlandServlet extends BasicServlet {
 		Farmland farmland = (Farmland) request.getSession().getAttribute("currentFarmland");
 		UserDAO userDAO = new UserDAO();
 		farmland.setUser(userDAO.findById(username));
-		ZoneDAO zoneDAO = new ZoneDAO();
-		farmland.setZone(zoneDAO.findByZonename(zonename).get(0));
+		BlockDAO blockDAO = new BlockDAO();
+		farmland.setBlock((blockDAO.findByBname(bname)).get(0));
 		if (longitude != null && latitude != null) {
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));

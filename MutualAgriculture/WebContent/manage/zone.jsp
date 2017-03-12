@@ -38,6 +38,7 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
+<link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
 
 
 <title>Document</title>
@@ -202,22 +203,39 @@
 								<tr>
 									<th style="width: 80px"><label>分片名</label></th>
 									<td style="width: 150px"><a href="#" id="bname"></a></td>
-									<th style="width: 80px"><label>所属区号</label></th>
-									<td style="width: 150px"><select id="select1"
-										class="js-example-basic-single" style="width: 90%">
-											<c:forEach var="item" items="${allZone }">
-												<option value="${item.zoneId }">${item.zonename }</option>
-											</c:forEach>
-									</select></td>
-								</tr>
-								<tr>
 									<th><label>面积</label></th>
 									<td><a href="#" id="area2"></a></td>
+								</tr>
+								<tr>
+									<th style="width: 80px"><label>所属分区名</label></th>
+									<td style="width: 150px">
+										<select id="select1" class="js-example-basic-single" style="width: 90%">
+											<c:forEach var="item" items="${allZone }">
+												<option value="${item.zoneId } ${item.type }">${item.zonename }</option>
+											</c:forEach>
+										</select>
+									</td>
+									<th style="width: 80px"><label>作物类型</label></th>
+									<td style="width: 150px" id="type2"></td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
+									</td>
+								</tr>
+								<tr>
+									<th><label>经纬度</label></th>
+									<td><a href="#" id="jingweidu"></a></td>
 									<th><label>地址</label></th>
 									<td><a href="#" id="address2"></a></td>
 								</tr>
 							</tbody>
 						</table>
+						<label class="control-label">选择图片</label>
+						<form id="myform" action="../blockServlet?op=uploadImage" method="post" enctype="multipart/form-data">
+                        	<input id="uploadImg" name="uploadImg" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpg", "png","gif","jpeg"]'>
+						</form>
+						<br>
 						<button type="button" class="btn btn-success" id="confirmAdd-btn2">确定</button>
 						<button type="button" class="btn btn-default" id="cancelAdd-btn2">取消</button>
 					</div>
@@ -231,6 +249,7 @@
 							<th data-field="zoneId" data-sortable="true">所属区号</th>
 							<th data-field="area" data-sortable="true">面积</th>
 							<th data-field="address" data-sortable="true">地址</th>
+							<th data-field="jingweidu" data-sortable="true">经纬度</th>
 							<th data-field="action" data-formatter="actionFormatter"
 								data-events="actionEvents2" data-width="65">操作</th>
 						</tr>
@@ -244,6 +263,7 @@
 								<td>${item.zone.zonename }</td>
 								<td>${item.area }</td>
 								<td>${item.address }</td>
+								<td>${item.longitude }, ${item.latitude }</td>
 								<td data-field="action" data-formatter="actionFormatter"
 									data-events="actionEvents2"></td>
 							</tr>
@@ -296,7 +316,7 @@
 
 	</div>
 	
-	
+	<jsp:include page="smallmap2.html"></jsp:include>
 
 	<!-- 二叉树 -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
@@ -323,7 +343,17 @@
 
 	<script src="depend/echarts/echarts.common.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
+	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 	<script>
+	//地图数据提交
+	function submitChange() {
+		var coordinate = $.trim($("#coordinate").val());
+		var _address = $.trim($("#_address").val());
+		$("#jingweidu").editable('setValue', coordinate)
+		$("#address2").editable('setValue', _address)
+		$('#myModal').modal('hide');
+	}
+	
 		function actionFormatter(value, row, index) {
 			return [
 					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
@@ -469,18 +499,19 @@
 				op : "getTreeJson"
 			}, function(data) {
 			}, "json");
+			 
+			$("#select1").select2();
+			$("#select1").select2('val', ' ');
 		});
 		function dashboard() {
 			parent.location.reload();
 		}
 
-		$("#select1").select2();
-		$("#select1").select2('val', ' ');
-
-		$("#select1").on("select2:select", function(e) {
-			var text = $("#select1").select2('data')[0]['text'];
-			//var phone = text.split(' ')[1];
-			//$("#phone").text(phone);
+		$("#select1").on("select2:select", function (e) {
+			var value = $("#select1").val();
+			var type = value.split(' ')[1];
+			var zoneId = value.split(' ')[0];
+			$("#type2").text(type);
 		});
 
 		$('#zonename').editable({
@@ -539,6 +570,14 @@
 				}
 			}
 		});
+		$('#jingweidu').editable({
+			type : 'text',
+			validate : function(value) {
+				if (value == '') {
+					return '不能为空';
+				}
+			}
+		});
 		$("#cancelAdd-btn").click(
 				function() {
 					$("#zonename").editable('setValue', null).removeClass(
@@ -583,7 +622,7 @@
 							});
 						} else {
 							alert("添加失败");
-						}
+						} 
 					});
 					$("#zonename").editable('setValue', null).removeClass(
 							'editable-unsaved');
@@ -609,12 +648,13 @@
 				});
 		$("#confirmAdd-btn2").click(
 				function() {
-					var zoneId = $("#select1").val();
+					var zoneId = $("#select1").val().split(' ')[0];
 					var bname = $("#bname").editable('getValue', true);
 					var area = $("#area2").editable('getValue', true);
 					var address = $("#address2").editable('getValue', true);
+					var jingweidu = $("#jingweidu").editable('getValue', true);
 					if (bname == null || area == null || zoneId == null
-							|| address == null) {
+							|| address == null || jingweidu==null) {
 						alert("请完成信息");
 						return;
 					}
@@ -623,9 +663,10 @@
 						bname : bname,
 						area : area,
 						zoneId : zoneId,
-						address : address
+						address : address,
+						jingweidu: jingweidu
 					}, function(data) {
-						if (data == 1) {
+						/* if (data == 1) {
 							alert("添加成功");
 							$.post("../blockServlet", {
 								op : "getAllBlockData"
@@ -639,7 +680,13 @@
 							});
 						} else {
 							alert("添加失败");
-						}
+						} */
+						if(data == 1) {
+				    		alert("添加成功");
+				    		$("#myform").submit();
+				    	} else {
+				    		alert("添加失败");
+				    	}
 					});
 					$("#select1").select2('val', ' ');
 					$("#bname").editable('setValue', null).removeClass(

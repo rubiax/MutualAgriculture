@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Systeminfo entity. @author MyEclipse Persistence Tools
  */
@@ -15,9 +17,11 @@ import javax.persistence.Table;
 public class Systeminfo implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer sid;
+	@Expose
 	private String title;
+	@Expose
 	private String content;
 
 	// Constructors

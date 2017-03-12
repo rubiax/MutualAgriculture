@@ -12,7 +12,7 @@ import javax.persistence.Query;
  * must be manually added to each of these methods for data to be persisted to
  * the JPA datastore.
  * 
- * @see com.geowind.hunong.entities.Pestquestion
+ * @see com.geowind.hunong.jpa.Pestquestion
  * @author MyEclipse Persistence Tools
  */
 public class PestquestionDAO implements IPestquestionDAO {

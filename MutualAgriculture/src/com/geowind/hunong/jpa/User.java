@@ -3,7 +3,6 @@ package com.geowind.hunong.jpa;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,6 +57,7 @@ public class User implements java.io.Serializable {
 	private Set<Pestquestion> pestquestions = new HashSet<Pestquestion>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Insectcontrol> insectcontrols = new HashSet<Insectcontrol>(0);
+	@Expose (serialize = false, deserialize = false)
 	private Set<Task> tasks = new HashSet<Task>(0);
 	@Expose (serialize = false, deserialize = false)
 	private Set<Consult> consults = new HashSet<Consult>(0);

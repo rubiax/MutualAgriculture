@@ -12,7 +12,7 @@ import javax.persistence.Query;
  * manually added to each of these methods for data to be persisted to the JPA
  * datastore.
  * 
- * @see com.geowind.hunong.entities.Systeminfo
+ * @see com.geowind.hunong.jpa.Systeminfo
  * @author MyEclipse Persistence Tools
  */
 public class SysteminfoDAO implements ISysteminfoDAO {

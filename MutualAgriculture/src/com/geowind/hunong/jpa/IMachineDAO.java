@@ -100,6 +100,8 @@ public interface IMachineDAO {
 
 	public List<Machine> findByHorsepower(Object horsepower);
 
+	public List<Machine> findByEfficiency(Object efficiency);
+
 	public List<Machine> findByPicture(Object picture);
 
 	public List<Machine> findByState(Object state);

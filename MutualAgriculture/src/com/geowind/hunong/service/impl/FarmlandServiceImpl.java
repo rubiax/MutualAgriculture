@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.geowind.hunong.dao.FarmlandDao;
 import com.geowind.hunong.dao.impl.FarmlandDaoImpl;
+import com.geowind.hunong.jpa.Block;
+import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
@@ -38,9 +40,9 @@ public class FarmlandServiceImpl implements FarmlandService {
 			farmland.setUser(user);
 			farmland.setTranstion((String)map.get("transtion"));
 			farmland.setProduction((double)map.get("production"));
-			ZoneDAO zoneDAO = new ZoneDAO();
-			Zone zone = zoneDAO.findById((int)map.get("zoneid"));
-			farmland.setZone(zone);
+			BlockDAO blockDAO = new BlockDAO();
+			Block block = blockDAO.findById((int)map.get("bid"));
+			farmland.setBlock(block);
 			farmland.setPh((String)map.get("ph"));
 			farmland.setNpk((String)map.get("npk"));
 			farmland.setState((int)map.get("status"));
