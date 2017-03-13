@@ -76,6 +76,7 @@
                 <li><a href="javascript:addFuelLayer()" >加油点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addRepairLayer()" >维修点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addCenterLayer()" >服务中心点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+              	 <li><a href="javascript:addBlockLayer()" >分块<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
               </ul>
             </li>
           </ul>
@@ -165,6 +166,7 @@
 	<script type="text/javascript" src="js/bigMap/repairLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/centerLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/computerArea.js"></script>
+	<script type="text/javascript" src="js/bigMap/blockLayer.js"></script>
 	<!-- 统筹控制地图各个功能层块的调度显示js文件 -->
     <!--<script type="text/javascript" src="js/bigMap/layerControl.js"></script>-->
 

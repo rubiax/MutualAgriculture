@@ -15,22 +15,24 @@ function addWeatherLayer(){
     		 if(data==0){
     			 alert("查询失败");
     		 }else{
+    			
     			 zonejson = JSON.parse(data);
+    			 
     		 }
-    	 });
+    	 })
     	 
     	 $.post(weatherurl,{},function(data){
     		 if(data==0){
     			 alert("查询为空");
     		 }else{
 	    			 weatherjson = JSON.parse(data);
-	    			 alert(data+" first picture is:"+weatherjson[0].first1);
     			 for(var i = 0;i<zonejson.length;i++)
     			 {
+    				 alert(zonejson[i].address);
     				 addWeatherMarker(zonejson[i].address,i);
     			 }
     		 }
-    	 })
+    	 });
     	 
     	 function addWeatherMarker(address,i){
     			var myIcon = new BMap.Icon("img/weatherMarker/a_"+weatherjson[0].first1, new BMap.Size(70,65),
@@ -65,6 +67,7 @@ function addWeatherLayer(){
     							searchInfoWindow.open(marker[i]);
     						});
     						map.addOverlay(marker[i]); //在地图中添加marker
+    						
     					}
     				else{
     					alert("您选择地址没有解析到结果!");

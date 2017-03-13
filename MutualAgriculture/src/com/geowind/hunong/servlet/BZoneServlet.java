@@ -181,7 +181,7 @@ public class BZoneServlet extends BasicServlet {
 			for(int i=0;i<zoneList.size();i++){
 				Set<Farmland> farmlandList = new HashSet<Farmland>();
 				//获得指定分区下的农田
-				farmlandList = zoneList.get(i).getFarmlands();
+//				farmlandList = zoneList.get(i).getFarmlands();
 				
 				if(farmlandList!=null&&farmlandList.size()>0){
 					List<Point> p = new ArrayList<Point>();
