@@ -96,7 +96,7 @@
 								
 							</tr>
 							<tr>
-								<th style="width: 80px"><label>所属分区名</label></th>
+								<th style="width: 80px"><label>区片名</label></th>
 								<td style="width: 150px">
 									<select id="select2" class="js-example-basic-single" style="width: 90%">
 										<c:forEach var="item" items="${allZone }">
@@ -104,6 +104,13 @@
 										</c:forEach>
 									</select>
 								</td>
+								<td style="width: 150px">
+									<select id="select3" class="js-example-basic-single" style="width: 90%">
+										<%-- <option value="${farmland.block.bid }">${farmland.block.bname }</option> --%>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<th style="width: 80px"><label>作物类型</label></th>
 								<td style="width: 150px" id="type"></td>
 							</tr>
@@ -165,11 +172,11 @@
                         		<td data-field="state" data-checkbox="true"></td>
 	                        	<td>${item.farmlandId }</td>
 	                        	<td>${item.user.realname }</td>
-	                        	<td>${item.zone.zonename }</td>
+	                        	<td>${item.block.zone.zonename }</td>
 	                        	<td>${item.block.bname }</td>
 	                            <td>${item.longitude }, ${item.latitude}</td>
 	                            <td>${item.address }</td>
-	                            <td>${item.zone.type }</td>
+	                            <td>${item.block.zone.type }</td>
 	                            <td>${item.area }</td>
 	                            <td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
                         	</tr>
@@ -260,6 +267,8 @@
 			$("#select1").select2('val',' ');
 			$("#select2").select2();
 			$("#select2").select2('val',' ');
+			$("#select3").select2();
+			$("#select3").select2('val',' ');
 		});
 		function dashboard() {
 			parent.location.reload();
@@ -269,11 +278,27 @@
 			var phone = text.split(' ')[1];
 			$("#phone").text(phone);
 		});
+		//选择好分区后查询该分区下的所有块
 		$("#select2").on("select2:select", function (e) {
+			$("#select3").attr("title","");
+			$("#select3").empty();
 			var value = $("#select2").val();
 			var type = value.split(' ')[1];
 			var zoneId = value.split(' ')[0];
 			$("#type").text(type);
+			$.post("../blockServlet", {op:"findBlocksByZoneId", zoneId:zoneId}, function(data) {
+				var obj = [];
+				for(var i=0; i<data.length; i++) {
+					obj.push({id:data[i].bid, text:data[i].bname});
+				}
+				$("#select3").select2({
+					placeholder: {
+					    id: -1, // the value of the option
+					    text: 'Select an option'
+					  },
+					data:obj
+				});
+			}, "json");
 		});
 
 		$('#jingweidu').editable({
@@ -328,6 +353,7 @@
 		$("#cancelAdd-btn").click(function() {
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
+			$("#select3").select2('val',' ');
 	        $("#jingweidu").editable('setValue', null).removeClass('editable-unsaved');
 			$("#address").editable('setValue', null).removeClass('editable-unsaved');
 			$("#area").editable('setValue', null).removeClass('editable-unsaved');
@@ -346,6 +372,7 @@
 				return;
 			}
 			var zoneId = value.split(' ')[0];
+			var bid = $("#select3").val();
 			var jingweidu = $("#jingweidu").editable('getValue', true);
 			var address = $("#address").editable('getValue', true);
 			var area = $("#area").editable('getValue', true);
@@ -357,7 +384,7 @@
 				alert("请完善信息");
 				return;
 			}
-			$.post("../bFarmlandServlet", {op:"add", username:username, zoneId:zoneId, jingweidu:jingweidu, address:address,
+			$.post("../bFarmlandServlet", {op:"add", username:username, bid:bid, jingweidu:jingweidu, address:address,
 				area:area, ph:ph, npk:npk, transtion:transtion}, function(data) {
 		    	if(data == 1) {
 		    		alert("添加成功");
@@ -368,6 +395,7 @@
 		    });
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
+			$("#select3").select2('val',' ');
 	        $("#jingweidu").editable('setValue', null).removeClass('editable-unsaved');
 			$("#address").editable('setValue', null).removeClass('editable-unsaved');
 			$("#area").editable('setValue', null).removeClass('editable-unsaved');

@@ -644,6 +644,8 @@
 							'editable-unsaved');
 					$("#address2").editable('setValue', null).removeClass(
 							'editable-unsaved');
+					$("#jingweidu").editable('setValue', null).removeClass(
+					'editable-unsaved');
 					$("#collapseOne2").collapse('hide');
 				});
 		$("#confirmAdd-btn2").click(

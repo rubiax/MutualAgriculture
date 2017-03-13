@@ -148,7 +148,7 @@
 								
 							</tr>
 							<tr>
-								<th style="width: 80px"><label>所属分区名</label></th>
+								<th style="width: 80px"><label>区片名</label></th>
 								<td style="width: 150px">
 									<select id="select2" class="js-example-basic-single" style="width: 90%">
 										<c:forEach var="item1" items="${allZone }">
@@ -164,7 +164,7 @@
 							</tr>
 							<tr>
 								<th style="width: 80px"><label>作物类型</label></th>
-								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
+								<td style="width: 150px" id="type">${currentFarmland.block.zone.type }</td>
 								<th style="width: 80px"><label>农田编号</label></th>
 								<td style="width: 150px">${currentFarmland.farmlandId }</td>
 							</tr>
@@ -249,7 +249,7 @@
 			$("#select1").select2();
 			$("#select1").val("${currentFarmland.user.username }").trigger("change");
 			$("#select2").select2();
-			$("#select2").val("${currentFarmland.zone.zoneId } ${currentFarmland.zone.type}").trigger("change");
+			$("#select2").val("${currentFarmland.block.zone.zoneId } ${currentFarmland.block.zone.type}").trigger("change");
 			$("#select3").select2();
 			$(".carousel-inner .item:first").addClass("active");
 			

@@ -105,6 +105,7 @@ public class BlockServlet extends BasicServlet {
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
 		System.out.println(value);
+		
 		BlockDAO blockDAO = new BlockDAO();
 		Block block = blockDAO.findById(Integer.parseInt(pk));
 		if("bname".equals(item)) {
@@ -117,11 +118,26 @@ public class BlockServlet extends BasicServlet {
 			block.setArea(Double.parseDouble(value));
 		} else if("address".equals(item)) {
 			block.setAddress(value);
+		} else if("jingweidu".equals(item)) {
+			String longitude = null;
+			String latitude = null;
+			if (!"".equals(value) && value != null) {
+				longitude = value.split(",")[0];
+				latitude = value.split(",")[1];
+			}
+			if (longitude != null && latitude != null) {
+				block.setLatitude(Double.parseDouble(latitude));
+				block.setLongitude(Double.parseDouble(longitude));
+			} else {
+				block.setLatitude(null);
+				block.setLongitude(null);
+			}
 		}
 		EntityManagerHelper.beginTransaction();
 		try {
 			blockDAO.update(block);
 			EntityManagerHelper.commit();
+			request.getSession().setAttribute("currentBlock", block);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
 		}
@@ -184,6 +200,9 @@ public class BlockServlet extends BasicServlet {
 	 * @throws IOException 
 	 */
 	private void getAllBlockData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		BlockDAO blockDAO = new BlockDAO();
 		List<Block> list = blockDAO.findAll();
 		this.out(response, list);

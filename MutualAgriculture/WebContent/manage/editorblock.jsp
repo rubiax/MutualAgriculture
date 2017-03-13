@@ -1,8 +1,25 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="com.geowind.hunong.jpa.Block"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%
+	Block block = (Block)request.getSession().getAttribute("currentBlock");
+	if(block != null) {
+		String images = block.getPicture();
+		if(images != null) {
+			String[] pic = images.split(",");
+			for(int i=0; i<pic.length; i++) {
+				pic[i] = "../../../"+pic[i];
+				System.out.println(pic[i]);
+			}
+			List<String> picList = Arrays.asList(pic);
+			pageContext.setAttribute("picList", picList);
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,26 +100,74 @@
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
+								<td style="width: 150px" rowspan="7">
+									<div id="carousel-example-generic" class="carousel slide"
+										data-ride="carousel">
+										<!-- Indicators -->
+										<ol class="carousel-indicators">
+											<li data-target="#carousel-example-generic" data-slide-to="0"
+												class="active"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+										</ol>
+
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" role="listbox">
+										
+										<c:forEach items="${picList}" var="item"> 
+											<div class="item">
+												<img src="${item}" alt="无图片" width="100%"
+													height="180">
+											</div>
+										</c:forEach>
+										
+										</div>
+
+										<!-- Controls -->
+										<a class="left carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="prev"> <span
+											class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="right carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="next"> <span
+											class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</td>
 								<th style="width: 80px"><label>编号</label></th>
 								<td style="width: 150px">${currentBlock.bid }</td>
 								<th style="width: 80px"><label>分片名</label></th>
-								<td style="width: 150px"><a href="#" id="bname">${currentZone.zonename }</a></td>
+								<td style="width: 150px"><a href="#" id="bname">${currentBlock.bname }</a></td>
 							</tr>
 							<tr>
-								<th><label>分区名</label></th>
-								<td>
+								<th style="width: 80px"><label>所属分区名</label></th>
+								<td style="width: 150px">
 									<select id="select1" class="js-example-basic-single" style="width: 90%">
 										<c:forEach var="item" items="${allZone }">
-											<option value="${item.zoneId }">${item.zonename }</option>
+											<option value="${item.zoneId } ${item.type }">${item.zonename }</option>
 										</c:forEach>
 									</select>
 								</td>
+								<th style="width: 80px"><label>作物类型</label></th>
+								<td style="width: 150px" id="type"></td>
+							</tr>
+							<tr>
 								<th><label>面积</label></th>
 								<td><a href="#" id="area">${currentBlock.area }</a></td>
 							</tr>
 							<tr>
+								<td colspan="4">
+									<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">修改地址及经纬度</a>
+								</td>
+							</tr>
+							<tr>
+								<th><label>经纬度</label></th>
+								<td><a href="#" id="jingweidu">${currentBlock.longitude }, ${currentBlock.latitude }</a></td>
 								<th><label>地址</label></th>
-								<td colspan="3"><a href="#" id="address">${currentBlock.address }</a></td>
+								<td><a href="#" id="address">${currentBlock.address }</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -167,9 +232,8 @@
 			<!-- /.box-body -->
 
 		</div>
-
-
 	</div>
+	<jsp:include page="smallmap2.html"></jsp:include>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- date-range-picker -->
@@ -189,6 +253,25 @@
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
 	<script>
+	function submitChange() {
+		var coordinate = $.trim($("#coordinate").val());
+		var _address = $.trim($("#_address").val());
+		$("#jingweidu").editable('setValue', coordinate)
+		$("#address").editable('setValue', _address)
+		$('#myModal').modal('hide');
+		$.post('../blockServlet', {
+			op : 'editeOne',
+			pk : '${currentBlock.bid }',
+			item : "jingweidu",
+			value : coordinate
+		});
+		$.post('../blockServlet', {
+			op : 'editeOne',
+			pk : '${currentBlock.bid }',
+			item : "address",
+			value : _address
+		});
+	}
 		function actionFormatter(value, row, index) {
 			return [
 					'<a class="edit ml10" href="javascript:void(0)" title="编辑">',
@@ -211,7 +294,11 @@
 		};
 		$(function() {
 			$("#select1").select2();
-			$("#select1").val("${currentBlock.zone.zoneId }").trigger("change");
+			$("#select1").val("${currentBlock.zone.zoneId } ${currentBlock.zone.type }").trigger("change");
+			$(".carousel-inner .item:first").addClass("active");
+			var value = $("#select1").val();
+			var type = value.split(' ')[1];
+			$("#type").text(type);
 			$('#table').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
@@ -228,8 +315,10 @@
 			});
 		});
 		$("#select1").on("select2:select", function (e) {
-			var text = $("#select1").select2('data')[0]['text'];
-			var zoneId = $("#select1").val();
+			var value = $("#select1").val();
+			var type = value.split(' ')[1];
+			var zoneId = value.split(' ')[0];
+			$("#type").text(type);
 			$.post('../blockServlet', {
 				op : 'editeOne',
 				pk : '${currentBlock.bid }',
@@ -278,6 +367,22 @@
 		            op: 'editeOne',
 		            pk: '${currentBlock.bid }',
 		            item:"address",
+		            value:params.value
+		        }); 
+		    },
+		    validate: function (value) { 
+		        if (value == '') { 
+		            return '不能为空'; 
+		        } 
+		    }
+		});
+		$('#jingweidu').editable({
+			type : 'text',
+			url: function (params) { 
+		        return $.post('../blockServlet', { 
+		            op: 'editeOne',
+		            pk: '${currentBlock.bid }',
+		            item:"jingweidu",
 		            value:params.value
 		        }); 
 		    },

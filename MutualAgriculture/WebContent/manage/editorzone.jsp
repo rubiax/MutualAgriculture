@@ -185,7 +185,7 @@
 		</div>
 
 		<!-- Horizontal Form -->
-		<div class="box box-success">
+		<%-- <div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title">农田信息</h3>
 			</div>
@@ -233,10 +233,10 @@
 					</tbody>
 				</table>
 
-			</div>
+			</div> 
 			<!-- /.box-body -->
 
-		</div>
+		</div>--%>
 
 
 	</div>
