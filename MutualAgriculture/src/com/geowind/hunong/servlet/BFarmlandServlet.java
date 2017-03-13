@@ -160,6 +160,9 @@ public class BFarmlandServlet extends BasicServlet {
 	}
 
 	private void getFarmlands(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		this.out(response, farmlandList);
