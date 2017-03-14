@@ -11,10 +11,10 @@ public class SimTask {
 	
 	//任务编号
 	@Expose
-	private int no;
+	private int tid;
     //农机手
 	@Expose
-    private String mUname;
+    private String muser;
     //块编号
 	@Expose
     private int bid;
@@ -23,10 +23,10 @@ public class SimTask {
 	private String bname;
     //工作量
 	@Expose
-    private String workLoad;
+    private String workload;
     //农机编号
 	@Expose
-    private String mno;
+    private String mid;
     //作业类型
 	@Expose
     private String  type;
@@ -36,15 +36,15 @@ public class SimTask {
     //状态
 	@Expose
     private String state;
-    //农田分区编号
+    //农田分区名
 	@Expose
-    private String fzno;
-    //农田总面积
+    private String zonename;
+    //块面积
 	@Expose
-    private double farea;
-    //农田地址
+    private double barea;
+    //块地址
 	@Expose
-    private String faddr;
+    private String address;
     //经度
 	@Expose
     private double longitude;
@@ -53,10 +53,10 @@ public class SimTask {
     private double latitude;
     //农田照片
 	@Expose
-    private String fpic;
+    private String pic;
     //作物类型
 	@Expose
-    private String cropType;
+    private String croptype;
     //农机类型
 	@Expose
     private String mstyle;
@@ -64,17 +64,65 @@ public class SimTask {
 	@Expose
     private String note;
     
-	public int getNo() {
-		return no;
+	
+	
+	
+	
+	
+	public int getTid() {
+		return tid;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
-	public String getmUname() {
-		return mUname;
+	public String getMuser() {
+		return muser;
 	}
-	public void setmUname(String mUname) {
-		this.mUname = mUname;
+	public void setMuser(String muser) {
+		this.muser = muser;
+	}
+	public String getWorkload() {
+		return workload;
+	}
+	public void setWorkload(String workload) {
+		this.workload = workload;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	
+	public String getZonename() {
+		return zonename;
+	}
+	public void setZonename(String zonename) {
+		this.zonename = zonename;
+	}
+	public double getBarea() {
+		return barea;
+	}
+	public void setBarea(double barea) {
+		this.barea = barea;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	public String getCroptype() {
+		return croptype;
+	}
+	public void setCroptype(String croptype) {
+		this.croptype = croptype;
 	}
 	public int getBid() {
 		return bid;
@@ -88,18 +136,6 @@ public class SimTask {
 	}
 	public void setBname(String bname) {
 		this.bname = bname;
-	}
-	public String getWorkLoad() {
-		return workLoad;
-	}
-	public void setWorkLoad(String workLoad) {
-		this.workLoad = workLoad;
-	}
-	public String getMno() {
-		return mno;
-	}
-	public void setMno(String mno) {
-		this.mno = mno;
 	}
 	public String getType() {
 		return type;
@@ -119,24 +155,6 @@ public class SimTask {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getFzno() {
-		return fzno;
-	}
-	public void setFzno(String fzno) {
-		this.fzno = fzno;
-	}
-	public double getFarea() {
-		return farea;
-	}
-	public void setFarea(double farea) {
-		this.farea = farea;
-	}
-	public String getFaddr() {
-		return faddr;
-	}
-	public void setFaddr(String faddr) {
-		this.faddr = faddr;
-	}
 	public double getLongitude() {
 		return longitude;
 	}
@@ -149,25 +167,13 @@ public class SimTask {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public String getFpic() {
-		return fpic;
-	}
-	public void setFpic(String fpic) {
-		this.fpic = fpic;
-	}
 	public void setFpicPath(String fpic) {
 		try {
-			this.fpic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
-			System.out.println("address:"+this.fpic);
+			this.pic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
+			System.out.println("address:"+this.pic);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-	}
-	public String getCropType() {
-		return cropType;
-	}
-	public void setCropType(String cropType) {
-		this.cropType = cropType;
 	}
 	public String getMstyle() {
 		return mstyle;
@@ -188,25 +194,34 @@ public class SimTask {
 			return null;
 		} else {
 			SimTask simTask = new SimTask();
-			simTask.setNo(task.getTaskId());
-			simTask.setmUname(task.getUser().getUsername());
+			simTask.setTid(task.getTaskId());
+			simTask.setMuser(task.getUser().getUsername());
 			simTask.setBid(task.getBlock().getBid());
 			simTask.setBname(task.getBlock().getBname());
-			simTask.setWorkLoad(String.valueOf(task.getWorkload()));
-			simTask.setMno(task.getMachine().getPlate());
+			simTask.setWorkload(String.valueOf(task.getWorkload()));
+			simTask.setMid(task.getMachine().getPlate());
 			simTask.setType(task.getType());
 			simTask.setDate(task.getWorkdate());
 			simTask.setState(String.valueOf(task.getFinished()));
-			simTask.setFzno(task.getBlock().getZone().getZonename());
-			simTask.setFarea(task.getBlock().getArea());
-			simTask.setFaddr(task.getBlock().getAddress());
+			simTask.setZonename(task.getBlock().getZone().getZonename());
+			simTask.setBarea(task.getBlock().getArea());
+			simTask.setAddress(task.getBlock().getAddress());
 			simTask.setLongitude(task.getBlock().getLongitude());
 			simTask.setLatitude(task.getBlock().getLatitude());
 			simTask.setFpicPath(task.getBlock().getPicture());
-			simTask.setCropType(task.getBlock().getZone().getType());
+			simTask.setCroptype(task.getBlock().getZone().getType());
 			simTask.setMstyle(task.getMachine().getType());
 			simTask.setNote(task.getDescr());
 			return simTask;
 		}
 	}
+	@Override
+	public String toString() {
+		return "SimTask [tid=" + tid + ", muser=" + muser + ", bid=" + bid + ", bname=" + bname + ", workload="
+				+ workload + ", mid=" + mid + ", type=" + type + ", date=" + date + ", state=" + state + ", zonename="
+				+ zonename + ", barea=" + barea + ", address=" + address + ", longitude=" + longitude + ", latitude="
+				+ latitude + ", pic=" + pic + ", croptype=" + croptype + ", mstyle=" + mstyle + ", note=" + note + "]";
+	}
+	
+	
 }

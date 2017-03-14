@@ -32,7 +32,7 @@ public class WeatherDataTimerTask extends TimerTask {
         	String path = null;
         	try {
 				path = URLDecoder.decode(p, "UTF-8").substring(1);
-				path += "jsonData/weather.json";
+				path += "/jsonData";
 				System.out.println(path);
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
@@ -42,6 +42,11 @@ public class WeatherDataTimerTask extends TimerTask {
 			String json = new WeatherDataCrawler().getWeatherJson();
 			File file = new File(path);
 			
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			path += "/weather.json";
+			file = new File(path);
 			if(!file.exists()) {
 				try {
 					file.createNewFile();

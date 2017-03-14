@@ -70,7 +70,7 @@ public class BZoneServlet extends BasicServlet {
 			MapSearchAll(request, response);
 			break;
 		case "MapSearchZonePoint":
-			MapSearchZonePoint(request, response);
+			MapSearchZonePoint(request,response);
 			break;
 		case "editeOne":
 			editeOne(request, response);
@@ -88,10 +88,9 @@ public class BZoneServlet extends BasicServlet {
 			break;
 		}
 	}
-
+	
 	/**
 	 * 获取庄家类型
-	 * 
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -105,7 +104,6 @@ public class BZoneServlet extends BasicServlet {
 
 	/**
 	 * 获取分区面积
-	 * 
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -119,17 +117,16 @@ public class BZoneServlet extends BasicServlet {
 
 	/**
 	 * 服务器向客户端写入数据
-	 * 
 	 * @param request
 	 * @param response
-	 * @throws IOException
+	 * @throws IOException 
 	 */
 	private void getAllData(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Zone> zoneList = zoneService.search(centerId);
 		List<SimZone> list = new ArrayList<SimZone>();
-		for (Zone zone : zoneList) {
+		for(Zone zone : zoneList) {
 			list.add(SimZone.fromZone(zone));
 		}
 		this.out(response, list);
@@ -137,7 +134,6 @@ public class BZoneServlet extends BasicServlet {
 
 	/**
 	 * 修改单个属性
-	 * 
 	 * @param request
 	 * @param response
 	 */
@@ -148,13 +144,13 @@ public class BZoneServlet extends BasicServlet {
 		System.out.println(value);
 		ZoneDAO zoneDAO = new ZoneDAO();
 		Zone zone = zoneDAO.findById(Integer.parseInt(pk));
-		if ("zonename".equals(item)) {
+		if("zonename".equals(item)) {
 			zone.setZonename(value);
-		} else if ("type".equals(item)) {
+		} else if("type".equals(item)) {
 			zone.setType(value);
-		} else if ("area".equals(item)) {
+		} else if("area".equals(item)) {
 			zone.setArea(Double.parseDouble(value));
-		} else if ("address".equals(item)) {
+		} else if("address".equals(item)) {
 			zone.setAddress(value);
 		}
 		EntityManagerHelper.beginTransaction();
@@ -168,78 +164,69 @@ public class BZoneServlet extends BasicServlet {
 
 	/**
 	 * 获得分区凸点并发送给前端
-	 * 
 	 * @param request
 	 * @param response
-	 * @throws IOException
+	 * @throws IOException 
 	 */
 	private void MapSearchZonePoint(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+	
 		ZoneDAO zoneDAO = new ZoneDAO();
 		List<Zone> zoneList = zoneDAO.findAll();
-
-		if (zoneList != null && zoneList.size() > 0) {
-
+		
+		if(zoneList!=null&&zoneList.size()>0){
+			
 			List<FarmlandPoint> farmlandPointList = new ArrayList<FarmlandPoint>();
 
-			Set<Block> blockSet = new HashSet<Block>();
-
-			// 根据分区数量遍历得出数据
-			for (int i = 0; i < zoneList.size(); i++) {
-
-				// 获得分区下所有的块
-				blockSet = zoneList.get(i).getBlocks();
-				if (blockSet.size() > 0) {
-
-					// 获得块下的所有农田
-					Iterator<Block> b = blockSet.iterator();
+			//  根据分区数量遍历得出数据
+			for(int i=0;i<zoneList.size();i++){
+				Set<Farmland> farmlandList = new HashSet<Farmland>();
+				//获得指定分区下的农田
+//				farmlandList = zoneList.get(i).getFarmlands();
+				
+				if(farmlandList!=null&&farmlandList.size()>0){
 					List<Point> p = new ArrayList<Point>();
-					while (b.hasNext()) {
-						Set<Farmland> farmlandSet = new HashSet<Farmland>();
-						farmlandSet = b.next().getFarmlands();
-
-						if (farmlandSet != null && farmlandSet.size() > 0) {
-
-							Iterator<Farmland> f = farmlandSet.iterator();
-
-							while (f.hasNext()) {
-
-								Point p1 = new Point();
-								Farmland tmp = f.next();
-								p1.setX(tmp.getLongitude());
-								p1.setY(tmp.getLatitude());
-
-								p.add(p1);
-
-							}
-
-						} else {
-							System.out.println(zoneList.get(i).getZonename() + "没有农田");
-						}
+					
+					Iterator<Farmland> f = farmlandList.iterator();
+			
+					while(f.hasNext()){
+						
+						Point p1 = new Point();
+						Farmland tmp = f.next();
+						System.out.println(tmp.getLongitude()+","+tmp.getLatitude());
+						p1.setX(tmp.getLongitude());
+						p1.setY(tmp.getLatitude());
+						
+						p.add(p1);
+						
 					}
+					
 					PointSelector ps = new PointSelector(p);
 					p = ps.GetHullPoints();
+					
 					FarmlandPoint fp = new FarmlandPoint();
 					fp.setPointList(p);
 					farmlandPointList.add(fp);
-				} else {
-					System.out.println("没有分块！！");
+				}else{
+					System.out.println(zoneList.get(i).getZonename()+"没有农田");
 				}
+				
 			}
-
 			this.out(response, farmlandPointList);
-		} else {
+			
+		}else{
 			this.out(response, 0);
 		}
-
+		
+	
+		
 	}
 
 	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneDAO zoneDAO = new ZoneDAO();
 		List<Zone> zoneList = zoneDAO.findAll();
-		if (zoneList != null && zoneList.size() > 0) {
+		if(zoneList!=null&&zoneList.size()>0){
 			this.out(response, zoneList);
-		} else {
+		}else{
 			this.out(response, 0);
 		}
 	}
@@ -371,8 +358,8 @@ public class BZoneServlet extends BasicServlet {
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); // 清空二级缓存；
-		entityManager.clear(); // 清空一级缓存
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		ZoneDAO zoneDAO = new ZoneDAO();
 		try {
 			Zone zone = zoneDAO.findById(Integer.parseInt(request.getParameter("zoneId")));
@@ -393,19 +380,19 @@ public class BZoneServlet extends BasicServlet {
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); // 清空二级缓存；
-		entityManager.clear(); // 清空一级缓存
-
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
+		
 		ZoneService zoneService = new ZoneServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Zone> zoneList = zoneService.search(centerId);
-
+		
 		BlockDAO blockDAO = new BlockDAO();
 		List<Block> blockList = blockDAO.findByValid(1);
-
+		
 		request.getSession().setAttribute("allZone", zoneList);
 		request.getSession().setAttribute("allBlock", blockList);
-
+		
 		response.sendRedirect("manage/zone.jsp");
 
 	}

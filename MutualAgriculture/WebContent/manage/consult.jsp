@@ -104,6 +104,7 @@
     	}
     	$.post("../consultServlet?op=answer", {cid:obj,content:content}, function() {
     		alert("success");
+    		location.href = '../consultServlet?op=consulting';
     	});
     }
 </script>
