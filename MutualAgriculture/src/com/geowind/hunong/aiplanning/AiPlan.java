@@ -37,7 +37,7 @@ public class AiPlan {
 	 */
 	private void initPlan() {
 		standard = getStandard();
-		 
+		
 		BlockDAO blockDAO = new BlockDAO();
 		AiplanDAO aiplanDAO = new AiplanDAO();
 		int firstBlockId = getFirstBlockId();
@@ -68,7 +68,7 @@ public class AiPlan {
 					if(block == null) {
 						sb.append("");
 					} else {
-						sb.append(block.getBname()+",");
+						sb.append(block.getBname()+"片,");
 					}
 				}
 				ai.setBname(sb.toString());

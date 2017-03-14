@@ -89,7 +89,7 @@ public class PestZoneServlet extends BasicServlet {
 		while(i.hasNext()){
 		
 			//获得该指定分区下的所有农田
-			farmlandList = i.next().getFarmlands();
+//			farmlandList = i.next().getBlocks().;
 			
 			System.out.println(farmlandList.iterator().next().getLatitude());
 			

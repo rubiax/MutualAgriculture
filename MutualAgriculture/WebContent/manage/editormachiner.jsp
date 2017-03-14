@@ -142,7 +142,7 @@
 							<th data-field="state" data-checkbox="true"></th>
 							<th data-field="taskId" data-sortable="true">任务编号</th>
 							<th data-field="zone" data-sortable="true">任务区号</th>
-							<th data-field="farmlandId" data-sortable="true">任务片号</th>
+							<th data-field="farmlandId" data-sortable="true">农田编号</th>
 							<th data-field="address" data-sortable="true">地址</th>
 							<th data-field="plate" data-sortable="true">农机牌号</th>
 							<th data-field="worktype" data-sortable="true">作业类型</th>
@@ -157,14 +157,14 @@
 							<tr>
 								<td data-field="state" data-checkbox="true"></td>
 								<td>${item.taskId }</td>
-								<td>${item.block.zone.zonename }</td>
-								<td>${item.block.bname }</td>
-								<td>${item.block.address }</td>
+								<td>${item.farmland.zone.zonename }</td>
+								<td>${item.farmland.farmlandId }</td>
+								<td>${item.farmland.address }</td>
 								<td>${item.machine.plate }</td>
 								<td>${item.type }</td>
-								<td><fmt:formatDate value="${item.workdate }"
+								<td><fmt:formatDate value="${item.publishdate }"
 										pattern="yyyy-MM-dd" />&nbsp;至&nbsp;<fmt:formatDate
-										value="${item.finishdate }" pattern="yyyy-MM-dd" />
+										value="${item.workdate }" pattern="yyyy-MM-dd" />
 								</td>
 								<td>
 									<%-- <c:choose>

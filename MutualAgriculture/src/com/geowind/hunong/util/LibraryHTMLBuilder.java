@@ -84,15 +84,14 @@ public class LibraryHTMLBuilder {
 		// point1:set title
 		Element elmt = doc.getElementById("title_h1");// title
 		elmt.html(dataMes[2]);
-		//elmt = doc.getElementById("view_title");// title
-		//elmt.html(dataMes[2]);
+		elmt = doc.getElementById("view_title");// title
+		elmt.html(dataMes[2]);
 		// point2:set list
 		elmt = doc.getElementById("view_list");
 		String[] airticlList = dataMes[3].split("##");
 		int listLen = airticlList.length;
 		for (int i = 0; i < listLen; i++) {
-			String html = "<li><a href=\"#" + ("info_title" + i)+ "\"><i class=\"fa fa-circle-o text-green\"></i> <span>"+airticlList[i]+"</span></a></li>";
-			//String html = "<li><a href=\"#" + ("info_title" + i) + "\">" + airticlList[i] + "</a><li>";
+			String html = "<li><a href=\"#" + ("info_title" + i) + "\">" + airticlList[i] + "</a><li>";
 			elmt.append(html);
 		}
 		// point3: set description 简介
@@ -110,7 +109,7 @@ public class LibraryHTMLBuilder {
 			elmt.append(html);
 		}
 		// set pictures
-		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  id=\"top_pic\" class=\"col-center-block\" width=\"98%\" style=\" position: relative;\">";
+		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  id=\"top_pic\" class=\"col-center-block\" width=\"95%\" style=\" position: relative;\">";
 		System.out.println(imgTag);
 		elmt = doc.getElementById("img_Wrapper");
 		elmt.append(imgTag);

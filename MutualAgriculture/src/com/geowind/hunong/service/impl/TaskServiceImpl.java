@@ -34,14 +34,14 @@ public class TaskServiceImpl implements TaskService {
 			Task task = new Task();
 			task.setTaskId((Integer)map.get("taskid"));
 			task.setUser(new UserDAO().findById((String)map.get("username")));
-			task.setBlock(new BlockDAO().findById((Integer)map.get("blockid")));
+			task.setBlock(new BlockDAO().findById((int)map.get("bid")));
 			task.setWorkload((Integer)map.get("workload"));
-			task.setMachine(new MachineDAO().findById((Integer)map.get("machineid")));
+			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
 			task.setPublishdate((Date)map.get("publishdate"));
 			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
 			task.setDescr((String)map.get("descr"));
-			task.setCenter(new CenterDAO().findById((Integer)map.get("centerid")));
+			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
 			task.setFinished((Integer)map.get("finished"));
 			list.add(task);
 		}

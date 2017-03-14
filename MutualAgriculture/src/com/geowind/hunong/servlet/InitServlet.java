@@ -93,8 +93,8 @@ public class InitServlet extends HttpServlet {
     	String weatherPath = null;
     	try {
     		weatherPath = URLDecoder.decode(p, "UTF-8").substring(1);
-    		weatherPath += "/jsonData";
-			System.out.println(path);
+    		weatherPath += "jsonData/weather.json";
+			System.out.println(weatherPath);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,12 +103,6 @@ public class InitServlet extends HttpServlet {
 		String json = new WeatherDataCrawler().getWeatherJson();
 		File weatherFile = new File(weatherPath);
 		
-		if(!weatherFile.exists()) {
-			weatherFile.mkdirs();
-		}
-		
-		weatherPath += "/weather.json";
-		weatherFile = new File(weatherPath);
 		if(!weatherFile.exists()) {
 			try {
 				file.createNewFile();

@@ -45,7 +45,7 @@
 		$(".tangram-suggestion-main").css("z-index","9999");
 		$(".modal-header").append($(".tangram-suggestion-main"));
 		
-		$.post("../blockServlet?op=getAllBlockData",{},function getData(data){
+		$.post("../bFarmlandServlet?op=getFarmlands",{},function getData(data){
 	    	
 	    	for(var m in data){
 	    		addMark(data[m]);
@@ -58,14 +58,14 @@
 	
 	var myIcon2 = new BMap.Icon("img/logoMarker/location2.png", new BMap.Size(30,30),
 	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
-	var bid;
+	var farmlandId;
     function addMark(data){
     	var me=this;     
     	var label;     
     	var point = new BMap.Point(data.longitude,data.latitude);    //建立测试point点
     	var marker = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
             raiseOnDrag: true});
-    	label = new BMap.Label(data.bid+","+data.bname, { offset: new BMap.Size(20, 0) }); //创建marker点的标记,这里注意下,因为百度地图可以对label样式做编辑,所以我这里吧重要的id放在了label(然后再隐藏)
+    	label = new BMap.Label(data.farmlandId, { offset: new BMap.Size(20, 0) }); //创建marker点的标记,这里注意下,因为百度地图可以对label样式做编辑,所以我这里吧重要的id放在了label(然后再隐藏)
     	//label.setStyle(  {   display:"none"         });//对label 样式隐藏   
     	marker.setLabel(label);  //把label设置到maker上  
     	//marker.setTitle(data.address); //这里设置maker的title (鼠标放到marker点上,会出现它的title,所以我这里把name,放到title里)   
@@ -77,7 +77,7 @@
 			$("#id").html(e.target.getLabel().content); //这里就可以获取到marker的id        
 			 
 			temp.setIcon(myIcon);
-    		bid = e.target.getLabel().content;
+    		farmlandId = e.target.getLabel().content;
     		marker.setIcon(myIcon2);
     		temp = marker;
     		
@@ -86,13 +86,14 @@
     
     
     function farmlandOK() {
-    	if(bid != undefined) {
+    	if(farmlandId != undefined) {
     		$('#myModal').modal('hide');
-    		bid = bid.split(",")[0];
-    		$.post("../blockServlet?op=getBlockByBid",{bid:bid}, function(data) {
+    		$.post("../bFarmlandServlet?op=findFarmland",{farmlandId:farmlandId}, function(data) {
+    			$("#farmername").text(data.user.realname);
+    			$("#farmerphone").text(data.user.phone);
     			$("#zonename").text(data.zone.zonename);
-    			$("#bname").text(data.bid+" "+data.bname);
-    			$("#croptype").text(data.zone.type);
+    			$("#zonetype").text(data.zone.type);
+    			$("#farmlandId").text(data.farmlandId);
     			$("#address").editable('setValue', data.address)
     		},"json");
     		
