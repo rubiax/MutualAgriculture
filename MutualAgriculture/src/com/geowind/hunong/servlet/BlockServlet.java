@@ -55,11 +55,27 @@ public class BlockServlet extends BasicServlet {
 		case "uploadImage":
 			uploadImage(request, response);
 			break;
+		case "getBlockByBid":
+			getBlockByBid(request, response);
+			break;
 		default:
 			break;
 		}
 	}
 	
+	/**
+	 * 根据块编号查询块
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void getBlockByBid(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int bid = Integer.parseInt(request.getParameter("bid"));
+		BlockDAO blockDAO = new BlockDAO();
+		Block block = blockDAO.findById(bid);
+		this.out(response, block);
+	}
+
 	/**
 	 * 块图片上传
 	 * 

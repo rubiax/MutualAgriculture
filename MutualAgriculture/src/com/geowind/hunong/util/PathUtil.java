@@ -2,7 +2,7 @@ package com.geowind.hunong.util;
 
 public class PathUtil {
 	public static String Util_HTMLpath = "LibraryHTML";
-	public static String Util_HTMLModelName = "library02.html";
+	public static String Util_HTMLModelName = "library03.html";
 	public final static String Lib_PictureURL = "/HN_upload/LibImages/";
 	public final static String ServerIP = "115.159.125.122";
 

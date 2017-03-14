@@ -34,6 +34,9 @@ public class ConsultServlet extends BasicServlet {
 		case "consulting":
 			consulting(request, response);
 			break;
+		case "consulted":
+			consulted(request, response);
+			break;
 		case "answer":
 			answer(request, response);
 			break;
@@ -42,12 +45,18 @@ public class ConsultServlet extends BasicServlet {
 		}
 	}
 
+	/**
+	 * 回答
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void answer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int cid = Integer.parseInt(request.getParameter("cid"));
 		String centent = request.getParameter("content");
 		ConsultDAO consultDAO = new ConsultDAO();
 		Consult consult = consultDAO.findById(cid);
-		consult.setCcontent(centent);
+		consult.setAcontent(centent);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(new Date());
 		consult.setAtime(date);
@@ -69,11 +78,31 @@ public class ConsultServlet extends BasicServlet {
 		}
 	}
 
+	/**
+	 * 未解决
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void consulting(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		ConsultDAO consultDAO = new ConsultDAO();
 		List<Consult> consults = consultDAO.findByStatus(0);
 		request.getSession().setAttribute("consulting", consults);
 		response.sendRedirect("manage/consult.jsp");
+	}
+	
+	/**
+	 * 已解决
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	private void consulted(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		ConsultDAO consultDAO = new ConsultDAO();
+		List<Consult> consults = consultDAO.findByStatus(1);
+		request.getSession().setAttribute("consulted", consults);
+		response.sendRedirect("manage/consulted.jsp");
 	}
 }

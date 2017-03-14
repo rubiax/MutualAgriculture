@@ -71,13 +71,13 @@
                 <li><a href="javascript:addTaskLayer()" >任务<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addQuestionLayer()" >提问<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
-                 <li><a href="javascript:addBlockLayer()" >分块<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addZoneLayer()" >分区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addAffectAreasLayer()">受灾区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addFuelLayer()" >加油点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addRepairLayer()" >维修点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addCenterLayer()" >服务中心点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
-              	 </ul>
+              	 <li><a href="javascript:addBlockLayer()" >分块<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+              </ul>
             </li>
           </ul>
            

@@ -135,6 +135,7 @@ public class UserServlet extends BasicServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        System.out.println(username + " " + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.findById(username);
         if(user != null) {
