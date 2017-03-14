@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.geowind.hunong.entity.FarmlandPoint;
 import com.geowind.hunong.entity.Point;
+import com.geowind.hunong.jpa.Block;
 import com.geowind.hunong.jpa.Farmland;
 import com.geowind.hunong.jpa.FarmlandDAO;
 import com.geowind.hunong.jpa.Pestzone;
@@ -71,35 +72,46 @@ public class PestZoneServlet extends BasicServlet {
 		
 		//获得分区的集合，保证不重复
 		Set<Zone> zoneNumber = new HashSet<Zone>();
-		int b =0;
+		int d =0;
 		for(int i=0;i<affectedAreaList.size();i++){
-				b++;
+				d++;
 				zoneNumber.add(affectedAreaList.get(i).getZone());
 				
 		} 
-		System.out.println("b is:"+b);
+		System.out.println("b is:"+d);
 //		FarmlandDAO farmlandDAO =new FarmlandDAO();
 		Iterator<Zone> i =zoneNumber.iterator(); 
 		
 		List<FarmlandPoint> farmlandPointList = new ArrayList<FarmlandPoint>();
 		
 		Set<Farmland> farmlandList = new HashSet<Farmland>();
+		
+		Set<Block> blockSet = new HashSet<Block>();
 	
+		List<Point> p = new ArrayList<Point>();
 		//遍历受灾的农田分区
 		while(i.hasNext()){
 		
 			//获得该指定分区下的所有农田
-//			farmlandList = i.next().getBlocks().;
+			blockSet = i.next().getBlocks();
 			
-			System.out.println(farmlandList.iterator().next().getLatitude());
+			Iterator<Block> b = blockSet.iterator();
 			
-			System.out.println("meile");
+			//获得分块
+			while(b.hasNext()){
 			
-			List<Point> p = new ArrayList<Point>();
+
+			
+//			System.out.println("meile");
+			
+			
+			
+			farmlandList = b.next().getFarmlands();
 			
 			Iterator<Farmland> f = farmlandList.iterator();
 			
 			int count = 0;
+			//获得农田
 			while(f.hasNext()){
 				
 				count++;
@@ -114,6 +126,9 @@ public class PestZoneServlet extends BasicServlet {
 			}
 			System.out.println("count is" + count);
 			
+			
+			}
+			
 			PointSelector ps = new PointSelector(p);
 			p = ps.GetHullPoints();
 			
@@ -122,9 +137,7 @@ public class PestZoneServlet extends BasicServlet {
 			farmlandPointList.add(fp);
 		}
 		
-		for(int l=0;l<farmlandPointList.size();l++){
-			System.out.println(farmlandPointList.get(l).getPointList().get(l));
-		}
+			
 		return farmlandPointList;
 	}
 
