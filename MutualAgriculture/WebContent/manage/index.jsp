@@ -142,7 +142,7 @@
       <ul class="sidebar-menu">
         <li class="header">管理栏目</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="single"><a href="javascript:showpage(this,'calendar.html')"><i class="fa fa-book"></i> <span>智能调度</span></a></li>
+        <li class="single"><a href="javascript:showpage(this,'calendar.html')"><i class="fa fa-truck"></i> <span>智能调度</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-users"></i> <span>人员管理</span>
             <span class="pull-right-container">
@@ -179,10 +179,10 @@
         </a>
           <ul class="treeview-menu">
             <li><a href="javascript:showpage(this,'../consultServlet?op=consulting')"><i class="fa fa-circle-o"></i> 待解决</a></li>
-            <li><a href="javascript:showpage(this,'../consultServlet?op=consulted')"><i class="fa fa-circle-o"></i> 已解决</a></li>
+            <li><a href="javascript:showpage(this,'consulted.html')"><i class="fa fa-circle-o"></i> 已解决</a></li>
           </ul>
         </li>
-        <!-- <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li> -->
+        <li><a href="#"><i class="fa fa-book"></i> <span>文库中心</span></a></li>
        	<li class="treeview">
        	 <a href="#"><i class="fa fa-medkit"></i> <span>病虫防治</span>
           <span class="pull-right-container">

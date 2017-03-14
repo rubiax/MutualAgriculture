@@ -1,4 +1,4 @@
-/*package com.geowind.hunong.aiplanning;
+package com.geowind.hunong.aiplanning;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,9 +26,9 @@ public class AiPlanning {
 		new AiPlanning().initPlan();
 	}
 	
-	*//**
+	/**
 	 * 初始化计划
-	 *//*
+	 */
 	private void initPlan() {
 		standard = getStandard();
 		
@@ -43,9 +43,9 @@ public class AiPlanning {
 		//删除所有记录
 		deleteFormerRecords();
 		
-		*//**
+		/**
 		 * 初始化第一片农田计划
-		 *//*
+		 */
 		for(int i=0; i<a.length; i++) {
 			Planstandard ps = standard.get(i);
 			a[i] = new Aiplanning();
@@ -72,9 +72,9 @@ public class AiPlanning {
 			}
 		}
 		
-		*//**
+		/**
 		 * 初始化剩下的农田计划
-		 *//*
+		 */
 		for(int j=firstBlockId+1; j<firstBlockId+getBlockNum(); j++) {
 			for(int i=0; i<a.length; i++) {
 				Planstandard ps = standard.get(i);
@@ -120,10 +120,10 @@ public class AiPlanning {
 		}
 	}
 	
-	*//**
+	/**
 	 * 获取标准计划
 	 * @return
-	 *//*
+	 */
 	private List<Planstandard> getStandard() {
 		CenterDAO centerDAO = new CenterDAO();
 		Center center = centerDAO.findById(10001);
@@ -137,10 +137,10 @@ public class AiPlanning {
 		return year;
 	}
 	
-	*//**
+	/**
 	 * 获取片数量
 	 * @return
-	 *//*
+	 */
 	private int getBlockNum() {
 		BlockDAO blockDAO = new BlockDAO();
 		return blockDAO.findAll().size();
@@ -151,11 +151,11 @@ public class AiPlanning {
 		return blockDAO.findAll().get(0).getBid();
 	}
 	
-	*//**
+	/**
 	 * 指定时间的下一天
 	 * @param specifiedDay
 	 * @return
-	 *//*
+	 */
 	private Date getSpecifiedDayAfter(Date specifiedDay){ 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance(); 
@@ -171,4 +171,3 @@ public class AiPlanning {
 	} 
 	
 }
-*/

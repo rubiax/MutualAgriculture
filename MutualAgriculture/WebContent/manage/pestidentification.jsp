@@ -98,7 +98,6 @@
     
     function answer(obj) {
     	var content = $("#answer"+obj).val();
-    	alert(content);
     	if(content == undefined || content == "") {
     		return;
     	}

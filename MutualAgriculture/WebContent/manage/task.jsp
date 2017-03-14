@@ -84,7 +84,7 @@
 					        </a>
 					      </h4>
 					    </div>
-					    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+					    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 					      <div class="panel-body">
 					       		<table id="table" data-toggle="table" data-pagination="true" data-page-size="5">
 									<thead>
@@ -114,8 +114,9 @@
 													<div class="box-body">
 														<ul>
 															<li><label>农机手信息：</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
-															<li><label>分区信息：</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
-															<li><label>分片信息</label>${item.block.bid }&nbsp;&nbsp;${item.block.bname }&nbsp;&nbsp;${item.block.address }</li>
+															<li><label>农田主信息：</label>${item.farmland.user.username }&nbsp;&nbsp;${item.farmland.user.realname }&nbsp;&nbsp;${item.farmland.user.phone }</li>
+															<li><label>分区信息：</label>${item.farmland.zone.zoneId }&nbsp;&nbsp;${item.farmland.zone.zonename }&nbsp;&nbsp;${item.farmland.zone.type }</li>
+															<li><label>农田信息：</label>${item.farmland.farmlandId }&nbsp;&nbsp;${item.farmland.address }&nbsp;&nbsp;${item.farmland.area }</li>
 															<li><label>农机信息：</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
 															<li><label>任务时间：</label>${item.workdate }</li>
 															<li><label>任务描述：</label>${item.descr }</li>
@@ -162,19 +163,25 @@
 								</tr>
 								<tr>
 									<td colspan="4">
-										<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">选择区片农田</a>
+										<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal" onclick="showModal()">选择农田</a>
 									</td>
+								</tr>
+								<tr>
+									<th><label>农田主姓名</label></th>
+									<td id="farmername"></td>
+									<th><label>农田主手机号</label></th>
+									<td id="farmerphone"></td>
 								</tr>
 								<tr>
 									<th><label>所属分区名</label></th>
 									<td id="zonename"></td>
-									<th><label>片名</label></th>
-									<td id="bname"></td>
+									<th><label>作物类型</label></th>
+									<td id="zonetype"></td>
 								</tr>
 								
 								<tr>
-									<th><label>作物类型</label></th>
-									<td id="croptype"></td>
+									<th><label>农田编号</label></th>
+									<td id="farmlandId"></td>
 									
 									<th><label>地址</label></th>
 									<td><a href="#" id="address"></a></td>
@@ -246,8 +253,9 @@
 													<div class="box-body">
 														<ul>
 															<li><label>农机手信息：</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
-															<li><label>分区信息：</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
-															<li><label>分片信息</label>${item.block.bid }&nbsp;&nbsp;${item.block.bname }&nbsp;&nbsp;${item.block.address }</li>
+															<li><label>农田主信息：</label>${item.farmland.user.username }&nbsp;&nbsp;${item.farmland.user.realname }&nbsp;&nbsp;${item.farmland.user.phone }</li>
+															<li><label>分区信息：</label>${item.farmland.zone.zoneId }&nbsp;&nbsp;${item.farmland.zone.zonename }&nbsp;&nbsp;${item.farmland.zone.type }</li>
+															<li><label>农田信息：</label>${item.farmland.farmlandId }&nbsp;&nbsp;${item.farmland.address }&nbsp;&nbsp;${item.farmland.area }</li>
 															<li><label>农机信息：</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
 															<li><label>任务时间：</label>${item.workdate }</li>
 															<li><label>任务描述：</label>${item.descr }</li>
@@ -281,6 +289,9 @@
 					  </div>
 					</div>
 				
+				
+				
+					
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="chartanalyze">...</div>
 			</div>
@@ -332,7 +343,6 @@
 		});
 		$('#workdate').editable({
 			type : 'text',
-			placeholder: 'yyyy-MM-dd',
 			validate : function(value) {
 				if (value == '') {
 					return '不能为空';
@@ -351,9 +361,11 @@
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
 			$("#machinerphone").text('');
+			$("#farmername").text('');
+			$("#farmerphone").text('');
 			$("#zonename").text('');
-			$('#bname').text('');
-			$("#croptype").text('');
+			$('#zonetype').text('');
+			$("#farmlandId").text('');
 			$("#machinetype").text('');
 	        $("#address").editable('setValue', null).removeClass('editable-unsaved');
 			$("#workdate").editable('setValue', null).removeClass('editable-unsaved');
@@ -363,17 +375,16 @@
 		$("#confirmAdd-btn").click(function() {
 			var username = $("#select1").val();
 			var machineId = $("#select2").val();
-			var address = $("#address").editable('getValue', true);
-			var bid = $("#bname").text().split(' ')[0];
+	    	var farmlandId = $.trim($("#farmlandId").text());
 			var workdate = $("#workdate").editable('getValue', true);
 			var descr = $("#descr").editable('getValue', true);
-			alert(username + " " + machineId + " " + bid + " " + workdate + " " + descr);
-			if(username == null || machineId == null || workdate == null || address==null||
-				bid==null||bid==''|| username == '' || machineId == '' || workdate == '' || address=='') {
+			alert(username + " " + machineId + " " + farmlandId + " " + workdate + " " + descr);
+			if(username == null || machineId == null || farmlandId == null || workdate == null || descr == null
+					|| username == '' || machineId == '' || farmlandId == '' || workdate == '' || descr == '') {
 				alert("请完善信息");
 				return;
 			}
-			$.post("../taskServlet?op=pulishTask", {username:username,machineId:machineId,bid:bid,
+			$.post("../taskServlet?op=pulishTask", {username:username,machineId:machineId,farmlandId:farmlandId,
 				workdate:workdate,descr:descr}, function(data) {
 	    			if(data == 1) {
 	    				alert("任务推送成功...")
@@ -385,9 +396,11 @@
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
 			$("#machinerphone").text('');
+			$("#farmername").text('');
+			$("#farmerphone").text('');
 			$("#zonename").text('');
-			$('#bname').text('');
-			$("#croptype").text('');
+			$('#zonetype').text('');
+			$("#farmlandId").text('');
 			$("#machinetype").text('');
 	        $("#address").editable('setValue', null).removeClass('editable-unsaved');
 			$("#workdate").editable('setValue', null).removeClass('editable-unsaved');

@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 
 import com.geowind.hunong.jpa.Aiplan;
 import com.geowind.hunong.jpa.AiplanDAO;
+import com.geowind.hunong.jpa.Aiplanning;
+import com.geowind.hunong.jpa.AiplanningDAO;
 import com.geowind.hunong.jpa.Block;
 import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.Center;
@@ -37,11 +39,12 @@ public class AiPlan {
 	 */
 	private void initPlan() {
 		standard = getStandard();
-		 
+		
 		BlockDAO blockDAO = new BlockDAO();
 		AiplanDAO aiplanDAO = new AiplanDAO();
 		int firstBlockId = getFirstBlockId();
 		
+		Aiplanning[] a = new Aiplanning[7];
 		
 		//获取总面积
 		double totalArea = getTotalArea();
@@ -68,7 +71,7 @@ public class AiPlan {
 					if(block == null) {
 						sb.append("");
 					} else {
-						sb.append(block.getBname()+",");
+						sb.append(block.getBname()+"片,");
 					}
 				}
 				ai.setBname(sb.toString());
