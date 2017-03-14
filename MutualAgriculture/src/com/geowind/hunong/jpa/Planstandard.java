@@ -131,4 +131,11 @@ public class Planstandard implements java.io.Serializable {
 		this.efficiency = efficiency;
 	}
 
+	@Override
+	public String toString() {
+		return "Planstandard [pid=" + pid + ", center=" + center + ", event=" + event + ", begin=" + begin + ", end="
+				+ end + ", maxdays=" + maxdays + ", totalwork=" + totalwork + ", efficiency=" + efficiency + "]";
+	}
+
+	
 }

@@ -1,4 +1,4 @@
-package com.geowind.hunong.aiplanning;
+/*package com.geowind.hunong.aiplanning;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,9 +33,9 @@ public class Test {
 		new Test().initPlan();
 	}
 	
-	/**
+	*//**
 	 * 初始化计划
-	 */
+	 *//*
 	private void initPlan() {
 		standard = getStandard();
 		
@@ -119,10 +119,10 @@ public class Test {
 		}
 	}
 	
-	/**
+	*//**
 	 * 获取标准计划
 	 * @return
-	 */
+	 *//*
 	private List<Planstandard> getStandard() {
 		CenterDAO centerDAO = new CenterDAO();
 		Center center = centerDAO.findById(10001);
@@ -136,10 +136,10 @@ public class Test {
 		return year;
 	}
 	
-	/**
+	*//**
 	 * 获取片数量
 	 * @return
-	 */
+	 *//*
 	private int getBlockNum() {
 		BlockDAO blockDAO = new BlockDAO();
 		return blockDAO.findAll().size();
@@ -150,11 +150,11 @@ public class Test {
 		return blockDAO.findAll().get(0).getBid();
 	}
 	
-	/**
+	*//**
 	 * 指定时间的后几天
 	 * @param specifiedDay
 	 * @return
-	 */
+	 *//*
 	private Date getSpecifiedDayAfter(Date specifiedDay, int num){ 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance(); 
@@ -175,3 +175,4 @@ public class Test {
 		return (double) map.get(0).get("totalarea");
 	}
 }
+*/

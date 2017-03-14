@@ -6,7 +6,7 @@
 var map = new BMap.Map("allmap",{mapType: BMAP_HYBRID_MAP}); 
 map.enableScrollWheelZoom(true);  //开启鼠标滚轮缩放
 
-var point = new BMap.Point(112.552478,26.923761);
+var point = new BMap.Point(112.56182, 27.012459);
 map.centerAndZoom(point,12);
 
 var geoc = new BMap.Geocoder();
