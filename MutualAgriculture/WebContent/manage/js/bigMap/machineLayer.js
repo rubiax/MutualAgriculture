@@ -12,7 +12,7 @@ function addMachineLayer(){
 			if(data==0){
 				alert("查询出错");
 			}else{
-				 alert(data);
+				 //alert(data);
 				 json = JSON.parse(data);
 				 for(var i=0;i<json.length;i++)
 				 { 	 

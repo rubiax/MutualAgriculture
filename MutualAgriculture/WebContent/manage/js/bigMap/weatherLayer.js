@@ -28,7 +28,7 @@ function addWeatherLayer(){
 	    			 weatherjson = JSON.parse(data);
     			 for(var i = 0;i<zonejson.length;i++)
     			 {
-    				 alert(zonejson[i].address);
+    				 //alert(zonejson[i].address);
     				 addWeatherMarker(zonejson[i].address,i);
     			 }
     		 }

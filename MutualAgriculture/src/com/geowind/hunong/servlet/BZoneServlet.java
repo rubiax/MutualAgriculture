@@ -170,57 +170,69 @@ public class BZoneServlet extends BasicServlet {
 	 */
 	private void MapSearchZonePoint(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	
-		ZoneDAO zoneDAO = new ZoneDAO();
-		List<Zone> zoneList = zoneDAO.findAll();
-		
-		if(zoneList!=null&&zoneList.size()>0){
-			
-			List<FarmlandPoint> farmlandPointList = new ArrayList<FarmlandPoint>();
-
-			//  根据分区数量遍历得出数据
-			for(int i=0;i<zoneList.size();i++){
-				Set<Farmland> farmlandList = new HashSet<Farmland>();
-				//获得指定分区下的农田
-//				farmlandList = zoneList.get(i).getFarmlands();
-				
-				if(farmlandList!=null&&farmlandList.size()>0){
-					List<Point> p = new ArrayList<Point>();
-					
-					Iterator<Farmland> f = farmlandList.iterator();
-			
-					while(f.hasNext()){
-						
-						Point p1 = new Point();
-						Farmland tmp = f.next();
-						System.out.println(tmp.getLongitude()+","+tmp.getLatitude());
-						p1.setX(tmp.getLongitude());
-						p1.setY(tmp.getLatitude());
-						
-						p.add(p1);
-						
-					}
-					
-					PointSelector ps = new PointSelector(p);
-					p = ps.GetHullPoints();
-					
-					FarmlandPoint fp = new FarmlandPoint();
-					fp.setPointList(p);
-					farmlandPointList.add(fp);
-				}else{
-					System.out.println(zoneList.get(i).getZonename()+"没有农田");
-				}
-				
-			}
-			this.out(response, farmlandPointList);
-			
-		}else{
-			this.out(response, 0);
-		}
-		
+  		ZoneDAO zoneDAO = new ZoneDAO();
+  		List<Zone> zoneList = zoneDAO.findAll();
 	
-		
-	}
+ 
+ 		if (zoneList != null && zoneList.size() > 0) {
+ 
+  			List<FarmlandPoint> farmlandPointList = new ArrayList<FarmlandPoint>();
+  
+ 			Set<Block> blockSet = new HashSet<Block>();
+ 
+ 			// 根据分区数量遍历得出数据
+ 			for (int i = 0; i < zoneList.size(); i++) {
+ 
+ 				// 获得分区下所有的块
+ 				blockSet = zoneList.get(i).getBlocks();
+ 				if (blockSet.size() > 0) {
+ 
+ 					// 获得块下的所有农田
+ 					Iterator<Block> b = blockSet.iterator();
+  					List<Point> p = new ArrayList<Point>();
+					
+ 					while (b.hasNext()) {
+ 						Set<Farmland> farmlandSet = new HashSet<Farmland>();
+ 						farmlandSet = b.next().getFarmlands();
+ 
+ 						if (farmlandSet != null && farmlandSet.size() > 0) {
+ 
+ 							Iterator<Farmland> f = farmlandSet.iterator();
+ 
+ 							while (f.hasNext()) {
+ 
+ 								Point p1 = new Point();
+ 								Farmland tmp = f.next();
+ 								p1.setX(tmp.getLongitude());
+ 								p1.setY(tmp.getLatitude());
+ 
+ 								p.add(p1);
+ 
+ 							}
+ 
+ 						} else {
+ 							System.out.println(zoneList.get(i).getZonename() + "没有农田");
+ 						}
+  					}				
+  					PointSelector ps = new PointSelector(p);
+  					p = ps.GetHullPoints();					
+  					FarmlandPoint fp = new FarmlandPoint();
+  					fp.setPointList(p);
+  					farmlandPointList.add(fp);
 
+ 				} else {
+ 					System.out.println("没有分块！！");
+  				}				
+  			}
+ 
+  			this.out(response, farmlandPointList);
+
+ 		} else {
+  			this.out(response, 0);
+  		}
+		
+ 
+  	}
 	private void MapSearchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneDAO zoneDAO = new ZoneDAO();
 		List<Zone> zoneList = zoneDAO.findAll();

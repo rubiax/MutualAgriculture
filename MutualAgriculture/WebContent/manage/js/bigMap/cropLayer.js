@@ -11,7 +11,7 @@ function addCropLayer(){
     var marker = new Array();
     var url = "../bFarmlandServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
-		 alert(data);
+		// alert(data);
 		 if(data==0){
 			 alert("查询出错");
 		 }else{

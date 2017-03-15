@@ -12,7 +12,7 @@
         <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>        
         <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js">   </script>
         <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
-    <title>地图使用测试</title>
+    <title> 互农地图</title>
     <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 	  <!-- Font Awesome -->

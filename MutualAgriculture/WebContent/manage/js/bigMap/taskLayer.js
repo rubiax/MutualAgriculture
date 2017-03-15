@@ -8,7 +8,7 @@ function addTaskLayer(){
     var marker = new Array();
     var url = "../taskServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
-		 alert(data);
+		 //alert(data);
 		 json = JSON.parse(data);
 		 for(var i=0;i<json.length;i++)
 		 { 

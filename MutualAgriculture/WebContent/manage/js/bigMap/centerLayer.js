@@ -9,7 +9,7 @@ map.clearOverlays();
     var marker = new Array();
     var url = "../CenterServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
-		 alert(data);
+		 //alert(data);
 		 json = JSON.parse(data);
 		 for(var i=0;i<json.length;i++)
 		 { 
