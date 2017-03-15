@@ -25,12 +25,10 @@ function addCropLayer(){
 					    '地址：'+json[i].address+
 					    '<br/>拥有者：'+json[i].user.realname+
 					    '<br>联系电话：'+json[i].user.phone+
-					    '<br>分区号:'+json[i].zone.zonename+
 					    '<br/>面积：'+json[i].area+
 					    '<br>pH:'+json[i].ph+
 					    '<br>流转信息：'+json[i].transtion+
 					    '<br>产量:'+json[i].production+
-					    '<br>种植类型:'+json[i].zone.type+
 					    '<br>NPK:'+json[i].npk+
 					    '</div>';
 				 addMarker(pointa,i,content);
@@ -48,7 +46,7 @@ function addCropLayer(){
 		searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 		title  : "农作物",      //标题
 		width  : 290,             //宽度
-		height : 230,              //高度
+		height : 200,              //高度
 		panel  : "panel",         //检索结果面板
 		enableAutoPan : true,     //自动平移
 		searchTypes   :[
