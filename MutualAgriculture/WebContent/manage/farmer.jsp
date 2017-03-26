@@ -37,8 +37,6 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
-<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
 <link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
@@ -155,8 +153,6 @@
 
 	<!-- Latest compiled and minified Locales -->
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
-	<!-- 等待加载 -->
-	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
 		function actionFormatter(value, row, index) {
 			return [

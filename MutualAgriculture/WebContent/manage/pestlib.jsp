@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
 <link rel="stylesheet" href="css/capSlide.css">
-<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
 <link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 	#back_to_top{
@@ -77,8 +75,6 @@
 </div>
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js" type="text/javascript"></script>
 	<script src="js/jquery.capSlide.js" type="text/javascript"></script>
-	<!-- 等待加载 -->
-	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script type="text/javascript">
             $(function() {
             	$("#loading").fadeOut("slow");  

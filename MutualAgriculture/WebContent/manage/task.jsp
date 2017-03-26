@@ -38,8 +38,6 @@
 
 <link rel="stylesheet"
 	href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
-	<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
 <link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
@@ -322,8 +320,6 @@
 	<script src="depend/select2/select2.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
-	<!-- 等待加载 -->
-	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
 	$(function() {
 		$("#loading").fadeOut("slow");  

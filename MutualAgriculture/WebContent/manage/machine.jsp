@@ -40,8 +40,6 @@
 <link rel="stylesheet" href="depend/select2/select2.min.css">
 
 <link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
-<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
 <link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
@@ -222,8 +220,6 @@
 	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
 	<script src="depend/echarts/echarts.common.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
-	<!-- 等待加载 -->
-	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
 		
 		$(function() {

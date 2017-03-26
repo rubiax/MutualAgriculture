@@ -39,8 +39,6 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
-<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
 <link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 
 <title>Document</title>
@@ -357,8 +355,6 @@
 	<script src="depend/echarts/echarts.common.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
-	<!-- 等待加载 -->
-	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
 	//地图数据提交
 	function submitChange() {
