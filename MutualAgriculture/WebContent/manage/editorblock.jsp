@@ -55,7 +55,9 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet" href="depend/select2/select2.min.css">
-
+<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
 #userInfo_left {
@@ -76,6 +78,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -252,6 +265,8 @@
 	<!-- Latest compiled and minified Locales -->
 	<script src="depend/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 	<script src="depend/select2/select2.min.js"></script>
+	<!-- 等待加载 -->
+	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
 	function submitChange() {
 		var coordinate = $.trim($("#coordinate").val());
@@ -293,6 +308,7 @@
 			}
 		};
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			$("#select1").select2();
 			$("#select1").val("${currentBlock.zone.zoneId } ${currentBlock.zone.type }").trigger("change");
 			$(".carousel-inner .item:first").addClass("active");

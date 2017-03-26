@@ -38,6 +38,9 @@
 
 <link rel="stylesheet"
 	href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
+	<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
 .ml10 {
@@ -46,6 +49,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -308,7 +322,12 @@
 	<script src="depend/select2/select2.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 	<script src="depend/bootstrap-fileinput-master/js/zh.js"></script>
+	<!-- 等待加载 -->
+	<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 	<script>
+	$(function() {
+		$("#loading").fadeOut("slow");  
+	});
 		$("#select1").on("select2:select", function (e) {
 			var text = $("#select1").select2('data')[0]['text'];
 			var phone = text.split(' ')[1];

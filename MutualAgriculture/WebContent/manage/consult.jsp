@@ -22,11 +22,23 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
-
+	<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+	<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
-
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 <div class="container" style="width:100%;">
 	<br>
 	<c:forEach items="${consulting }" var="item">
@@ -86,6 +98,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
 <!-- page script -->
+<!-- 等待加载 -->
+<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 <script>
     /* $("#answer").click(function () {
         if ($("#comment").is(":hidden")) {
@@ -96,6 +110,9 @@
             $("#answer").html("<i class='fa fa-sticky-note-o'></i>解答");
         }
     }); */
+    $(function() {
+    	$("#loading").fadeOut("slow");  
+    });
     
     function answer(obj) {
     	var content = $("#answer"+obj).val();

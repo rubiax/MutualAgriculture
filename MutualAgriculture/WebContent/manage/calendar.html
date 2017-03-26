@@ -27,8 +27,23 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+<link href="depend/loading/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/css/main.css" rel="stylesheet" type="text/css" />
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="hold-transition skin-green-light sidebar-mini" style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
   <!-- Content Wrapper. Contains page content -->
     <!-- Content Header (Page header) -->
     <!-- <section class="content-header">
@@ -253,9 +268,12 @@
 <script src="depend/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <!-- 日期规划 -->
 <script src="js/planstandard.js"></script>
+<!-- 等待加载 -->
+<script type="text/javascript" src="depend/loading/scripts/main.js"></script>
 
 <script>
   $(function () {
+	  $("#loading").fadeOut("slow");  
     /* initialize the external events
      -----------------------------------------------------------------*/
     function ini_events(ele) {
