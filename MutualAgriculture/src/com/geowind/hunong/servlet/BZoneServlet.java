@@ -141,7 +141,7 @@ public class BZoneServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		ZoneDAO zoneDAO = new ZoneDAO();
 		Zone zone = zoneDAO.findById(Integer.parseInt(pk));
 		if("zonename".equals(item)) {
@@ -266,7 +266,7 @@ public class BZoneServlet extends BasicServlet {
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ZoneDAO zoneDAO = new ZoneDAO();
 		String zoneId = request.getParameter("zoneId");
-		System.out.println(zoneId);
+//		System.out.println(zoneId);
 		Zone zone = null;
 		EntityManagerHelper.beginTransaction();
 

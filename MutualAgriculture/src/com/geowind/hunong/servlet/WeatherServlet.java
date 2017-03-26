@@ -101,7 +101,7 @@ public class WeatherServlet extends BasicServlet{
 		}	
 		
 		String after = weather.replaceAll("\\d{1,2}.gif", "");
-		System.out.println("after is"+after);
+//		System.out.println("after is"+after);
 		detail.setDetail(after);
 		weatherList.add(detail);
 
@@ -110,7 +110,7 @@ public class WeatherServlet extends BasicServlet{
 //		System.out.println("i= "+i+" first is: "+weatherList.get(0).getFirst1()+" five is :"+weatherList.get(0).getFive2());
 			
 		this.out(response,weatherList);
-		System.out.println("pao chu shu ju");
+//		System.out.println("pao chu shu ju");
 	}
 	/** 
      * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市 

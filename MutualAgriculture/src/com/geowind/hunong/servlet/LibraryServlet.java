@@ -55,7 +55,7 @@ public class LibraryServlet extends HttpServlet {
 
 	private void SearchMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword = request.getParameter("keyword");
-		System.out.println("library serlvet op=" + keyword);
+//		System.out.println("library serlvet op=" + keyword);
 		// String keyword = request.getParameter("keyword");
 		List<ArticleSim> ArticleMeg = LibraryKeywordSearch.GetMatchArticlesURL(keyword);
 		for (int i = 0; i < ArticleMeg.size(); i++) {

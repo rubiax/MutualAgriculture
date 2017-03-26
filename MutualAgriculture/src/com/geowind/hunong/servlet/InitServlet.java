@@ -40,27 +40,27 @@ public class InitServlet extends HttpServlet {
 
 		File file = new File(path);
 		if (!file.exists()) {
-			System.out.println(path + "路径创建成功");
+//			System.out.println(path + "路径创建成功");
 			file.mkdirs();
 		}
 
 		path = this.getServletContext().getRealPath("/") + filePath + "/imgupload";
 		file = new File(path);
 		if (!file.exists()) {
-			System.out.println(path + "图片文件夹创建成功");
+//			System.out.println(path + "图片文件夹创建成功");
 			file.mkdirs();
 		}
 
 		path = this.getServletContext().getRealPath("/") + filePath + "/pestlib";
 		file = new File(path);
 		if (!file.exists()) {
-			System.out.println(path + "虫库创建成功");
+//			System.out.println(path + "虫库创建成功");
 			file.mkdirs();
 		}
 
 		FileUploadUtil.PATH = filePath;
-		System.out.println(filePath);
-		System.out.println(path);
+//		System.out.println(filePath);
+//		System.out.println(path);
 
 		/*
 		 * ---------------------------------------------------------------------
@@ -80,10 +80,10 @@ public class InitServlet extends HttpServlet {
 		LibraryHTMLBuilder lhb = new LibraryHTMLBuilder();
 		lhb.CreateAllHTML();
 
-		System.out.println("文库图片路径" + Lib_PictureURL);
-		System.out.println("总文章数" + ArticleNumber);
-		System.out.println("开始ID" + ArticleBeginId);
-		System.out.println("结束ID" + ArticleEndId);
+//		System.out.println("文库图片路径" + Lib_PictureURL);
+//		System.out.println("总文章数" + ArticleNumber);
+//		System.out.println("开始ID" + ArticleBeginId);
+//		System.out.println("结束ID" + ArticleEndId);
 		
 		/********************************************************************/
 		/**
@@ -94,7 +94,7 @@ public class InitServlet extends HttpServlet {
     	try {
     		weatherPath = URLDecoder.decode(p, "UTF-8").substring(1);
     		weatherPath += "/jsonData";
-			System.out.println(path);
+//			System.out.println(path);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

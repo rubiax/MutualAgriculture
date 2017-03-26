@@ -88,7 +88,7 @@ public class BFarmlandServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		Farmland farmland = farmlandDAO.findById(Integer.parseInt(pk));
 		if ("username".equals(item)) {
@@ -96,14 +96,14 @@ public class BFarmlandServlet extends BasicServlet {
 			User user = userDAO.findById(value);
 			farmland.setUser(user);
 		} else if ("bid".equals(item)) {
-			System.out.println("bid:"+value);
+//			System.out.println("bid:"+value);
 			BlockDAO blockDAO = new BlockDAO();
 			Block block = blockDAO.findById(Integer.parseInt(value));
 			farmland.setBlock(block);
 		} else if ("jingweidu".equals(item)) {
 			String longitude = value.split(", ")[0];
 			String latitude = value.split(", ")[1];
-			System.out.println(longitude + " " + latitude);
+//			System.out.println(longitude + " " + latitude);
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));
 		} else if ("address".equals(item)) {
@@ -117,9 +117,8 @@ public class BFarmlandServlet extends BasicServlet {
 		} else if("transtion".equals(item)) {
 			farmland.setTranstion(value);
 		} else if("bid".equals(item)) {
-			System.out.println(value);
+//			System.out.println(value);
 			if("-1".equals(value)) {
-				System.out.println("aaaaaaaaaaaaa");
 				farmland.setBlock(null);
 			} else {
 				BlockDAO blockDAO = new BlockDAO();
@@ -151,7 +150,7 @@ public class BFarmlandServlet extends BasicServlet {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
-			System.out.println(farmland);
+//			System.out.println(farmland);
 			this.out(response, farmland);
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
