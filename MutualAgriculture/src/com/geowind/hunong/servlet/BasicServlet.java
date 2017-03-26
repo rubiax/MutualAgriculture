@@ -70,7 +70,7 @@ public class BasicServlet extends HttpServlet {
 	public void out(HttpServletResponse response, Object obj) throws IOException {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create(); 
 		PrintWriter out = response.getWriter();
-		System.out.println(gson.toJson(obj));
+//		System.out.println(gson.toJson(obj));
 		out.println(gson.toJson(obj));
 		out.flush();
 		out.close();

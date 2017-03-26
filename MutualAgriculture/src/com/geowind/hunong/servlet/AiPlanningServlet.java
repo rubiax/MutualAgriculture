@@ -74,7 +74,7 @@ public class AiPlanningServlet extends BasicServlet {
 			String bstr = request.getParameter("b"+i);
 			String estr = request.getParameter("e"+i);
 			String xstr = request.getParameter("x"+i);
-			System.out.println(xstr);
+//			System.out.println(xstr);
 			int result = planStandardService.updatePlanStandard(i, bstr, estr, Double.parseDouble(xstr));
 			if(result > 0) {
 				this.out(response, "1");

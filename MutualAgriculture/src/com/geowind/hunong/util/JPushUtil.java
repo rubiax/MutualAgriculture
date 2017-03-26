@@ -37,9 +37,9 @@ public class JPushUtil {
 		PushPayload payload = buildPushObject_android_and_iosByAlias(alias,
 				title, jsonObject);
 		try {
-			System.out.println(payload.toString());
+//			System.out.println(payload.toString());
 			PushResult result = jpushClient.sendPush(payload);
-			System.out.println("result:  " + result);
+//			System.out.println("result:  " + result);
 			LOG.info("Got result - " + result);
 
 		} catch (APIConnectionException e) {
