@@ -279,7 +279,7 @@
 		<!-- 图表 -->
 		<div class="row">
 			<div class="col-md-6">
-				<div class="panel panel-primary">
+				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">分区面积</h3>
 					</div>
@@ -289,7 +289,7 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="panel panel-primary">
+				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">作物类型</h3>
 					</div>
@@ -302,7 +302,7 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-primary">
+				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">级别树状图展示</h3>
 					</div>
@@ -320,7 +320,7 @@
 
 	<!-- 二叉树 -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script> -->
 	<script src="js/dndTree.js"></script>
 	<!-- 二叉数 -->
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>

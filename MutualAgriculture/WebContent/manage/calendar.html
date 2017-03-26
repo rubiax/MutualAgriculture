@@ -45,7 +45,7 @@
 	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">智能日历</a></li>
 	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">未来天气</a></li>
 	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">日期规划</a></li>
-	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+	    <!-- <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -131,66 +131,92 @@
 		      <!-- /.row -->
 		    </section>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="profile" style="width: 900px;height:400px;"></div>
+	    <br>
+	    <div role="tabpanel" class="tab-pane" id="profile">
+	    	<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 class="panel-title">天气预测</h3>
+						</div>
+						<div class="panel-body">
+							<div id="monthweather" style="width:900px;height:500px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <br>
 	    <div role="tabpanel" class="tab-pane" id="messages">
-	    	<div class="accordion-inner">
-				<table class="table table-bordered table-striped">
-					<tbody>
-						<tr>
-							<th style="width: 80px"><label>操作</label></th>
-							<th style="width: 80px"><label>开始时间</label></th>
-							<th style="width: 80px"><label>结束时间</label></th>
-							<th style="width: 80px"><label>工作效率（亩/小时）</label></th>
-						</tr>
-						<tr>
-							<th><label>压青</label></th>
-							<td><a href="#" id="b1"></a></td>
-							<td><a href="#" id="e1"></a></td>
-							<td><a href="#" id="x1"></a></td>
-						</tr>
-						<tr>
-							<th><label>施底肥</label></th>
-							<td><a href="#" id="b2"></a></td>
-							<td><a href="#" id="e2"></a></td>
-							<td><a href="#" id="x2"></a></td>
-						</tr>
-						<tr>
-							<th><label>平整</label></th>
-							<td><a href="#" id="b3"></a></td>
-							<td><a href="#" id="e3"></a></td>
-							<td><a href="#" id="x3"></a></td>
-						</tr>
-						<tr>
-							<th><label>插秧</label></th>
-							<td><a href="#" id="b4"></a></td>
-							<td><a href="#" id="e4"></a></td>
-							<td><a href="#" id="x4"></a></td>
-						</tr>
-						<tr>
-							<th><label>追肥</label></th>
-							<td><a href="#" id="b5"></a></td>
-							<td><a href="#" id="e5"></a></td>
-							<td><a href="#" id="x5"></a></td>
-						</tr>
-						<tr>
-							<th><label>防虫</label></th>
-							<td><a href="#" id="b6"></a></td>
-							<td><a href="#" id="e6"></a></td>
-							<td><a href="#" id="x6"></a></td>
-						</tr>
-						<tr>
-							<th><label>收割</label></th>
-							<td><a href="#" id="b7"></a></td>
-							<td><a href="#" id="e7"></a></td>
-							<td><a href="#" id="x7"></a></td>
-						</tr>
-					</tbody>
-				</table>
-				<button type="button" class="btn btn-success" onclick="reloadPlan()">重新规划</button>
-				<button type="button" class="btn btn-danger" onclick="cancel()">取消规划</button>
+	    	<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 class="panel-title">日期规划</h3>
+						</div>
+						<div class="panel-body">
+							<div class="accordion-inner">
+								<table class="table table-bordered table-striped">
+									<tbody>
+										<tr>
+											<th style="width: 80px"><label>操作</label></th>
+											<th style="width: 80px"><label>开始时间</label></th>
+											<th style="width: 80px"><label>结束时间</label></th>
+											<th style="width: 80px"><label>工作效率（亩/小时）</label></th>
+										</tr>
+										<tr>
+											<th><label>压青</label></th>
+											<td><a href="#" id="b1"></a></td>
+											<td><a href="#" id="e1"></a></td>
+											<td><a href="#" id="x1"></a></td>
+										</tr>
+										<tr>
+											<th><label>施底肥</label></th>
+											<td><a href="#" id="b2"></a></td>
+											<td><a href="#" id="e2"></a></td>
+											<td><a href="#" id="x2"></a></td>
+										</tr>
+										<tr>
+											<th><label>平整</label></th>
+											<td><a href="#" id="b3"></a></td>
+											<td><a href="#" id="e3"></a></td>
+											<td><a href="#" id="x3"></a></td>
+										</tr>
+										<tr>
+											<th><label>插秧</label></th>
+											<td><a href="#" id="b4"></a></td>
+											<td><a href="#" id="e4"></a></td>
+											<td><a href="#" id="x4"></a></td>
+										</tr>
+										<tr>
+											<th><label>追肥</label></th>
+											<td><a href="#" id="b5"></a></td>
+											<td><a href="#" id="e5"></a></td>
+											<td><a href="#" id="x5"></a></td>
+										</tr>
+										<tr>
+											<th><label>防虫</label></th>
+											<td><a href="#" id="b6"></a></td>
+											<td><a href="#" id="e6"></a></td>
+											<td><a href="#" id="x6"></a></td>
+										</tr>
+										<tr>
+											<th><label>收割</label></th>
+											<td><a href="#" id="b7"></a></td>
+											<td><a href="#" id="e7"></a></td>
+											<td><a href="#" id="x7"></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<button type="button" class="btn btn-success" onclick="reloadPlan()">重新规划</button>
+								<button type="button" class="btn btn-danger" onclick="cancel()">取消规划</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	    <div role="tabpanel" class="tab-pane" id="settings">.f..</div>
+	    <!-- <div role="tabpanel" class="tab-pane" id="settings">.f..</div> -->
 	  </div>
 	
 	</div>

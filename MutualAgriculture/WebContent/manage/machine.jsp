@@ -175,7 +175,7 @@
 			<!-- 图表 -->
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-primary">
+				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">农机数量统计</h3>
 					</div>

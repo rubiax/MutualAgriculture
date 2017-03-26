@@ -28,7 +28,7 @@
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
 
 <div class="container" style="width:100%;">
-
+	<br>
 	<c:forEach items="${consulted }" var="item">
 		<div class="row">
         <div class="col-md-10">
