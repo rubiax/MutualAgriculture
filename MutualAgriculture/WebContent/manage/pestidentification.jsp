@@ -37,8 +37,8 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-
+<div class="container" style="width:100%;">
+	<br>
 	<c:forEach items="${questions }" var="item">
 		<div class="row">
         <div class="col-md-10">
@@ -46,7 +46,14 @@
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../../${item.user.picture }" alt="User Image">
+                <img class="img-circle" src=
+                <c:if test="${empty item.user.picture}">
+					"img/not_pic.jpg"
+					</c:if>
+					<c:if test="${not empty item.user.picture}">
+					"../../${item.user.picture}"
+					</c:if>
+               alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
                 <span class="description">${item.utime }</span>
               </div>
@@ -64,7 +71,14 @@
             <div class="box-body">
             <!-- 问题描述图片 -->
               <p>${item.descr }</p>
-              <img class="img-responsive pad" src="../../${item.uploadPic}" style="width:400px" alt="Photo">
+              <img class="img-responsive pad" src=
+              <c:if test="${empty item.uploadPic}">
+					"img/notfound.png"
+					</c:if>
+					<c:if test="${not empty item.uploadPic}">
+					"../../${item.uploadPic}"
+					</c:if>
+              style="width:400px" alt="Photo">
               <span class="pull-right text-muted">n个回复</span>
             </div>
             
@@ -110,7 +124,7 @@
     });
     function answer(obj) {
     	var content = $("#answer"+obj).val();
-    	alert(content);
+    	//alert(content);
     	if(content == undefined || content == "") {
     		return;
     	}

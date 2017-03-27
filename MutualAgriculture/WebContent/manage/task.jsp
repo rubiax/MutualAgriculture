@@ -382,7 +382,7 @@
 			var bid = $("#bname").text().split(' ')[0];
 			var workdate = $("#workdate").editable('getValue', true);
 			var descr = $("#descr").editable('getValue', true);
-			alert(username + " " + machineId + " " + bid + " " + workdate + " " + descr);
+			//alert(username + " " + machineId + " " + bid + " " + workdate + " " + descr);
 			if(username == null || machineId == null || workdate == null || address==null||
 				bid==null||bid==''|| username == '' || machineId == '' || workdate == '' || address=='') {
 				alert("请完善信息");

@@ -46,7 +46,14 @@
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../../${item.user.picture }" alt="User Image">
+                <img class="img-circle" src=
+                <c:if test="${empty item.user.picture}">
+					"img/not_pic.jpg"
+					</c:if>
+					<c:if test="${not empty item.user.picture}">
+					"../../${item.user.picture}"
+					</c:if>
+               alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
                 <span class="description">${item.ctime }</span>
               </div>

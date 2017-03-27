@@ -335,7 +335,7 @@
 					data:obj
 				});
 				var bid = $("#select3").val();
-				alert(bid);
+				//alert(bid);
 				if(bid == null || bid=="") {
 					bid = -1;
 				}
