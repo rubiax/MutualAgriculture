@@ -35,7 +35,7 @@ public class AiPlan {
 	/**
 	 * 初始化计划
 	 */
-	private void initPlan() {
+	public void initPlan() {
 		standard = getStandard();
 		 
 		BlockDAO blockDAO = new BlockDAO();

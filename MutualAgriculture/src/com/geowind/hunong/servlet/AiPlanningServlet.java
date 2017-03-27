@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.aiplanning.AiPlan;
 import com.geowind.hunong.jpa.Aiplan;
 import com.geowind.hunong.jpa.AiplanDAO;
 import com.geowind.hunong.jpa.EntityManagerHelper;
@@ -16,7 +17,6 @@ import com.geowind.hunong.jpa.Planstandard;
 import com.geowind.hunong.jpa.PlanstandardDAO;
 import com.geowind.hunong.service.PlanStandardService;
 import com.geowind.hunong.service.impl.PlanStandardServiceImpl;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
 public class AiPlanningServlet extends BasicServlet {
 
@@ -70,17 +70,19 @@ public class AiPlanningServlet extends BasicServlet {
 		 * e 表示结束时间end
 		 * x 表示效率efficiency 
 		 */
+		int result = 0;
 		for(int i=1; i<=7; i++) {
 			String bstr = request.getParameter("b"+i);
 			String estr = request.getParameter("e"+i);
 			String xstr = request.getParameter("x"+i);
 //			System.out.println(xstr);
-			int result = planStandardService.updatePlanStandard(i, bstr, estr, Double.parseDouble(xstr));
-			if(result > 0) {
-				this.out(response, "1");
-			} else {
-				this.out(response, "0");
-			}
+			result = planStandardService.updatePlanStandard(i, bstr, estr, Double.parseDouble(xstr));
+		}
+		if(result > 0) {
+			new AiPlan().initPlan();
+			this.out(response, "1");
+		} else {
+			this.out(response, "0");
 		}
 		
 	}

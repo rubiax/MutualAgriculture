@@ -17,7 +17,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
-import org.apache.logging.log4j.LogManager;
 
 public class DBHelper {
 
@@ -32,9 +31,9 @@ public class DBHelper {
 
 			// 使用连接池技术，数据源DBCP
 			dataSource = BasicDataSourceFactory.createDataSource(props);
-			LogManager.getLogger().debug("加载数据库属性元素构建数据源成功");
+			LogManager.logger.debug("加载数据库属性元素构建数据源成功");
 		} catch (Exception e) {
-			LogManager.getLogger().error("加载数据库属性元素构建数据源失败", e);
+			LogManager.logger.error("加载数据库属性元素构建数据源失败", e);
 		}
 	}
 
@@ -47,9 +46,9 @@ public class DBHelper {
 		Connection con = null;
 		try {
 			con = dataSource.getConnection();
-			LogManager.getLogger().debug("数据库连接成功");
+			LogManager.logger.debug("数据库连接成功");
 		} catch (Exception e) {
-			LogManager.getLogger().error("数据库连接失败", e);
+			LogManager.logger.error("数据库连接失败", e);
 		}
 		return con;
 	}
@@ -66,27 +65,27 @@ public class DBHelper {
 		if (rs != null) {
 			try {
 				rs.close();
-				LogManager.getLogger().debug("关闭结果集完成");
+				LogManager.logger.debug("关闭结果集完成");
 			} catch (SQLException e) {
-				LogManager.getLogger().error("关闭结果集失败", e);
+				LogManager.logger.error("关闭结果集失败", e);
 			}
 		}
 
 		if (st != null) {
 			try {
 				st.close();
-				LogManager.getLogger().debug("关闭执行工具完成");
+				LogManager.logger.debug("关闭执行工具完成");
 			} catch (SQLException e) {
-				LogManager.getLogger().error("关闭执行工具失败", e);
+				LogManager.logger.error("关闭执行工具失败", e);
 			}
 		}
 
 		if (con != null) {
 			try {
 				con.close();
-				LogManager.getLogger().debug("关闭数据库连接完成");
+				LogManager.logger.debug("关闭数据库连接完成");
 			} catch (SQLException e) {
-				LogManager.getLogger().error("关闭数据库连接失败");
+				LogManager.logger.error("关闭数据库连接失败");
 			}
 		}
 	}
@@ -104,19 +103,19 @@ public class DBHelper {
 		int result = 0;
 		try {
 			con = getConn();
-			LogManager.getLogger().debug("要执行的sql语句:" + sql);
+			LogManager.logger.debug("要执行的sql语句:" + sql);
 			ps = con.prepareStatement(sql);
 			setParams(ps, params);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			result = ps.executeUpdate();
-			LogManager.getLogger().debug("处理数据成功，处理数据的条数为:" + result);
+			LogManager.logger.debug("处理数据成功，处理数据的条数为:" + result);
 		} catch (SQLException e) {
-			LogManager.getLogger().error("处理数据失败", e);
+			LogManager.logger.error("处理数据失败", e);
 		} finally {
 			close(con, ps, null);
 		}
@@ -151,7 +150,7 @@ public class DBHelper {
 				
 			}
 		} catch (SQLException e) {
-			LogManager.getLogger().error(String.format("注入第%d个值失败", flag), e);
+			LogManager.logger.error(String.format("注入第%d个值失败", flag), e);
 		}
 
 	}
@@ -173,16 +172,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -200,9 +199,9 @@ public class DBHelper {
 					results.put(rsmd.getColumnName(i).toLowerCase(), obj);
 				}
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -219,16 +218,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -246,9 +245,9 @@ public class DBHelper {
 					results.put(rsmd.getColumnName(i).toLowerCase(), obj);
 				}
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -271,16 +270,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -302,9 +301,9 @@ public class DBHelper {
 				}
 				results.add(record);
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -320,16 +319,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -351,9 +350,9 @@ public class DBHelper {
 				}
 				results.add(record);
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -369,16 +368,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -433,9 +432,9 @@ public class DBHelper {
 				}
 				list.add(t);
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (Exception e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -452,16 +451,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -480,9 +479,9 @@ public class DBHelper {
 							rs.getString(i));
 				}
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -517,7 +516,7 @@ public class DBHelper {
 
 			}
 		} catch (SQLException e) {
-			LogManager.getLogger().error(String.format("注入第%d个值失败", flag), e);
+			LogManager.logger.error(String.format("注入第%d个值失败", flag), e);
 		}
 
 	}
@@ -531,16 +530,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -595,9 +594,9 @@ public class DBHelper {
 				}
 				list.add(t);
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (Exception e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
@@ -615,16 +614,16 @@ public class DBHelper {
 			con = getConn();
 			ps = con.prepareStatement(sql);
 			setParams(ps, objs);
-			LogManager.getLogger().debug("sql执行工具创建成功");
+			LogManager.logger.debug("sql执行工具创建成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("sql执行工具创建失败", e);
+			LogManager.logger.error("sql执行工具创建失败", e);
 		}
 
 		try {
 			rs = ps.executeQuery();
-			LogManager.getLogger().debug("执行sql取到返回数据成功");
+			LogManager.logger.debug("执行sql取到返回数据成功");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("执行sql取到返回数据失败", e);
+			LogManager.logger.error("执行sql取到返回数据失败", e);
 		}
 
 		try {
@@ -643,9 +642,9 @@ public class DBHelper {
 							rs.getString(i));
 				}
 			}
-			LogManager.getLogger().debug("取出结果集数据完成");
+			LogManager.logger.debug("取出结果集数据完成");
 		} catch (SQLException e) {
-			LogManager.getLogger().error("取出结果集数据失败", e);
+			LogManager.logger.error("取出结果集数据失败", e);
 		} finally {
 			close(con, ps, rs);
 		}
