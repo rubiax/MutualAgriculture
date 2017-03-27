@@ -40,7 +40,7 @@ public class LibraryKeywordSearch {
 		List<ArticleSim> res = new ArrayList<>();
 
 		String sql = "select * from article where keyword='" + keyword + "'";
-		System.out.println(sql);
+//		System.out.println(sql);
 		res = DBHelperSim.GetArticleSimUseSql(sql);// 第一遍查询
 
 		sql = "select * from article where keyword like '" + keyword + "%" + "'";
@@ -51,7 +51,7 @@ public class LibraryKeywordSearch {
 
 		res = ClearRepeatArticleSim(res);
 
-		System.out.println("size = " + res.size());
+//		System.out.println("size = " + res.size());
 		// System.out.println("article的长度="+_article.size());
 		// 反向查询
 		/********* 暂时先不写 ********/

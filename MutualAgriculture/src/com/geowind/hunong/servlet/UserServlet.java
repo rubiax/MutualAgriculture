@@ -32,7 +32,7 @@ public class UserServlet extends BasicServlet {
     	response.setCharacterEncoding("utf-8");
     	
         String methodName = request.getParameter("method");
-        System.out.println(methodName);
+//        System.out.println(methodName);
         /*if (methodName == null) {
             resultJson = null;
         } else {
@@ -101,7 +101,7 @@ public class UserServlet extends BasicServlet {
 		int type = Integer.parseInt(request.getParameter("type"));
 		String centername = request.getParameter("centername");
 		
-		System.out.println(username +" "+password+ " "+realname+ " "+phone+" "+type+" "+centername);
+//		System.out.println(username +" "+password+ " "+realname+ " "+phone+" "+type+" "+centername);
 		
 		user.setUsername(username);
 		user.setPassword(password);
@@ -135,7 +135,7 @@ public class UserServlet extends BasicServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(username + " " + password);
+//        System.out.println(username + " " + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.findById(username);
         if(user != null) {

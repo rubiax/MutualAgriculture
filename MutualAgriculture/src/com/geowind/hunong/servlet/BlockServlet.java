@@ -120,7 +120,7 @@ public class BlockServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		
 		BlockDAO blockDAO = new BlockDAO();
 		Block block = blockDAO.findById(Integer.parseInt(pk));

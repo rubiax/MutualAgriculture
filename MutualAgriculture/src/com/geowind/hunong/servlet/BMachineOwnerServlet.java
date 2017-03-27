@@ -99,7 +99,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
 		Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(pk));
 		if("name".equals(item)) {
@@ -131,7 +131,7 @@ public class BMachineOwnerServlet extends BasicServlet {
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		List<Machineowner> machinerOwnerList = machineService.search(centerId);
-		System.out.println(machinerOwnerList);
+//		System.out.println(machinerOwnerList);
 		this.out(response, machinerOwnerList);
 	}
 

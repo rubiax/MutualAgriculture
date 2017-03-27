@@ -80,7 +80,7 @@ public class BUserServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		UserDAO userDAO = new UserDAO();
 		User user = userDAO.findById(pk);
 		if ("realname".equals(item)) {

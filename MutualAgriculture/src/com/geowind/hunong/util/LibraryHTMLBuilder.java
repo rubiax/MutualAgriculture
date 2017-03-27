@@ -111,7 +111,7 @@ public class LibraryHTMLBuilder {
 		}
 		// set pictures
 		String imgTag = "<img src= " + PathUtil.Lib_PictureURL + dataMes[7] + "  id=\"top_pic\" class=\"col-center-block\" width=\"98%\" style=\" position: relative;\">";
-		System.out.println(imgTag);
+//		System.out.println(imgTag);
 		elmt = doc.getElementById("img_Wrapper");
 		elmt.append(imgTag);
 		// set finished

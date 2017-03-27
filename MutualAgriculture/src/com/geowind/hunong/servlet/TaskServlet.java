@@ -90,9 +90,9 @@ public class TaskServlet extends BasicServlet {
 
 	private void historyTask(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		System.out.println("---------------historyTask----------------");
+//		System.out.println("---------------historyTask----------------");
 		String username = request.getParameter("username");
-		System.out.println(username);
+//		System.out.println(username);
 		/*int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		TaskService taskService = new TaskServiceImpl();
 		List<Task> tasks = taskService.historyTaskByUser(centerId, 1, username);*/
@@ -123,7 +123,7 @@ public class TaskServlet extends BasicServlet {
 	private void finishTask(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String taskId = request.getParameter("taskId");
-		System.out.println(taskId);
+//		System.out.println(taskId);
 		TaskDAO taskDAO = new TaskDAO();
 		UserDAO userDAO = new UserDAO();
 		MachineDAO machineDAO = new MachineDAO();

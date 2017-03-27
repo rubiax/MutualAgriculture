@@ -78,7 +78,7 @@ public class PestZoneServlet extends BasicServlet {
 				zoneNumber.add(affectedAreaList.get(i).getZone());
 				
 		} 
-		System.out.println("b is:"+d);
+//		System.out.println("b is:"+d);
 //		FarmlandDAO farmlandDAO =new FarmlandDAO();
 		Iterator<Zone> i =zoneNumber.iterator(); 
 		
@@ -117,14 +117,14 @@ public class PestZoneServlet extends BasicServlet {
 				count++;
 				Point p1 = new Point();
 				Farmland tmp = f.next();
-				System.out.println(tmp.getLongitude()+","+tmp.getLatitude());
+//				System.out.println(tmp.getLongitude()+","+tmp.getLatitude());
 				p1.setX(tmp.getLongitude());
 				p1.setY(tmp.getLatitude());
 				
 				p.add(p1);
 				
 			}
-			System.out.println("count is" + count);
+//			System.out.println("count is" + count);
 			
 			
 			}

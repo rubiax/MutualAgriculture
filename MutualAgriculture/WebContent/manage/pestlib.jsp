@@ -115,7 +115,7 @@
 				row.each(function (index) {
 					$(this).find('img').attr("height",Math.floor(190*multiple))
 				})
-				console.log(multiple)
+				//console.log(multiple)
 			}
 			
 			

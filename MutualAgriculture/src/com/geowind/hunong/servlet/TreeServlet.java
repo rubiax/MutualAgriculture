@@ -62,14 +62,12 @@ public class TreeServlet extends BasicServlet {
 			//设置服务中心节点对象
 			centerObject.addProperty("name", map.get("name").toString());
 			
-//			System.out.println("centerId is="+map.get("centerid").toString());
 			//获取区 数组
 			zoneArray  = getZoneJson(map.get("centerid").toString());
 			
 			//将区 数组放入服务中心 对象
 			centerObject.add("children", zoneArray);
 		}
-		System.out.println(centerObject.toString());
 		try{
 			
 			String s = centerObject.toString();
@@ -78,7 +76,6 @@ public class TreeServlet extends BasicServlet {
 			//String path = new File(base.getFile(), "../../").getCanonicalPath(); 
 		
 			String dirString = request.getSession().getServletContext().getRealPath("")+File.separator+"jsonData";
-			System.out.println(dirString);
 			File dir = new File(dirString);
 			if(!dir.exists()) {
 				dir.mkdirs();
@@ -150,7 +147,6 @@ public class TreeServlet extends BasicServlet {
 	private JsonArray getBlockJson(String zoneId) {
 		
 		String sql = "select bid , bname from block where zoneId = "+ zoneId +";";
-		System.out.println("zoneId is="+zoneId);
 		List<Map<String,Object>> maps = DBHelper.doQuery(sql);
 		
 		//块 对象
@@ -195,7 +191,6 @@ public class TreeServlet extends BasicServlet {
 		for(Map<String,Object> map : maps){
 			farmlandObject = new JsonObject();
 			farmlandObject.addProperty("name", map.get("farmlandid").toString());
-			//System.out.println("农田数据："+map.get("farmlandid").toString());
 			
 			//将农田对象放入农田数组			
 			farmlandArray.add(farmlandObject);

@@ -111,7 +111,7 @@ public class PointSelector {
 		Point[] res = new Point[top - bot - 1];
 		int index = 0;
 		for (i = bot + 1; i < top - 1; i++) {
-			System.out.println(pointArray[D[i]].getX() + "," + pointArray[D[i]].getY());
+//			System.out.println(pointArray[D[i]].getX() + "," + pointArray[D[i]].getY());
 			res[index++] = pointArray[D[i]];
 		}
 		List<Point> p = new ArrayList<Point>();

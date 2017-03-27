@@ -35,7 +35,7 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
         PrintWriter out = null;
         try {
             Map<String, String> map = uploadUtil.upload(servletConfig, request, response);
-            System.out.println(map);
+//            System.out.println(map);
             out = response.getWriter();
             
             if(map != null && map.size()>0) {
