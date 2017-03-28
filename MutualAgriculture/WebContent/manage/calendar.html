@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- fullCalendar 2.2.5-->
   <link rel="stylesheet" href="css/plugins/fullcalendar/fullcalendar.min.css">
-  <link rel="stylesheet" href="css/plugins/fullcalendar/fullcalendar.print.css" media="print">
+  <link rel="stylesheet" href="css/plugins/fullcalendar/fullcalendar.print.min.css" media="print">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/dist/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -239,6 +239,22 @@
   <!-- /.content-wrapper -->
   <div class="control-sidebar-bg"></div>
 <!-- ./wrapper -->
+<!--model-->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">智能任务</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- jQuery 2.2.3 -->
 <script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -255,8 +271,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="js/fullcalendar/moment.min.js"></script>
+<script src="js/fullcalendar/fullcalendar.min.js"></script>
+<script src="js/fullcalendar/locale-all.js"></script>
 <!-- Page specific script -->
 <script src="depend/echarts/echarts.common.min.js"></script>
 <script src="depend/select2/select2.min.js"></script>
@@ -301,9 +318,9 @@
     	  for(var i=0; i<data.length; i++) {
     		  var mod = i % 7 ; 
     		  events.push({
-    			  title:data[i].bname + data[i].event+", "+data[i].mnum+"台农机", 
-    			  start:formatDate(data[i].aid), 
-    			  end:getEndDate(formatDate(data[i].aid), 1),
+    			  title:"@"+ data[i].event + "@"+ data[i].bname + "@" + data[i].mnum+"台农机", 
+    			  start:formatDate(data[i].aid)
+    			  //end:getEndDate(formatDate(data[i].aid), 1).toString()
     			  //backgroundColor: colors[mod],
 	   	          //borderColor: colors[mod]
     	      })
@@ -317,59 +334,43 @@
 	   	    var d = date.getDate(),
 	   	        m = date.getMonth(),
 	   	        y = date.getFullYear();
+	   	 	var initialLocaleCode = 'zh-cn';
+
 	   	    $('#calendar').fullCalendar({
 	   	      header: {
 	   	        left: 'prev,next today',
 	   	        center: 'title',
-	   	        right: 'month,agendaWeek,agendaDay'
+	   	        right: 'month,listWeek,listDay'//'month,agendaWeek,agendaDay,listMonth'
 	   	      },
-	   	      buttonText: {
-	   	        today: '今天',
-	   	        month: '月',
-	   	        week: '周',
-	   	        day: '日'
-	   	      },
-	   	      events:events,
-	   	      /* //Random default events
-	   	      events: [
-	   	        {
-	   	          title: '全天事项',
-	   	          start: new Date(y, m, 1),
-	   	          //backgroundColor: "#f56954", //red
-	   	          //borderColor: "#f56954" //red
-	   	        },
-	   	        {
-	   	          title: '长时间事项',
-	   	          start: new Date(y, m, d - 5),
-	   	          end: new Date(y, m, d - 2),
-	   	          backgroundColor: "#f39c12", //yellow
-	   	          borderColor: "#f39c12" //yellow
-	   	        },
-	   	        {
-	   	          title: '会议',
-	   	          start: new Date(y, m, d, 10, 30),
-	   	          allDay: false,
-	   	          backgroundColor: "#0073b7", //Blue
-	   	          borderColor: "#0073b7" //Blue
-	   	        },
-	   	        {
-	   	          title: '午餐',
-	   	          start: new Date(y, m, d, 12, 0),
-	   	          end: new Date(y, m, d, 14, 0),
-	   	          allDay: false,
-	   	          backgroundColor: "#00c0ef", //Info (aqua)
-	   	          borderColor: "#00c0ef" //Info (aqua)
-	   	        },
-	   	        {
-	   	          title: '生日派对',
-	   	          start: new Date(y, m, d + 1, 19, 0),
-	   	          end: new Date(y, m, d + 1, 22, 30),
-	   	          allDay: false,
-	   	          backgroundColor: "#00a65a", //Success (green)
-	   	          borderColor: "#00a65a" //Success (green)
-	   	        }
-	   	      ], */
+		   	   views: {
+				   month: {buttonText: '月'}	,   		   
+		   		   listWeek: { buttonText: '周' },
+		   		   listDay: { buttonText: '天' }
+				},
+				defaultView: 'month',
+
+	   	      locale: initialLocaleCode,
 	   	      editable: true,
+	   	      navLinks: true, // can click day/week names to navigate views
+	   	      eventLimit: true, // allow "more" link when too many events
+	   	      events:events,
+		   	   eventClick: function(calEvent, jsEvent, view) {
+				   var title = calEvent.title;
+				   var str = title.split("@");
+				   var event = str[1];
+				   var bnames = str[2];
+				   var mnum = str[3];
+				   $(".modal-body").html('');
+				   $(".modal-body").append("<p>任务类型："+event+"</p><p>任务区域："+bnames+"</p><p>农机数量："+mnum+"</p>");
+				   $('#myModal').modal('show');
+		           //alert('Event: ' + calEvent.title);
+		           //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+		           //alert('View: ' + view.name);
+	
+		           // change the border color just for fun
+		           //$(this).css('border-color', 'red');
+	
+		       },
 	   	      droppable: true, // this allows things to be dropped onto the calendar !!!
 	   	      drop: function (date, allDay) { // this function is called when something is dropped
 	
@@ -464,9 +465,9 @@
   function formatDate(obj) {
 	  obj = obj.toString();
 	  var y = obj.substring(0,4),
-	  m = obj.substring(4,6)-1,
+	  m = obj.substring(4,6),
 	  d = obj.substring(6,8);
-	  return new Date(y,m,d);
+	  return y+"-"+m+"-"+d;
   }
 </script>
 </body>
