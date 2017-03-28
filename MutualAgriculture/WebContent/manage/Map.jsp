@@ -53,8 +53,8 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
 <!--             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
- -->            <li><a href="#myHint" role="button" class="btn btn-success" data-toggle="modal" onCLick="addPoint()">添加标注点</a></li>
- 				<li><a href="#myHint2" role="button" class="btn btn-success" data-toggle="modal" onClick="addComputerAreaResult()">计算面积</a></li>
+ -->            <li><a href="#myHint" role="button"  data-toggle="modal" onCLick="addPoint()">添加标注点</a></li>
+ 				<li><a href="#myHint2" role="button" data-toggle="modal" onClick="addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
