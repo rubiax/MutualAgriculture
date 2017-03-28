@@ -7,10 +7,12 @@ var i=0;
 var checkOpenAddPoint = false;
 function addPoint(){
 		if(!checkOpenAddPoint){
-			    var content = '点击“添加标注点”后可使用 鼠标右键 按照顺时针或逆时针有序点击地图添加标注点,' +
-								'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
-								'点击 ”功能选择“的 重置 即可取消该功能！'
-				alert(content);
+				
+//			    var content = '点击“添加标注点”后可使用 鼠标右键 按照顺时针或逆时针有序点击地图添加标注点,' +
+//								'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
+//								'点击 ”功能选择“的 重置 即可取消该功能！'
+//				alert(content);
+				
 			
 			    checkOpenAddPoint = true;
 			    
@@ -39,13 +41,15 @@ function showInfo(e){
 
 function addComputerAreaResult(){
 	if(pts.length<3){
-		alert("请选择至三个标注点！");
+//		alert("请选择至三个标注点！");
+		$("#hinttext").text("请选择至三个标注点！");
 	}else{
 		var ply = new BMap.Polygon(pts);    
 	    var area = BMapLib.GeoUtils.getPolygonArea(ply);
 	    var mu = area.toFixed(2)*0.0015;
-	    alert("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩");
-	
+//	    alert("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩");
+	    var areas = area.toFixed(2); 
+	    $("#hinttext").text(areas +"平方米, 共有 "+mu+"亩");
 	    //演示：将面添加到地图上    
 	   // map.clearOverlays();
 	    map.addOverlay(ply); 
