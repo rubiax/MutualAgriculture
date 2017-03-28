@@ -41,13 +41,11 @@ function showInfo(e){
 
 function addComputerAreaResult(){
 	if(pts.length<3){
-//		alert("请选择至三个标注点！");
-		$("#hinttext").text("请选择至三个标注点！");
+		$("#hinttext").text("请选择至三个标注点！如若没有启用计算面积功能，应先点击 添加标注点 !");
 	}else{
 		var ply = new BMap.Polygon(pts);    
 	    var area = BMapLib.GeoUtils.getPolygonArea(ply);
 	    var mu = area.toFixed(2)*0.0015;
-//	    alert("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩");
 	    var areas = area.toFixed(2); 
 	    $("#hinttext").text(areas +"平方米, 共有 "+mu+"亩");
 	    //演示：将面添加到地图上    
