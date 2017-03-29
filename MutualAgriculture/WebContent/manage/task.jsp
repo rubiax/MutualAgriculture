@@ -210,6 +210,8 @@
 							</table>
 							<button type="button" class="btn btn-success" id="confirmAdd-btn">确定</button>
 							<button type="button" class="btn btn-default" id="cancelAdd-btn">取消</button>
+							<a id="confirm1" href="#myHint2" role="button" data-toggle="modal"></a>
+							
 					      </div>
 					    </div>
 					  </div>
@@ -277,7 +279,7 @@
 					      </div>
 					    </div>
 					  </div>
-					  <div class="panel panel-default">
+					 <!--   <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="headingTwo2">
 					      <h4 class="panel-title">
 					        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
@@ -290,7 +292,7 @@
 					        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
 					      </div>
 					    </div>
-					  </div>
+					  </div>-->
 					</div>
 				
 				</div>
@@ -301,6 +303,8 @@
 
 	</div>
 	<jsp:include page="farmlandmap.html"></jsp:include>
+	<jsp:include page="hint2.html"></jsp:include>
+	
 	<script src="js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<!-- date-range-picker -->
@@ -382,20 +386,29 @@
 			var bid = $("#bname").text().split(' ')[0];
 			var workdate = $("#workdate").editable('getValue', true);
 			var descr = $("#descr").editable('getValue', true);
-			//alert(username + " " + machineId + " " + bid + " " + workdate + " " + descr);
+			
 			if(username == null || machineId == null || workdate == null || address==null||
 				bid==null||bid==''|| username == '' || machineId == '' || workdate == '' || address=='') {
-				alert("请完善信息");
+				
+				 $("#hinttext").text("请完善信息");
 				return;
 			}
 			$.post("../taskServlet?op=pulishTask", {username:username,machineId:machineId,bid:bid,
 				workdate:workdate,descr:descr}, function(data) {
 	    			if(data == 1) {
-	    				alert("任务推送成功...")
-	    				location.href = "../taskServlet?op=listTask";
+	    			
+	    				$("#hinttext").text("任务推送成功...");
+	    				$("#confirm1").click();
+	    					 
+	 	    			
 	    			} else {
-	    				alert("任务推送失败...")
+	    				
+	    				$("#hinttext").text("任务推送失败...");
+	    				$("#confirm1").click();
 	    			}
+	    			
+	    			setTimeout("location.href = '../taskServlet?op=listTask'", 3000);
+    			
 	    	});
 			$("#select1").select2('val',' ');
 			$("#select2").select2('val',' ');
@@ -441,7 +454,7 @@
 				$("#select2").select2('val',' ');
 			}, "json");
 		});
-		
+			
 		function finishTask(obj) {
 			var taskId = obj;
 			if(taskId==""||taskId==undefined){
@@ -453,7 +466,9 @@
 			        	if(data == 1) {
 			        		location.href = "../taskServlet?op=listTask";
 			        	} else {
-			        		alert("操作失败");
+			        		
+			        		$("#hinttext").text("操作失败");
+		    				$("#confirm1").click();
 			        	}
 			        });
 				}else{
