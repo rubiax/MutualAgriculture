@@ -33,8 +33,8 @@ function addBlockLayer(){
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(30,30),
-	        {anchor:new BMap.Size(30,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(36,36),
+	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	function addMarker(point,i,content){
 			
 			//创建检索信息窗口对象
@@ -42,7 +42,7 @@ function addBlockLayer(){
 			searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 			title  : "分块",      //标题
 			width  : 290,             //宽度
-			height : 150,              //高度
+			height : 100,              //高度
 			panel  : "panel",         //检索结果面板
 			enableAutoPan : true,     //自动平移
 			searchTypes   :[

@@ -9,8 +9,8 @@ function addAffectAreasLayer(){
 	var url = "../pestZoneServlet?op=MapSearchAffectedArea";
 	var json;
 	var ply=[];
-	var myIcon = new BMap.Icon("img/logoMarker/location.png", new BMap.Size(30,30),
-	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/location.png", new BMap.Size(36,36),
+	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	$.post(url,{},function getData(data){
 		//alert(data);
 		json = JSON.parse(data);
