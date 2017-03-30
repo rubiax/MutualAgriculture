@@ -55,7 +55,7 @@
 					</c:if>
                alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.ctime }</span>
+                <span class="description">上传时间：${item.ctime }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键词：${item.keywords }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -79,7 +79,6 @@
             <!-- /.box-footer -->
             <div class="box-footer">
                 <img class="img-responsive img-circle img-sm" src="img/admin.png" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text" onkeydown='if(event.keyCode==13){answer(${item.cid})} else{return;}' id="answer${item.cid }"  class="form-control" placeholder="按下回车键提交回复.." />
                 </div>

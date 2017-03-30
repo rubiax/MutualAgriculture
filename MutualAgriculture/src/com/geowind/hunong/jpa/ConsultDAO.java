@@ -20,6 +20,7 @@ public class ConsultDAO implements IConsultDAO {
 	public static final String CCONTENT = "ccontent";
 	public static final String CTIME = "ctime";
 	public static final String ACONTENT = "acontent";
+	public static final String KEYWORDS = "keywords";
 	public static final String ATIME = "atime";
 	public static final String STATUS = "status";
 
@@ -173,6 +174,10 @@ public class ConsultDAO implements IConsultDAO {
 
 	public List<Consult> findByAcontent(Object acontent) {
 		return findByProperty(ACONTENT, acontent);
+	}
+
+	public List<Consult> findByKeywords(Object keywords) {
+		return findByProperty(KEYWORDS, keywords);
 	}
 
 	public List<Consult> findByAtime(Object atime) {

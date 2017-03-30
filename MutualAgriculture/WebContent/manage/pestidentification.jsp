@@ -55,7 +55,7 @@
 					</c:if>
                alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.utime }</span>
+                <span class="description">上传时间：${item.utime }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -79,7 +79,6 @@
 					"../../${item.uploadPic}"
 					</c:if>
               style="width:400px" alt="Photo">
-              <span class="pull-right text-muted">n个回复</span>
             </div>
             
             <!-- /.box-footer -->

@@ -35,9 +35,7 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
         PrintWriter out = null;
         try {
             Map<String, String> map = uploadUtil.upload(servletConfig, request, response);
-//            System.out.println(map);
             out = response.getWriter();
-            
             if(map != null && map.size()>0) {
             	
             	if(map.containsKey("images")) {
@@ -105,6 +103,7 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
 		consult.setCcontent(map.get("describe"));
 		consult.setCtime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		consult.setStatus(0);
+		consult.setKeywords(map.get("keywords"));
 		EntityManagerHelper.beginTransaction();
     	try {
     		consultDAO.save(consult);

@@ -55,7 +55,7 @@
 					</c:if>
                alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.ctime }</span>
+                <span class="description">上传时间：${item.ctime }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解答时间：${item.atime}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键词：${item.keywords }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">

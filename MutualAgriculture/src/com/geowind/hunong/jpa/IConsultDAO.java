@@ -96,6 +96,8 @@ public interface IConsultDAO {
 
 	public List<Consult> findByAcontent(Object acontent);
 
+	public List<Consult> findByKeywords(Object keywords);
+
 	public List<Consult> findByAtime(Object atime);
 
 	public List<Consult> findByStatus(Object status);
