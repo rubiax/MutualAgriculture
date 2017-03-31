@@ -121,8 +121,10 @@
     	if(content == undefined || content == "") {
     		return;
     	}
+    	alert(obj);
+    	alert(content);
     	$.post("../consultServlet?op=answer", {cid:obj,content:content}, function() {
-    		alert("success");
+    		alert("专家回复成功...");
     		location.href = '../consultServlet?op=consulting';
     	});
     }

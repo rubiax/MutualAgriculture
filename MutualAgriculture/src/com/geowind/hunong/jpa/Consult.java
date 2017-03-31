@@ -131,4 +131,12 @@ public class Consult implements java.io.Serializable {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Consult [cid=" + cid + ", user=" + user + ", ccontent=" + ccontent + ", ctime=" + ctime + ", acontent="
+				+ acontent + ", keywords=" + keywords + ", atime=" + atime + ", status=" + status + "]";
+	}
+	
+	
+
 }
