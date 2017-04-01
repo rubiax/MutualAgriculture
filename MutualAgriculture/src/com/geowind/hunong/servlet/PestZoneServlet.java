@@ -54,6 +54,7 @@ public class PestZoneServlet extends BasicServlet {
 		PestzoneDAO pestzoneDAO = new PestzoneDAO();
 		Integer in = 0;
 		List<Pestzone> affectedAreaList = pestzoneDAO.findByStatus(in);
+		System.out.println("aff is:"+affectedAreaList.size());
 		if(affectedAreaList!=null&&affectedAreaList.size()>0){			
 			this.out(response, getAffectedFarmlandPoint(affectedAreaList));
 		}else{
@@ -88,10 +89,10 @@ public class PestZoneServlet extends BasicServlet {
 		
 		Set<Block> blockSet = new HashSet<Block>();
 	
-		List<Point> p = new ArrayList<Point>();
+		
 		//遍历受灾的农田分区
 		while(i.hasNext()){
-		
+			List<Point> p = new ArrayList<Point>();
 			//获得该指定分区下的所有农田
 			blockSet = i.next().getBlocks();
 			
@@ -125,8 +126,6 @@ public class PestZoneServlet extends BasicServlet {
 				
 			}
 //			System.out.println("count is" + count);
-			
-			
 			}
 			
 			PointSelector ps = new PointSelector(p);

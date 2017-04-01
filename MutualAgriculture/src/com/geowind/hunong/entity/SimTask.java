@@ -1,11 +1,11 @@
 package com.geowind.hunong.entity;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 
 import com.geowind.hunong.jpa.Task;
 import com.google.gson.annotations.Expose;
-
-import com.geowind.hunong.util.ServerIpUtil;
 
 public class SimTask {
 	
@@ -168,8 +168,12 @@ public class SimTask {
 		this.latitude = latitude;
 	}
 	public void setFpicPath(String fpic) {
-		this.pic = "http://"+ServerIpUtil.getServerIp() +":8080/MutualAgriculture/"+ fpic;
-		System.out.println("address:"+this.pic);
+		try {
+			this.pic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
+			System.out.println("address:"+this.pic);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 	}
 	public String getMstyle() {
 		return mstyle;
@@ -194,6 +198,7 @@ public class SimTask {
 			simTask.setMuser(task.getUser().getUsername());
 			simTask.setBid(task.getBlock().getBid());
 			simTask.setBname(task.getBlock().getBname());
+			simTask.setWorkload(String.valueOf(task.getWorkload()));
 			simTask.setMid(task.getMachine().getPlate());
 			simTask.setType(task.getType());
 			simTask.setDate(task.getWorkdate());
@@ -207,7 +212,6 @@ public class SimTask {
 			simTask.setCroptype(task.getBlock().getZone().getType());
 			simTask.setMstyle(task.getMachine().getType());
 			simTask.setNote(task.getDescr());
-			simTask.setWorkload(task.getBlock().getArea().toString());
 			return simTask;
 		}
 	}

@@ -22,17 +22,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.soap.Detail;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Kui on 2016/7/22.
@@ -87,11 +93,11 @@ public class TaskServlet extends BasicServlet {
 //		System.out.println("---------------historyTask----------------");
 		String username = request.getParameter("username");
 //		System.out.println(username);
-		int centerId = (int) request.getSession().getAttribute("currentCenterId");
+		/*int centerId = (int) request.getSession().getAttribute("currentCenterId");
 		TaskService taskService = new TaskServiceImpl();
-		List<Task> tasks = taskService.historyTaskByUser(centerId, 1, username);
-		/*TaskDAO taskDAO = new TaskDAO();
-		List<Task> tasks = taskDAO.findByFinished(1);*/
+		List<Task> tasks = taskService.historyTaskByUser(centerId, 1, username);*/
+		TaskDAO taskDAO = new TaskDAO();
+		List<Task> tasks = taskDAO.findByFinished(1);
 		List<SimTask> simTasks = new ArrayList<SimTask>();
 		for(Task t : tasks) {
 			SimTask simTask = new SimTask();
@@ -104,7 +110,7 @@ public class TaskServlet extends BasicServlet {
 		String taskId = request.getParameter("taskId");
 		TaskDAO taskDAO = new TaskDAO();
 		Task task = taskDAO.findById(Integer.parseInt(taskId));
-		request.getSession().setAttribute("currentTrask", task);
+		request.getSession().setAttribute("currentTask", task);
 		response.sendRedirect("manage/taskdetail.jsp");
 	}
 
@@ -218,6 +224,8 @@ public class TaskServlet extends BasicServlet {
 			
 			SimTask simTask = new SimTask();
 			simTask = simTask.fromTask(task);
+			//System.out.println("=====================================");
+			//System.out.println(simTask.toString());
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();

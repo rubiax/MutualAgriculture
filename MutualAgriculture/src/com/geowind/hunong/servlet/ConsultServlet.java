@@ -65,8 +65,10 @@ public class ConsultServlet extends BasicServlet {
 		try {
 			consultDAO.update(consult);
 			EntityManagerHelper.commit();
+			
 			SimConsult simConsult = new SimConsult();
-			simConsult = simConsult.fromConsult(consult);
+			simConsult.fromConsult(consult);
+			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simConsult)).getAsJsonObject();
 			JPushUtil.sendPush(consult.getUser().getUsername(), "专家回复", jsonObject);

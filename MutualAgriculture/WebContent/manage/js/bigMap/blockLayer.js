@@ -33,7 +33,7 @@ function addBlockLayer(){
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(36,36),
+	var myIcon = new BMap.Icon("img/logoMarker/block.png", new BMap.Size(36,36),
 	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	function addMarker(point,i,content){
 			
