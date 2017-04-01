@@ -89,7 +89,6 @@ public class PestZoneServlet extends BasicServlet {
 		
 		Set<Block> blockSet = new HashSet<Block>();
 	
-		
 		//遍历受灾的农田分区
 		while(i.hasNext()){
 			List<Point> p = new ArrayList<Point>();
