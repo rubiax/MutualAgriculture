@@ -70,19 +70,15 @@ public class SimConsult {
 	}
 	
 	public SimConsult fromConsult(Consult consult) {
-		if(consult == null) {
-			return null;
-		} else {
-			SimConsult simConsult = new SimConsult();
-			simConsult.setCid(consult.getCid());
-			simConsult.setUsername(consult.getUser().getUsername());
-			simConsult.setCcontent(consult.getCcontent());
-			simConsult.setCtime(consult.getCtime());
-			simConsult.setAcontent(consult.getAcontent());
-			simConsult.setAtime(consult.getAtime());
-			simConsult.setStatus(consult.getStatus());
-			return simConsult;
-		}
+		SimConsult simConsult = new SimConsult();
+		simConsult.setCid(consult.getCid());
+		simConsult.setUsername(consult.getUser().getUsername());
+		simConsult.setCcontent(consult.getCcontent());
+		simConsult.setCtime(consult.getCtime());
+		simConsult.setAcontent(consult.getAcontent());
+		simConsult.setAtime(consult.getAtime());
+		simConsult.setStatus(consult.getStatus());
+		return simConsult;
 	}
 	
 	

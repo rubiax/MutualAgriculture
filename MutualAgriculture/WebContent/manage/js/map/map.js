@@ -6,25 +6,25 @@
 var map = new BMap.Map("allmap",{mapType: BMAP_HYBRID_MAP}); 
 map.enableScrollWheelZoom(true);  //开启鼠标滚轮缩放
 
-var point = new BMap.Point(112.56182, 27.012459);
-map.centerAndZoom(point,12);
+var point = new BMap.Point(112.613455, 27.026652);
+map.centerAndZoom(point,16);
 
 var geoc = new BMap.Geocoder();
 
 //定位跳转到当地地图
-var mark;//当前定位标注
-var geolocation = new BMap.Geolocation();
-geolocation.getCurrentPosition(function(r){
-    if(this.getStatus() == BMAP_STATUS_SUCCESS){
-        mark = new BMap.Marker(r.point);
-        map.addOverlay(mark);
-        map.panTo(r.point);
-
-    }
-    else {
-        alert('failed'+this.getStatus());
-    }
-},{enableHighAccuracy: true})
+//var mark;//当前定位标注
+//var geolocation = new BMap.Geolocation();
+//geolocation.getCurrentPosition(function(r){
+//    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+//        mark = new BMap.Marker(r.point);
+//        map.addOverlay(mark);
+//        map.panTo(r.point);
+//
+//    }
+//    else {
+//        alert('failed'+this.getStatus());
+//    }
+//},{enableHighAccuracy: true})
 
 /**
  * 显示详细地址和经纬度
