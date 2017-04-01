@@ -193,10 +193,10 @@ public class TaskServlet extends BasicServlet {
 		TaskDAO taskDAO = new TaskDAO();
 		Task task = new Task();
 		User user = new UserDAO().findById(username);
-		user.setStatus(1);
+		//user.setStatus(1);
 		task.setUser(user);
 		Machine machine = new MachineDAO().findById(Integer.parseInt(machineId));
-		machine.setWorkstate(1);
+		//machine.setWorkstate(1);
 		task.setMachine(machine);
 		Block block = new BlockDAO().findById(Integer.parseInt(bid));
 		task.setBlock(block);

@@ -42,6 +42,4 @@ public class ServerIpUtil {
 	public static void main(String[] args) {
 		System.out.println(getServerIp());
 	}
-	
-
 }

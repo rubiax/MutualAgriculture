@@ -180,7 +180,7 @@
 								<tr>
 									<th><label>所属分区名</label></th>
 									<td id="zonename"></td>
-									<th><label>片名</label></th>
+									<th><label>片名</label></th>
 									<td id="bname"></td>
 								</tr>
 								
@@ -335,7 +335,7 @@
 			var ownerId = $("#select1").val();
 		})
 		$("#select2").on("select2:select", function (e) {
-			var text = $("#select1").select2('data')[0]['text'];
+			var text = $("#select2").select2('data')[0]['text'];
 			var type = text.split(' ')[1];
 			$("#machinetype").text(type);
 			var machineId = $("#select2").val();
