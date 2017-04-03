@@ -17,7 +17,7 @@ function addTaskLayer(){
 			 var pointa = new BMap.Point(json[i].block.longitude,json[i].block.latitude);
 			//农作物显示信息
 				var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-							    '<img src="../'+json[i].uploadPic+'" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+							    '<img src="../'+json[i].block.picture+'" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 							    '农田地址：'+json[i].block.address+
 							    '<br/>任务类型:'+json[i].type+
 							    '<br/>农机手姓名:'+json[i].machine.machineowner.name+
