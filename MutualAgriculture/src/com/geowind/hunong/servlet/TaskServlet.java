@@ -224,11 +224,12 @@ public class TaskServlet extends BasicServlet {
 			
 			SimTask simTask = new SimTask();
 			simTask = simTask.fromTask(task);
-			//System.out.println("=====================================");
+			System.out.println("=====================================");
 			//System.out.println(simTask.toString());
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
+			System.out.println(jsonObject.toString());
 			JPushUtil.sendPush(username, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {

@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Date;
 
 import com.geowind.hunong.jpa.Task;
+import com.geowind.hunong.util.ServerIpUtil;
 import com.google.gson.annotations.Expose;
 
 public class SimTask {
@@ -168,12 +169,8 @@ public class SimTask {
 		this.latitude = latitude;
 	}
 	public void setFpicPath(String fpic) {
-		try {
-			this.pic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
-			System.out.println("address:"+this.pic);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		this.pic = "http://"+ServerIpUtil.getServerIp() +":8080/MutualAgriculture/"+ fpic;
+		System.out.println("address:"+this.pic);
 	}
 	public String getMstyle() {
 		return mstyle;
