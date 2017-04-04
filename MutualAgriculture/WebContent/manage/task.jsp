@@ -125,12 +125,12 @@
 													</div>
 													<div class="box-body">
 														<ul>
-															<li><label>农机手信息：</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
-															<li><label>分区信息：</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
-															<li><label>分片信息</label>${item.block.bid }&nbsp;&nbsp;${item.block.bname }&nbsp;&nbsp;${item.block.address }</li>
-															<li><label>农机信息：</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
-															<li><label>任务时间：</label>${item.workdate }</li>
-															<li><label>任务描述：</label>${item.descr }</li>
+															<li><label>农机手信息:</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
+															<li><label>分区信息:</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
+															<li><label>分片信息:</label>${item.block.bid }&nbsp;&nbsp;${item.block.bname }&nbsp;&nbsp;${item.block.address }</li>
+															<li><label>农机信息:</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
+															<li><label>任务时间:</label>${item.workdate }</li>
+															<li><label>任务描述:</label>${item.descr }</li>
 														</ul>
 													</div>
 													<div class="box-footer">
@@ -259,12 +259,12 @@
 													</div>
 													<div class="box-body">
 														<ul>
-															<li><label>农机手信息：</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
-															<li><label>分区信息：</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
+															<li><label>农机手信息:</label>${item.user.username }&nbsp;&nbsp;${item.user.realname }&nbsp;&nbsp;${item.user.phone }</li>
+															<li><label>分区信息:</label>${item.block.zone.zoneId }&nbsp;&nbsp;${item.block.zone.zonename }&nbsp;&nbsp;${item.block.zone.type }</li>
 															<li><label>分片信息:</label>${item.block.bid }&nbsp;&nbsp;${item.block.bname }&nbsp;&nbsp;${item.block.address }</li>
-															<li><label>农机信息：</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
-															<li><label>任务时间：</label>${item.workdate }</li>
-															<li><label>任务描述：</label>${item.descr }</li>
+															<li><label>农机信息:</label>${item.machine.machineId }&nbsp;&nbsp;${item.machine.type }&nbsp;&nbsp;${item.machine.plate }</li>
+															<li><label>任务时间:</label>${item.workdate }</li>
+															<li><label>任务描述:</label>${item.descr }</li>
 														</ul>
 													</div>
 													<div class="box-footer">
