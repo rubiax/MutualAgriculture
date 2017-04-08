@@ -88,22 +88,22 @@ public class BFarmlandServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		Farmland farmland = farmlandDAO.findById(Integer.parseInt(pk));
 		if ("username".equals(item)) {
 			UserDAO userDAO = new UserDAO();
 			User user = userDAO.findById(value);
 			farmland.setUser(user);
-		} else if ("zoneId".equals(item)) {
-			System.out.println("zoneId:"+value);
-			ZoneDAO zoneDAO = new ZoneDAO();
-			Zone zone = zoneDAO.findById(Integer.parseInt(value));
-			farmland.setZone(zone);
+		} else if ("bid".equals(item)) {
+//			System.out.println("bid:"+value);
+			BlockDAO blockDAO = new BlockDAO();
+			Block block = blockDAO.findById(Integer.parseInt(value));
+			farmland.setBlock(block);
 		} else if ("jingweidu".equals(item)) {
 			String longitude = value.split(", ")[0];
 			String latitude = value.split(", ")[1];
-			System.out.println(longitude + " " + latitude);
+//			System.out.println(longitude + " " + latitude);
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));
 		} else if ("address".equals(item)) {
@@ -117,9 +117,8 @@ public class BFarmlandServlet extends BasicServlet {
 		} else if("transtion".equals(item)) {
 			farmland.setTranstion(value);
 		} else if("bid".equals(item)) {
-			System.out.println(value);
+//			System.out.println(value);
 			if("-1".equals(value)) {
-				System.out.println("aaaaaaaaaaaaa");
 				farmland.setBlock(null);
 			} else {
 				BlockDAO blockDAO = new BlockDAO();
@@ -151,7 +150,7 @@ public class BFarmlandServlet extends BasicServlet {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		try {
 			Farmland farmland = farmlandDAO.findById(Integer.parseInt(request.getParameter("farmlandId")));
-			System.out.println(farmland);
+//			System.out.println(farmland);
 			this.out(response, farmland);
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
@@ -160,6 +159,9 @@ public class BFarmlandServlet extends BasicServlet {
 	}
 
 	private void getFarmlands(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
+		entityManager.clear(); //清空一级缓存
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		List<Farmland> farmlandList = farmlandDAO.findByValid(1);
 		this.out(response, farmlandList);
@@ -206,7 +208,7 @@ public class BFarmlandServlet extends BasicServlet {
 		Farmland farmland = new Farmland();
 		
 		String username = request.getParameter("username");
-		String zondId = request.getParameter("zoneId");
+		String bid = request.getParameter("bid");
 		String jingweidu = request.getParameter("jingweidu");
 		String longitude = null;
 		String latitude = null;
@@ -223,8 +225,8 @@ public class BFarmlandServlet extends BasicServlet {
 		UserDAO userDAO = new UserDAO();
 		farmland.setUser(userDAO.findById(username));
 		
-		ZoneDAO zoneDAO = new ZoneDAO();
-		farmland.setZone(zoneDAO.findById(Integer.parseInt(zondId)));
+		BlockDAO blockDAO = new BlockDAO();
+		farmland.setBlock(blockDAO.findById(Integer.parseInt(bid)));
 		
 		if (longitude != null && latitude != null) {
 			farmland.setLatitude(Double.parseDouble(latitude));
@@ -286,7 +288,7 @@ public class BFarmlandServlet extends BasicServlet {
 	private void editor(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		FarmlandDAO farmlandDAO = new FarmlandDAO();
 		String username = request.getParameter("username");
-		String zonename = request.getParameter("zonename");
+		String bname = request.getParameter("bname");
 		String lal = request.getParameter("lal");
 		String longitude = null;
 		String latitude = null;
@@ -303,8 +305,8 @@ public class BFarmlandServlet extends BasicServlet {
 		Farmland farmland = (Farmland) request.getSession().getAttribute("currentFarmland");
 		UserDAO userDAO = new UserDAO();
 		farmland.setUser(userDAO.findById(username));
-		ZoneDAO zoneDAO = new ZoneDAO();
-		farmland.setZone(zoneDAO.findByZonename(zonename).get(0));
+		BlockDAO blockDAO = new BlockDAO();
+		farmland.setBlock((blockDAO.findByBname(bname)).get(0));
 		if (longitude != null && latitude != null) {
 			farmland.setLatitude(Double.parseDouble(latitude));
 			farmland.setLongitude(Double.parseDouble(longitude));

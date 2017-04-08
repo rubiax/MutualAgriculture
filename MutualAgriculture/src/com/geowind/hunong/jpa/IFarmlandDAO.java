@@ -1,7 +1,6 @@
 package com.geowind.hunong.jpa;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Interface for FarmlandDAO.

@@ -1,14 +1,11 @@
 package com.geowind.hunong.jpa;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,17 +23,16 @@ import com.google.gson.annotations.Expose;
 public class Task implements java.io.Serializable {
 
 	// Fields
-
 	@Expose
 	private Integer taskId;
 	@Expose
 	private Center center;
 	@Expose
+	private Block block;
+	@Expose
 	private User user;
 	@Expose
 	private Machine machine;
-	@Expose
-	private Farmland farmland;
 	@Expose
 	private Integer workload;
 	@Expose
@@ -59,20 +55,20 @@ public class Task implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Task(User user, Machine machine, Farmland farmland) {
+	public Task(Block block, User user, Machine machine) {
+		this.block = block;
 		this.user = user;
 		this.machine = machine;
-		this.farmland = farmland;
 	}
 
 	/** full constructor */
-	public Task(Center center, User user, Machine machine, Farmland farmland,
+	public Task(Center center, Block block, User user, Machine machine,
 			Integer workload, Date publishdate, Date workdate, Date finishdate,
 			String type, Integer finished, String descr) {
 		this.center = center;
+		this.block = block;
 		this.user = user;
 		this.machine = machine;
-		this.farmland = farmland;
 		this.workload = workload;
 		this.publishdate = publishdate;
 		this.workdate = workdate;
@@ -105,6 +101,16 @@ public class Task implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "blockId", nullable = false)
+	public Block getBlock() {
+		return this.block;
+	}
+
+	public void setBlock(Block block) {
+		this.block = block;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "username", nullable = false)
 	public User getUser() {
 		return this.user;
@@ -122,16 +128,6 @@ public class Task implements java.io.Serializable {
 
 	public void setMachine(Machine machine) {
 		this.machine = machine;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "farmlandId", nullable = false)
-	public Farmland getFarmland() {
-		return this.farmland;
-	}
-
-	public void setFarmland(Farmland farmland) {
-		this.farmland = farmland;
 	}
 
 	@Column(name = "workload")

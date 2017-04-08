@@ -10,7 +10,7 @@ function addZoneLayer(){
 	var myIcon = new BMap.Icon("img/logoMarker/location2.png", new BMap.Size(30,30),
 	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
 	$.post(url,{},function getData(data){
-		alert(data);
+//		alert(data);
 		json = JSON.parse(data);
 //		alert(json.length+" ,"+json[0].pointList.length);
 		for(var j=0;j<json.length;j++){

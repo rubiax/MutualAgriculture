@@ -22,13 +22,23 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
-
+	<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
-
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 <div class="container" style="width:100%;">
-
+	<br>
 	<c:forEach items="${consulting }" var="item">
 		<div class="row">
         <div class="col-md-10">
@@ -36,9 +46,16 @@
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../../${item.user.picture }" alt="User Image">
+                <img class="img-circle" src=
+                <c:if test="${empty item.user.picture}">
+					"img/not_pic.jpg"
+					</c:if>
+					<c:if test="${not empty item.user.picture}">
+					"../../${item.user.picture}"
+					</c:if>
+               alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.ctime }</span>
+                <span class="description">上传时间：${item.ctime }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键词：${item.keywords }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -62,7 +79,6 @@
             <!-- /.box-footer -->
             <div class="box-footer">
                 <img class="img-responsive img-circle img-sm" src="img/admin.png" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text" onkeydown='if(event.keyCode==13){answer(${item.cid})} else{return;}' id="answer${item.cid }"  class="form-control" placeholder="按下回车键提交回复.." />
                 </div>
@@ -96,6 +112,9 @@
             $("#answer").html("<i class='fa fa-sticky-note-o'></i>解答");
         }
     }); */
+    $(function() {
+    	$("#loading").fadeOut("slow");  
+    });
     
     function answer(obj) {
     	var content = $("#answer"+obj).val();
@@ -104,6 +123,7 @@
     	}
     	$.post("../consultServlet?op=answer", {cid:obj,content:content}, function() {
     		alert("success");
+    		location.href = '../consultServlet?op=consulting';
     	});
     }
 </script>

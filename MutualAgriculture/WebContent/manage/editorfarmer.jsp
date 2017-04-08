@@ -36,7 +36,7 @@
 <link href="depend/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
-
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 
 <title>Document</title>
 <style type="text/css">
@@ -58,6 +58,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -153,10 +164,10 @@
 							<tr>
 								<td data-field="state" data-checkbox="true"></td>
 								<td>${item.farmlandId }</td>
-								<td>${item.zone.zonename }</td>
+								<td>${item.block.zone.zonename }</td>
 								<td>${item.longitude }, ${item.latitude }</td>
 								<td>${item.address }</td>
-								<td>${item.zone.type }</td>
+								<td>${item.block.zone.type }</td>
 								<td>${item.area }</td>
 								<td data-field="action" data-formatter="actionFormatter" data-events="actionEvents"></td>
 							</tr>
@@ -210,6 +221,7 @@
 			}
 		};
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			//Datemask dd/mm/yyyy
 			$("#datemask").inputmask("yyyy-mm-dd", {
 				"placeholder" : "yyyy-mm-dd"

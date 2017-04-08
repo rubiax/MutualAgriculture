@@ -23,9 +23,7 @@ public class Gasstation implements java.io.Serializable {
 	private Double longitude;
 	@Expose
 	private Double latitude;
-	
-	
-	
+
 	// Constructors
 
 	/** default constructor */

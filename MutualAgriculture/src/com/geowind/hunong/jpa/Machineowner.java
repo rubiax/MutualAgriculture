@@ -3,15 +3,12 @@ package com.geowind.hunong.jpa;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -56,12 +53,11 @@ public class Machineowner implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Machineowner(Center center, String name, String sex, Date birthday,
-			String phone, String address) {
+	public Machineowner(Center center, String name, String sex, String phone,
+			String address) {
 		this.center = center;
 		this.name = name;
 		this.sex = sex;
-		this.birthday = birthday;
 		this.phone = phone;
 		this.address = address;
 	}
@@ -120,7 +116,7 @@ public class Machineowner implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", nullable = false, length = 10)
+	@Column(name = "birthday", length = 10)
 	public Date getBirthday() {
 		return this.birthday;
 	}
@@ -138,7 +134,7 @@ public class Machineowner implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "address", nullable = false, length = 80)
+	@Column(name = "address", nullable = false, length = 200)
 	public String getAddress() {
 		return this.address;
 	}
@@ -164,14 +160,5 @@ public class Machineowner implements java.io.Serializable {
 	public void setMachines(Set<Machine> machines) {
 		this.machines = machines;
 	}
-
-	@Override
-	public String toString() {
-		return "Machineowner [ownerId=" + ownerId + ", center=" + center
-				+ ", name=" + name + ", sex=" + sex + ", birthday=" + birthday
-				+ ", phone=" + phone + ", address=" + address + ", valid="
-				+ valid + ", machines=" + machines + "]";
-	}
-
 
 }

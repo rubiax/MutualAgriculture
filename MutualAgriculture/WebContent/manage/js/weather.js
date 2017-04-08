@@ -1,6 +1,8 @@
 	var min=[];
 	var max=[];
 	var time=[];
+	var hmin=[];
+	var hmax=[];
 	
 	
 	$.post("../jsonData/weather.json",function(data) {
@@ -8,15 +10,17 @@
 			
 			min[i]=data[i].min;
 			max[i]=data[i].max;
+			hmin[i]=data[i].hmin;
+			hmax[i]=data[i].hmax;
 			time[i]=data[i].date;
-			console.log(data[i].date);
+			//console.log(data[i].date);
 			create(min,max,time);	
 		}	
 	}, "json");
 
 	function create(min,max,time){
 
-	 var myChart = echarts.init(document.getElementById('profile'));	
+	 var myChart = echarts.init(document.getElementById('monthweather'));	
 		option = {
 	    title: {
 		text: '未来一个月气温变化',
@@ -26,7 +30,7 @@
 		trigger: 'axis'
 	    },
 	    legend: {
-		data:['最高气温','最低气温']
+		data:['预报高温','预报低温','历史均值高温','历史均值低温']
 	    },
 	    toolbox: {
 		show: true,
@@ -53,10 +57,11 @@
 	    },
 	    series: [
 		{
-		    name:'最高气温',
+		    name:'预报高温',
 		    type:'line',
-		    data:max,
-		    markPoint: {
+		    smooth: true,
+		    data:max
+		    /*markPoint: {
 		        data: [
 		            {type: 'max', name: '最大值'},
 		            {type: 'min', name: '最小值'}
@@ -66,13 +71,14 @@
 		        data: [
 		            {type: 'average', name: '平均值'}
 		        ]
-		    }
+		    }*/
 		},
 		{
-		    name:'最低气温',
+		    name:'预报低温',
 		    type:'line',
-		    data:min,
-		    markPoint: {
+		    smooth: true,
+		    data:min
+		   /* markPoint: {
 		        data: [
 		            {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
 		        ]
@@ -96,7 +102,19 @@
 		                name: '最高点'
 		            }]
 		        ]
-		    }
+		    }*/
+		},
+		{
+		    name:'历史均值高温',
+		    type:'line',
+		    smooth: true,
+		    data:hmax
+		},
+		{
+		    name:'历史均值低温',
+		    type:'line',
+		    smooth: true,
+		    data:hmin
 		}
 	    ]
 	};

@@ -60,7 +60,7 @@ public class FileUploadUtil {
 		if(files!=null && files.getCount()>0){//说明用户文件已传上来
 			Collection<File> collection = files.getCollection();
 			path=pagecontent.getServletContext().getRealPath("/") + PATH;
-			System.out.println(path);
+//			System.out.println(path);
 			
 			java.io.File f = new java.io.File(path);
 			if(!f.exists()){
@@ -71,7 +71,7 @@ public class FileUploadUtil {
 				if(!f1.isMissing()){//文件没有丢失
 					filedName = f1.getFieldName();
 					fileName = new Date().getTime()+"_"+new Random().nextInt(10000)+"."+f1.getFileExt();
-					System.out.println(fileName);
+//					System.out.println(fileName);
 					//保存数据到指定文件
 					f1.saveAs(path+"/"+fileName);
 					
@@ -83,7 +83,7 @@ public class FileUploadUtil {
 			}
 			map.put(filedName, temp);
 		}
-		System.out.println(map);
+//		System.out.println(map);
 		return map;
 	}
 	
@@ -113,7 +113,7 @@ public class FileUploadUtil {
 		while(enums.hasMoreElements()){
 			name=enums.nextElement();
 			map.put(name,request.getParameter(name));
-			System.out.println(name);
+//			System.out.println(name);
 		}
 		
 		//将上传文件存到服务器路径下
@@ -126,7 +126,7 @@ public class FileUploadUtil {
 		if(files!=null && files.getCount()>0){//说明用户文件已传上来
 			Collection<File> collection = files.getCollection();
 			path=servletConfig.getServletContext().getRealPath("/") + PATH;
-			System.out.println(path);
+//			System.out.println(path);
 			
 			java.io.File f = new java.io.File(path);
 			if(!f.exists()){
@@ -137,7 +137,7 @@ public class FileUploadUtil {
 				if(!f1.isMissing()){//文件没有丢失
 					filedName = f1.getFieldName();
 					fileName = new Date().getTime()+"_"+new Random().nextInt(10000)+"."+f1.getFileExt();
-					System.out.println(fileName);
+//					System.out.println(fileName);
 					//保存数据到指定文件
 					f1.saveAs(path+"/"+fileName);
 					
@@ -149,7 +149,7 @@ public class FileUploadUtil {
 			}
 			map.put(filedName, temp);
 		}
-		System.out.println(map);
+//		System.out.println(map);
 		return map;
 	}
 	
@@ -174,10 +174,10 @@ public class FileUploadUtil {
 		while(enums.hasMoreElements()){
 			name=enums.nextElement();
 			map.put(name,request.getParameter(name));
-			System.out.println(name);
+//			System.out.println(name);
 		}
 		
-		System.out.println(map);
+//		System.out.println(map);
 		return map;
 	}
 

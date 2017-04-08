@@ -45,7 +45,7 @@ public class PestlibServlet extends BasicServlet {
 		if(pests == null || pests.size()==0) {
 			pests = pestlibDAO.findByBranch(content);
 		}
-		System.out.println(pests);
+//		System.out.println(pests);
 		request.getSession().setAttribute("pestlib", pests);
 		this.out(response, "1");
 	}

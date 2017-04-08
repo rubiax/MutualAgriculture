@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -135,10 +133,8 @@ public class Planstandard implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Planstandard [pid=" + pid + ", center=" + center + ", event="
-				+ event + ", begin=" + begin + ", end=" + end + ", maxdays="
-				+ maxdays + ", totalwork=" + totalwork + ", efficiency="
-				+ efficiency + "]";
+		return "Planstandard [pid=" + pid + ", center=" + center + ", event=" + event + ", begin=" + begin + ", end="
+				+ end + ", maxdays=" + maxdays + ", totalwork=" + totalwork + ", efficiency=" + efficiency + "]";
 	}
 
 	

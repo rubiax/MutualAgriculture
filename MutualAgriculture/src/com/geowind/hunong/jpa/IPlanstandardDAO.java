@@ -96,7 +96,11 @@ public interface IPlanstandardDAO {
 
 	public List<Planstandard> findByEnd(Object end);
 
-	public List<Planstandard> findByDays(Object days);
+	public List<Planstandard> findByMaxdays(Object maxdays);
+
+	public List<Planstandard> findByTotalwork(Object totalwork);
+
+	public List<Planstandard> findByEfficiency(Object efficiency);
 
 	/**
 	 * Find all Planstandard entities.

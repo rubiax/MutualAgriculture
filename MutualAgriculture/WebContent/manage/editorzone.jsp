@@ -37,7 +37,7 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
-
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
 #userInfo_left {
@@ -58,6 +58,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -185,7 +196,7 @@
 		</div>
 
 		<!-- Horizontal Form -->
-		<div class="box box-success">
+		<%-- <div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title">农田信息</h3>
 			</div>
@@ -233,10 +244,10 @@
 					</tbody>
 				</table>
 
-			</div>
+			</div> 
 			<!-- /.box-body -->
 
-		</div>
+		</div>--%>
 
 
 	</div>
@@ -279,6 +290,7 @@
 			}
 		};
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			$('#table1').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,

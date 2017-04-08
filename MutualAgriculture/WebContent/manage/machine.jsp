@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="depend/select2/select2.min.css">
 
 <link rel="stylesheet" href="depend/bootstrap-fileinput-master/css/fileinput.min.css">
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
 .ml10 {
@@ -48,6 +49,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -175,7 +187,7 @@
 			<!-- 图表 -->
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-primary">
+				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">农机数量统计</h3>
 					</div>
@@ -211,6 +223,7 @@
 	<script>
 		
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			$('#table').bootstrapTable({
 				pagination : true,
 				pageNumber : 1,
@@ -389,7 +402,7 @@
 			$("#phone").val('');
 	        $("#collapseOne").collapse('hide');
 	   	});
-function createChart1(name,value){
+	function createChart1(name,value){
 			
 			//图表生成
 			var dom = document.getElementById("machinenum_chart1");

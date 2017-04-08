@@ -2,15 +2,12 @@ package com.geowind.hunong.jpa;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -45,8 +42,6 @@ public class Zone implements java.io.Serializable {
 	@Expose (serialize = false, deserialize = false)
 	private Set<Pestzone> pestzones = new HashSet<Pestzone>(0);
 	@Expose (serialize = false, deserialize = false)
-	private Set<Farmland> farmlands = new HashSet<Farmland>(0);
-	@Expose (serialize = false, deserialize = false)
 	private Set<Block> blocks = new HashSet<Block>(0);
 
 	// Constructors
@@ -64,7 +59,7 @@ public class Zone implements java.io.Serializable {
 	/** full constructor */
 	public Zone(Center center, String zonename, Double area, String type,
 			String address, Integer valid, Set<Pestzone> pestzones,
-			Set<Farmland> farmlands, Set<Block> blocks) {
+			Set<Block> blocks) {
 		this.center = center;
 		this.zonename = zonename;
 		this.area = area;
@@ -72,7 +67,6 @@ public class Zone implements java.io.Serializable {
 		this.address = address;
 		this.valid = valid;
 		this.pestzones = pestzones;
-		this.farmlands = farmlands;
 		this.blocks = blocks;
 	}
 
@@ -153,15 +147,6 @@ public class Zone implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zone")
-	public Set<Farmland> getFarmlands() {
-		return this.farmlands;
-	}
-
-	public void setFarmlands(Set<Farmland> farmlands) {
-		this.farmlands = farmlands;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zone")
 	public Set<Block> getBlocks() {
 		return this.blocks;
 	}
@@ -169,15 +154,5 @@ public class Zone implements java.io.Serializable {
 	public void setBlocks(Set<Block> blocks) {
 		this.blocks = blocks;
 	}
-
-	@Override
-	public String toString() {
-		return "Zone [zoneId=" + zoneId + ", center=" + center + ", zonename="
-				+ zonename + ", area=" + area + ", type=" + type + ", address="
-				+ address + ", valid=" + valid + ", pestzones=" + pestzones
-				+ ", farmlands=" + farmlands + ", blocks=" + blocks + "]";
-	}
-	
-	
 
 }

@@ -42,10 +42,10 @@ public class WeatherDataCrawler {
 	        	sb.append(in.nextLine());
 			}
 	        String weatherInfo = sb.toString();
-	        System.out.println(weatherInfo);
+//	        System.out.println(weatherInfo);
 	        int index = weatherInfo.indexOf("[");
 	        weatherJson = weatherInfo.substring(index);
-	        System.out.println(weatherJson);
+//	        System.out.println(weatherJson);
 	        in.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

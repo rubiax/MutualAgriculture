@@ -52,7 +52,7 @@
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet"
 	href="depend/select2/select2.min.css">
-
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 <title>Document</title>
 <style type="text/css">
 #userInfo_left {
@@ -73,6 +73,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -148,7 +159,7 @@
 								
 							</tr>
 							<tr>
-								<th style="width: 80px"><label>所属分区名</label></th>
+								<th style="width: 80px"><label>区片名</label></th>
 								<td style="width: 150px">
 									<select id="select2" class="js-example-basic-single" style="width: 90%">
 										<c:forEach var="item1" items="${allZone }">
@@ -164,7 +175,7 @@
 							</tr>
 							<tr>
 								<th style="width: 80px"><label>作物类型</label></th>
-								<td style="width: 150px" id="type">${currentFarmland.zone.type }</td>
+								<td style="width: 150px" id="type">${currentFarmland.block.zone.type }</td>
 								<th style="width: 80px"><label>农田编号</label></th>
 								<td style="width: 150px">${currentFarmland.farmlandId }</td>
 							</tr>
@@ -246,10 +257,11 @@
 			}
 		};
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			$("#select1").select2();
 			$("#select1").val("${currentFarmland.user.username }").trigger("change");
 			$("#select2").select2();
-			$("#select2").val("${currentFarmland.zone.zoneId } ${currentFarmland.zone.type}").trigger("change");
+			$("#select2").val("${currentFarmland.block.zone.zoneId } ${currentFarmland.block.zone.type}").trigger("change");
 			$("#select3").select2();
 			$(".carousel-inner .item:first").addClass("active");
 			
@@ -323,7 +335,7 @@
 					data:obj
 				});
 				var bid = $("#select3").val();
-				alert(bid);
+				//alert(bid);
 				if(bid == null || bid=="") {
 					bid = -1;
 				}

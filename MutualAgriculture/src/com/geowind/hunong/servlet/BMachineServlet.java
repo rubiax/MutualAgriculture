@@ -40,7 +40,7 @@ public class BMachineServlet extends BasicServlet {
 		response.setCharacterEncoding("utf-8");
 
 		String op = request.getParameter("op");
-		System.out.println(op);
+//		System.out.println(op);
 		switch (op) {
 		case "searchAll":
 			searchAll(request, response);
@@ -121,7 +121,7 @@ public class BMachineServlet extends BasicServlet {
 		String pk = request.getParameter("pk");
 		String item = request.getParameter("item");
 		String value = request.getParameter("value");
-		System.out.println(value);
+//		System.out.println(value);
 		MachineDAO machineDAO = new MachineDAO();
 		Machine machine = machineDAO.findById(Integer.parseInt(pk));
 		if("ownerId".equals(item)) {
@@ -288,7 +288,7 @@ public class BMachineServlet extends BasicServlet {
 		String horsepower = request.getParameter("horsepower");
 		String overdate = request.getParameter("overdate");
 
-		System.out.println(ownerId + " " + plate + " " + type + " " + brand + " " + horsepower + " " + overdate);
+//		System.out.println(ownerId + " " + plate + " " + type + " " + brand + " " + horsepower + " " + overdate);
 
 		MachineownerDAO machineownerDAO = new MachineownerDAO();
 		Machineowner machineowner = machineownerDAO.findById(Integer.parseInt(ownerId));

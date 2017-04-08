@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,6 +31,8 @@ public class Consult implements java.io.Serializable {
 	@Expose
 	private String acontent;
 	@Expose
+	private String keywords;
+	@Expose
 	private String atime;
 	@Expose
 	private Integer status;
@@ -45,11 +45,12 @@ public class Consult implements java.io.Serializable {
 
 	/** full constructor */
 	public Consult(User user, String ccontent, String ctime, String acontent,
-			String atime, Integer status) {
+			String keywords, String atime, Integer status) {
 		this.user = user;
 		this.ccontent = ccontent;
 		this.ctime = ctime;
 		this.acontent = acontent;
+		this.keywords = keywords;
 		this.atime = atime;
 		this.status = status;
 	}
@@ -76,7 +77,7 @@ public class Consult implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "ccontent", length = 200)
+	@Column(name = "ccontent", length = 500)
 	public String getCcontent() {
 		return this.ccontent;
 	}
@@ -94,13 +95,22 @@ public class Consult implements java.io.Serializable {
 		this.ctime = ctime;
 	}
 
-	@Column(name = "acontent", length = 200)
+	@Column(name = "acontent", length = 500)
 	public String getAcontent() {
 		return this.acontent;
 	}
 
 	public void setAcontent(String acontent) {
 		this.acontent = acontent;
+	}
+
+	@Column(name = "keywords", length = 100)
+	public String getKeywords() {
+		return this.keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 
 	@Column(name = "atime", length = 45)

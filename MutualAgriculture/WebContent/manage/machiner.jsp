@@ -37,7 +37,7 @@
 	rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="depend/bootstrap-table/bootstrap-table.css">
-
+<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
 
 <title>Document</title>
 <style type="text/css">
@@ -59,6 +59,17 @@
 </style>
 </head>
 <body style="background-color: #ECF0F5">
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
 	<div class="container" style="width: 100%;">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -166,10 +177,11 @@
 			},
 			'click .remove' : function(e, value, row, index) {
 				alert('You click remove icon, row: ' + JSON.stringify(row));
-				console.log(value, row, index);
+				//console.log(value, row, index);
 			}
 		};
 		$(function() {
+			$("#loading").fadeOut("slow");  
 			//Datemask dd/mm/yyyy
 			$('#table').bootstrapTable({
 				pagination : true,

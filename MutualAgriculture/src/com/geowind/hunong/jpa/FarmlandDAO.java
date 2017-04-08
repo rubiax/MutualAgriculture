@@ -1,7 +1,6 @@
 package com.geowind.hunong.jpa;
 
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

@@ -11,7 +11,7 @@ function addCropLayer(){
     var marker = new Array();
     var url = "../bFarmlandServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
-		 alert(data);
+		// alert(data);
 		 if(data==0){
 			 alert("查询出错");
 		 }else{
@@ -25,12 +25,10 @@ function addCropLayer(){
 					    '地址：'+json[i].address+
 					    '<br/>拥有者：'+json[i].user.realname+
 					    '<br>联系电话：'+json[i].user.phone+
-					    '<br>分区号:'+json[i].zone.zonename+
 					    '<br/>面积：'+json[i].area+
 					    '<br>pH:'+json[i].ph+
 					    '<br>流转信息：'+json[i].transtion+
 					    '<br>产量:'+json[i].production+
-					    '<br>种植类型:'+json[i].zone.type+
 					    '<br>NPK:'+json[i].npk+
 					    '</div>';
 				 addMarker(pointa,i,content);
@@ -39,8 +37,8 @@ function addCropLayer(){
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(30,30),
-	        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/crop.png", new BMap.Size(36,36),
+	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	function addMarker(point,i,content){
 		
 		//创建检索信息窗口对象
@@ -48,7 +46,7 @@ function addCropLayer(){
 		searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 		title  : "农作物",      //标题
 		width  : 290,             //宽度
-		height : 230,              //高度
+		height : 200,              //高度
 		panel  : "panel",         //检索结果面板
 		enableAutoPan : true,     //自动平移
 		searchTypes   :[

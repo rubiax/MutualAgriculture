@@ -98,6 +98,12 @@ public interface IBlockDAO {
 
 	public List<Block> findByValid(Object valid);
 
+	public List<Block> findByLongitude(Object longitude);
+
+	public List<Block> findByLatitude(Object latitude);
+
+	public List<Block> findByPicture(Object picture);
+
 	/**
 	 * Find all Block entities.
 	 * 

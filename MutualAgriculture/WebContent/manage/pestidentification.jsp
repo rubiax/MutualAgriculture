@@ -22,13 +22,23 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="css/dist/skin/skin-green-light.min.css">
-
+	<link href="depend/loading/loading.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="background-color: #ECF0F5">
-
-<div class="container">
-
+<!-- 等待加载 -->
+<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object" id="object_one"></div>
+			<div class="object" id="object_two"></div>
+			<div class="object" id="object_three"></div>
+			<div class="object" id="object_four"></div>
+		</div>
+	</div>
+</div>
+<div class="container" style="width:100%;">
+	<br>
 	<c:forEach items="${questions }" var="item">
 		<div class="row">
         <div class="col-md-10">
@@ -36,9 +46,16 @@
             <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="../../${item.user.picture }" alt="User Image">
+                <img class="img-circle" src=
+                <c:if test="${empty item.user.picture}">
+					"img/not_pic.jpg"
+					</c:if>
+					<c:if test="${not empty item.user.picture}">
+					"../../${item.user.picture}"
+					</c:if>
+               alt="User Image">
                 <span class="username"><a href="#">${item.user.username }</a></span>
-                <span class="description">${item.utime }</span>
+                <span class="description">上传时间：${item.utime }</span>
               </div>
               <!-- /.user-block -->
               <div class="box-tools">
@@ -54,8 +71,14 @@
             <div class="box-body">
             <!-- 问题描述图片 -->
               <p>${item.descr }</p>
-              <img class="img-responsive pad" src="../../${item.uploadPic}" style="width:400px" alt="Photo">
-              <span class="pull-right text-muted">n个回复</span>
+              <img class="img-responsive pad" src=
+              <c:if test="${empty item.uploadPic}">
+					"img/notfound.png"
+					</c:if>
+					<c:if test="${not empty item.uploadPic}">
+					"../../${item.uploadPic}"
+					</c:if>
+              style="width:400px" alt="Photo">
             </div>
             
             <!-- /.box-footer -->
@@ -95,9 +118,12 @@
             $("#answer").html("<i class='fa fa-sticky-note-o'></i>解答");
         }
     }); */
-    
+    $(function() {
+    	$("#loading").fadeOut("slow");  
+    });
     function answer(obj) {
     	var content = $("#answer"+obj).val();
+    	//alert(content);
     	if(content == undefined || content == "") {
     		return;
     	}

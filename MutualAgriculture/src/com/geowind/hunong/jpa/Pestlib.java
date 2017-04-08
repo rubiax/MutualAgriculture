@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Pestlib entity. @author MyEclipse Persistence Tools
  */
@@ -20,13 +22,19 @@ import javax.persistence.Table;
 public class Pestlib implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer pestId;
+	@Expose
 	private String pestname;
+	@Expose
 	private String branch;
+	@Expose
 	private String info;
+	@Expose
 	private String method;
+	@Expose
 	private String pic;
+	@Expose (serialize = false, deserialize = false)
 	private Set<Pestquestion> pestquestions = new HashSet<Pestquestion>(0);
 
 	// Constructors

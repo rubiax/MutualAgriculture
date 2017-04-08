@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Insectcontrol entity. @author MyEclipse Persistence Tools
  */
@@ -18,17 +20,27 @@ import javax.persistence.Table;
 public class Insectcontrol implements java.io.Serializable {
 
 	// Fields
-
+	@Expose
 	private Integer cid;
+	@Expose
 	private User user;
+	@Expose
 	private String descr;
+	@Expose
 	private String uploadImage;
+	@Expose
 	private String uploadtime;
+	@Expose
 	private String insectImage;
+	@Expose
 	private String info;
+	@Expose
 	private String harm;
+	@Expose
 	private String counterplan;
+	@Expose
 	private String solvetime;
+	@Expose
 	private Integer status;
 
 	// Constructors

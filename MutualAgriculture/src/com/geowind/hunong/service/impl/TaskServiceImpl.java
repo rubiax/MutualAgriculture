@@ -2,6 +2,7 @@ package com.geowind.hunong.service.impl;
 
 import com.geowind.hunong.dao.TaskDao;
 import com.geowind.hunong.dao.impl.TaskDaoImpl;
+import com.geowind.hunong.jpa.BlockDAO;
 import com.geowind.hunong.jpa.CenterDAO;
 import com.geowind.hunong.jpa.FarmlandDAO;
 import com.geowind.hunong.jpa.MachineDAO;
@@ -33,14 +34,14 @@ public class TaskServiceImpl implements TaskService {
 			Task task = new Task();
 			task.setTaskId((Integer)map.get("taskid"));
 			task.setUser(new UserDAO().findById((String)map.get("username")));
-			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
+			task.setBlock(new BlockDAO().findById((Integer)map.get("blockid")));
 			task.setWorkload((Integer)map.get("workload"));
-			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
+			task.setMachine(new MachineDAO().findById((Integer)map.get("machineid")));
 			task.setPublishdate((Date)map.get("publishdate"));
 			task.setWorkdate((Date)map.get("workdate"));
 			task.setType((String)map.get("type"));
 			task.setDescr((String)map.get("descr"));
-			task.setCenter(new CenterDAO().findById((int)map.get("centerid")));
+			task.setCenter(new CenterDAO().findById((Integer)map.get("centerid")));
 			task.setFinished((Integer)map.get("finished"));
 			list.add(task);
 		}
@@ -56,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
 			Task task = new Task();
 			task.setTaskId((int)map.get("taskid"));
 			task.setUser(new UserDAO().findById((String)map.get("username")));
-			task.setFarmland(new FarmlandDAO().findById((int)map.get("farmlandid")));
+			task.setBlock(new BlockDAO().findById((int)map.get("bid")));
 			task.setWorkload((int)map.get("workload"));
 			task.setMachine(new MachineDAO().findById((int)map.get("machineid")));
 			task.setPublishdate((Date)map.get("publishdate"));

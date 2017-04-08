@@ -12,7 +12,7 @@
         <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>        
         <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js">   </script>
         <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
-    <title>地图使用测试</title>
+    <title> 互农地图</title>
     <link rel="shortcut icon" href="img/icon_web_mini.png" type=""/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 	  <!-- Font Awesome -->
@@ -53,8 +53,8 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
 <!--             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
- -->            <li><a href="javascript:addPoint()" >添加标注点</a></li>
- 				<li><a href="javascript:addComputerAreaResult()">计算面积</a></li>
+ -->            <li><a href="#myHint" role="button"  data-toggle="modal" onCLick="addPoint()">添加标注点</a></li>
+ 				<li><a href="#myHint2" role="button" data-toggle="modal" onClick="addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -76,6 +76,7 @@
                 <li><a href="javascript:addFuelLayer()" >加油点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addRepairLayer()" >维修点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addCenterLayer()" >服务中心点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+              	 <li><a href="javascript:addBlockLayer()" >分块<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
               </ul>
             </li>
           </ul>
@@ -143,6 +144,10 @@
 	</header>
      <div id="allmap" class="baidu-maps"></div>
 	
+	<!-- hint html -->
+	<jsp:include page="hint1.html"></jsp:include>
+	<jsp:include page="hint2.html"></jsp:include>
+	
 	<!-- 初始化地图界面的四个js 文件 -->
     <script type="text/javascript" src="js/bigMap/mapInit.js"></script>
     <script type="text/javascript" src="js/bigMap/search.js"></script>
@@ -165,6 +170,7 @@
 	<script type="text/javascript" src="js/bigMap/repairLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/centerLayer.js" ></script>
 	<script type="text/javascript" src="js/bigMap/computerArea.js"></script>
+	<script type="text/javascript" src="js/bigMap/blockLayer.js"></script>
 	<!-- 统筹控制地图各个功能层块的调度显示js文件 -->
     <!--<script type="text/javascript" src="js/bigMap/layerControl.js"></script>-->
 

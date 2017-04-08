@@ -33,12 +33,7 @@ public class WeatherServlet extends BasicServlet{
 //	 * @param result：结果
 //	 * @throws IOException 
 //	 */
-//	protected void out(HttpServletResponse response, String result) throws IOException {
-//		PrintWriter out = response.getWriter();
-//		out.println(result);
-//		out.flush();
-//		out.close();
-//	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req,resp);
@@ -50,7 +45,6 @@ public class WeatherServlet extends BasicServlet{
 		response.setCharacterEncoding("utf-8");
 		String weather = getWeather("衡阳");
 		
-		System.out.println(weather);
 		String a = "\\d{1,2}.gif";
 		Pattern p = Pattern.compile(a);
 		Matcher m = p.matcher(weather);
@@ -107,16 +101,16 @@ public class WeatherServlet extends BasicServlet{
 		}	
 		
 		String after = weather.replaceAll("\\d{1,2}.gif", "");
-		System.out.println("after is"+after);
+//		System.out.println("after is"+after);
 		detail.setDetail(after);
 		weatherList.add(detail);
 
-		System.out.println("detail is"+weatherList.get(0).getDetail());
+//		System.out.println("detail is"+weatherList.get(0).getDetail());
 
-		System.out.println("i= "+i+" first is: "+weatherList.get(0).getFirst1()+" five is :"+weatherList.get(0).getFive2());
+//		System.out.println("i= "+i+" first is: "+weatherList.get(0).getFirst1()+" five is :"+weatherList.get(0).getFive2());
 			
 		this.out(response,weatherList);
-		System.out.println("over");
+//		System.out.println("pao chu shu ju");
 	}
 	/** 
      * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市 
