@@ -199,10 +199,10 @@ public class TaskServlet extends BasicServlet {
 		TaskDAO taskDAO = new TaskDAO();
 		Task task = new Task();
 		User user = new UserDAO().findById(username);
-		user.setStatus(1);
+		//user.setStatus(1);
 		task.setUser(user);
 		Machine machine = new MachineDAO().findById(Integer.parseInt(machineId));
-		machine.setWorkstate(1);
+		//machine.setWorkstate(1);
 		task.setMachine(machine);
 		Block block = new BlockDAO().findById(Integer.parseInt(bid));
 		task.setBlock(block);
@@ -224,11 +224,12 @@ public class TaskServlet extends BasicServlet {
 			
 			SimTask simTask = new SimTask();
 			simTask = simTask.fromTask(task);
-			//System.out.println("=====================================");
-			//System.out.println(simTask);
+			System.out.println("=====================================");
+			//System.out.println(simTask.toString());
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
+			System.out.println(jsonObject.toString());
 			JPushUtil.sendPush(username, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {

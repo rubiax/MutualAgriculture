@@ -34,8 +34,8 @@ function addFarmerLayer(){
 	});
 	
 	
-	var myIcon = new BMap.Icon("img/logoMarker/farmer.png", new BMap.Size(30,30),
-	        {anchor:new BMap.Size(30,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/farmer.png", new BMap.Size(36,36),
+	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	function addMarker(address,i,content){
 		
 		// 创建地址解析器实例

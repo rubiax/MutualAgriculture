@@ -89,11 +89,11 @@ public class InitServlet extends HttpServlet {
 		/**
 		 * 生成weather.json
 		 */
-		String p = WeatherDataTimerTask.class.getClassLoader().getResource("../../").getPath();
+		String p = '/'+WeatherDataTimerTask.class.getClassLoader().getResource("../../").getPath();
     	String weatherPath = null;
     	try {
     		weatherPath = URLDecoder.decode(p, "UTF-8").substring(1);
-    		weatherPath += "/jsonData";
+    		weatherPath += "jsonData";
 //			System.out.println(path);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -108,10 +108,14 @@ public class InitServlet extends HttpServlet {
 		}
 		
 		weatherPath += "/weather.json";
+		System.out.println(weatherPath);
 		weatherFile = new File(weatherPath);
+		if(weatherFile.exists()) {
+			weatherFile.delete();
+		}
 		if(!weatherFile.exists()) {
 			try {
-				file.createNewFile();
+				boolean b =file.createNewFile();
 				BufferedWriter writer = new BufferedWriter(new FileWriter(weatherFile, true));
 				writer.write(json);
 				writer.flush();

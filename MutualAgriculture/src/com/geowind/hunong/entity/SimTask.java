@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Date;
 
 import com.geowind.hunong.jpa.Task;
+import com.geowind.hunong.util.ServerIpUtil;
 import com.google.gson.annotations.Expose;
 
 public class SimTask {
@@ -168,8 +169,8 @@ public class SimTask {
 		this.latitude = latitude;
 	}
 	public void setFpicPath(String fpic) {
-			this.pic = "http://115.159.125.122:8080/MutualAgriculture/"+ fpic;
-			System.out.println("address:"+this.pic);
+		this.pic = "http://115.159.125.122:8080/MutualAgriculture/"+ fpic;
+		System.out.println("address:"+this.pic);
 	}
 	public String getMstyle() {
 		return mstyle;

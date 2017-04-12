@@ -13,7 +13,6 @@ function addPestLayer(){
 		 json = JSON.parse(data);
 		 for(var i=0;i<json.length;i++)
 		 {
-			 
 			 var pestType = checkPestType(json[i].ptype);
 				 
 			var diseaseType = checkDiseaseType(json[i].itype);
@@ -21,17 +20,17 @@ function addPestLayer(){
 			var degree = checkServe(json[i].degree)
 			 //循环数据 json[i]//获取数据操作 
 			 var content =  '<div style="margin:0;line-height:20px;padding:2px;">'+
-							'<img src="" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+							//'<img src="" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
 							'病害程度：'+degree+
-							'<br/>虫害类型：'+pestType+
+							'<br/>虫害类型：'+json[i].ptype+
 							'<br/>病害类型：'+diseaseType+
 							'</div>';
 			 addMarker(json[i].zone.address,i,content);
 		 }
 	});
 	
-	var myIcon = new BMap.Icon("img/logoMarker/pest.png", new BMap.Size(30,30),
-		        {anchor:new BMap.Size(15,30),infoWindowAnchor: new BMap.Size(15, 0)} );
+	var myIcon = new BMap.Icon("img/logoMarker/pest.png", new BMap.Size(36,36),
+		        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
 	 // 编写自定义函数,创建标注
     function addMarker(address,i,content){
     	// 创建地址解析器实例
@@ -42,8 +41,8 @@ function addPestLayer(){
 					var searchInfoWindow = null;
 					searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 					title  : "病害",      //标题
-					width  : 290,             //宽度
-					height : 105,              //高度
+					width  : 250,             //宽度
+					height : 100,              //高度
 					panel  : "panel",         //检索结果面板
 					enableAutoPan : true,     //自动平移
 					searchTypes   :[
