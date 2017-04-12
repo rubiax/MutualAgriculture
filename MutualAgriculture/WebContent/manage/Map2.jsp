@@ -36,35 +36,6 @@
 	  	.baidu-maps label {max-width: none;}
 	  	body,html,#allmap{width: 100%;height: 96.5%;overflow: hidden;margin: 0;}
 	  	
-	  	/* 下拉别样式 */
-	  	/***************************************************************/
-	  	#dropdown-menu li {
-	  		list-style: none;
-	  	}
-	  	#dropdown-menu .checkboxs li {
-	  		float: left;
-	  		margin-right: 10px; 
-	  	}
-	  	#dropdown-menu .checkboxs {
-	  		clear: both;
-	  	}
-	  	#dropdown-menu .checkitems {
-	  		margin-top: 10px;
-	  		display: inline-block;
-	  	}
-	  	/****************************************************************/
-	  	/* 右边侧边栏  */
-	  	/****************************************************************/
-	  	#rightpart {
-	  		width:25%;
-	  		left: 75%;
-	  		height: 100%;
-			position: fixed;
-	  		background: white;
-	  		z-index: 999;
-	  		opacity: 0.85;
-	  	}
-	  	/****************************************************************/
 	  </style>
 </head>
 <body class="hold-transition skin-green-light layout-top-nav">
@@ -86,33 +57,26 @@
  				<li><a href="#myHint2" role="button" data-toggle="modal" onClick="addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
-              <ul id="dropdown-menu" class="dropdown-menu" role="menu" style="min-width:350px;opacity:0.85;">
-              	<li class="checkitems">
-              		<ul class="checkboxs">
-              			<li>天气&nbsp;<input type="checkbox"/></li>
-              			<li>虫害&nbsp;<input type="checkbox"/></li>
-              			<li>病害&nbsp;<input type="checkbox"/></li>
-              			<li>农机&nbsp;<input type="checkbox"/></li>
-              			<li>农作物&nbsp;<input type="checkbox"/></li>
-              		</ul>
-              	</li>
-              	<li class="checkitems">
-              		<ul class="checkboxs">
-              			<li>农民&nbsp;<input type="checkbox"/></li>
-              			<li>任务&nbsp;<input type="checkbox"/></li>
-              			<li>提问&nbsp;<input type="checkbox"/></li>
-              			<li>分区&nbsp;<input type="checkbox"/></li>
-              			<li>分块&nbsp;<input type="checkbox"/></li>
-              		</ul>
-              	</li>
-              	<li class="checkitems">
-              		<ul class="checkboxs">
-              			<li>受灾点&nbsp;<input type="checkbox"/></li>
-              			<li>加油点&nbsp;<input type="checkbox"/></li>
-              			<li>维修点&nbsp;<input type="checkbox"/></li>
-              			<li>服务中心点&nbsp;<input type="checkbox"/></li>
-              		</ul>
-              	</li>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="javascript:clearMark()" >重置<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:addWeatherLayer()" >天气<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addPestLayer()" >虫害<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addDiseaseLayer()" >病害<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:addFarmerLayer()" >农民<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addMachineLayer()" >农机<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCropLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:addTaskLayer()" >任务<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addQuestionLayer()" >提问<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:addZoneLayer()" >分区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addAffectAreasLayer()">受灾区<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addFuelLayer()" >加油点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addRepairLayer()" >维修点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCenterLayer()" >服务中心点<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+              	 <li><a href="javascript:addBlockLayer()" >分块<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
               </ul>
             </li>
           </ul>
@@ -178,18 +142,8 @@
       <!-- /.container-fluid -->
     </nav>
 	</header>
-	<div id="rightpart">
-		<div style="margin-left:20px;">
-			<h2>A区</h2>
-			<p><img src="img/user8-128x128.jpg" display="height:80px;"/></p>
-			<p>总面积：xxx</p>
-			<p>当天天气：</p>
-			<p>作物类型：</p>
-			<p>任务数量：</p>
-		</div>
-	</div>
-    <div id="allmap" class="baidu-maps"></div>
-	 
+     <div id="allmap" class="baidu-maps"></div>
+	
 	<!-- hint html -->
 	<jsp:include page="hint1.html"></jsp:include>
 	<jsp:include page="hint2.html"></jsp:include>

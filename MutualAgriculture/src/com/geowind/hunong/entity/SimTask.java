@@ -168,12 +168,8 @@ public class SimTask {
 		this.latitude = latitude;
 	}
 	public void setFpicPath(String fpic) {
-		try {
-			this.pic = "http://"+InetAddress.getLocalHost().getHostAddress() +":8080/MutualAgriculture/"+ fpic;
+			this.pic = "http://115.159.125.122:8080/MutualAgriculture/"+ fpic;
 			System.out.println("address:"+this.pic);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
 	}
 	public String getMstyle() {
 		return mstyle;
