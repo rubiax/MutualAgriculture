@@ -36,12 +36,10 @@
 	  	.baidu-maps label {max-width: none;}
 	  	body,html,#allmap{width: 100%;height: 96.5%;overflow: hidden;margin: 0;}
 	  	
-	  
+	  </style>
 </head>
 
-
-<body>
-
+<body class="hold-transition skin-green-light layout-top-nav">
   <header class="main-header">
 	<nav class="navbar navbar-static-top">
       <div class="container">
@@ -60,7 +58,6 @@
  				<li><a href="#myHint2" role="button" data-toggle="modal" onClick="addComputerAreaResult()">计算面积</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能选择 <span class="caret"></span></a>
-
               <ul class="dropdown-menu" role="menu">
                 <li><a href="javascript:clearMark()" >重置<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
@@ -70,7 +67,7 @@
                 <li class="divider"></li>
                 <li><a href="javascript:addFarmerLayer()" >农民<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addMachineLayer()" >农机<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
-                <li><a href="javascript:addCropLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCropLayer()" onclick="addZoneLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
                 <li><a href="javascript:addTaskLayer()" >任务<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addQuestionLayer()" >提问<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
@@ -146,8 +143,8 @@
       <!-- /.container-fluid -->
     </nav>
 	</header>
-	  <div id="allmap" class="baidu-maps"></div>
-	 
+     <div id="allmap" class="baidu-maps"></div>
+	
 	<!-- hint html -->
 	<jsp:include page="hint1.html"></jsp:include>
 	<jsp:include page="hint2.html"></jsp:include>
