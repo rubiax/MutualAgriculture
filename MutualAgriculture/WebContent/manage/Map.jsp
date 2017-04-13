@@ -66,7 +66,7 @@
                 <li class="divider"></li>
                 <li><a href="javascript:addFarmerLayer()" >农民<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addMachineLayer()" >农机<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
-                <li><a href="javascript:addCropLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
+                <li><a href="javascript:addCropLayer()" onclick="addZoneLayer()">农作物<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li class="divider"></li>
                 <li><a href="javascript:addTaskLayer()" >任务<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>
                 <li><a href="javascript:addQuestionLayer()" >提问<span class="pull-right-container"><i class="fa fa-check pull-right" style="line-height: 20px; color: green; display: none;"></i></span></a></li>

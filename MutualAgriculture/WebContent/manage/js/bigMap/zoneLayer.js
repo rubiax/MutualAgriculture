@@ -2,7 +2,7 @@
  * Created by Jiang on 2016/10/19.
  */
 function addZoneLayer(){
-    map.clearOverlays();
+ 
     
     var url = "../bZoneServlet?op=MapSearchZonePoint";
 	var json;
