@@ -38,6 +38,7 @@
 	  	
 	  </style>
 </head>
+
 <body class="hold-transition skin-green-light layout-top-nav">
   <header class="main-header">
 	<nav class="navbar navbar-static-top">
