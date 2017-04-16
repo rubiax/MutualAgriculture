@@ -65,6 +65,7 @@ public class BMachineServlet extends BasicServlet {
 			break;
 		case "mapSearchAll":
 			MapSearchAll(request,response);
+			break;
 		case "editeOne":
 			editeOne(request, response);
 			break;
@@ -80,7 +81,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 获得农机类型统计数量
+	 * 鑾峰緱鍐滄満绫诲瀷缁熻鏁伴噺
 	 * @param request
 	 * @param response
 	 * @throws IOException 
@@ -96,15 +97,15 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 查询空闲农机
+	 * 鏌ヨ绌洪棽鍐滄満
 	 * @param request
 	 * @param response
 	 * @throws IOException 
 	 */
 	private void findFreeMachine(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
-		entityManager.clear(); //清空一级缓存
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
+		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
 		
 		MachineService machineService = new MachineServiceImpl();
 		List<Machine> machineList = machineService.findFreeMachine();
@@ -112,7 +113,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 修改单个属性
+	 * 淇敼鍗曚釜灞炴��
 	 * 
 	 * @param request
 	 * @param response
@@ -178,7 +179,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 编辑农机信息
+	 * 缂栬緫鍐滄満淇℃伅
 	 * 
 	 * @param request
 	 * @param response
@@ -219,7 +220,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 上传农机图片
+	 * 涓婁紶鍐滄満鍥剧墖
 	 * 
 	 * @param request
 	 * @param response
@@ -247,7 +248,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 删除农机
+	 * 鍒犻櫎鍐滄満
 	 * 
 	 * @param request
 	 * @param response
@@ -271,7 +272,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 添加农机信息
+	 * 娣诲姞鍐滄満淇℃伅
 	 * 
 	 * @param request
 	 * @param response
@@ -322,7 +323,7 @@ public class BMachineServlet extends BasicServlet {
 	}
 
 	/**
-	 * 农机详情
+	 * 鍐滄満璇︽儏
 	 * 
 	 * @param request
 	 * @param response
@@ -330,8 +331,8 @@ public class BMachineServlet extends BasicServlet {
 	 */
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
-		entityManager.clear(); //清空一级缓存
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
+		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
 		MachineDAO machineDAO = new MachineDAO();
 		try {
 			Machine machine = machineDAO.findById(Integer.parseInt(request.getParameter("machineId")));
@@ -345,12 +346,12 @@ public class BMachineServlet extends BasicServlet {
 			response.sendRedirect("manage/editormachine.jsp");
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find failed", Level.SEVERE, re);
-			// 跳转至错误界面
+			// 璺宠浆鑷抽敊璇晫闈�
 		}
 	}
 
 	/**
-	 * 查找所有农机信息
+	 * 鏌ユ壘鎵�鏈夊啘鏈轰俊鎭�
 	 * 
 	 * @param request
 	 * @param response
@@ -358,8 +359,8 @@ public class BMachineServlet extends BasicServlet {
 	 */
 	private void searchAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); //清空二级缓存；
-		entityManager.clear(); //清空一级缓存
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
+		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
 		MachineDAO machineDAO = new MachineDAO();
 		MachineOwnerService machineService = new MachineOwnerServiceImpl();
 		int centerId = (int) request.getSession().getAttribute("currentCenterId");
@@ -374,7 +375,7 @@ public class BMachineServlet extends BasicServlet {
 			request.getSession().setAttribute("allMachine", machineList);
 			response.sendRedirect("manage/machine.jsp");
 		} else {
-			// 跳转至错误页面
+			// 璺宠浆鑷抽敊璇〉闈�
 
 		}
 	}

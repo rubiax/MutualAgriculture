@@ -3,12 +3,15 @@
  * 天气标注图层
  */
 // var marker2 = new BMap.Marker();
+
+var markerWeather = new Array();
 var weatherDetail;
+var countWeather;
 function addWeatherLayer(){
-		map.clearOverlays();
+		//map.clearOverlays();
  	  	var zonejson;
  	  	var weatherjson;
- 	  	var marker = new Array();
+ 	  	
     	 var weatherurl="../weatherServlet";
     	 var zoneurl ="../bZoneServlet?op=MapSearchAll";
     	 $.post(zoneurl,{},function getWeather(data){
@@ -26,9 +29,9 @@ function addWeatherLayer(){
     			 alert("查询为空");
     		 }else{
 	    			 weatherjson = JSON.parse(data);
+	    			 countWeather=zonejson.length;
     			 for(var i = 0;i<zonejson.length;i++)
     			 {
-    				 //alert(zonejson[i].address);
     				 addWeatherMarker(zonejson[i].address,i);
     			 }
     		 }
@@ -61,12 +64,12 @@ function addWeatherLayer(){
     						//BMAPLIB_TAB_FROM_HERE //从这里出发
     						]
     						});
-    						marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+    						markerWeather[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
     				            raiseOnDrag: true}); //创建marker对象
-    						marker[i].addEventListener("click", function(e){
-    							searchInfoWindow.open(marker[i]);
+    						markerWeather[i].addEventListener("click", function(e){
+    							searchInfoWindow.open(markerWeather[i]);
     						});
-    						map.addOverlay(marker[i]); //在地图中添加marker
+    						map.addOverlay(markerWeather[i]); //在地图中添加marker
     						
     					}
     				else{
@@ -75,10 +78,18 @@ function addWeatherLayer(){
     			}, "湖南省");
     		 
     	 }
+ 
 
-    
-    
+};
 
-}
-
+/**
+ * Created by Jiang on 2017/04/14.
+ * 隐藏天气
+ * @returns
+ */
+function hideWeatherLayer(){
+	for(var k =0;k<countWeather;k++){
+		map.removeOverlay(markerWeather[k]);
+	}
+};
 

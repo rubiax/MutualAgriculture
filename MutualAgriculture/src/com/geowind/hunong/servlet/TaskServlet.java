@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -69,11 +70,67 @@ public class TaskServlet extends BasicServlet {
 			historyTask(request, response);
 		} else if("MapSearchAll".equals(op)){
 			MapSearchAll(request,response);
+		} else if("getTaskNum".equals(op)){
+			getTaskNum(request,response);
 		}
 	}
 	
+	
 	/**
-	 * 地图查找所有任务
+	 * 获得任务数量
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void getTaskNum(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		TaskDAO taskDAO =new TaskDAO();
+		List<Task> taskList = taskDAO.findAll();
+		String zoneNum = request.getParameter("zone");
+		int taskNum = 0;
+		if(taskList!=null&&taskList.size()>0){
+			taskNum = countTaskNum(taskList,zoneNum);
+			this.out(response,taskNum);
+		}else{
+			this.out(response, 0);
+		}
+	}
+
+	/**
+	 * 计算任务数量
+	 * @param taskList
+	 * @return
+	 */
+	private int countTaskNum(List<Task> taskList, String zoneNum) {
+		int num = 0;
+		if (zoneNum.equals("0")) {
+			Iterator<Task> it = taskList.iterator();
+			while (it.hasNext()) {
+
+				if(it.next().getBlock().getZone().getZonename().equals("A区")){
+					num++;
+				}
+				
+
+			}
+		} else if (zoneNum.equals("1")) {
+			
+			Iterator<Task> it = taskList.iterator();
+			while (it.hasNext()) {
+
+				if(it.next().getBlock().getZone().getZonename().equals("B区")){
+					num++;
+				}
+				
+
+			}
+		}
+
+		return num;
+	}
+
+
+	/**
+	 * 鍦板浘鏌ユ壘鎵�鏈変换鍔�
 	 * @param request
 	 * @param response
 	 * @throws IOException 
@@ -115,7 +172,7 @@ public class TaskServlet extends BasicServlet {
 	}
 
 	/**
-	 * 任务结束
+	 * 浠诲姟缁撴潫
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -154,7 +211,7 @@ public class TaskServlet extends BasicServlet {
 	}
 
 	/**
-	 * 已经完成的任务
+	 * 宸茬粡瀹屾垚鐨勪换鍔�
 	 * @param request
 	 * @param response
 	 * @throws IOException 
@@ -168,7 +225,7 @@ public class TaskServlet extends BasicServlet {
 	}
 
 	/**
-	 * 任务清单
+	 * 浠诲姟娓呭崟
 	 * @param request
 	 * @param response
 	 * @throws IOException 
@@ -184,7 +241,7 @@ public class TaskServlet extends BasicServlet {
 	}
 
 	/**
-	 * 发布任务
+	 * 鍙戝竷浠诲姟
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -230,7 +287,7 @@ public class TaskServlet extends BasicServlet {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
 			System.out.println(jsonObject.toString());
-			JPushUtil.sendPush(username, "任务提醒", jsonObject);
+			JPushUtil.sendPush(username, "浠诲姟鎻愰啋", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");

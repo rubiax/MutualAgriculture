@@ -2,12 +2,13 @@
  * Created by Jiang on 2016/10/19.
  * 农民显示
  */
+var countFarmer;
+var markerFarmer = new Array();
 function addFarmerLayer(){
 
-	map.clearOverlays();
     
     var json;
-    var marker = new Array();
+    
     var url = "../bUserServlet?op=MapSearchFarmer";
 	$.post(url,{},function getData(data){
 		 
@@ -16,6 +17,7 @@ function addFarmerLayer(){
 		}else{
 			//alert(data);
 			 json = JSON.parse(data);
+			 countFarmer = json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 //循环数据 json[i]//获取数据操作 
@@ -56,12 +58,12 @@ function addFarmerLayer(){
 					//BMAPLIB_TAB_FROM_HERE //从这里出发
 					]
 					});
-					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+					markerFarmer[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
 			            raiseOnDrag: true}); //创建marker对象
-					marker[i].addEventListener("click", function(e){
-						searchInfoWindow.open(marker[i]);
+					markerFarmer[i].addEventListener("click", function(e){
+						searchInfoWindow.open(markerFarmer[i]);
 					})
-					map.addOverlay(marker[i]); //在地图中添加marker
+					map.addOverlay(markerFarmer[i]); //在地图中添加marker
 				}
 			else{
 				alert("您选择地址没有解析到结果!");
@@ -70,3 +72,17 @@ function addFarmerLayer(){
 	}
 
 }
+
+
+
+/**
+ * Created by Jiang on 2017/04/14
+ * 隐藏农民
+ * @returns
+ */
+function hideFarmerLayer(){
+	for(var k=0;k<countFarmer;k++){
+		map.removeOverlay(markerFarmer[k]);
+	}
+}
+

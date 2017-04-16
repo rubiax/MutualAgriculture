@@ -7,12 +7,6 @@ var i=0;
 var checkOpenAddPoint = false;
 function addPoint(){
 		if(!checkOpenAddPoint){
-				
-//			    var content = '点击“添加标注点”后可使用 鼠标右键 按照顺时针或逆时针有序点击地图添加标注点,' +
-//								'选择完标注点后点击面板上的 计算面积 即可得出所标注图形构成的面积,' +
-//								'点击 ”功能选择“的 重置 即可取消该功能！'
-//				alert(content);
-				
 			
 			    checkOpenAddPoint = true;
 			    

@@ -2,13 +2,13 @@
  * Created by Jiang on 2016/10/19.
  * 农作物图层详情
  */
-
+var countCrop;
+var markerCrop = new Array();
 function addCropLayer(){
 	
 
-    map.clearOverlays();
     var json;
-    var marker = new Array();
+    
     var url = "../bFarmlandServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		// alert(data);
@@ -16,6 +16,7 @@ function addCropLayer(){
 			 alert("查询出错");
 		 }else{
 			 json = JSON.parse(data);
+			 countCrop = json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 var pointa = new BMap.Point(json[i].longitude,json[i].latitude);
@@ -55,14 +56,30 @@ function addCropLayer(){
 		//BMAPLIB_TAB_FROM_HERE //从这里出发
 		]
 		});
-		marker[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+		markerCrop[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
             raiseOnDrag: true}); //创建marker对象
-		marker[i].addEventListener("click", function(e){
-		searchInfoWindow.open(marker[i]);
+		markerCrop[i].addEventListener("click", function(e){
+		searchInfoWindow.open(markerCrop[i]);
 		});
-		map.addOverlay(marker[i]); //在地图中添加marker
+		map.addOverlay(markerCrop[i]); //在地图中添加marker
 		
 	}
 	
     
 }
+
+/**
+ * Created by Jiang on 2017/04/14
+ * 隐藏农作物
+ * @returns
+ */
+function hideCropLayer(){
+	alert(countCrop);
+	for(var k = 0;k<countCrop;k++){
+		map.removeOverlay(markerCrop[k]);
+	}
+}
+
+
+
+

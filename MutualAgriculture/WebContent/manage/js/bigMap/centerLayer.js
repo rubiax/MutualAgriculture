@@ -1,16 +1,18 @@
 /**
  * 服务中心点层
  */
-
+var countCenter;
+var markerCenter = new Array();
 function addCenterLayer(){
-map.clearOverlays();
+	//map.clearOverlays();
     
     var json;
-    var marker = new Array();
+  
     var url = "../CenterServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		 //alert(data);
 		 json = JSON.parse(data);
+		 countCenter=json.length;
 		 for(var i=0;i<json.length;i++)
 		 { 
 			//服务中心显示信息
@@ -48,12 +50,12 @@ map.clearOverlays();
 					//BMAPLIB_TAB_FROM_HERE //从这里出发
 					]
 					});
-					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+					markerCenter[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
 			            raiseOnDrag: true}); //创建marker对象
-					marker[i].addEventListener("click", function(e){
-					searchInfoWindow.open(marker[i]);
+					markerCenter[i].addEventListener("click", function(e){
+					searchInfoWindow.open(markerCenter[i]);
 					})
-					map.addOverlay(marker[i]); //在地图中添加marker
+					map.addOverlay(markerCenter[i]); //在地图中添加marker
 				}
 			else{
 				alert("您选择地址没有解析到结果!");
@@ -62,4 +64,17 @@ map.clearOverlays();
 				
 	}
 
+}
+
+
+/**
+ * Created by Jiang on 2017/04/14
+ * 隐藏服务中心
+ * @returns
+ */
+function hideCenterLayer(){
+	for(var k = 0;k<countCenter;k++){
+		map.removeOverlay(markerCenter[k]);
+		
+	}
 }

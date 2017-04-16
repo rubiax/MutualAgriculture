@@ -89,28 +89,28 @@
               <ul id="dropdown-menu" class="dropdown-menu" role="menu" style="min-width:350px;opacity:0.85;">
               	<li class="checkitems">
               		<ul class="checkboxs">
-              			<li>天气&nbsp;<input type="checkbox"/></li>
-              			<li>虫害&nbsp;<input type="checkbox"/></li>
-              			<li>病害&nbsp;<input type="checkbox"/></li>
-              			<li>农机&nbsp;<input type="checkbox"/></li>
-              			<li>农作物&nbsp;<input type="checkbox"/></li>
+              			<li>天气&nbsp;<input type="checkbox" id="weather" name="weather" value="天气"/></li>
+              			<li>虫害&nbsp;<input type="checkbox" id="pest" name="pest" value="天气"/></li>
+              			<li>病害&nbsp;<input type="checkbox"id="disease" name="disease" value="灾害"/></li>
+              			<li>农机&nbsp;<input type="checkbox" id="machine" name="machine" value="农机"/></li>
+              			<li>农作物&nbsp;<input type="checkbox" id="crop" name="crop" value="农作物"/></li>
               		</ul>
               	</li>
               	<li class="checkitems">
               		<ul class="checkboxs">
-              			<li>农民&nbsp;<input type="checkbox"/></li>
-              			<li>任务&nbsp;<input type="checkbox"/></li>
-              			<li>提问&nbsp;<input type="checkbox"/></li>
-              			<li>分区&nbsp;<input type="checkbox"/></li>
-              			<li>分块&nbsp;<input type="checkbox"/></li>
+              			<li>农民&nbsp;<input type="checkbox" id="farmer" name="farmer" value="农民"/></li>
+              			<li>任务&nbsp;<input type="checkbox" id="task" name="task" value="任务"/></li>
+              			<li>提问&nbsp;<input type="checkbox" id="question" name="question" vaue="任务"/></li>
+              			<li>分区&nbsp;<input type="checkbox" id="zone" name="zone" value="分区"/></li>
+              			<li>分块&nbsp;<input type="checkbox" id="block" name="block" value="分块"/></li>
               		</ul>
               	</li>
               	<li class="checkitems">
               		<ul class="checkboxs">
-              			<li>受灾点&nbsp;<input type="checkbox"/></li>
-              			<li>加油点&nbsp;<input type="checkbox"/></li>
-              			<li>维修点&nbsp;<input type="checkbox"/></li>
-              			<li>服务中心点&nbsp;<input type="checkbox"/></li>
+              			<li>受灾点&nbsp;<input type="checkbox" id="affectedarea" name="affectedarea" value="受灾区" /></li>
+              			<li>加油点&nbsp;<input type="checkbox" id="fuel" name="fuel" value="加油点"/></li>
+              			<li>维修点&nbsp;<input type="checkbox" id="repair" name="repair" value="维修点"/></li>
+              			<li>服务中心点&nbsp;<input type="checkbox"id="center" name="center" value="服务中心"/></li>
               		</ul>
               	</li>
               </ul>
@@ -180,12 +180,26 @@
 	</header>
 	<div id="rightpart">
 		<div style="margin-left:20px;">
-			<h2>A区</h2>
-			<p><img src="img/user8-128x128.jpg" display="height:80px;"/></p>
-			<p>总面积：xxx</p>
-			<p>当天天气：</p>
-			<p>作物类型：</p>
-			<p>任务数量：</p>
+			
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					 分区 <span class="caret"></span>
+				</button>
+				<h2 id="zoneName" ></h2>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="javascript:addZoneLayer(0)" onclick="modifyA()">A区</a></li>
+					<li><a href="javascript:addZoneLayer(1)" onclick="modifyB()">B区</a></li>
+				</ul>
+			</div>
+			
+			
+			<p><img id="zonePicture" src="../../HN_upload/imgupload/1489371566369_184.jpeg" display="height:80px;"/></p>
+			<p id="area">总面积：</p>
+			<p id="weather">当天天气：</p>
+			<p id="cropType">作物类型：</p>
+			<p id="taskNum">任务数量：</p>
 		</div>
 	</div>
     <div id="allmap" class="baidu-maps"></div>
@@ -233,6 +247,159 @@
 	<!-- AdminLTE App -->
 	<script src="js/dist/app.min.js"></script>
 	<script type="text/javascript">
+	
+	
+	
+	$(document).ready(function() {
+		
+	        $("#weather").change(function() {
+	            if (!$("#weather").attr("checked")) {
+	            	$("#weather").attr("checked",true);
+	            	addWeatherLayer();
+	            	alert("add");
+	            }else if($("#weather").attr("checked")){
+	            	$("#weather").attr("checked",false);
+	            	hideWeatherLayer();
+	            }
+	        });
+	        
+	        $("#block").change(function(){
+	        	if(!$("#block").attr("checked")){
+	        		$("#block").attr("checked",true);
+	        		addBlockLayer();
+	        	}else if($("#block").attr("checked")){
+	        		$("#block").attr("checked",false);
+	        		hideBlockLayer();
+	        	}	      	
+	        });
+	        
+	        $("#affectedarea").change(function(){
+	        	if(!$("#affectedarea").attr("checked")){
+	        		$("#affectedarea").attr("checked",true);
+	        		addAffectAreasLayer();
+	        	}else if($("#affectedarea").attr("checked")){
+	        		$("#affectedarea").attr("checked",false);
+	        		hideAffectedAreasLayer();
+	        	}	      	
+	        });
+	        
+	        $("#center").change(function(){
+	        	if(!$("#center").attr("checked")){
+	        		$("#center").attr("checked",true);
+	        		addCenterLayer();
+	        	}else if($("#center").attr("checked")){
+	        		$("#center").attr("checked",false);
+	        		hideCenterLayer();
+	        	}	      	
+	        });
+	        
+	        
+	        $("#crop").change(function(){
+	        	if(!$("#crop").attr("checked")){
+	        		$("#crop").attr("checked",true);
+	        		addCropLayer();
+	        	}else if($("#crop").attr("checked")){
+	        		$("#crop").attr("checked",false);
+	        		hideCropLayer();
+	        	}	      	
+	        });
+	        
+	        
+	        $("#disease").change(function(){
+	        	if(!$("#disease").attr("checked")){
+	        		$("#disease").attr("checked",true);
+	        		addDiseaseLayer();
+	        	}else if($("#disease").attr("checked")){
+	        		$("#disease").attr("checked",false);
+	        		hideDiseaseLayer();
+	        	}	      	
+	        });
+	        
+	        $("#farmer").change(function(){
+	        	if(!$("#farmer").attr("checked")){
+	        		$("#farmer").attr("checked",true);
+	        		addFarmerLayer();
+	        	}else if($("#farmer").attr("checked")){
+	        		$("#farmer").attr("checked",false);
+	        		hideFarmerLayer();
+	        	}	      	
+	        });
+	        
+	        $("#fuel").change(function(){
+	        	if(!$("#fuel").attr("checked")){
+	        		$("#fuel").attr("checked",true);
+	        		addFuelLayer();
+	        	}else if($("#fuel").attr("checked")){
+	        		$("#fuel").attr("checked",false);
+	        		hideFuelLayer();
+	        	}	      	
+	        });
+	        
+	        $("#machine").change(function(){
+	        	if(!$("#machine").attr("checked")){
+	        		$("#machine").attr("checked",true);
+	        		addMachineLayer();
+	        	}else if($("#machine").attr("checked")){
+	        		$("#machine").attr("checked",false);
+	        		hideMachineLayer();
+	        	}	      	
+	        });
+	        
+	        
+	        $("#pest").change(function(){
+	        	if(!$("#pest").attr("checked")){
+	        		$("#pest").attr("checked",true);
+	        		addPestLayer();
+	        	}else if($("#pest").attr("checked")){
+	        		$("#pest").attr("checked",false);
+	        		hidePestLayer();
+	        	}	      	
+	        });
+	        
+	        $("#question").change(function(){
+	        	if(!$("#question").attr("checked")){
+	        		$("#question").attr("checked",true);
+	        		addQuestionLayer();
+	        	}else if($("#question").attr("checked")){
+	        		$("#question").attr("checked",false);
+	        		hideQuestionLayer();
+	        	}	      	
+	        });
+	        
+	        
+	        $("#repair").change(function(){
+	        	if(!$("#repair").attr("checked")){
+	        		$("#repair").attr("checked",true);
+	        		addRepairLayer();
+	        	}else if($("#repair").attr("checked")){
+	        		$("#repair").attr("checked",false);
+	        		hideRepairLayer();
+	        	}	      	
+	        });
+	        
+	        $("#task").change(function(){
+	        	if(!$("#task").attr("checked")){
+	        		$("#task").attr("checked",true);
+	        		addTaskLayer();
+	        	}else if($("#task").attr("checked")){
+	        		$("#task").attr("checked",false);
+	        		hideTaskLayer();
+	        	}	      	
+	        });
+	        
+	        $("#zone").change(function(){
+	        	if(!$("#zone").attr("checked")){
+	        		$("#zone").attr("checked",true);
+	        		addZoneLayer();
+	        	}else if($("#zone").attr("checked")){
+	        		$("#zone").attr("checked",false);
+	        		hideZoneLayer();
+	        	}	      	
+	        });
+	        
+	});
+	
+	
 		$(".dropdown-menu > li").click(function () {
 			$(".dropdown-menu > li").find("i").each(function () {
 				$(this).hide();
@@ -245,6 +412,18 @@
 			pts = [];
 			checkOpenAddPoint = false;
 			map.removeEventListener("rightclick",showInfo);
+		};
+		
+		function modifyA(){
+			
+			$("#zoneName").text("A区");
+			$("#cropType").text("作物类型：水稻");
+			
+		}
+		
+		function modifyB(){
+			$("#zoneName").text("B区");
+			$("cropType").text("作物类型：小麦")
 		}
 	</script>
 </body>

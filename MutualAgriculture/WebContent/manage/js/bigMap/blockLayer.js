@@ -2,12 +2,14 @@
  * Created by Jiang on 2016/10/19.
  * 分块显示
  */
+var countBlock;
+var markerBlock = new Array();
+
 function addBlockLayer(){
 
-	map.clearOverlays();
-    
+	//map.clearOverlays();  
     var json;
-    var marker = new Array();
+  
     var url = "../blockServlet?op=getAllBlockData";
 	$.post(url,{},function getData(data){
 		 
@@ -16,6 +18,7 @@ function addBlockLayer(){
 		}else{
 			//alert(data);
 			 json = JSON.parse(data);
+			 countBlock=json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 var pointa = new BMap.Point(json[i].longitude,json[i].latitude);
@@ -27,7 +30,7 @@ function addBlockLayer(){
 					    '<br>块名：'+json[i].bname+
 					    '<br/>面积：'+json[i].area+
 					    '</div>';
-				 addMarker(pointa,i,content);
+				 addMarker(pointa,i,content,json);
 			 }
 		}		
 	});
@@ -35,7 +38,7 @@ function addBlockLayer(){
 	
 	var myIcon = new BMap.Icon("img/logoMarker/block.png", new BMap.Size(36,36),
 	        {anchor:new BMap.Size(18,36),infoWindowAnchor: new BMap.Size(18, 0)} );
-	function addMarker(point,i,content){
+	function addMarker(point,i,content,json){
 			
 			//创建检索信息窗口对象
 			var searchInfoWindow = null;
@@ -51,14 +54,31 @@ function addBlockLayer(){
 			//BMAPLIB_TAB_FROM_HERE //从这里出发
 			]
 			});
-			marker[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+			markerBlock[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
 	            raiseOnDrag: true}); //创建marker对象
-			marker[i].addEventListener("click", function(e){
-			searchInfoWindow.open(marker[i]);
+			markerBlock[i].addEventListener("click", function(){
+			
+				//alert("../"+json[i].picture);
+				$("#zonePicture").attr("src","../"+json[i].picture);
+				searchInfoWindow.open(markerBlock[i]);
 			});
-			map.addOverlay(marker[i]); //在地图中添加marker
+			
+			map.addOverlay(markerBlock[i]); //在地图中添加marker
 			
 		}
 		
 
+}
+
+
+
+/**
+ * Created by Jiang on 2017/04/14.
+ * 增加隐藏标注点
+ * @returns
+ */
+function hideBlockLayer(){
+	for(var k=0;k<countBlock;k++){
+		map.removeOverlay(markerBlock[k]);
+	}
 }

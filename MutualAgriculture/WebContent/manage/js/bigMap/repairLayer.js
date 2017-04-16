@@ -1,13 +1,13 @@
 /**
+ *  
  * 维修点层
  */
-
+var markerRepair = new Array();
+var countRepair;
 function addRepairLayer(){
 	
-map.clearOverlays();
-    
     var json;
-    var marker = new Array();
+   
     var url = "../serviceStaionServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		
@@ -16,6 +16,7 @@ map.clearOverlays();
 		}else{
 			//alert(data);
 			 json = JSON.parse(data);
+			 countRepair = json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 //循环数据 json[i]//获取数据操作 
@@ -34,12 +35,18 @@ map.clearOverlays();
 		
 	function addMarker(point,i,label){
 		
-		marker[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+		markerRepair[i] = new BMap.Marker(point,{icon:myIcon, enableDragging: false,
             raiseOnDrag: true}); //创建marker对象
 	
-		map.addOverlay(marker[i]); //在地图中添加marker
-		marker[i].setLabel(label);
+		map.addOverlay(markerRepair[i]); //在地图中添加marker
+		markerRepair[i].setLabel(label);
 	}
 	
 
+}
+
+function hideRepairLayer(){
+	for(var k =0;k<countRepair;k++){
+		map.removeOverlay(markerRepair[k]);
+	}
 }

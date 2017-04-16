@@ -2,14 +2,17 @@
  * Created by Jiang on 2016/10/19.
  * 病害区
  */
+
+var markerDisease = new Array();
+var countDisease; 
 function addDiseaseLayer(){
 
-	   	map.clearOverlays();
 	    var json;
-	    var marker = new Array();
+	   
 	    var url = "../pestZoneServlet?op=MapSearchAll";
 		$.post(url,{},function getData(data){
 			 json = JSON.parse(data);
+			 countDisease = json.length; 
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 
@@ -51,13 +54,13 @@ function addDiseaseLayer(){
 						//BMAPLIB_TAB_FROM_HERE //从这里出发
 						]
 						});
-						marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: true,
+						markerDisease[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: true,
 				            raiseOnDrag: true}); //创建marker对象
-						marker[i].addEventListener("click", function(e){
+						markerDisease[i].addEventListener("click", function(e){
 							searchInfoWindow.open(marker[i]);
 						})
-						map.addOverlay(marker[i]); //在地图中添加marker
-						marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+						map.addOverlay(markerDisease[i]); //在地图中添加marker
+						markerDisease[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 					}
 				else{
 					alert("您选择地址没有解析到结果!");
@@ -188,4 +191,14 @@ function checkServe(serve){
 	return re;
 }
 
+/**
+ * Created by Jiang on 2017/04/014
+ * 隐藏病害
+ * @returns
+ */	
+function hideDiseaseLayer(){
+	for(var k=0;k<countDisease;k++){
+		map.removeOverlay(markerDisease[k]);
+	}
 	
+}

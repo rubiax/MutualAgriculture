@@ -2,15 +2,17 @@
  * Created by Jiang on 2016/10/19.
  * 添加虫害图层
  */
+var markerPest = new Array();
+var countPest;  
 function addPestLayer(){
 	
-   	map.clearOverlays();
     var json;
-    var marker = new Array();
+  
     var url = "../pestZoneServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		 //alert(data);
 		 json = JSON.parse(data);
+		 countPest = json.length;
 		 for(var i=0;i<json.length;i++)
 		 {
 			 var pestType = checkPestType(json[i].ptype);
@@ -51,13 +53,13 @@ function addPestLayer(){
 					//BMAPLIB_TAB_FROM_HERE //从这里出发
 					]
 					});
-					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: true,
+					markerPest[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: true,
 			            raiseOnDrag: true}); //创建marker对象
-					marker[i].addEventListener("click", function(e){
-						searchInfoWindow.open(marker[i]);
+					markerPest[i].addEventListener("click", function(e){
+						searchInfoWindow.open(markerPest[i]);
 					});
-					map.addOverlay(marker[i]); //在地图中添加marker
-					marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+					map.addOverlay(markerPest[i]); //在地图中添加marker
+					markerPest[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 				}
 			else{
 				alert("您选择地址没有解析到结果!");
@@ -186,3 +188,14 @@ function checkServe(serve){
 }
 
 
+/**
+ * Created by Jiang on 2017/04/14
+ * 隐藏虫害
+ * @returns
+ */
+function hidePestLayer(){
+	for(var k = 0;k<countPest;k++){
+		map.removeOverlay(markerPest[k]);
+	}
+
+}

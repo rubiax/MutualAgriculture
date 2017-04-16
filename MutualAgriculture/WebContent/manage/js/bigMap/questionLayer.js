@@ -2,10 +2,11 @@
  * Created by Jiang on 2016/10/19
  * 提问显示图层.
  */
+var markerQuestion = new Array();
+var countQuestion;
 function addQuestionLayer(){
-   	map.clearOverlays();
     var json;
-    var marker = new Array();
+    
     var url = "../pestQuestionServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		
@@ -14,6 +15,7 @@ function addQuestionLayer(){
 		}else{
 			// alert(data);
 			 json = JSON.parse(data);
+			 countQuestion = json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
 				 //循环数据 json[i]//获取数据操作 
@@ -52,17 +54,29 @@ function addQuestionLayer(){
 					//BMAPLIB_TAB_FROM_HERE //从这里出发
 					]
 					});
-					marker[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
+					markerQuestion[i]= new BMap.Marker(point,{icon:myIcon, enableDragging: false,
 			            raiseOnDrag: true}); //创建marker对象
-					marker[i].addEventListener("click", function(e){
-						searchInfoWindow.open(marker[i]);
+					markerQuestion[i].addEventListener("click", function(e){
+						searchInfoWindow.open(markerQuestion[i]);
 					})
-					map.addOverlay(marker[i]); //在地图中添加marker
-					marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+					map.addOverlay(markerQuestion[i]); //在地图中添加marker
+					markerQuestion[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 				}
 			else{
 				alert("您选择地址没有解析到结果!");
 			}
 		}, "湖南省");
     }
+}
+
+
+/**
+ * Created by Jiang on 2017/04/14
+ * 隐藏提问
+ * @returns
+ */
+function hideQuestionLayer(){
+	for(var k =0;k<countQuestion;k++){
+		map.removeOverlay(markerQuestion[k]);	
+	}
 }
