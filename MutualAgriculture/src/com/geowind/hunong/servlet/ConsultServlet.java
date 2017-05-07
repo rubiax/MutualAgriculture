@@ -67,7 +67,7 @@ public class ConsultServlet extends BasicServlet {
 			EntityManagerHelper.commit();
 			
 			SimConsult simConsult = new SimConsult();
-			simConsult.fromConsult(consult);
+			simConsult = simConsult.fromConsult(consult);
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simConsult)).getAsJsonObject();

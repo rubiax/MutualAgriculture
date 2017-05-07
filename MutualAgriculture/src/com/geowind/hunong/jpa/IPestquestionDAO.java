@@ -99,6 +99,8 @@ public interface IPestquestionDAO {
 	public List<Pestquestion> findByAtime(Object atime);
 
 	public List<Pestquestion> findByStatus(Object status);
+	
+	public List<Pestquestion> findByAnswer(Object answer);
 
 	/**
 	 * Find all Pestquestion entities.

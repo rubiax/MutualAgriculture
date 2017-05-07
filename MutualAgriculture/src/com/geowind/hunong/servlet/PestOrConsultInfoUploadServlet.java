@@ -19,6 +19,9 @@ import com.geowind.hunong.jpa.PestquestionDAO;
 import com.geowind.hunong.jpa.User;
 import com.geowind.hunong.jpa.UserDAO;
 import com.geowind.hunong.util.FileUploadUtil;
+import com.geowind.hunong.util.ImageClassify;
+import com.geowind.hunong.util.LogManager;
+import com.mysql.jdbc.log.LogUtils;
 
 public class PestOrConsultInfoUploadServlet extends BasicServlet {
 
@@ -30,7 +33,7 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
 		response.setCharacterEncoding("utf-8");
 		
 		ServletConfig servletConfig = this.getServletConfig();
-		FileUploadUtil.PATH = "../HN_upload/imgupload";
+		FileUploadUtil.PATH = "../HN_upload/pestImageUpload";
         FileUploadUtil uploadUtil = new FileUploadUtil();
         PrintWriter out = null;
         try {
@@ -76,10 +79,25 @@ public class PestOrConsultInfoUploadServlet extends BasicServlet {
     	try {
     		pestquestionDAO.save(pestquestion);
     		EntityManagerHelper.commit();
+    		//自动识别回答
+    		autoAnswerByImage(pestquestion);
     	} catch (RuntimeException re) {
     		re.printStackTrace();
     		this.out(response, "0");
     	}
+	}
+
+	/**
+	 * 自动图片识别
+	 * @param pestquestion
+	 */
+	private synchronized void autoAnswerByImage(Pestquestion pestquestion) {
+		//开启线程进行识别
+		LogManager.logger.info("开始执行自动识别...");
+//		System.out.println(pestquestion.toString());
+		ImageClassify imageClassify = new ImageClassify(pestquestion);
+		Thread t = new Thread(imageClassify);
+		t.start();
 	}
 
 	/**

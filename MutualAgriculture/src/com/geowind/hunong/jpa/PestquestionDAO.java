@@ -22,6 +22,7 @@ public class PestquestionDAO implements IPestquestionDAO {
 	public static final String UTIME = "utime";
 	public static final String ATIME = "atime";
 	public static final String STATUS = "status";
+	public static final String ANSWER = "answer";
 
 	private EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
@@ -186,6 +187,10 @@ public class PestquestionDAO implements IPestquestionDAO {
 
 	public List<Pestquestion> findByStatus(Object status) {
 		return findByProperty(STATUS, status);
+	}
+	
+	public List<Pestquestion> findByAnswer(Object answer) {
+		return findByProperty(ANSWER, answer);
 	}
 
 	/**

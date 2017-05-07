@@ -36,6 +36,8 @@ public class Pestquestion implements java.io.Serializable {
 	private String atime;
 	@Expose
 	private Integer status;
+	@Expose
+	private String answer;
 
 	// Constructors
 
@@ -45,7 +47,7 @@ public class Pestquestion implements java.io.Serializable {
 
 	/** full constructor */
 	public Pestquestion(User user, Pestlib pestlib, String uploadPic,
-			String descr, String utime, String atime, Integer status) {
+			String descr, String utime, String atime, Integer status, String answer) {
 		this.user = user;
 		this.pestlib = pestlib;
 		this.uploadPic = uploadPic;
@@ -53,6 +55,7 @@ public class Pestquestion implements java.io.Serializable {
 		this.utime = utime;
 		this.atime = atime;
 		this.status = status;
+		this.answer = answer;
 	}
 
 	// Property accessors
@@ -104,6 +107,15 @@ public class Pestquestion implements java.io.Serializable {
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
+	
+	@Column(name = "answer", length = 3000)
+	public String getAnswer() {
+		return this.answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 
 	@Column(name = "utime", length = 45)
 	public String getUtime() {
@@ -131,5 +143,14 @@ public class Pestquestion implements java.io.Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "Pestquestion [qid=" + qid + ", user=" + user + ", pestlib=" + pestlib + ", uploadPic=" + uploadPic
+				+ ", descr=" + descr + ", utime=" + utime + ", atime=" + atime + ", status=" + status + ", answer="
+				+ answer + "]";
+	}
+	
+	
 
 }

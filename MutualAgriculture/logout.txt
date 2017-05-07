@@ -1,0 +1,1 @@
+2017-05-07 13:40:58 INFO  main    [com.geowind.hunong.util.LogManager] aaaaaa
