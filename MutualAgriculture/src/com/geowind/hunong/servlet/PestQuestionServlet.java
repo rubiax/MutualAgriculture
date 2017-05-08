@@ -1,14 +1,29 @@
 package com.geowind.hunong.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geowind.hunong.entity.SimConsult;
+import com.geowind.hunong.entity.SimPestQuestion;
+import com.geowind.hunong.jpa.Consult;
+import com.geowind.hunong.jpa.ConsultDAO;
+import com.geowind.hunong.jpa.EntityManagerHelper;
 import com.geowind.hunong.jpa.Pestquestion;
 import com.geowind.hunong.jpa.PestquestionDAO;
+import com.geowind.hunong.util.JPushUtil;
+import com.geowind.hunong.util.LogManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.mysql.jdbc.log.LogUtils;
 
 public class PestQuestionServlet extends BasicServlet {
 
@@ -28,6 +43,15 @@ public class PestQuestionServlet extends BasicServlet {
 			case "question":
 				question(request, response);
 				break;
+			case "questioned":
+				questioned(request, response);
+				break;
+			case "answer":
+				answer(request, response);
+				break;
+			case "answeragain":
+				answeragain(request, response);
+				break;
 			default:
 				break;
 
@@ -35,9 +59,106 @@ public class PestQuestionServlet extends BasicServlet {
 		}
 	
 	}
+	
+	
+	/**
+	 * 图片机器识别后专家再次补充解答
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void answeragain(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int cid = Integer.parseInt(request.getParameter("qid"));
+		String centent = request.getParameter("content");
+		PestquestionDAO pestquestionDAO = new PestquestionDAO();
+		Pestquestion pestquestion = pestquestionDAO.findById(cid);
+		String answer = pestquestion.getAnswer();
+		if (centent == null) {
+			answer = "";
+		}
+		answer = answer.concat("\n").concat(centent);
+		pestquestion.setAnswer(answer);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(new Date());
+		pestquestion.setAtime(date);
+		pestquestion.setStatus(1);
+		EntityManagerHelper.beginTransaction();
+		try {
+			pestquestionDAO.update(pestquestion);
+			EntityManagerHelper.commit();
+			
+			SimPestQuestion simPestQuestion = new SimPestQuestion();
+			simPestQuestion = simPestQuestion.fromPestquestion(pestquestion);
+			
+			LogManager.logger.info(simPestQuestion.toString());
+			
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simPestQuestion)).getAsJsonObject();
+			JPushUtil.sendPush(simPestQuestion.getUsername(), "虫害识别", jsonObject);
+			this.out(response, "1");
+		} catch (RuntimeException re) {
+			this.out(response, "0");
+		}
+	}
 
-	private void question(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+
+	/**
+	 * 图片人工回答
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	private void answer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int cid = Integer.parseInt(request.getParameter("qid"));
+		String centent = request.getParameter("content");
+		PestquestionDAO pestquestionDAO = new PestquestionDAO();
+		Pestquestion pestquestion = pestquestionDAO.findById(cid);
+		pestquestion.setAnswer(centent);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(new Date());
+		pestquestion.setAtime(date);
+		pestquestion.setStatus(1);
+		EntityManagerHelper.beginTransaction();
+		try {
+			pestquestionDAO.update(pestquestion);
+			EntityManagerHelper.commit();
+			
+			SimPestQuestion simPestQuestion = new SimPestQuestion();
+			simPestQuestion = simPestQuestion.fromPestquestion(pestquestion);
+			
+			LogManager.logger.info(simPestQuestion.toString());
+			
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simPestQuestion)).getAsJsonObject();
+			JPushUtil.sendPush(simPestQuestion.getUsername(), "虫害识别", jsonObject);
+			this.out(response, "1");
+		} catch (RuntimeException re) {
+			this.out(response, "0");
+		}
+	}
+
+	/**
+	 * 查看已经识别的图片
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void questioned(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
+		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
+		
+		PestquestionDAO pestquestionDAO = new PestquestionDAO();
+		List<Pestquestion> pestquestionList = pestquestionDAO.findByStatus(1);
+		request.getSession().setAttribute("historyquestions", pestquestionList);
+		response.sendRedirect("manage/pestidentificated.jsp");
+	}
+
+	private void question(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		EntityManager entityManager = EntityManagerHelper.getEntityManager();
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
+		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
+		
 		PestquestionDAO pestquestionDAO = new PestquestionDAO();
 		List<Pestquestion> pestquestionList = pestquestionDAO.findByStatus(0);
 		request.getSession().setAttribute("questions", pestquestionList);

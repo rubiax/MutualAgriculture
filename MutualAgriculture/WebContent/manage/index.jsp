@@ -193,6 +193,7 @@
             <!-- <li><a href="javascript:showpage(this,'')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li> -->
             <li><a href="javascript:showpage(this,'../pestlibServlet?op=searchAll')"><i class="fa fa-circle-o"></i> 病虫图鉴</a></li>
             <li><a href="javascript:showpage(this,'../pestQuestionServlet?op=question')"><i class="fa fa-circle-o"></i> 人工识别</a></li>
+            <li><a href="javascript:showpage(this,'../pestQuestionServlet?op=questioned')"><i class="fa fa-circle-o"></i> 历史解答</a></li>
           </ul>
         </li>
       </ul>

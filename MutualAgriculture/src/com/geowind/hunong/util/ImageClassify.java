@@ -159,30 +159,30 @@ public class ImageClassify implements Runnable {
 		LogManager.logger.info("run.................");
 		PestquestionDAO pestquestionDAO = new PestquestionDAO();
 		String string = classifyImage(pestquestion.getUploadPic());
-		if(string == null) {
-			return;
+		if(string != null && !"".equals(string)) {
+			LogManager.logger.info(string);
+			pestquestion.setAnswer(string);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String date = sdf.format(new Date());
+			pestquestion.setAtime(date);
+			pestquestion.setStatus(1);
+//			System.out.println(pestquestion.toString());
+			EntityManagerHelper.beginTransaction();
+			try {
+	    		pestquestionDAO.update(pestquestion);
+	    		EntityManagerHelper.commit();
+	    		
+	    		SimPestQuestion simPestQuestion = new SimPestQuestion();
+	    		simPestQuestion = simPestQuestion.fromPestquestion(pestquestion);
+	    		LogManager.logger.info("图片识别返回结果："+simPestQuestion.toString());
+				Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+				JsonObject jsonObject = new JsonParser().parse(gson.toJson(simPestQuestion)).getAsJsonObject();
+				JPushUtil.sendPush(simPestQuestion.getUsername(), "虫害识别", jsonObject);
+	    		
+	    	} catch (RuntimeException re) {
+	    		re.printStackTrace();
+	    	}
 		}
-		LogManager.logger.info(string);
-		pestquestion.setAnswer(string);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date = sdf.format(new Date());
-		pestquestion.setAtime(date);
-		pestquestion.setStatus(1);
-//		System.out.println(pestquestion.toString());
-		EntityManagerHelper.beginTransaction();
-		try {
-    		pestquestionDAO.save(pestquestion);
-    		EntityManagerHelper.commit();
-    		
-    		SimPestQuestion simPestQuestion = new SimPestQuestion();
-    		simPestQuestion = simPestQuestion.fromPestquestion(pestquestion);
-    		LogManager.logger.info("图片识别返回结果："+simPestQuestion.toString());
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simPestQuestion)).getAsJsonObject();
-			JPushUtil.sendPush(simPestQuestion.getUsername(), "专家回复", jsonObject);
-    		
-    	} catch (RuntimeException re) {
-    		re.printStackTrace();
-    	}
+		
 	}
 }

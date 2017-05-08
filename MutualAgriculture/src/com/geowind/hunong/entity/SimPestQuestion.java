@@ -42,7 +42,7 @@ public class SimPestQuestion {
 			return uploadPic;
 		}
 		public void setUploadPic(String uploadPic) {
-			this.uploadPic = uploadPic;
+			this.uploadPic = "http://115.159.125.122:8080/MutualAgriculture/"+uploadPic;
 		}
 		public String getDescr() {
 			return descr;

@@ -39,7 +39,7 @@
 </div>
 <div class="container" style="width:100%;">
 	<br>
-	<c:forEach items="${questions }" var="item">
+	<c:forEach items="${historyquestions }" var="item">
 		<div class="row">
         <div class="col-md-10">
             <!-- Box Comment -->
@@ -79,6 +79,7 @@
 					"../../${item.uploadPic}"
 					</c:if>
               style="width:400px" alt="Photo">
+              <p><pre>${item.answer }</pre></p>
             </div>
             
             <!-- /.box-footer -->
@@ -86,7 +87,7 @@
                 <img class="img-responsive img-circle img-sm" src="img/admin.png" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                  <input type="text"  class="form-control" placeholder="按下回车键提交回复.." onkeydown='if(event.keyCode==13){answer(${item.qid})} else{return;}' id="answer${item.qid }" />
+                  <input type="text"  class="form-control" placeholder="重新解答..." onkeydown='if(event.keyCode==13){answer(${item.qid})} else{return;}' id="answer${item.qid }"/>
                 </div>
             </div>
             <!-- /.box-footer -->
@@ -126,9 +127,9 @@
     	if(content == undefined || content == "") {
     		return;
     	}
-    	$.post("../pestQuestionServlet?op=answer", {qid:obj,content:content}, function() {
+    	$.post("../pestQuestionServlet?op=answeragain", {qid:obj,content:content}, function() {
     		alert("success");
-    		location.href = '../pestQuestionServlet?op=question';
+    		location.href = '../pestQuestionServlet?op=questioned';
     	});
     }
 </script>
