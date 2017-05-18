@@ -34,7 +34,7 @@ public class CheckAdminIsLoginFilter implements Filter {
 			String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getContextPath() + "/";
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('è¯·å…ˆç™»å½•...');location.href='"+basePath+errorPage+"'</script>");
+			out.println("<script>alert('ÇëÏÈµÇÂ¼...');location.href='"+basePath+errorPage+"'</script>");
 			out.flush();
 			out.close();
 		} else {
