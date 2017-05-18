@@ -54,7 +54,7 @@ public class PestZoneServlet extends BasicServlet {
 		PestzoneDAO pestzoneDAO = new PestzoneDAO();
 		Integer in = 0;
 		List<Pestzone> affectedAreaList = pestzoneDAO.findByStatus(in);
-		System.out.println("aff is:"+affectedAreaList.size());
+		//System.out.println("aff is:"+affectedAreaList.size());
 		if(affectedAreaList!=null&&affectedAreaList.size()>0){			
 			this.out(response, getAffectedFarmlandPoint(affectedAreaList));
 		}else{
@@ -65,13 +65,13 @@ public class PestZoneServlet extends BasicServlet {
 
 	
 	/**
-	 * 获得受灾区凸点经纬度
+	 * 鑾峰緱鍙楃伨鍖哄嚫鐐圭粡绾害
 	 * @param affectedAreaList
 	 * @return
 	 */
 	private List<FarmlandPoint> getAffectedFarmlandPoint(List<Pestzone> affectedAreaList) {
 		
-		//获得分区的集合，保证不重复
+		//鑾峰緱鍒嗗尯鐨勯泦鍚堬紝淇濊瘉涓嶉噸澶�
 		Set<Zone> zoneNumber = new HashSet<Zone>();
 		int d =0;
 		for(int i=0;i<affectedAreaList.size();i++){
@@ -89,15 +89,15 @@ public class PestZoneServlet extends BasicServlet {
 		
 		Set<Block> blockSet = new HashSet<Block>();
 	
-		//遍历受灾的农田分区
+		//閬嶅巻鍙楃伨鐨勫啘鐢板垎鍖�
 		while(i.hasNext()){
 			List<Point> p = new ArrayList<Point>();
-			//获得该指定分区下的所有农田
+			//鑾峰緱璇ユ寚瀹氬垎鍖轰笅鐨勬墍鏈夊啘鐢�
 			blockSet = i.next().getBlocks();
 			
 			Iterator<Block> b = blockSet.iterator();
 			
-			//获得分块
+			//鑾峰緱鍒嗗潡
 			while(b.hasNext()){
 			
 
@@ -111,7 +111,7 @@ public class PestZoneServlet extends BasicServlet {
 			Iterator<Farmland> f = farmlandList.iterator();
 			
 			int count = 0;
-			//获得农田
+			//鑾峰緱鍐滅敯
 			while(f.hasNext()){
 				
 				count++;

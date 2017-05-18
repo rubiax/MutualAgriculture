@@ -1,5 +1,10 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=2d37964ead6287f02014eb95c54f2e96a0d1f7e7
+>>>>>>>=10b73787d7616184b3855597ed751f80ff99a792
 eclipse.preferences.version=1
+encoding//src/com/geowind/hunong/servlet/BMachineServlet.java=UTF-8
+encoding//src/com/geowind/hunong/servlet/InitServlet.java=UTF-8
+encoding//src/com/geowind/hunong/servlet/PestZoneServlet.java=UTF-8
+encoding//src/com/geowind/hunong/servlet/TaskServlet.java=UTF-8
+encoding//src/com/geowind/hunong/servlet/WeatherServlet.java=UTF-8
 encoding//src/com/geowind/hunong/util/PathUtil.java=UTF-8
