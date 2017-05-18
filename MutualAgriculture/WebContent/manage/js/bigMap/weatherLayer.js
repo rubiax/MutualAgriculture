@@ -7,7 +7,7 @@
 var markerWeather = new Array();
 var weatherDetail;
 var countWeather;
-function addWeatherLayer(){
+function addWeatherLayer(result){
 		//map.clearOverlays();
  	  	var zonejson;
  	  	var weatherjson;
@@ -45,11 +45,6 @@ function addWeatherLayer(){
 							    '区号：'+zonejson[i].zonename +
 							    '<br/>天气详情：'+weatherjson[0].detail+
 							    '</div>';
-    			
-    			
-    			//var str = weatherjson[0].detail; 
-    			//var patt = new RegExp("2017","g");
-    			//alert(patt.exec(str));
     			var str = weatherjson[0].detail;
     			var reg = /\d{4}\/\d{2}\/\d{2}\s\d{2}\:\d{2}\:\d{2}/g;
     			var updateTime = reg.exec(str);
@@ -83,8 +78,10 @@ function addWeatherLayer(){
     						markerWeather[i].addEventListener("click", function(e){
     							searchInfoWindow.open(markerWeather[i]);
     						});
-    						map.addOverlay(markerWeather[i]); //在地图中添加marker
     						
+    						if(result==1){
+    							map.addOverlay(markerWeather[i]); //在地图中添加marker
+    						}
     					}
     				else{
     					alert("您选择地址没有解析到结果!");

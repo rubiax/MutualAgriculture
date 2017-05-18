@@ -258,11 +258,10 @@
 	        $("#weather").change(function() {
 	            if (!$("#weather").attr("checked")) {
 	            	$("#weather").attr("checked",true);
-	            	addWeatherLayer();
-	            	//alert("add");
+	            	addWeatherLayer(1);
 	            }else if($("#weather").attr("checked")){
 	            	$("#weather").attr("checked",false);
-	            	hideWeatherLayer();
+	            	hideWeatherLayer(0);
 	            }
 	        });
 	        
@@ -421,14 +420,14 @@
 			
 			$("#zoneName").text("A区");
 			$("#cropType").text("作物类型：水稻");
-			addWeatherLayer();
+			addWeatherLayer(0);
 			
 		}
 		
 		function modifyB(){
 			$("#zoneName").text("B区");
 			$("#cropType").text("作物类型：小麦")
-			addWeatherLayer();
+			addWeatherLayer(0);
 		}
 	</script>
 </body>
