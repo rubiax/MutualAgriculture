@@ -197,7 +197,10 @@
 			
 			<p><img id="zonePicture" src="../../HN_upload/imgupload/1489371566369_184.jpeg" display="height:80px;"/></p>
 			<p id="area">总面积：</p>
-			<p id="weather">当天天气：</p>
+			<p id="weatherDetail">天气预报：</p>
+			<p id="updateDetail"></p>
+			<p id="today"></p>
+			<p id="future"></p>
 			<p id="cropType">作物类型：</p>
 			<p id="taskNum">任务数量：</p>
 		</div>
@@ -256,7 +259,7 @@
 	            if (!$("#weather").attr("checked")) {
 	            	$("#weather").attr("checked",true);
 	            	addWeatherLayer();
-	            	alert("add");
+	            	//alert("add");
 	            }else if($("#weather").attr("checked")){
 	            	$("#weather").attr("checked",false);
 	            	hideWeatherLayer();
@@ -418,12 +421,14 @@
 			
 			$("#zoneName").text("A区");
 			$("#cropType").text("作物类型：水稻");
+			addWeatherLayer();
 			
 		}
 		
 		function modifyB(){
 			$("#zoneName").text("B区");
-			$("cropType").text("作物类型：小麦")
+			$("#cropType").text("作物类型：小麦")
+			addWeatherLayer();
 		}
 	</script>
 </body>

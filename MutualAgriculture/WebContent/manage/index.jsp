@@ -223,7 +223,7 @@
     <!-- <div class="pull-right hidden-xs">
       Anything you want
     </div> -->
-    <strong>Copyright &copy; 2016 <a href="http://www.geowind.cn" style="color: green;" target="_Blank">geowind</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2017 <a href="http://www.geowind.cn" style="color: green;" target="_Blank">geowind</a>.</strong> All rights reserved.
     <!-- Default to the left -->
   </footer>
 

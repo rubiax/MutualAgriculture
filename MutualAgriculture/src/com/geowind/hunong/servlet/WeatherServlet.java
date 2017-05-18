@@ -28,9 +28,9 @@ public class WeatherServlet extends BasicServlet{
 
 	
 //	/**
-//	 * 发送一个表示符给客服端
+//	 * 鍙戦�佷竴涓〃绀虹缁欏鏈嶇
 //	 * @param response
-//	 * @param result：结果
+//	 * @param result锛氱粨鏋�
 //	 * @throws IOException 
 //	 */
 
@@ -113,10 +113,10 @@ public class WeatherServlet extends BasicServlet{
 //		System.out.println("pao chu shu ju");
 	}
 	/** 
-     * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市 
+     * 鑾峰彇SOAP鐨勮姹傚ご锛屽苟鏇挎崲鍏朵腑鐨勬爣蹇楃鍙蜂负鐢ㄦ埛杈撳叆鐨勫煄甯� 
      *  
-     * @param city 用户输入的城市名称 
-     * @return 客户将要发送给服务器的SOAP请求 
+     * @param city 鐢ㄦ埛杈撳叆鐨勫煄甯傚悕绉� 
+     * @return 瀹㈡埛灏嗚鍙戦�佺粰鏈嶅姟鍣ㄧ殑SOAP璇锋眰 
      */  
     private static String getSoapRequest(String city) {  
         StringBuilder sb = new StringBuilder();  
@@ -133,10 +133,10 @@ public class WeatherServlet extends BasicServlet{
     }  
   
     /** 
-     * 用户把SOAP请求发送给服务器端，并返回服务器点返回的输入流 
+     * 鐢ㄦ埛鎶奡OAP璇锋眰鍙戦�佺粰鏈嶅姟鍣ㄧ锛屽苟杩斿洖鏈嶅姟鍣ㄧ偣杩斿洖鐨勮緭鍏ユ祦 
      *  
-     * @param city 用户输入的城市名称 
-     * @return 服务器端返回的输入流，供客户端读取 
+     * @param city 鐢ㄦ埛杈撳叆鐨勫煄甯傚悕绉� 
+     * @return 鏈嶅姟鍣ㄧ杩斿洖鐨勮緭鍏ユ祦锛屼緵瀹㈡埛绔鍙� 
      * @throws Exception 
      */  
     private static InputStream getSoapInputStream(String city) throws Exception {  
@@ -173,11 +173,11 @@ public class WeatherServlet extends BasicServlet{
     }  
   
     /** 
-     * 对服务器端返回的XML进行解析 
+     * 瀵规湇鍔″櫒绔繑鍥炵殑XML杩涜瑙ｆ瀽 
      *  
      * @param city 
-     *            用户输入的城市名称 
-     * @return 字符串 用#分割 
+     *            鐢ㄦ埛杈撳叆鐨勫煄甯傚悕绉� 
+     * @return 瀛楃涓� 鐢�#鍒嗗壊 
      */  
     public static String getWeather(String city) {  
         try {  
@@ -193,7 +193,7 @@ public class WeatherServlet extends BasicServlet{
                 if(count!=6&&count!=2)
                 {
 	            	Node n = nl.item(count);  
-	                if(n.getFirstChild().getNodeValue().equals("查询结果为空！")) {  
+	                if(n.getFirstChild().getNodeValue().equals("鏌ヨ缁撴灉涓虹┖锛�")) {  
 	                    sb = new StringBuffer(" ") ;  
 	                    break ;  
 	                }  

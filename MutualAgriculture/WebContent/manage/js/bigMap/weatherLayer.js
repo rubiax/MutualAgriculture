@@ -45,7 +45,21 @@ function addWeatherLayer(){
 							    '区号：'+zonejson[i].zonename +
 							    '<br/>天气详情：'+weatherjson[0].detail+
 							    '</div>';
-    	   				
+    			
+    			
+    			//var str = weatherjson[0].detail; 
+    			//var patt = new RegExp("2017","g");
+    			//alert(patt.exec(str));
+    			var str = weatherjson[0].detail;
+    			var reg = /\d{4}\/\d{2}\/\d{2}\s\d{2}\:\d{2}\:\d{2}/g;
+    			var updateTime = reg.exec(str);
+    			
+    			var today = str.substr(29,50); 
+    			var future = str.substr(79);
+    			
+    			$("#updateDetail").text("  更新时间："+updateTime);
+    			$("#today").text(today);
+    			$("#future").text("  未来天气："+future);
     			// 创建地址解析器实例
     			var myGeo = new BMap.Geocoder();
     			myGeo.getPoint(address, function(point){
