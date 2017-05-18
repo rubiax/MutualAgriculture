@@ -287,7 +287,7 @@ public class TaskServlet extends BasicServlet {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simTask)).getAsJsonObject();
 			System.out.println(jsonObject.toString());
-			JPushUtil.sendPush(username, "浠诲姟鎻愰啋", jsonObject);
+			JPushUtil.sendPush(username, "任务提醒", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");
