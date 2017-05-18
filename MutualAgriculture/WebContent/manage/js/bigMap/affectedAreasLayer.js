@@ -32,9 +32,9 @@ function addAffectAreasLayer(){
 	            var area = BMapLib.GeoUtils.getPolygonArea(plyaffected[j]);
 	            var mu = area.toFixed(2)*0.0015;
 
-	            	 var label = new BMap.Label("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩",{offset:new BMap.Size(20,-10)})	
+	            	 //var label = new BMap.Label("共" + area.toFixed(2) + "平方米, 共有 "+mu+"亩",{offset:new BMap.Size(20,-10)})	
 	            	 map.addOverlay(marker);
-	            	 marker.setLabel(label);
+	            	 //marker.setLabel(label);
 
 	            //演示：将面添加到地图上    
 	            //map.clearOverlays();

@@ -10,11 +10,13 @@ function addQuestionLayer(){
     var url = "../pestQuestionServlet?op=MapSearchAll";
 	$.post(url,{},function getData(data){
 		
+		
 		if(data==0){
 			alert("查询出错");
 		}else{
-			// alert(data);
+			 alert(data);
 			 json = JSON.parse(data);
+			 
 			 countQuestion = json.length;
 			 for(var i=0;i<json.length;i++)
 			 { 
