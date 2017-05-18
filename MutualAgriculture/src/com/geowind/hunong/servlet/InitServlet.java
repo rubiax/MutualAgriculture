@@ -40,21 +40,22 @@ public class InitServlet extends HttpServlet {
 
 		File file = new File(path);
 		if (!file.exists()) {
-//			System.out.println(path + "路径创建成功");
+//			System.out.println(path + "璺緞鍒涘缓鎴愬姛");
+			//System.out.println("lalalallal");
 			file.mkdirs();
 		}
 
 		path = this.getServletContext().getRealPath("/") + filePath + "/imgupload";
 		file = new File(path);
 		if (!file.exists()) {
-//			System.out.println(path + "图片文件夹创建成功");
+//			System.out.println(path + "鍥剧墖鏂囦欢澶瑰垱寤烘垚鍔�");
 			file.mkdirs();
 		}
 
 		path = this.getServletContext().getRealPath("/") + filePath + "/pestlib";
 		file = new File(path);
 		if (!file.exists()) {
-//			System.out.println(path + "虫库创建成功");
+//			System.out.println(path + "铏簱鍒涘缓鎴愬姛");
 			file.mkdirs();
 		}
 
@@ -68,7 +69,7 @@ public class InitServlet extends HttpServlet {
 		 */
 		Util_HTMLpath = this.getServletContext().getRealPath("/") + Util_HTMLpath;
 
-		// 将图片放到filePath下
+		// 灏嗗浘鐗囨斁鍒癴ilePath涓�
 		//Lib_PictureURL = this.getServletContext().getRealPath("/") + filePath + Lib_PictureURL;
 		List<ArticleSim> tmp = DBHelperSim.GetArticleSimUseSql("select * from article");
 		ArticleNumber = tmp.size();
@@ -80,14 +81,14 @@ public class InitServlet extends HttpServlet {
 		LibraryHTMLBuilder lhb = new LibraryHTMLBuilder();
 		lhb.CreateAllHTML();
 
-//		System.out.println("文库图片路径" + Lib_PictureURL);
-//		System.out.println("总文章数" + ArticleNumber);
-//		System.out.println("开始ID" + ArticleBeginId);
-//		System.out.println("结束ID" + ArticleEndId);
+//		System.out.println("鏂囧簱鍥剧墖璺緞" + Lib_PictureURL);
+//		System.out.println("鎬绘枃绔犳暟" + ArticleNumber);
+//		System.out.println("寮�濮婭D" + ArticleBeginId);
+//		System.out.println("缁撴潫ID" + ArticleEndId);
 		
 		/********************************************************************/
 		/**
-		 * 生成weather.json
+		 * 鐢熸垚weather.json
 		 */
 		String p = '/'+WeatherDataTimerTask.class.getClassLoader().getResource("../../").getPath();
     	String weatherPath = null;

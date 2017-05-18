@@ -6,6 +6,7 @@ var areaMu=[];
 var plyzone=[];
 var countZone;
 function addZoneLayer(zone){
+ 
     
     var url = "../bZoneServlet?op=MapSearchZonePoint";
 	var json;
