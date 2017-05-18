@@ -62,7 +62,7 @@ public class PestQuestionServlet extends BasicServlet {
 	
 	
 	/**
-	 * 图片机器识别后专家再次补充解答
+	 * 鍥剧墖鏈哄櫒璇嗗埆鍚庝笓瀹跺啀娆¤ˉ鍏呰В绛�
 	 * @param request
 	 * @param response
 	 * @throws IOException 
@@ -103,7 +103,7 @@ public class PestQuestionServlet extends BasicServlet {
 
 
 	/**
-	 * 图片人工回答
+	 * 鍥剧墖浜哄伐鍥炵瓟
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -138,15 +138,15 @@ public class PestQuestionServlet extends BasicServlet {
 	}
 
 	/**
-	 * 查看已经识别的图片
+	 * 鏌ョ湅宸茬粡璇嗗埆鐨勫浘鐗�
 	 * @param request
 	 * @param response
 	 * @throws IOException 
 	 */
 	private void questioned(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
-		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //濞撳懐鈹栨禍宀�楠囩紓鎾崇摠閿涳拷
+		entityManager.clear(); //濞撳懐鈹栨稉锟界痪褏绱︾�涳拷
 		
 		PestquestionDAO pestquestionDAO = new PestquestionDAO();
 		List<Pestquestion> pestquestionList = pestquestionDAO.findByStatus(1);
@@ -156,8 +156,8 @@ public class PestQuestionServlet extends BasicServlet {
 
 	private void question(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		EntityManager entityManager = EntityManagerHelper.getEntityManager();
-		entityManager.getEntityManagerFactory().getCache().evictAll(); //娓呯┖浜岀骇缂撳瓨锛�
-		entityManager.clear(); //娓呯┖涓�绾х紦瀛�
+		entityManager.getEntityManagerFactory().getCache().evictAll(); //濞撳懐鈹栨禍宀�楠囩紓鎾崇摠閿涳拷
+		entityManager.clear(); //濞撳懐鈹栨稉锟界痪褏绱︾�涳拷
 		
 		PestquestionDAO pestquestionDAO = new PestquestionDAO();
 		List<Pestquestion> pestquestionList = pestquestionDAO.findByStatus(0);

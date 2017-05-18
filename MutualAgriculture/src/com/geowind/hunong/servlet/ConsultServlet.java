@@ -46,7 +46,7 @@ public class ConsultServlet extends BasicServlet {
 	}
 
 	/**
-	 * 回答
+	 * 鍥炵瓟
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -71,7 +71,7 @@ public class ConsultServlet extends BasicServlet {
 			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonObject jsonObject = new JsonParser().parse(gson.toJson(simConsult)).getAsJsonObject();
-			JPushUtil.sendPush(consult.getUser().getUsername(), "专家回复", jsonObject);
+			JPushUtil.sendPush(consult.getUser().getUsername(), "专家咨询", jsonObject);
 			this.out(response, "1");
 		} catch (RuntimeException re) {
 			this.out(response, "0");
@@ -79,7 +79,7 @@ public class ConsultServlet extends BasicServlet {
 	}
 
 	/**
-	 * 未解决
+	 * 鏈В鍐�
 	 * @param request
 	 * @param response
 	 * @throws IOException
@@ -93,7 +93,7 @@ public class ConsultServlet extends BasicServlet {
 	}
 	
 	/**
-	 * 已解决
+	 * 宸茶В鍐�
 	 * @param request
 	 * @param response
 	 * @throws IOException
